@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programs & Products – Project Future Self</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'pfs-orange': '#E8821A',
+            'pfs-blue':   '#1B5EE0',
+            'pfs-gold':   '#F5A31A',
+            'rs-navy':    '#0d1421',
+            'rs-darker':  '#0a1120',
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Lato', sans-serif; }
+    .nav-link { font-size: 12px; letter-spacing: 0.05em; color: #ccc; transition: color 0.2s; }
+    .nav-link:hover { color: #fff; }
+  </style>
+</head>
+<body class="bg-rs-navy text-white">
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-rs-darker border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-14">
+      <a href="robin-sharma.html" class="text-white font-black uppercase tracking-widest" style="font-size:13px; letter-spacing:0.16em;">PROJECT FUTURE SELF</a>
+      <div class="hidden lg:flex items-center gap-7">
+        <a href="robin-sharma.html#sprint"       class="nav-link">5-Day Sprint</a>
+        <a href="robin-sharma.html#about"        class="nav-link">About Andrew</a>
+        <a href="robin-sharma.html#assessment"   class="nav-link">Assessment</a>
+        <a href="products.html"                  class="nav-link text-white">Products</a>
+        <a href="robin-sharma.html#testimonials" class="nav-link">Testimonials</a>
+        <a href="contact.html"                   class="nav-link">Contact Us</a>
+      </div>
+      <a href="robin-sharma.html#assessment" class="bg-pfs-gold text-black text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-sm hover:bg-yellow-300 transition-colors whitespace-nowrap" style="font-size:11px;">TAKE THE ASSESSMENT</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <section class="pt-28 pb-12 px-6" style="background: linear-gradient(160deg, #0e1a30 0%, #1c3154 35%, #0a1120 100%);">
+    <div class="max-w-7xl mx-auto">
+      <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-2">Project Future Self</p>
+      <h1 class="text-white font-black text-5xl mb-3">Programs &amp; Products</h1>
+      <p class="text-gray-400 text-sm max-w-xl">Choose your path. Every product and program is designed to move you from stuck to in motion — with tools you keep and use for life.</p>
+    </div>
+  </section>
+
+  <!-- FEATURED: 5-DAY SPRINT -->
+  <section class="bg-rs-darker py-14 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6">
+      <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-6">Featured Program</p>
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div class="relative rounded-sm overflow-hidden" style="aspect-ratio:16/9; background:linear-gradient(135deg,#0e2a6e,#1B5EE0);">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center">
+              <p class="text-white/20 font-black text-6xl uppercase tracking-widest">SPRINT</p>
+              <p class="text-white/40 text-xs uppercase tracking-widest mt-1">5-Day Reinvention Program</p>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h2 class="text-white font-black text-4xl mb-2">5-Day Reinvention Sprint</h2>
+          <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-4">Live Coaching Program</p>
+          <p class="text-gray-300 text-sm leading-relaxed mb-4">A fast-paced, structured transformation workshop. In just one week, you'll diagnose exactly where you are in your reinvention cycle, define who you are becoming, rewrite the story you tell the world, and build a real 90-Day Roadmap you can execute immediately.</p>
+          <ul class="space-y-2 mb-6">
+            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-pfs-gold mt-0.5">✓</span> Future-Self Identity Blueprint</li>
+            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-pfs-gold mt-0.5">✓</span> Reinvention Matrix Diagnosis</li>
+            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-pfs-gold mt-0.5">✓</span> Powerful Professional Narrative</li>
+            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-pfs-gold mt-0.5">✓</span> 90-Day Reinvention Roadmap</li>
+            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-pfs-gold mt-0.5">✓</span> Future Self OS™</li>
+          </ul>
+          <button class="bg-pfs-gold text-black font-black uppercase text-sm tracking-widest px-8 py-4 hover:bg-yellow-300 transition-colors">Apply for the Sprint →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FREE: ASSESSMENT -->
+  <section class="bg-rs-navy py-10 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-8">
+      <div class="flex-shrink-0 w-24 h-24 rounded-full flex items-center justify-center" style="background:linear-gradient(135deg,#7a3d00,#E8821A);">
+        <span class="text-white font-black text-sm uppercase text-center leading-tight">FREE</span>
+      </div>
+      <div class="flex-1">
+        <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Free Assessment</p>
+        <h3 class="text-white font-black text-2xl mb-1">Transformation Readiness Assessment</h3>
+        <p class="text-gray-400 text-sm">Identify your exact reinvention stage and discover what's been holding you back. Get a personalized action plan in under 10 minutes — at no cost.</p>
+      </div>
+      <div class="flex-shrink-0">
+        <button class="bg-pfs-gold text-black font-black uppercase text-sm tracking-widest px-8 py-4 hover:bg-yellow-300 transition-colors whitespace-nowrap">Take the Free Assessment</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ALL DIGITAL PRODUCTS -->
+  <section class="bg-rs-darker py-14">
+    <div class="max-w-7xl mx-auto px-6">
+      <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-2">Self-Paced Digital Tools</p>
+      <h2 class="text-white font-black text-3xl mb-8">Digital Products</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Product card macro -->
+        <!-- Career Pivot Playbook -->
+        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
+          <div class="h-32" style="background:linear-gradient(135deg,#0a1a3a,#1a2a5e);"></div>
+          <div class="p-6">
+            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Career</p>
+            <h3 class="text-white font-black text-lg mb-2">Career Pivot Playbook</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-5">A step-by-step guide for executing a strategic career pivot — from identifying transferable skills to landing your next role in a new field.</p>
+            <button class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
+          </div>
+        </div>
+
+        <!-- Confidence Reset Protocol -->
+        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
+          <div class="h-32" style="background:linear-gradient(135deg,#2a1005,#5a2a10);"></div>
+          <div class="p-6">
+            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Identity</p>
+            <h3 class="text-white font-black text-lg mb-2">Confidence Reset Protocol</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-5">A targeted reset for professionals experiencing confidence gaps. Rebuild your self-belief with proven tools, reframes, and daily practice missions.</p>
+            <button class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
+          </div>
+        </div>
+
+        <!-- Personal Brand Starter Kit -->
+        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
+          <div class="h-32" style="background:linear-gradient(135deg,#083020,#0f4a30);"></div>
+          <div class="p-6">
+            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Branding</p>
+            <h3 class="text-white font-black text-lg mb-2">Personal Brand Starter Kit</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-5">Everything you need to craft a compelling professional brand — LinkedIn optimization, bio, elevator pitch, and complete online presence strategy.</p>
+            <button class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
+          </div>
+        </div>
+
+        <!-- Skill Monetization Toolkit -->
+        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
+          <div class="h-32" style="background:linear-gradient(135deg,#1a0a2e,#3a1a5e);"></div>
+          <div class="p-6">
+            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Income</p>
+            <h3 class="text-white font-black text-lg mb-2">Skill Monetization Toolkit</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-5">Identify your most valuable skills, package them into offers, and turn your expertise into new income streams with proven frameworks.</p>
+            <button class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
+          </div>
+        </div>
+
+        <!-- Reinvention Story Pack -->
+        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
+          <div class="h-32" style="background:linear-gradient(135deg,#0a2010,#1a4020);"></div>
+          <div class="p-6">
+            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Narrative</p>
+            <h3 class="text-white font-black text-lg mb-2">Reinvention Story Pack</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-5">Templates and frameworks to articulate your reinvention story powerfully — for interviews, networking, LinkedIn, and every room you walk into.</p>
+            <button class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
+          </div>
+        </div>
+
+        <!-- Job Search Accelerator System -->
+        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
+          <div class="h-32" style="background:linear-gradient(135deg,#1e1008,#3a2010);"></div>
+          <div class="p-6">
+            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Career</p>
+            <h3 class="text-white font-black text-lg mb-2">Job Search Accelerator System</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-5">A systematic process that compresses months of searching into weeks — with outreach templates, tracking tools, and positioning strategies.</p>
+            <button class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
+          </div>
+        </div>
+
+        <!-- Reinvention Reflection Workbook -->
+        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
+          <div class="h-32" style="background:linear-gradient(135deg,#0f0f20,#1a1a35);"></div>
+          <div class="p-6">
+            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Identity</p>
+            <h3 class="text-white font-black text-lg mb-2">Reinvention Reflection Workbook</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-5">Guided reflection exercises to process where you've been, get clear on where you're going, and design the next chapter with real intention.</p>
+            <button class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
+          </div>
+        </div>
+
+        <!-- Reinvention Matrix -->
+        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
+          <div class="h-32" style="background:linear-gradient(135deg,#081820,#0f2a38);"></div>
+          <div class="p-6">
+            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Framework</p>
+            <h3 class="text-white font-black text-lg mb-2">Reinvention Matrix — Core Components</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-5">The foundational framework behind the 5-Day Sprint. Map your reinvention stage and identify the exact levers that will move you forward.</p>
+            <button class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
+          </div>
+        </div>
+
+        <!-- Impact Story Template -->
+        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
+          <div class="h-32" style="background:linear-gradient(135deg,#0a1a18,#102e2a);"></div>
+          <div class="p-6">
+            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Narrative</p>
+            <h3 class="text-white font-black text-lg mb-2">Impact Story Template</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-5">A structured template for crafting compelling professional impact stories — perfect for interviews, proposals, and building authority in any room.</p>
+            <button class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
+          </div>
+        </div>
+
+        <!-- Future Self OS -->
+        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
+          <div class="h-32" style="background:linear-gradient(135deg,#2a0e00,#E8821A);"></div>
+          <div class="p-6">
+            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">System</p>
+            <h3 class="text-white font-black text-lg mb-2">Future Self OS™</h3>
+            <p class="text-gray-400 text-sm leading-relaxed mb-5">Your personal operating system for sustained identity change — daily habits, decision frameworks, and momentum-building practices for long-term transformation.</p>
+            <button class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-rs-darker py-8 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+      <a href="robin-sharma.html" class="text-white font-black uppercase tracking-widest" style="font-size:12px; letter-spacing:0.16em;">PROJECT FUTURE SELF</a>
+      <div class="flex items-center gap-5">
+        <a href="robin-sharma.html" class="hover:text-gray-300 transition-colors">Home</a>
+        <a href="products.html" class="text-pfs-gold">Products</a>
+        <a href="contact.html" class="hover:text-gray-300 transition-colors">Contact Us</a>
+      </div>
+      <p>&copy; Project Future Self. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
