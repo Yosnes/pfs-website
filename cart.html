@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart – Project Future Self</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'pfs-orange': '#E8821A',
+            'pfs-blue':   '#1B5EE0',
+            'pfs-gold':   '#F5A31A',
+            'rs-navy':    '#0d1421',
+            'rs-darker':  '#0a1120',
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Lato', sans-serif; }
+    .nav-link { font-size: 12px; letter-spacing: 0.05em; color: #ccc; transition: color 0.2s; }
+    .nav-link:hover { color: #fff; }
+  </style>
+</head>
+<body class="bg-rs-navy text-white">
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-rs-darker border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-14">
+      <a href="index.html" class="text-white font-black uppercase tracking-widest" style="font-size:13px; letter-spacing:0.16em;">PROJECT FUTURE SELF</a>
+      <div class="hidden lg:flex items-center gap-7">
+        <a href="products.html" class="nav-link">5-Day Sprint</a>
+        <a href="index.html#about" class="nav-link">About Andrew</a>
+        <a href="index.html#assessment" class="nav-link">Assessment</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="index.html#testimonials" class="nav-link">Testimonials</a>
+        <a href="contact.html" class="nav-link">Contact Us</a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="cart.html" class="relative flex items-center p-1 text-pfs-gold" title="Cart">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+          <span id="cart-badge" class="absolute -top-1 -right-1 bg-pfs-gold text-black font-black rounded-full w-4 h-4 items-center justify-center hidden" style="font-size:9px;">0</span>
+        </a>
+        <a href="index.html#assessment" class="bg-pfs-gold text-black text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-sm hover:bg-yellow-300 transition-colors whitespace-nowrap" style="font-size:11px;">TAKE THE FREE ASSESSMENT</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CART -->
+  <section class="pt-28 pb-20 min-h-screen" style="background: linear-gradient(160deg, #0e1a30 0%, #0a1120 100%);">
+    <div class="max-w-5xl mx-auto px-6">
+      <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-2">Your Selection</p>
+      <h1 class="text-white font-black text-4xl mb-8">Cart</h1>
+
+      <!-- EMPTY STATE -->
+      <div id="cart-empty" class="hidden text-center py-24">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-14 h-14 text-gray-600 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+        <p class="text-gray-400 text-lg mb-6">Your cart is empty.</p>
+        <a href="products.html" class="inline-block bg-pfs-gold text-black font-black uppercase text-sm tracking-widest px-8 py-4 hover:bg-yellow-300 transition-colors">Browse Products →</a>
+      </div>
+
+      <!-- CART WITH ITEMS -->
+      <div id="cart-content" class="hidden">
+        <div class="flex flex-col lg:flex-row gap-8 items-start">
+
+          <!-- ITEMS LIST -->
+          <div class="flex-1" id="cart-items"></div>
+
+          <!-- ORDER SUMMARY -->
+          <div class="w-full lg:w-80 flex-shrink-0">
+            <div class="bg-rs-darker border border-white/10 p-6">
+              <h2 class="text-white font-black uppercase tracking-widest mb-5" style="font-size:12px; letter-spacing:0.14em;">Order Summary</h2>
+              <div id="summary-lines" class="space-y-2 mb-5"></div>
+              <div class="border-t border-white/10 pt-4 mb-6">
+                <div class="flex justify-between items-baseline">
+                  <span class="text-gray-400 text-sm uppercase tracking-widest" style="font-size:11px;">Subtotal</span>
+                  <span id="cart-total" class="text-pfs-gold font-black text-2xl">$0</span>
+                </div>
+                <p id="included-note" class="text-gray-500 text-xs mt-2 leading-relaxed hidden">* Items marked "–" are included with the 5-Day Reinvention Sprint at no additional cost.</p>
+              </div>
+              <button onclick="alert('Checkout coming soon!')" class="w-full bg-pfs-gold text-black font-black uppercase text-sm tracking-widest py-4 hover:bg-yellow-300 transition-colors mb-3">Proceed to Checkout →</button>
+              <a href="products.html" class="block text-center text-gray-500 text-xs uppercase tracking-widest hover:text-white transition-colors py-2">← Continue Shopping</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-rs-darker py-8 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+      <a href="index.html" class="text-white font-black uppercase tracking-widest" style="font-size:12px; letter-spacing:0.16em;">PROJECT FUTURE SELF</a>
+      <div class="flex items-center gap-5">
+        <a href="index.html" class="hover:text-gray-300 transition-colors">Home</a>
+        <a href="products.html" class="hover:text-gray-300 transition-colors">Products</a>
+        <a href="contact.html" class="hover:text-gray-300 transition-colors">Contact Us</a>
+      </div>
+      <p>&copy; Project Future Self. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function getCart() {
+      return JSON.parse(localStorage.getItem('pfs-cart') || '[]');
+    }
+    function saveCart(cart) {
+      localStorage.setItem('pfs-cart', JSON.stringify(cart));
+    }
+    function updateCartBadge() {
+      const cart = getCart();
+      const count = cart.reduce((sum, item) => sum + item.qty, 0);
+      const badge = document.getElementById('cart-badge');
+      if (badge) {
+        badge.textContent = count;
+        badge.classList.toggle('hidden', count === 0);
+        badge.classList.toggle('flex', count > 0);
+      }
+    }
+    function renderCart() {
+      const cart = getCart();
+      updateCartBadge();
+      const emptyEl = document.getElementById('cart-empty');
+      const contentEl = document.getElementById('cart-content');
+      if (cart.length === 0) {
+        emptyEl.classList.remove('hidden');
+        contentEl.classList.add('hidden');
+        return;
+      }
+      emptyEl.classList.add('hidden');
+      contentEl.classList.remove('hidden');
+
+      // Render item rows
+      document.getElementById('cart-items').innerHTML = cart.map((item, i) => `
+        <div class="bg-rs-darker border border-white/10 p-5 mb-3 flex items-center gap-4">
+          <div class="flex-1 min-w-0">
+            <p class="text-white font-black text-sm leading-snug">${item.name}</p>
+            <p class="text-pfs-gold font-bold text-sm mt-1">${item.price}</p>
+          </div>
+          <div class="flex items-center gap-2 flex-shrink-0">
+            <button onclick="changeQty(${i}, -1)" class="w-7 h-7 flex items-center justify-center bg-white/10 text-white hover:bg-white/20 transition-colors font-bold">−</button>
+            <span class="text-white font-bold w-5 text-center text-sm">${item.qty}</span>
+            <button onclick="changeQty(${i}, 1)" class="w-7 h-7 flex items-center justify-center bg-white/10 text-white hover:bg-white/20 transition-colors font-bold">+</button>
+          </div>
+          <button onclick="removeItem(${i})" class="text-gray-600 hover:text-red-400 transition-colors text-xs uppercase tracking-widest flex-shrink-0 ml-1">Remove</button>
+        </div>
+      `).join('');
+
+      // Render summary lines + total
+      let total = 0;
+      let hasIncluded = false;
+      document.getElementById('summary-lines').innerHTML = cart.map(item => {
+        const lineTotal = item.priceNum * item.qty;
+        total += lineTotal;
+        if (item.priceNum === 0) hasIncluded = true;
+        return `
+          <div class="flex justify-between text-xs text-gray-400 gap-2">
+            <span class="flex-1 truncate">${item.name}${item.qty > 1 ? ' ×' + item.qty : ''}</span>
+            <span class="flex-shrink-0">${item.priceNum > 0 ? '$' + (lineTotal).toLocaleString() : '–'}</span>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('cart-total').textContent = '$' + total.toLocaleString();
+      const noteEl = document.getElementById('included-note');
+      noteEl.classList.toggle('hidden', !hasIncluded);
+    }
+    function changeQty(index, delta) {
+      const cart = getCart();
+      cart[index].qty = Math.max(1, cart[index].qty + delta);
+      saveCart(cart);
+      renderCart();
+    }
+    function removeItem(index) {
+      const cart = getCart();
+      cart.splice(index, 1);
+      saveCart(cart);
+      renderCart();
+    }
+    document.addEventListener('DOMContentLoaded', renderCart);
+  </script>
+
+</body>
+</html>

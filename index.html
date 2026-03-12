@@ -58,8 +58,16 @@
         <a href="#testimonials"class="nav-link">Testimonials</a>
         <a href="contact.html"  class="nav-link">Contact Us</a>
       </div>
-      <!-- CTA -->
-      <a href="#assessment" class="bg-pfs-gold text-black text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-sm hover:bg-yellow-300 transition-colors whitespace-nowrap" style="font-size:11px;">TAKE THE FREE ASSESSMENT</a>
+      <!-- CTA + Cart -->
+      <div class="flex items-center gap-3">
+        <a href="cart.html" class="relative flex items-center p-1 text-gray-300 hover:text-white transition-colors" title="Cart">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+          <span id="cart-badge" class="absolute -top-1 -right-1 bg-pfs-gold text-black font-black rounded-full w-4 h-4 items-center justify-center hidden" style="font-size:9px;">0</span>
+        </a>
+        <a href="#assessment" class="bg-pfs-gold text-black text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-sm hover:bg-yellow-300 transition-colors whitespace-nowrap" style="font-size:11px;">TAKE THE FREE ASSESSMENT</a>
+      </div>
     </div>
   </nav>
 
@@ -582,6 +590,22 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    (function() {
+      function updateCartBadge() {
+        const cart = JSON.parse(localStorage.getItem('pfs-cart') || '[]');
+        const count = cart.reduce((sum, item) => sum + item.qty, 0);
+        const badge = document.getElementById('cart-badge');
+        if (badge) {
+          badge.textContent = count;
+          badge.classList.toggle('hidden', count === 0);
+          badge.classList.toggle('flex', count > 0);
+        }
+      }
+      document.addEventListener('DOMContentLoaded', updateCartBadge);
+    })();
+  </script>
 
 </body>
 </html>
