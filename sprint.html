@@ -380,7 +380,7 @@
         </div>
       </div>
 
-      <form id="sprint-application" class="space-y-5" onsubmit="handleSubmit(event)">
+      <form id="sprint-application" class="space-y-5" onsubmit="handleSubmit(event)" novalidate>
 
         <!-- Name row -->
         <div class="grid sm:grid-cols-2 gap-4">
@@ -450,9 +450,10 @@
         </div>
 
         <div class="pt-2">
-          <button type="submit" class="w-full bg-pfs-gold text-black font-black uppercase tracking-widest py-4 hover:bg-yellow-300 transition-colors text-sm">
+          <button type="submit" id="submit-btn" class="w-full bg-pfs-gold text-black font-black uppercase tracking-widest py-4 hover:bg-yellow-300 transition-colors text-sm">
             Submit My Application →
           </button>
+          <p id="form-error" class="hidden text-center text-red-400 text-xs mt-3">Something went wrong. Please try again or email us directly at andrew@projectfutureself.com.</p>
           <p class="text-center text-gray-500 text-xs mt-3">Andrew reviews every application personally. You'll hear back within 48 hours.</p>
         </div>
 
@@ -498,15 +499,39 @@
       }
     })();
 
-    // Form submit handler
+    // Form submit handler — posts to Formspree, stays on page
     function handleSubmit(e) {
       e.preventDefault();
       const form = document.getElementById('sprint-application');
+      const btn = document.getElementById('submit-btn');
+      const errorMsg = document.getElementById('form-error');
       const success = document.getElementById('form-success');
-      form.classList.add('hidden');
-      success.classList.remove('hidden');
-      // Scroll to success message
-      success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+      errorMsg.classList.add('hidden');
+
+      fetch('https://formspree.io/f/andrew@projectfutureself.com', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(res) {
+        if (res.ok) {
+          form.classList.add('hidden');
+          success.classList.remove('hidden');
+          success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          btn.disabled = false;
+          btn.textContent = 'Submit My Application →';
+          errorMsg.classList.remove('hidden');
+        }
+      })
+      .catch(function() {
+        btn.disabled = false;
+        btn.textContent = 'Submit My Application →';
+        errorMsg.classList.remove('hidden');
+      });
     }
   </script>
 
