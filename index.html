@@ -81,19 +81,15 @@
       .group > div:last-child {
         padding: 8px 6px !important;
       }
-      /* Hide the long description paragraph (3rd child) */
-      .group > div:last-child > :nth-child(3) {
+      /* Hide category, title, price — keep description + button */
+      .group > div:last-child > :nth-child(1),
+      .group > div:last-child > :nth-child(2),
+      .group > div:last-child > :nth-child(4) {
         display: none;
       }
-      /* Tighten spacing on category + title */
-      .group > div:last-child > :nth-child(1),
-      .group > div:last-child > :nth-child(2) {
-        margin-bottom: 3px !important;
-      }
-      /* Shrink price */
-      .group > div:last-child > :nth-child(4) {
-        font-size: 11px !important;
-        margin-bottom: 6px !important;
+      /* Tighten description spacing */
+      .group > div:last-child > :nth-child(3) {
+        margin-bottom: 8px !important;
       }
       /* Compact button */
       .group > div:last-child > :nth-child(5) {
