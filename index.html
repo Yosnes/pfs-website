@@ -75,6 +75,32 @@
     /* Product card tap-to-reveal on touch devices */
     .group.touch-open > div:first-child { opacity: 0; }
     .group.touch-open > div:last-child  { opacity: 1; }
+
+    /* Product card overlay — compact on small screens */
+    @media (max-width: 639px) {
+      .group > div:last-child {
+        padding: 8px 6px !important;
+      }
+      /* Hide the long description paragraph (3rd child) */
+      .group > div:last-child > :nth-child(3) {
+        display: none;
+      }
+      /* Tighten spacing on category + title */
+      .group > div:last-child > :nth-child(1),
+      .group > div:last-child > :nth-child(2) {
+        margin-bottom: 3px !important;
+      }
+      /* Shrink price */
+      .group > div:last-child > :nth-child(4) {
+        font-size: 11px !important;
+        margin-bottom: 6px !important;
+      }
+      /* Compact button */
+      .group > div:last-child > :nth-child(5) {
+        padding: 5px 10px !important;
+        font-size: 9px !important;
+      }
+    }
   </style>
 </head>
 
@@ -248,7 +274,7 @@
       <div class="flex items-end justify-between mb-6">
         <div>
           <h2 class="text-white font-black text-2xl">Programs &amp; Products</h2>
-          <p class="text-gray-400 text-xs mt-1">Hover over any item to learn more</p>
+          <p class="text-gray-400 text-xs mt-1">Tap or hover to learn more</p>
         </div>
         <a href="products.html"
           class="text-pfs-gold text-xs font-bold uppercase tracking-widest hover:text-yellow-300 transition-colors">View
