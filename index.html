@@ -626,7 +626,7 @@
           </div>
         </div>
       </div>
-      <a href="#sprint"
+      <a href="sprint.html"
         class="inline-block border-2 border-gray-800 text-gray-800 text-xs font-bold uppercase tracking-widest px-8 py-3 hover:bg-gray-800 hover:text-white transition-colors">SEE
         THE FULL PROGRAM</a>
     </div>
@@ -649,25 +649,25 @@
                 <span class="text-black font-black text-lg leading-none">PFS</span>
               </div>
               <div>
-                <p class="text-white text-sm leading-relaxed italic mb-4">"I came in feeling stuck and completely
+                <p id="t-quote" class="text-white text-sm leading-relaxed italic mb-4">"I came in feeling stuck and completely
                   unclear about my next step. By Day 3, I had rewritten my professional story. By Day 5, I had a real
                   roadmap — and the confidence to actually follow it."</p>
                 <div>
-                  <p class="text-white font-bold text-sm">SPRINT PARTICIPANT</p>
-                  <p class="text-gray-400 text-xs">Career Transition, New York</p>
+                  <p id="t-name" class="text-white font-bold text-sm">SPRINT PARTICIPANT</p>
+                  <p id="t-location" class="text-gray-400 text-xs">Career Transition, New York</p>
                 </div>
               </div>
             </div>
           </div>
           <!-- Navigation arrows -->
           <div class="flex items-center gap-4 mt-4">
-            <button
+            <button id="t-prev"
               class="w-8 h-8 border border-white/30 flex items-center justify-center text-white hover:bg-white/10 transition-colors">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
               </svg>
             </button>
-            <button
+            <button id="t-next"
               class="w-8 h-8 border border-white/30 flex items-center justify-center text-white hover:bg-white/10 transition-colors">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -856,6 +856,48 @@
           }
         }
         document.addEventListener('DOMContentLoaded', updateCartBadge);
+      })();
+
+      // Testimonial carousel
+      (function() {
+        var testimonials = [
+          {
+            quote: '"I came in feeling stuck and completely unclear about my next step. By Day 3, I had rewritten my professional story. By Day 5, I had a real roadmap — and the confidence to actually follow it."',
+            name: 'SPRINT PARTICIPANT',
+            location: 'Career Transition, New York'
+          },
+          {
+            quote: '"The Reinvention Matrix gave me clarity I\'d been searching for for two years. I finally understood what was actually holding me back — and what to do about it."',
+            name: 'SPRINT PARTICIPANT',
+            location: 'Executive, Financial Services'
+          },
+          {
+            quote: '"Andrew\'s frameworks are the most practical tools I\'ve ever used for career reinvention. The Future-Self Identity Blueprint changed how I think about myself professionally."',
+            name: 'SPRINT PARTICIPANT',
+            location: 'Entrepreneur, Los Angeles'
+          }
+        ];
+        var current = 0;
+        var quoteEl = document.getElementById('t-quote');
+        var nameEl = document.getElementById('t-name');
+        var locationEl = document.getElementById('t-location');
+
+        function show(index) {
+          var t = testimonials[index];
+          quoteEl.textContent = t.quote;
+          nameEl.textContent = t.name;
+          locationEl.textContent = t.location;
+        }
+
+        document.getElementById('t-prev').addEventListener('click', function() {
+          current = (current - 1 + testimonials.length) % testimonials.length;
+          show(current);
+        });
+
+        document.getElementById('t-next').addEventListener('click', function() {
+          current = (current + 1) % testimonials.length;
+          show(current);
+        });
       })();
   </script>
 
