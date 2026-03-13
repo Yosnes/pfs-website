@@ -48,7 +48,23 @@
           </svg>
           <span id="cart-badge" class="absolute -top-1 -right-1 bg-pfs-gold text-black font-black rounded-full w-4 h-4 items-center justify-center hidden" style="font-size:9px;">0</span>
         </a>
-        <a href="assessment.html" class="bg-pfs-gold text-black text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-sm hover:bg-yellow-300 transition-colors whitespace-nowrap" style="font-size:11px;">TAKE THE FREE ASSESSMENT</a>
+        <a href="assessment.html" class="hidden sm:inline-block bg-pfs-gold text-black text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-sm hover:bg-yellow-300 transition-colors whitespace-nowrap" style="font-size:11px;">TAKE THE FREE ASSESSMENT</a>
+        <button id="mobile-menu-btn" class="lg:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 ml-1" aria-label="Open menu">
+          <span class="block w-5 h-0.5 bg-white"></span>
+          <span class="block w-5 h-0.5 bg-white"></span>
+          <span class="block w-5 h-0.5 bg-white"></span>
+        </button>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden lg:hidden bg-rs-darker border-t border-white/10">
+      <div class="flex flex-col px-6 py-4 gap-0 divide-y divide-white/10">
+        <a href="sprint.html"           class="nav-link py-3">5-Day Sprint</a>
+        <a href="index.html#about"      class="nav-link py-3">About Andrew</a>
+        <a href="assessment.html"       class="nav-link py-3">Assessment</a>
+        <a href="products.html"         class="nav-link py-3" style="color:#fff;">Products</a>
+        <a href="index.html#testimonials" class="nav-link py-3">Testimonials</a>
+        <a href="contact.html"          class="nav-link py-3">Contact Us</a>
+        <a href="assessment.html"       class="bg-pfs-gold text-black text-xs font-bold uppercase tracking-widest px-4 py-3 mt-3 text-center rounded-sm hover:bg-yellow-300 transition-colors" style="font-size:11px;">TAKE THE FREE ASSESSMENT</a>
       </div>
     </div>
   </nav>
@@ -321,6 +337,17 @@
       }
     }
     document.addEventListener('DOMContentLoaded', updateCartBadge);
+
+    // Mobile hamburger menu
+    (function() {
+      var btn  = document.getElementById('mobile-menu-btn');
+      var menu = document.getElementById('mobile-menu');
+      if (!btn || !menu) return;
+      btn.addEventListener('click', function() { menu.classList.toggle('hidden'); });
+      menu.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() { menu.classList.add('hidden'); });
+      });
+    })();
   </script>
 </body>
 </html>
