@@ -78,6 +78,8 @@
 
     /* Product card overlay — compact on small screens */
     @media (max-width: 639px) {
+      /* Portrait aspect ratio gives enough height for description + button */
+      .group { aspect-ratio: 3/4 !important; }
       .group > div:last-child {
         padding: 8px 6px !important;
       }
