@@ -1,918 +1,592 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project Future Self – Reinvent. Redesign. Reclaim.</title>
-  <meta name="description"
-    content="Project Future Self is a personal and professional transformation program. Join the 5-Day Reinvention Sprint, take the free Transformation Readiness Assessment, and start designing your next chapter." />
-  <meta name="author" content="Andrew Asnes" />
-  <!-- Open Graph / social sharing -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Project Future Self – Reinvent. Redesign. Reclaim." />
-  <meta property="og:description"
-    content="A hands-on transformation program for professionals ready to reinvent their career and life. 5-Day Sprint, free assessment, and self-paced digital tools." />
-  <meta property="og:image" content="andrew-headshot.jpg" />
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Project Future Self – Reinvent. Redesign. Reclaim." />
-  <meta name="twitter:description"
-    content="A hands-on transformation program for professionals ready to reinvent their career and life." />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'pfs-orange': '#E8821A',
-            'pfs-blue': '#1B5EE0',
-            'pfs-gold': '#F5A31A',
-            'rs-navy': '#0d1421',
-            'rs-darker': '#0a1120',
-          },
-          fontFamily: { lato: ['Lato', 'sans-serif'] },
-        }
-      }
-    }
-  </script>
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Future Self — Reinvent. Redesign. Reclaim.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0D1F3C;
+    --slate:      #1E3A5F;
+    --slate-mid:  #2A4A72;
+    --gold:       #F5A31A;
+    --gold-dark:  #C07D0A;
+    --gold-pale:  #FEF3DC;
+    --amber-bg:   #FDF6EC;
+    --amber-mid:  #F5E8CC;
+    --text-dark:  #1A1208;
+    --text-mid:   #3D2E14;
+    --text-muted: #7A6240;
+    --white:      #FFFFFF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--amber-bg);
+    color: var(--text-dark);
+    line-height: 1.6;
+  }
+
+  /* ── NAVIGATION ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(253,246,236,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(13,31,60,0.08);
+    padding: 0 5%;
+  }
+  .nav-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-mark { height: 44px; width: auto; }
+  .nav-wordmark { line-height: 1.15; }
+  .nav-wordmark .nw-top { font-size: 9px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+  .nav-wordmark .nw-main { font-size: 16px; font-weight: 800; letter-spacing: 0.02em; color: var(--navy); text-transform: uppercase; }
+  .nav-wordmark .nw-tag { font-size: 7px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dark); }
+
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta {
+    font-size: 12px; font-weight: 700; padding: 9px 20px;
+    background: var(--navy); color: var(--gold);
+    border-radius: 24px; text-decoration: none; transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--slate); transform: translateY(-1px); }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: all 0.3s; }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--amber-bg);
+    padding: 80px 5% 70px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -60px; right: -80px;
+    width: 520px; height: 520px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,163,26,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold-dark); margin-bottom: 18px;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 20px; height: 2px;
+    background: var(--gold); border-radius: 2px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(42px, 5.5vw, 68px);
+    font-weight: 400; line-height: 1.05;
+    color: var(--navy); margin-bottom: 10px;
+  }
+  .hero h1 em {
+    font-style: italic; color: var(--slate);
+  }
+  .hero-audience {
+    font-size: 13px; font-weight: 600; color: var(--gold-dark);
+    margin-bottom: 18px; letter-spacing: 0.02em;
+  }
+  .hero-body {
+    font-size: 16px; font-weight: 400; color: var(--text-mid);
+    line-height: 1.7; margin-bottom: 32px; max-width: 440px;
+  }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+  .btn-primary {
+    display: inline-block; padding: 14px 28px;
+    background: var(--navy); color: var(--gold);
+    font-size: 14px; font-weight: 700; border-radius: 32px;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .btn-primary:hover { background: var(--slate); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,31,60,0.2); }
+  .btn-secondary {
+    display: inline-block; padding: 14px 26px;
+    border: 1.5px solid rgba(13,31,60,0.25); color: var(--navy);
+    font-size: 14px; font-weight: 600; border-radius: 32px;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--navy); background: rgba(13,31,60,0.04); }
+  .hero-trust { display: flex; gap: 20px; flex-wrap: wrap; }
+  .trust-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); font-weight: 500; }
+  .trust-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+  .hero-visual {
+    display: flex; justify-content: center; align-items: center;
+    position: relative;
+  }
+  .hero-mark {
+    width: 100%; max-width: 420px; height: auto;
+    filter: drop-shadow(0 16px 48px rgba(13,31,60,0.12));
+  }
+
+  /* ── ASSESSMENT STRIP ── */
+  .assessment-strip {
+    background: var(--slate);
+    padding: 22px 5%;
+  }
+  .assessment-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center; gap: 24px;
+    flex-wrap: wrap;
+  }
+  .asmt-badge {
+    display: inline-block; font-size: 9px; font-weight: 800; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 3px 10px; border-radius: 20px;
+    background: rgba(245,163,26,0.2); color: var(--gold); margin-bottom: 5px;
+  }
+  .asmt-title { font-size: 17px; font-weight: 700; color: #FDF6EC; margin-bottom: 3px; }
+  .asmt-sub { font-size: 12px; color: rgba(253,246,236,0.6); }
+  .btn-gold {
+    display: inline-block; padding: 13px 28px;
+    background: var(--gold); color: var(--navy);
+    font-size: 13px; font-weight: 800; border-radius: 28px;
+    text-decoration: none; white-space: nowrap; transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .btn-gold:hover { background: #f8b83a; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,163,26,0.35); }
+
+  /* ── SECTIONS COMMON ── */
+  section { padding: 80px 5%; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-header { margin-bottom: 48px; }
+  .section-eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--gold-dark); margin-bottom: 10px;
+  }
+  .section-h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 3.5vw, 42px); font-weight: 400;
+    color: var(--navy); line-height: 1.15; margin-bottom: 6px;
+  }
+  .gold-rule { width: 40px; height: 3px; background: var(--gold); border-radius: 2px; margin-top: 14px; }
+
+  /* ── SPRINT FEATURE ── */
+  .sprint-section { background: var(--navy); }
+  .sprint-section .section-eyebrow { color: var(--gold); }
+  .sprint-section .section-h2 { color: #FDF6EC; }
+  .sprint-section .gold-rule { background: var(--gold); }
+  .sprint-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  .sprint-desc { font-size: 15px; color: rgba(253,246,236,0.75); line-height: 1.75; margin-bottom: 28px; }
+  .sprint-price {
+    display: inline-flex; align-items: baseline; gap: 6px; margin-bottom: 28px;
+  }
+  .sprint-price .amount { font-size: 36px; font-weight: 800; color: var(--gold); }
+  .sprint-price .label { font-size: 13px; color: rgba(253,246,236,0.5); }
+  .deliverables-title { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(253,246,236,0.4); margin-bottom: 14px; }
+  .deliverable {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .deliverable:last-child { border-bottom: none; }
+  .deliv-icon {
+    width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
+    background: rgba(245,163,26,0.15); display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 14px; font-weight: 700;
+  }
+  .deliv-name { font-size: 14px; font-weight: 600; color: #FDF6EC; margin-bottom: 2px; }
+  .deliv-desc { font-size: 12px; color: rgba(253,246,236,0.5); line-height: 1.5; }
+
+  /* ── ABOUT ── */
+  .about-section { background: var(--amber-bg); }
+  .about-grid { display: grid; grid-template-columns: 280px 1fr; gap: 56px; align-items: start; }
+  .about-photo-wrap { position: relative; }
+  .about-photo {
+    width: 100%; aspect-ratio: 3/4; object-fit: cover;
+    border-radius: 16px;
+    background: var(--amber-mid);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; color: var(--text-muted);
+    border: 2px solid var(--amber-mid);
+  }
+  .about-photo-placeholder {
+    width: 100%; aspect-ratio: 3/4;
+    border-radius: 16px; background: var(--amber-mid);
+    border: 2px solid rgba(13,31,60,0.08);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; color: var(--text-muted); font-weight: 500;
+  }
+  .about-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px; color: var(--navy); margin-bottom: 4px;
+  }
+  .about-role { font-size: 13px; font-weight: 600; color: var(--gold-dark); margin-bottom: 20px; }
+  .about-body { font-size: 15px; color: var(--text-mid); line-height: 1.8; margin-bottom: 16px; }
+  .about-cta { margin-top: 24px; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-section { background: var(--slate); }
+  .testimonials-section .section-eyebrow { color: var(--gold); }
+  .testimonials-section .section-h2 { color: #FDF6EC; }
+  .testimonials-section .gold-rule { background: var(--gold); }
+  .tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .tcard {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(245,163,26,0.15);
+    border-radius: 14px; padding: 24px;
+  }
+  .qmark { font-family: 'DM Serif Display', serif; font-size: 48px; color: var(--gold); line-height: 0.7; margin-bottom: 12px; opacity: 0.6; }
+  .qtext { font-size: 14px; color: rgba(253,246,236,0.82); line-height: 1.75; font-style: italic; margin-bottom: 18px; }
+  .qauthor { font-size: 13px; font-weight: 700; color: #FDF6EC; }
+  .qrole { font-size: 11px; color: rgba(245,163,26,0.7); margin-top: 2px; }
+
+  /* ── PROGRAMS ── */
+  .programs-section { background: var(--amber-bg); }
+  .programs-table-wrap { overflow-x: auto; }
+  table.ptable { width: 100%; border-collapse: collapse; }
+  .ptable thead tr { border-bottom: 2px solid var(--gold); }
+  .ptable th {
+    text-align: left; font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-muted); padding: 0 12px 12px 0;
+  }
+  .ptable th:last-child { text-align: right; padding-right: 0; }
+  .ptable td {
+    padding: 14px 12px 14px 0; font-size: 14px; color: var(--text-mid);
+    border-bottom: 1px solid rgba(13,31,60,0.07); vertical-align: top;
+  }
+  .ptable td:first-child { color: var(--navy); font-weight: 600; }
+  .ptable td:last-child { text-align: right; font-weight: 700; color: var(--gold-dark); padding-right: 0; white-space: nowrap; }
+  .ptable tr.featured { background: rgba(245,163,26,0.06); }
+  .ptable tr.featured td:first-child { color: var(--navy); }
+  .flagship-badge {
+    display: inline-block; font-size: 9px; font-weight: 800; padding: 2px 7px;
+    background: var(--gold); color: var(--navy); border-radius: 4px;
+    letter-spacing: 0.06em; text-transform: uppercase; margin-left: 8px;
+    vertical-align: middle;
+  }
+  .prod-sub { font-size: 12px; color: var(--text-muted); font-weight: 400; display: block; margin-top: 3px; }
+  .free-tag { color: #1a7a30 !important; }
+  .view-all-row td { border-bottom: none; padding-top: 20px; }
+  .view-all-link {
+    font-size: 13px; font-weight: 700; color: var(--slate);
+    text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+  }
+  .view-all-link:hover { color: var(--navy); }
+
+  /* ── CONTACT / CTA FOOTER ── */
+  .cta-footer {
+    background: var(--navy); padding: 80px 5%;
+    text-align: center;
+  }
+  .cta-footer .section-eyebrow { color: var(--gold); }
+  .cta-footer h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 48px); color: #FDF6EC;
+    margin-bottom: 16px; font-weight: 400; line-height: 1.15;
+  }
+  .cta-footer p { font-size: 15px; color: rgba(253,246,236,0.65); max-width: 480px; margin: 0 auto 36px; line-height: 1.7; }
+  .cta-footer-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060F1E; padding: 28px 5%;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+  .footer-brand { display: flex; align-items: center; gap: 10px; }
+  .footer-mark { height: 32px; width: auto; opacity: 0.8; }
+  .footer-name { font-size: 12px; font-weight: 700; color: rgba(253,246,236,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+  footer p { font-size: 11px; color: rgba(253,246,236,0.3); }
+  .footer-links { display: flex; gap: 16px; }
+  .footer-links a { font-size: 11px; color: rgba(253,246,236,0.3); text-decoration: none; }
+  .footer-links a:hover { color: rgba(253,246,236,0.6); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 32px; }
+    .hero-visual { order: -1; }
+    .hero-mark { max-width: 280px; }
+    .sprint-grid { grid-template-columns: 1fr; gap: 32px; }
+    .about-grid { grid-template-columns: 1fr; gap: 28px; }
+    .about-photo-placeholder { aspect-ratio: 4/3; max-width: 320px; }
+    .tgrid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: rgba(253,246,236,0.98); padding: 16px 5% 20px; border-bottom: 1px solid rgba(13,31,60,0.1); gap: 14px; z-index: 99; }
+    .hamburger { display: flex; }
+    .assessment-inner { flex-direction: column; text-align: center; }
+  }
+</style>
 </head>
+<body>
 
-<body class="bg-rs-navy text-white">
-
-  <!-- NAVIGATION -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-rs-darker border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-14">
-      <!-- Logo -->
-      <a href="#" class="text-white font-black uppercase tracking-widest"
-        style="font-size:13px; letter-spacing:0.16em;">PROJECT FUTURE SELF</a>
-      <!-- Nav links -->
-      <div class="hidden lg:flex items-center gap-7">
-        <a href="sprint.html" class="nav-link">5-Day Sprint</a>
-        <a href="#about" class="nav-link">About Andrew</a>
-        <a href="assessment.html" class="nav-link">Assessment</a>
-        <a href="#products" class="nav-link">Products</a>
-        <a href="#testimonials" class="nav-link">Testimonials</a>
-        <a href="contact.html" class="nav-link">Contact Us</a>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-brand">
+      <img class="nav-mark" src="Transparent mark without words.png" alt="Project Future Self mark">
+      <div class="nav-wordmark">
+        <div class="nw-top">Project</div>
+        <div class="nw-main">Future Self</div>
+        <div class="nw-tag">Reinvent · Redesign · Reclaim</div>
       </div>
-      <!-- CTA + Cart -->
-      <div class="flex items-center gap-3">
-        <a href="cart.html" class="relative flex items-center p-1 text-gray-300 hover:text-white transition-colors"
-          title="Cart">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-            stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-          </svg>
-          <span id="cart-badge"
-            class="absolute -top-1 -right-1 bg-pfs-gold text-black font-black rounded-full w-4 h-4 items-center justify-center hidden"
-            style="font-size:9px;">0</span>
-        </a>
-        <a href="assessment.html"
-          class="hidden sm:inline-block bg-pfs-gold text-black text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-sm hover:bg-yellow-300 transition-colors whitespace-nowrap"
-          style="font-size:11px;">FREE ASSESSMENT</a>
-        <!-- Hamburger (mobile only) -->
-        <button id="mobile-menu-btn" class="lg:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 ml-1" aria-label="Open menu">
-          <span class="block w-5 h-0.5 bg-white"></span>
-          <span class="block w-5 h-0.5 bg-white"></span>
-          <span class="block w-5 h-0.5 bg-white"></span>
-        </button>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="#about">About</a>
+      <a href="#programs">Programs</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
+      <a href="https://yosnes.github.io/assessment.html" class="nav-cta">Free Assessment ↗</a>
+    </div>
+    <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Personal &amp; Professional Transformation</div>
+      <h1>Reinvent.<br>Redesign.<br><em>Reclaim.</em></h1>
+      <div class="hero-audience">For Executives · Entrepreneurs · Professionals in Transition</div>
+      <p class="hero-body">A hands-on transformation system for professionals ready to stop drifting and start designing their next chapter — with live coaching, proprietary frameworks, and a 90-Day Roadmap you can actually execute.</p>
+      <div class="hero-ctas">
+        <a href="https://yosnes.github.io/sprint.html" class="btn-primary">View the 5-Day Sprint →</a>
+        <a href="#about" class="btn-secondary">About Andrew</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item"><div class="trust-dot"></div>Live Coaching</div>
+        <div class="trust-item"><div class="trust-dot"></div>9+ Tools</div>
+        <div class="trust-item"><div class="trust-dot"></div>90-Day Roadmap</div>
+        <div class="trust-item"><div class="trust-dot"></div>Free Assessment</div>
       </div>
     </div>
-    <!-- Mobile menu dropdown -->
-    <div id="mobile-menu" class="hidden lg:hidden bg-rs-darker border-t border-white/10">
-      <div class="flex flex-col px-6 py-4 gap-0 divide-y divide-white/10">
-        <a href="sprint.html"      class="nav-link py-3">5-Day Sprint</a>
-        <a href="#about"           class="nav-link py-3" id="mm-about">About Andrew</a>
-        <a href="assessment.html"  class="nav-link py-3">Assessment</a>
-        <a href="#products"        class="nav-link py-3" id="mm-products">Products</a>
-        <a href="#testimonials"    class="nav-link py-3" id="mm-testimonials">Testimonials</a>
-        <a href="contact.html"     class="nav-link py-3">Contact Us</a>
-        <a href="assessment.html"  class="bg-pfs-gold text-black text-xs font-bold uppercase tracking-widest px-4 py-3 mt-3 text-center rounded-sm hover:bg-yellow-300 transition-colors" style="font-size:11px;">FREE ASSESSMENT</a>
-      </div>
+    <div class="hero-visual">
+      <img class="hero-mark" src="Transparent mark without words.png" alt="Project Future Self — transformation illustration">
     </div>
-  </nav>
+  </div>
+</section>
 
-  <!-- HERO SECTION -->
-  <section class="relative flex flex-col items-center text-center overflow-hidden"
-    style="height:60vh; background: linear-gradient(160deg, #0e1a30 0%, #1c3154 35%, #0d1828 70%, #0a1120 100%);">
-    <!-- Background glow -->
-    <div class="absolute inset-0 pointer-events-none">
-      <div class="absolute inset-0"
-        style="background: radial-gradient(ellipse at 55% 30%, rgba(27,94,224,0.18) 0%, transparent 60%);"></div>
-      <div class="absolute inset-0"
-        style="background: radial-gradient(ellipse at 45% 70%, rgba(232,130,26,0.1) 0%, transparent 50%);"></div>
-      <div class="absolute inset-0"
-        style="background: linear-gradient(to bottom, transparent 0%, rgba(10,17,32,0.5) 55%, rgba(10,17,32,0.9) 100%);">
-      </div>
+<!-- ASSESSMENT STRIP -->
+<div class="assessment-strip">
+  <div class="assessment-inner">
+    <div>
+      <div class="asmt-badge">Free · 10 Minutes · Instant Results</div>
+      <div class="asmt-title">Not sure where to start? Take the Free Transformation Assessment</div>
+      <div class="asmt-sub">Identify your exact reinvention stage and get a personalised action plan</div>
     </div>
-    <!-- Content pinned to bottom of viewport -->
-    <div class="relative z-10 w-full flex-1 flex flex-col items-center justify-end pb-12 pt-14">
-      <h1 class="hero-text-main text-white">REINVENT. REDESIGN.</h1>
-      <h2 class="hero-text-main mt-1" style="color:#F5A31A;">RECLAIM.</h2>
-      <h3 class="hero-text-small text-gray-400 mt-4 uppercase tracking-widest">STEP INTO WHO YOU'RE MEANT TO BE.</h3>
-      <!-- Scroll indicator -->
-      <div class="mt-8 flex flex-col items-center">
-        <div class="w-7 h-11 border-2 border-white/25 rounded-full flex justify-center pt-2">
-          <div class="w-1 h-2 bg-white/40 rounded-full animate-bounce"></div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <a href="https://docs.google.com/forms/d/1PnNuPdBgq0L60vpY6Mn41hbJwFaqm-qvDATNgGKvkQo/edit?usp=drivesdk" class="btn-gold">Yes, Take It Free →</a>
+  </div>
+</div>
 
-  <!-- TRUST / CREDIBILITY BAR -->
-  <section class="bg-white py-7">
-    <div class="max-w-5xl mx-auto px-6 text-center">
-      <p class="text-gray-700 font-semibold mb-1" style="font-size:18px; line-height:1.5;">A Personal &amp; Professional
-        Transformation Program for Executives, Entrepreneurs, and Professionals in Transition</p>
-      <div class="flex flex-wrap items-center justify-center gap-8">
-        <span class="text-gray-400 font-black uppercase tracking-widest"
-          style="font-size:11px; letter-spacing:0.18em;">5-DAY SPRINT</span>
-        <span class="text-gray-300 font-light">|</span>
-        <span class="text-gray-400 font-black uppercase tracking-widest"
-          style="font-size:11px; letter-spacing:0.18em;">LIVE COACHING</span>
-        <span class="text-gray-300 font-light">|</span>
-        <span class="text-gray-400 font-black uppercase tracking-widest"
-          style="font-size:11px; letter-spacing:0.18em;">9+ TOOLS</span>
-        <span class="text-gray-300 font-light">|</span>
-        <span class="text-gray-400 font-black uppercase tracking-widest"
-          style="font-size:11px; letter-spacing:0.18em;">90-DAY ROADMAP</span>
-        <span class="text-gray-300 font-light">|</span>
-        <span class="text-gray-400 font-black uppercase tracking-widest"
-          style="font-size:11px; letter-spacing:0.18em;">FREE ASSESSMENT</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROGRAM STATS / QUICK LINKS -->
-  <section class="bg-rs-darker py-0" id="sprint">
-    <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-0 divide-x divide-white/10">
-      <!-- Sprint -->
-      <div class="flex items-center gap-3 px-8 py-5">
-        <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style="background:#1B5EE0;">
-          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-        </div>
-        <div>
-          <p class="text-white font-bold text-sm leading-tight">5-Day Reinvention Sprint</p>
-          <p class="text-gray-400 text-xs mt-1">Live Coaching Program</p>
-        </div>
-      </div>
-      <!-- Assessment -->
-      <div class="flex items-center gap-3 px-8 py-5" id="assessment">
-        <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style="background:#E8821A;">
-          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10" />
-            <path stroke-linecap="round" d="M12 8v4m0 4h.01" />
-          </svg>
-        </div>
-        <div>
-          <p class="text-white font-bold text-sm leading-tight">Transformation Assessment</p>
-          <p class="text-gray-400 text-xs mt-1">Free · Instant Results</p>
-        </div>
-      </div>
-      <!-- Tools -->
-      <div class="flex items-center gap-3 px-8 py-5" id="products">
-        <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style="background:#F5A31A;">
-          <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-          </svg>
-        </div>
-        <div>
-          <p class="text-white font-bold text-sm">Digital Tools</p>
-          <p class="text-gray-400 text-xs mt-1">9+ Self-Paced Products</p>
-        </div>
-      </div>
-      <!-- Contact -->
-      <a href="contact.html" class="flex items-center gap-3 px-8 py-5 hover:bg-white/5 transition-colors" id="contact">
-        <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
-          style="background: linear-gradient(45deg, #1B5EE0, #E8821A);">
-          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-          </svg>
-        </div>
-        <div>
-          <p class="text-white font-bold text-sm">Work With Andrew</p>
-          <p class="text-gray-400 text-xs mt-0.5">Contact Us →</p>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- PROGRAMS & PRODUCTS GRID -->
-  <section class="bg-rs-navy py-12" id="products">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="flex items-end justify-between mb-6">
-        <div>
-          <h2 class="text-white font-black text-2xl">Programs &amp; Products</h2>
-          <p class="text-gray-400 text-xs mt-1">Tap or hover to learn more</p>
-        </div>
-        <a href="products.html"
-          class="text-pfs-gold text-xs font-bold uppercase tracking-widest hover:text-yellow-300 transition-colors">View
-          All →</a>
-      </div>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-
-        <!-- 1. 5-Day Reinvention Sprint -->
-        <div class="relative overflow-hidden cursor-pointer group rounded-sm"
-          style="aspect-ratio:4/3; background:linear-gradient(135deg,#0e2a6e,#1B5EE0);">
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-4 transition-opacity duration-300 group-hover:opacity-0">
-            <p class="text-white font-black text-center uppercase leading-tight"
-              style="font-size:13px; letter-spacing:0.05em;">5-Day<br />Reinvention<br />Sprint</p>
-            <p class="text-pfs-gold font-bold mt-2" style="font-size:15px;">$499</p>
-          </div>
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            style="background:rgba(0,0,0,0.9);">
-            <p class="text-pfs-gold font-black text-xs uppercase tracking-widest mb-2">Live Program</p>
-            <p class="text-white font-bold text-xs text-center mb-2">5-Day Reinvention Sprint</p>
-            <p class="text-gray-300 text-xs text-center leading-relaxed mb-3">A fast-paced workshop where you diagnose
-              where you are, define who you're becoming, rewrite your story, and build your 90-Day Roadmap — in just 5
-              days.</p>
-            <p class="text-pfs-gold font-black text-base mb-3">$499</p>
-            <a href="sprint.html"
-              class="bg-pfs-gold text-black text-xs font-black uppercase tracking-widest px-5 py-2 hover:bg-yellow-300 transition-colors">Learn
-              More</a>
-          </div>
-        </div>
-
-        <!-- 2. Transformation Readiness Assessment -->
-        <div class="relative overflow-hidden cursor-pointer group rounded-sm"
-          style="aspect-ratio:4/3; background:linear-gradient(135deg,#7a3d00,#E8821A);">
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-4 transition-opacity duration-300 group-hover:opacity-0">
-            <p class="text-white font-black text-center uppercase leading-tight"
-              style="font-size:13px; letter-spacing:0.05em;">Transformation<br />Readiness<br />Assessment</p>
-            <p class="text-pfs-gold font-bold mt-2" style="font-size:15px;">Free</p>
-          </div>
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            style="background:rgba(0,0,0,0.9);">
-            <p class="text-pfs-gold font-black text-xs uppercase tracking-widest mb-2">Free Tool</p>
-            <p class="text-white font-bold text-xs text-center mb-2">Transformation Readiness Assessment</p>
-            <p class="text-gray-300 text-xs text-center leading-relaxed mb-3">Identify your exact reinvention stage and
-              discover what's been holding you back. Get a personalized action plan in under 10 minutes — at no cost.
-            </p>
-            <p class="text-pfs-gold font-black text-base mb-3">Free</p>
-            <a href="assessment.html"
-              class="bg-pfs-gold text-black text-xs font-black uppercase tracking-widest px-5 py-2 hover:bg-yellow-300 transition-colors">Learn
-              More</a>
-          </div>
-        </div>
-
-        <!-- 3. Career Pivot Playbook -->
-        <div class="relative overflow-hidden cursor-pointer group rounded-sm"
-          style="aspect-ratio:4/3; background:linear-gradient(135deg,#0a1a3a,#1a2a5e);">
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-4 transition-opacity duration-300 group-hover:opacity-0">
-            <p class="text-white font-black text-center uppercase leading-tight"
-              style="font-size:13px; letter-spacing:0.05em;">Career Pivot<br />Playbook</p>
-            <p class="text-pfs-gold font-bold mt-2" style="font-size:15px;">$149</p>
-          </div>
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            style="background:rgba(0,0,0,0.9);">
-            <p class="text-pfs-gold font-black text-xs uppercase tracking-widest mb-2">Digital Product</p>
-            <p class="text-white font-bold text-xs text-center mb-2">Career Pivot Playbook</p>
-            <p class="text-gray-300 text-xs text-center leading-relaxed mb-3">A step-by-step guide for executing a
-              strategic career pivot — from identifying transferable skills to positioning yourself and landing in a new
-              field.</p>
-            <p class="text-pfs-gold font-black text-base mb-3">$149</p>
-            <a href="products.html"
-              class="bg-pfs-gold text-black text-xs font-black uppercase tracking-widest px-5 py-2 hover:bg-yellow-300 transition-colors">Learn
-              More</a>
-          </div>
-        </div>
-
-        <!-- 4. Confidence Reset Protocol -->
-        <div class="relative overflow-hidden cursor-pointer group rounded-sm"
-          style="aspect-ratio:4/3; background:linear-gradient(135deg,#2a1005,#5a2a10);">
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-4 transition-opacity duration-300 group-hover:opacity-0">
-            <p class="text-white font-black text-center uppercase leading-tight"
-              style="font-size:13px; letter-spacing:0.05em;">Confidence<br />Reset<br />Protocol</p>
-            <p class="text-pfs-gold font-bold mt-2" style="font-size:15px;">$49</p>
-          </div>
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            style="background:rgba(0,0,0,0.9);">
-            <p class="text-pfs-gold font-black text-xs uppercase tracking-widest mb-2">Digital Product</p>
-            <p class="text-white font-bold text-xs text-center mb-2">Confidence Reset Protocol</p>
-            <p class="text-gray-300 text-xs text-center leading-relaxed mb-3">A targeted reset for professionals
-              experiencing confidence gaps. Rebuild your self-belief with proven tools, reframes, and daily practice
-              missions.</p>
-            <p class="text-pfs-gold font-black text-base mb-3">$49</p>
-            <a href="products.html"
-              class="bg-pfs-gold text-black text-xs font-black uppercase tracking-widest px-5 py-2 hover:bg-yellow-300 transition-colors">Learn
-              More</a>
-          </div>
-        </div>
-
-        <!-- 5. Personal Brand Starter Kit -->
-        <div class="relative overflow-hidden cursor-pointer group rounded-sm"
-          style="aspect-ratio:4/3; background:linear-gradient(135deg,#083020,#0f4a30);">
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-4 transition-opacity duration-300 group-hover:opacity-0">
-            <p class="text-white font-black text-center uppercase leading-tight"
-              style="font-size:13px; letter-spacing:0.05em;">Personal Brand<br />Starter Kit</p>
-            <p class="text-pfs-gold font-bold mt-2" style="font-size:15px;">$79</p>
-          </div>
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            style="background:rgba(0,0,0,0.9);">
-            <p class="text-pfs-gold font-black text-xs uppercase tracking-widest mb-2">Digital Product</p>
-            <p class="text-white font-bold text-xs text-center mb-2">Personal Brand Starter Kit</p>
-            <p class="text-gray-300 text-xs text-center leading-relaxed mb-3">Everything you need to craft a compelling
-              professional brand — LinkedIn optimization, bio, elevator pitch, and a complete online presence strategy.
-            </p>
-            <p class="text-pfs-gold font-black text-base mb-3">$79</p>
-            <a href="products.html"
-              class="bg-pfs-gold text-black text-xs font-black uppercase tracking-widest px-5 py-2 hover:bg-yellow-300 transition-colors">Learn
-              More</a>
-          </div>
-        </div>
-
-        <!-- 6. Skill Monetization Toolkit -->
-        <div class="relative overflow-hidden cursor-pointer group rounded-sm"
-          style="aspect-ratio:4/3; background:linear-gradient(135deg,#1a0a2e,#3a1a5e);">
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-4 transition-opacity duration-300 group-hover:opacity-0">
-            <p class="text-white font-black text-center uppercase leading-tight"
-              style="font-size:13px; letter-spacing:0.05em;">Skill<br />Monetization<br />Toolkit</p>
-            <p class="text-pfs-gold font-bold mt-2" style="font-size:15px;">$99</p>
-          </div>
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            style="background:rgba(0,0,0,0.9);">
-            <p class="text-pfs-gold font-black text-xs uppercase tracking-widest mb-2">Digital Product</p>
-            <p class="text-white font-bold text-xs text-center mb-2">Skill Monetization Toolkit</p>
-            <p class="text-gray-300 text-xs text-center leading-relaxed mb-3">Identify your most valuable skills,
-              package them into compelling offers, and turn your expertise into new income streams with proven
-              frameworks.</p>
-            <p class="text-pfs-gold font-black text-base mb-3">$99</p>
-            <a href="products.html"
-              class="bg-pfs-gold text-black text-xs font-black uppercase tracking-widest px-5 py-2 hover:bg-yellow-300 transition-colors">Learn
-              More</a>
-          </div>
-        </div>
-
-        <!-- 7. Reinvention Story Pack -->
-        <div class="relative overflow-hidden cursor-pointer group rounded-sm"
-          style="aspect-ratio:4/3; background:linear-gradient(135deg,#0a2010,#1a4020);">
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-4 transition-opacity duration-300 group-hover:opacity-0">
-            <p class="text-white font-black text-center uppercase leading-tight"
-              style="font-size:13px; letter-spacing:0.05em;">Reinvention<br />Story Pack</p>
-            <p class="text-pfs-gold font-bold mt-2" style="font-size:15px;">$79</p>
-          </div>
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            style="background:rgba(0,0,0,0.9);">
-            <p class="text-pfs-gold font-black text-xs uppercase tracking-widest mb-2">Digital Product</p>
-            <p class="text-white font-bold text-xs text-center mb-2">Reinvention Story Pack</p>
-            <p class="text-gray-300 text-xs text-center leading-relaxed mb-3">Templates and frameworks to articulate
-              your reinvention story powerfully — for interviews, networking, LinkedIn, and every room you walk into.
-            </p>
-            <p class="text-pfs-gold font-black text-base mb-3">$79</p>
-            <a href="products.html"
-              class="bg-pfs-gold text-black text-xs font-black uppercase tracking-widest px-5 py-2 hover:bg-yellow-300 transition-colors">Learn
-              More</a>
-          </div>
-        </div>
-
-        <!-- 8. Job Search Accelerator System -->
-        <div class="relative overflow-hidden cursor-pointer group rounded-sm"
-          style="aspect-ratio:4/3; background:linear-gradient(135deg,#1e1008,#3a2010);">
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-4 transition-opacity duration-300 group-hover:opacity-0">
-            <p class="text-white font-black text-center uppercase leading-tight"
-              style="font-size:13px; letter-spacing:0.05em;">Job Search<br />Accelerator<br />System</p>
-            <p class="text-pfs-gold font-bold mt-2" style="font-size:15px;">$149</p>
-          </div>
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            style="background:rgba(0,0,0,0.9);">
-            <p class="text-pfs-gold font-black text-xs uppercase tracking-widest mb-2">Digital Product</p>
-            <p class="text-white font-bold text-xs text-center mb-2">Job Search Accelerator System</p>
-            <p class="text-gray-300 text-xs text-center leading-relaxed mb-3">A systematic job search process that
-              compresses months of searching into weeks — with outreach templates, tracking tools, and positioning
-              strategies.</p>
-            <p class="text-pfs-gold font-black text-base mb-3">$149</p>
-            <a href="products.html"
-              class="bg-pfs-gold text-black text-xs font-black uppercase tracking-widest px-5 py-2 hover:bg-yellow-300 transition-colors">Learn
-              More</a>
-          </div>
-        </div>
-
-        <!-- 9. Reinvention Reflection Workbook -->
-        <div class="relative overflow-hidden cursor-pointer group rounded-sm"
-          style="aspect-ratio:4/3; background:linear-gradient(135deg,#0f0f20,#1a1a35);">
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-4 transition-opacity duration-300 group-hover:opacity-0">
-            <p class="text-white font-black text-center uppercase leading-tight"
-              style="font-size:13px; letter-spacing:0.05em;">Reinvention<br />Reflection<br />Workbook</p>
-            <p class="text-pfs-gold font-bold mt-2 text-center leading-tight" style="font-size:11px;">Included
-              with<br />5-Day Sprint</p>
-          </div>
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            style="background:rgba(0,0,0,0.9);">
-            <p class="text-pfs-gold font-black text-xs uppercase tracking-widest mb-2">Digital Product</p>
-            <p class="text-white font-bold text-xs text-center mb-2">Reinvention Reflection Workbook</p>
-            <p class="text-gray-300 text-xs text-center leading-relaxed mb-3">Guided reflection exercises to process
-              where you've been, get clear on where you're going, and design the next chapter of your life with
-              intention.</p>
-            <p class="text-pfs-gold font-black text-xs text-center mb-3 uppercase tracking-wide">Included with 5-Day
-              Sprint</p>
-            <a href="products.html"
-              class="bg-pfs-gold text-black text-xs font-black uppercase tracking-widest px-5 py-2 hover:bg-yellow-300 transition-colors">Learn
-              More</a>
-          </div>
-        </div>
-
-        <!-- 10. Reinvention Matrix -->
-        <div class="relative overflow-hidden cursor-pointer group rounded-sm"
-          style="aspect-ratio:4/3; background:linear-gradient(135deg,#081820,#0f2a38);">
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-4 transition-opacity duration-300 group-hover:opacity-0">
-            <p class="text-white font-black text-center uppercase leading-tight"
-              style="font-size:13px; letter-spacing:0.05em;">Reinvention<br />Matrix</p>
-            <p class="text-pfs-gold font-bold mt-2 text-center leading-tight" style="font-size:11px;">Included
-              with<br />5-Day Sprint</p>
-          </div>
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            style="background:rgba(0,0,0,0.9);">
-            <p class="text-pfs-gold font-black text-xs uppercase tracking-widest mb-2">Digital Product</p>
-            <p class="text-white font-bold text-xs text-center mb-2">Reinvention Matrix — Core Components</p>
-            <p class="text-gray-300 text-xs text-center leading-relaxed mb-3">The foundational framework behind the
-              5-Day Sprint. Map your reinvention stage and identify the exact levers that will move you forward.</p>
-            <p class="text-pfs-gold font-black text-xs text-center mb-3 uppercase tracking-wide">Included with 5-Day
-              Sprint</p>
-            <a href="products.html"
-              class="bg-pfs-gold text-black text-xs font-black uppercase tracking-widest px-5 py-2 hover:bg-yellow-300 transition-colors">Learn
-              More</a>
-          </div>
-        </div>
-
-        <!-- 11. Impact Story Template -->
-        <div class="relative overflow-hidden cursor-pointer group rounded-sm"
-          style="aspect-ratio:4/3; background:linear-gradient(135deg,#0a1a18,#102e2a);">
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-4 transition-opacity duration-300 group-hover:opacity-0">
-            <p class="text-white font-black text-center uppercase leading-tight"
-              style="font-size:13px; letter-spacing:0.05em;">Impact Story<br />Template</p>
-            <p class="text-pfs-gold font-bold mt-2 text-center leading-tight" style="font-size:11px;">Included
-              with<br />5-Day Sprint</p>
-          </div>
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            style="background:rgba(0,0,0,0.9);">
-            <p class="text-pfs-gold font-black text-xs uppercase tracking-widest mb-2">Digital Product</p>
-            <p class="text-white font-bold text-xs text-center mb-2">Impact Story Template</p>
-            <p class="text-gray-300 text-xs text-center leading-relaxed mb-3">A structured template for crafting your
-              most compelling professional impact stories — perfect for interviews, proposals, and building authority in
-              any room.</p>
-            <p class="text-pfs-gold font-black text-xs text-center mb-3 uppercase tracking-wide">Included with 5-Day
-              Sprint</p>
-            <a href="products.html"
-              class="bg-pfs-gold text-black text-xs font-black uppercase tracking-widest px-5 py-2 hover:bg-yellow-300 transition-colors">Learn
-              More</a>
-          </div>
-        </div>
-
-        <!-- 12. Future Self OS -->
-        <div class="relative overflow-hidden cursor-pointer group rounded-sm"
-          style="aspect-ratio:4/3; background:linear-gradient(135deg,#2a0e00,#E8821A);">
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-4 transition-opacity duration-300 group-hover:opacity-0">
-            <p class="text-white font-black text-center uppercase leading-tight"
-              style="font-size:13px; letter-spacing:0.05em;">Future Self<br />OS™</p>
-            <p class="text-pfs-gold font-bold mt-2 text-center leading-tight" style="font-size:11px;">Included
-              with<br />5-Day Sprint</p>
-          </div>
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            style="background:rgba(0,0,0,0.9);">
-            <p class="text-pfs-gold font-black text-xs uppercase tracking-widest mb-2">Digital Product</p>
-            <p class="text-white font-bold text-xs text-center mb-2">Future Self OS™</p>
-            <p class="text-gray-300 text-xs text-center leading-relaxed mb-3">Your personal operating system for
-              sustained identity change — daily habits, decision frameworks, and momentum-building practices for
-              long-term transformation.</p>
-            <p class="text-pfs-gold font-black text-xs text-center mb-3 uppercase tracking-wide">Included with 5-Day
-              Sprint</p>
-            <a href="products.html"
-              class="bg-pfs-gold text-black text-xs font-black uppercase tracking-widest px-5 py-2 hover:bg-yellow-300 transition-colors">Learn
-              More</a>
-          </div>
-        </div>
-
-        <!-- 13. AI-Enhanced Career Toolkit -->
-        <div class="relative overflow-hidden cursor-pointer group rounded-sm"
-          style="aspect-ratio:4/3; background:linear-gradient(135deg,#0a1a2e,#1a3a5e);">
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-4 transition-opacity duration-300 group-hover:opacity-0">
-            <p class="text-white font-black text-center uppercase leading-tight"
-              style="font-size:13px; letter-spacing:0.05em;">AI-Enhanced<br />Career<br />Toolkit</p>
-            <p class="text-pfs-gold font-bold mt-2" style="font-size:15px;">$99</p>
-          </div>
-          <div
-            class="absolute inset-0 flex flex-col items-center justify-center p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            style="background:rgba(0,0,0,0.9);">
-            <p class="text-pfs-gold font-black text-xs uppercase tracking-widest mb-2">Digital Product</p>
-            <p class="text-white font-bold text-xs text-center mb-2">AI-Enhanced Career Toolkit</p>
-            <p class="text-gray-300 text-xs text-center leading-relaxed mb-3">Leverage AI tools to accelerate your
-              career reinvention — from resume optimization and interview prep to personal brand building and
-              opportunity discovery.</p>
-            <p class="text-pfs-gold font-black text-base mb-3">$99</p>
-            <a href="products.html"
-              class="bg-pfs-gold text-black text-xs font-black uppercase tracking-widest px-5 py-2 hover:bg-yellow-300 transition-colors">Learn
-              More</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT ANDREW -->
-  <section class="bg-rs-darker py-16" id="about">
-    <div class="max-w-5xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-      <!-- Photo -->
-      <div class="relative overflow-hidden rounded-sm" style="min-height:480px;">
-        <img src="andrew-headshot.jpg" alt="Andrew Asnes"
-          class="absolute inset-0 w-full h-full object-cover object-top" />
-      </div>
-      <!-- Bio -->
+<!-- 5-DAY SPRINT -->
+<section class="sprint-section">
+  <div class="section-inner">
+    <div class="sprint-grid">
       <div>
-        <h2 class="text-white text-4xl font-black mb-1">Andrew Asnes</h2>
-        <p class="text-gray-400 text-sm mb-5">Career Reinvention Coach &middot; Transformation Strategist &middot;
-          Founder, Project Future Self</p>
-        <p class="text-gray-300 text-sm leading-relaxed mb-6">
-          Andrew Asnes created Project Future Self as a <strong class="text-white">hands-on transformation
-            system</strong> for professionals who feel stuck between who they've been and who they're meant to become.
-          His work blends strategic coaching with proprietary frameworks designed to generate breakthroughs fast.
-        </p>
-        <p class="text-gray-300 text-sm leading-relaxed mb-8">
-          Through the 5-Day Reinvention Sprint, Andrew guides clients through a complete reinvention cycle — diagnosing
-          where they are, designing who they're becoming, rewriting their story, and building a 90-Day Roadmap they can
-          actually execute. His program serves executives, mid-career professionals, and entrepreneurs navigating major
-          life and career transitions.
-        </p>
-        <!-- Contact -->
-        <div>
-          <a href="#contact-form"
-            class="inline-block border border-pfs-orange text-pfs-orange text-xs font-bold uppercase tracking-widest px-5 py-2 hover:bg-pfs-orange hover:text-black transition-colors">Get
-            In Touch →</a>
+        <div class="section-header">
+          <div class="section-eyebrow">Flagship Program</div>
+          <h2 class="section-h2">The 5-Day<br>Reinvention Sprint</h2>
+          <div class="gold-rule"></div>
         </div>
+        <p class="sprint-desc">A fast-paced live coaching program where you diagnose where you are, define who you're becoming, rewrite your story, and build your 90-Day Roadmap — in just 5 days. Designed for executives and professionals who are done waiting.</p>
+        <div class="sprint-price">
+          <span class="amount">$499</span>
+          <span class="label">· Live Program</span>
+        </div>
+        <a href="https://yosnes.github.io/sprint.html" class="btn-gold">Learn More &amp; Enroll →</a>
       </div>
-    </div>
-  </section>
-
-  <!-- FEATURED DELIVERABLES (replaces "Books") -->
-  <section class="bg-gray-100 py-16">
-    <div class="max-w-5xl mx-auto px-6 text-center">
-      <h2 class="text-gray-900 text-4xl font-black mb-1">Walk Away With 5 Deliverables</h2>
-      <p class="text-gray-500 text-sm mb-10">Proprietary tools you own and keep — built in 5 days of live coaching</p>
-      <!-- 3 featured deliverables -->
-      <div class="flex items-end justify-center gap-8 mb-10">
-        <!-- Blueprint -->
-        <div class="relative shadow-2xl rounded-sm overflow-hidden"
-          style="width:180px; height:240px; background:linear-gradient(135deg,#1B5EE0,#0933c0);">
-          <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
-            <p class="text-blue-200 text-xs font-bold uppercase tracking-widest mb-2">Blueprint</p>
-            <p class="text-white font-black text-sm leading-tight">Future-Self Identity Blueprint</p>
+      <div>
+        <div class="deliverables-title">What You Walk Away With</div>
+        <div class="deliverable">
+          <div class="deliv-icon">01</div>
+          <div>
+            <div class="deliv-name">Future-Self Identity Blueprint</div>
+            <div class="deliv-desc">A clear, written definition of who you're becoming — professionally and personally.</div>
           </div>
         </div>
-        <!-- Roadmap - center, taller -->
-        <div class="relative shadow-2xl rounded-sm overflow-hidden -mt-4"
-          style="width:190px; height:260px; background:linear-gradient(135deg,#1a1a1a,#2a2a2a);">
-          <div class="absolute inset-0"
-            style="background:linear-gradient(to bottom, rgba(245,163,26,0.15) 0%, transparent 50%);"></div>
-          <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
-            <p class="text-pfs-gold text-xs font-bold uppercase tracking-widest mb-2">Roadmap</p>
-            <p class="text-white font-black text-sm leading-tight">90-Day Reinvention Roadmap</p>
+        <div class="deliverable">
+          <div class="deliv-icon">02</div>
+          <div>
+            <div class="deliv-name">90-Day Reinvention Roadmap</div>
+            <div class="deliv-desc">A concrete, executable action plan for your next 90 days — built during the Sprint.</div>
           </div>
         </div>
-        <!-- OS -->
-        <div class="relative shadow-2xl rounded-sm overflow-hidden"
-          style="width:180px; height:240px; background:linear-gradient(135deg,#E8821A,#b85a08);">
-          <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center">
-            <p class="text-orange-200 text-xs font-bold uppercase tracking-widest mb-2">System</p>
-            <p class="text-white font-black text-sm leading-tight">Future Self OS™</p>
+        <div class="deliverable">
+          <div class="deliv-icon">03</div>
+          <div>
+            <div class="deliv-name">Future Self OS™</div>
+            <div class="deliv-desc">Your personal operating system for sustained identity change and long-term momentum.</div>
           </div>
         </div>
-      </div>
-      <a href="sprint.html"
-        class="inline-block border-2 border-gray-800 text-gray-800 text-xs font-bold uppercase tracking-widest px-8 py-3 hover:bg-gray-800 hover:text-white transition-colors">SEE
-        THE FULL PROGRAM</a>
-    </div>
-  </section>
-
-  <!-- TESTIMONIALS -->
-  <section class="bg-rs-darker py-16 overflow-hidden" id="testimonials">
-    <div class="max-w-5xl mx-auto px-6">
-      <div class="grid md:grid-cols-2 gap-8 items-start">
-        <!-- Left — large featured quote -->
-        <div class="relative">
-          <div class="relative overflow-hidden rounded-sm"
-            style="min-height:340px; background: linear-gradient(135deg, #0e1e3a, #1B5EE0);">
-            <div class="absolute inset-0"
-              style="background:linear-gradient(to right, rgba(10,15,30,0.85) 0%, rgba(10,15,30,0.3) 100%);"></div>
-            <div class="relative p-8 flex flex-col justify-between h-full" style="min-height:340px;">
-              <!-- PFS mark -->
-              <div class="w-12 h-12 rounded-full flex items-center justify-center cursor-pointer mb-4"
-                style="background:#F5A31A;">
-                <span class="text-black font-black text-lg leading-none">PFS</span>
-              </div>
-              <div>
-                <p id="t-quote" class="text-white text-sm leading-relaxed italic mb-4">"I came in feeling stuck and completely
-                  unclear about my next step. By Day 3, I had rewritten my professional story. By Day 5, I had a real
-                  roadmap — and the confidence to actually follow it."</p>
-                <div>
-                  <p id="t-name" class="text-white font-bold text-sm">SPRINT PARTICIPANT</p>
-                  <p id="t-location" class="text-gray-400 text-xs">Career Transition, New York</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Navigation arrows -->
-          <div class="flex items-center gap-4 mt-4">
-            <button id="t-prev"
-              class="w-8 h-8 border border-white/30 flex items-center justify-center text-white hover:bg-white/10 transition-colors">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <button id="t-next"
-              class="w-8 h-8 border border-white/30 flex items-center justify-center text-white hover:bg-white/10 transition-colors">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
-        </div>
-        <!-- Right — text testimonials -->
-        <div class="flex flex-col gap-5">
-          <div class="bg-rs-navy p-6 rounded-sm border border-white/10">
-            <p class="text-gray-300 text-sm leading-relaxed italic">"The Reinvention Matrix gave me clarity I'd been
-              searching for for two years. I finally understood what was actually holding me back — and what to do about
-              it."</p>
-            <p class="text-white font-bold text-xs mt-3">Sprint Participant</p>
-            <p class="text-gray-500 text-xs">Executive, Financial Services</p>
-          </div>
-          <div class="bg-rs-navy p-6 rounded-sm border border-white/10">
-            <p class="text-gray-300 text-sm leading-relaxed italic">"Andrew's frameworks are the most practical tools
-              I've ever used for career reinvention. The Future-Self Identity Blueprint changed how I think about myself
-              professionally."</p>
-            <p class="text-white font-bold text-xs mt-3">Sprint Participant</p>
-            <p class="text-gray-500 text-xs">Entrepreneur, Los Angeles</p>
+        <div class="deliverable">
+          <div class="deliv-icon">04</div>
+          <div>
+            <div class="deliv-name">Reinvention Matrix + Story Pack</div>
+            <div class="deliv-desc">Proprietary frameworks to map your stage and articulate your reinvention story.</div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FREE ASSESSMENT CTA -->
-  <section class="bg-rs-navy py-12 border-t border-white/10">
-    <div class="max-w-5xl mx-auto px-6">
-      <div class="flex flex-col md:flex-row items-center gap-8">
-        <!-- Icon/visual -->
-        <div class="flex-shrink-0 w-32 h-24 rounded-sm flex items-center justify-center"
-          style="background:linear-gradient(135deg,#1B5EE0,#E8821A);">
-          <span class="text-white font-black text-2xl tracking-widest">PFS</span>
-        </div>
-        <!-- Copy -->
-        <div class="flex-1">
-          <h3 class="text-white font-black text-xl leading-tight mb-2">Take the Free Transformation Readiness Assessment
-          </h3>
-          <p class="text-gray-400 text-xs leading-relaxed">Identify your exact reinvention stage, discover what's been
-            holding you back, and get a personalised action plan — in under 10 minutes.</p>
-        </div>
-        <!-- CTA -->
-        <div class="flex-shrink-0 flex flex-col items-center gap-1">
-          <a href="https://docs.google.com/forms/d/1PnNuPdBgq0L60vpY6Mn41hbJwFaqm-qvDATNgGKvkQo/edit?usp=drivesdk"
-            class="bg-pfs-gold text-black font-black uppercase text-sm tracking-wider px-8 py-4 hover:bg-yellow-300 transition-colors whitespace-nowrap">YES,
-            TAKE THE FREE ASSESSMENT</a>
-          <p class="text-gray-500 text-xs">* No cost. No credit card required.</p>
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-photo-wrap">
+        <div class="about-photo-placeholder">Andrew's photo here</div>
+      </div>
+      <div>
+        <div class="section-eyebrow">About Andrew</div>
+        <h2 class="section-h2">Andrew Asnes</h2>
+        <div class="gold-rule" style="margin-bottom:20px;"></div>
+        <div class="about-role">Career Reinvention Coach · Transformation Strategist · Founder, Project Future Self</div>
+        <p class="about-body">Andrew Asnes created Project Future Self as a hands-on transformation system for professionals who feel stuck between who they've been and who they're meant to become. His work blends strategic coaching with proprietary frameworks designed to generate breakthroughs fast.</p>
+        <p class="about-body">Through the 5-Day Reinvention Sprint, Andrew guides clients through a complete reinvention cycle — diagnosing where they are, designing who they're becoming, rewriting their story, and building a 90-Day Roadmap they can actually execute. His program serves executives, mid-career professionals, and entrepreneurs navigating major life and career transitions.</p>
+        <div class="about-cta">
+          <a href="https://yosnes.github.io/contact.html" class="btn-primary">Work With Andrew →</a>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CONTACT US SECTION -->
-  <section class="bg-rs-darker py-16 border-t border-white/10" id="contact-form">
-    <div class="max-w-2xl mx-auto px-6">
-      <h2 class="text-white font-black text-3xl mb-2">Contact Us</h2>
-      <p class="text-gray-400 text-sm mb-8">We'd love to hear from you. Fill out the form below and we'll be in touch.
-      </p>
-      <form class="flex flex-col gap-5">
-        <!-- Name row -->
-        <div class="grid grid-cols-2 gap-4">
-          <div class="flex flex-col gap-1.5">
-            <label class="text-gray-400 text-xs uppercase tracking-widest font-semibold">First Name</label>
-            <input type="text" placeholder="First name"
-              class="bg-white/5 border border-white/15 text-white text-sm px-4 py-3 rounded-sm placeholder-white/25 focus:outline-none focus:border-pfs-gold transition-colors" />
-          </div>
-          <div class="flex flex-col gap-1.5">
-            <label class="text-gray-400 text-xs uppercase tracking-widest font-semibold">Last Name</label>
-            <input type="text" placeholder="Last name"
-              class="bg-white/5 border border-white/15 text-white text-sm px-4 py-3 rounded-sm placeholder-white/25 focus:outline-none focus:border-pfs-gold transition-colors" />
-          </div>
-        </div>
-        <!-- Email -->
-        <div class="flex flex-col gap-1.5">
-          <label class="text-gray-400 text-xs uppercase tracking-widest font-semibold">Email Address</label>
-          <input type="email" placeholder="your@email.com"
-            class="bg-white/5 border border-white/15 text-white text-sm px-4 py-3 rounded-sm placeholder-white/25 focus:outline-none focus:border-pfs-gold transition-colors" />
-        </div>
-        <!-- Message -->
-        <div class="flex flex-col gap-1.5">
-          <label class="text-gray-400 text-xs uppercase tracking-widest font-semibold">Tell Us What You'd Like to
-            Know</label>
-          <textarea rows="5" placeholder="Write your message here..."
-            class="bg-white/5 border border-white/15 text-white text-sm px-4 py-3 rounded-sm placeholder-white/25 focus:outline-none focus:border-pfs-gold transition-colors resize-none"></textarea>
-        </div>
-        <!-- Submit -->
-        <div>
-          <button type="submit"
-            class="bg-pfs-gold text-black font-black uppercase text-sm tracking-widest px-10 py-4 hover:bg-yellow-300 transition-colors">SEND
-            MESSAGE</button>
-        </div>
-      </form>
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" id="testimonials">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">Client Results</div>
+      <h2 class="section-h2">What Clients Say</h2>
+      <div class="gold-rule"></div>
     </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="bg-rs-darker py-12 border-t border-white/10">
-    <div class="max-w-5xl mx-auto px-6">
-      <div class="grid md:grid-cols-2 gap-10 mb-10">
-        <!-- Left col -->
-        <div>
-          <h4 class="text-white font-black text-lg mb-3">Why Project Future Self Works</h4>
-          <p class="text-gray-400 text-xs leading-relaxed mb-4">Project Future Self is not theory — it's a hands-on,
-            high-impact transformation system built for professionals who are ready to stop drifting and start designing
-            their next chapter. Through live coaching, daily action missions, and proprietary frameworks, Andrew Asnes
-            guides clients to breakthroughs fast.</p>
-          <div class="flex items-center gap-5 flex-wrap">
-            <span class="text-gray-500 font-bold text-xs uppercase tracking-widest">5-Day Sprint</span>
-            <span class="text-gray-500 font-bold text-xs uppercase tracking-widest">Free Assessment</span>
-            <span class="text-gray-500 font-bold text-xs uppercase tracking-widest">9+ Tools</span>
-            <span class="text-gray-500 font-bold text-xs uppercase tracking-widest">90-Day Roadmap</span>
-          </div>
-        </div>
-        <!-- Right col -->
-        <div class="md:text-right">
-          <h4 class="text-white font-bold text-sm uppercase tracking-widest mb-4">FOLLOW ANDREW</h4>
-          <div class="flex items-center gap-4 md:justify-end mb-6">
-            <!-- Instagram -->
-            <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center"
-              style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);">
-              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-              </svg>
-            </a>
-            <!-- LinkedIn -->
-            <a href="#" class="w-9 h-9 rounded-full bg-blue-700 flex items-center justify-center">
-              <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" />
-                <circle cx="4" cy="4" r="2" />
-              </svg>
-            </a>
-            <!-- YouTube -->
-            <a href="#" class="w-9 h-9 rounded-full bg-red-600 flex items-center justify-center">
-              <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                  d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.5a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58zM9.75 15.02V8.98L15.5 12z" />
-              </svg>
-            </a>
-            <!-- Twitter/X -->
-            <a href="#" class="w-9 h-9 rounded-full bg-sky-500 flex items-center justify-center">
-              <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                  d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
-              </svg>
-            </a>
-          </div>
-          <!-- Contact link -->
-          <div class="text-right">
-            <a href="#contact-form" class="text-gray-400 text-xs hover:text-pfs-orange transition">Contact Us →</a>
-          </div>
-        </div>
+    <div class="tgrid">
+      <div class="tcard">
+        <div class="qmark">"</div>
+        <p class="qtext">I came in feeling stuck and completely unclear about my next step. By Day 3, I had rewritten my professional story. By Day 5, I had a real roadmap — and the confidence to actually follow it.</p>
+        <div class="qauthor">Sprint Participant</div>
+        <div class="qrole">Career Transition · New York</div>
       </div>
-      <!-- Footer logo -->
-      <div class="flex justify-center mb-8">
-        <img src="pfs-logo.png" alt="Project Future Self" class="h-16 w-auto rounded opacity-75"
-          style="background:#fff; padding:4px 12px;" />
+      <div class="tcard">
+        <div class="qmark">"</div>
+        <p class="qtext">The Reinvention Matrix gave me clarity I'd been searching for for two years. I finally understood what was actually holding me back — and what to do about it.</p>
+        <div class="qauthor">Sprint Participant</div>
+        <div class="qrole">Executive · Financial Services</div>
       </div>
-      <!-- Bottom bar -->
-      <div
-        class="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-gray-500">
-        <p>&copy; Project Future Self. All rights reserved.</p>
-        <div class="flex items-center gap-4">
-          <a href="#" class="hover:text-gray-300 transition-colors">Privacy Policy</a>
-          <a href="#" class="hover:text-gray-300 transition-colors">Terms &amp; Conditions</a>
-          <a href="#contact" class="hover:text-gray-300 transition-colors">Contact</a>
-        </div>
+      <div class="tcard">
+        <div class="qmark">"</div>
+        <p class="qtext">Andrew's frameworks are the most practical tools I've ever used for career reinvention. The Future-Self Identity Blueprint changed how I think about myself professionally.</p>
+        <div class="qauthor">Sprint Participant</div>
+        <div class="qrole">Entrepreneur · Los Angeles</div>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script>
-      (function () {
-        function updateCartBadge() {
-          const cart = JSON.parse(localStorage.getItem('pfs-cart') || '[]');
-          const count = cart.reduce((sum, item) => sum + item.qty, 0);
-          const badge = document.getElementById('cart-badge');
-          if (badge) {
-            badge.textContent = count;
-            badge.classList.toggle('hidden', count === 0);
-            badge.classList.toggle('flex', count > 0);
-          }
-        }
-        document.addEventListener('DOMContentLoaded', updateCartBadge);
-      })();
+<!-- PROGRAMS & PRODUCTS -->
+<section class="programs-section" id="programs">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">Programs &amp; Products</div>
+      <h2 class="section-h2">Everything You Need<br>to Reinvent</h2>
+      <div class="gold-rule"></div>
+    </div>
+    <div class="programs-table-wrap">
+      <table class="ptable">
+        <thead>
+          <tr>
+            <th style="width:52%">Program / Product</th>
+            <th style="width:22%">Format</th>
+            <th style="width:14%">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="featured">
+            <td>
+              5-Day Reinvention Sprint <span class="flagship-badge">Flagship</span>
+              <span class="prod-sub">Live coaching · 90-Day Roadmap · 4 proprietary tools included</span>
+            </td>
+            <td>Live Program</td>
+            <td>$499</td>
+          </tr>
+          <tr>
+            <td>
+              Transformation Readiness Assessment
+              <span class="prod-sub">10 min · Instant personalised action plan</span>
+            </td>
+            <td>Free Tool</td>
+            <td class="free-tag">Free</td>
+          </tr>
+          <tr>
+            <td>Career Pivot Playbook<span class="prod-sub">Step-by-step guide for executing a strategic career pivot</span></td>
+            <td>Digital Guide</td>
+            <td>$149</td>
+          </tr>
+          <tr>
+            <td>Job Search Accelerator System<span class="prod-sub">Compress months of searching into weeks</span></td>
+            <td>Digital System</td>
+            <td>$149</td>
+          </tr>
+          <tr>
+            <td>AI-Enhanced Career Toolkit<span class="prod-sub">Leverage AI to accelerate your career reinvention</span></td>
+            <td>Digital Toolkit</td>
+            <td>$99</td>
+          </tr>
+          <tr>
+            <td>Skill Monetization Toolkit<span class="prod-sub">Turn your expertise into new income streams</span></td>
+            <td>Digital Toolkit</td>
+            <td>$99</td>
+          </tr>
+          <tr>
+            <td>Personal Brand Starter Kit<span class="prod-sub">LinkedIn, bio, elevator pitch &amp; online presence</span></td>
+            <td>Digital Kit</td>
+            <td>$79</td>
+          </tr>
+          <tr class="view-all-row">
+            <td colspan="3">
+              <a href="https://yosnes.github.io/products.html" class="view-all-link">View all 13 products &amp; tools →</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
 
-      // Mobile hamburger menu
-      (function() {
-        var btn  = document.getElementById('mobile-menu-btn');
-        var menu = document.getElementById('mobile-menu');
-        if (!btn || !menu) return;
-        btn.addEventListener('click', function() {
-          menu.classList.toggle('hidden');
-        });
-        menu.querySelectorAll('a').forEach(function(link) {
-          link.addEventListener('click', function() {
-            menu.classList.add('hidden');
-          });
-        });
-      })();
+<!-- CTA FOOTER SECTION -->
+<section class="cta-footer" id="contact">
+  <div class="section-eyebrow">Ready to Begin?</div>
+  <h2>Step Into Who<br>You're Meant to Be</h2>
+  <p>Start with the free assessment to find your reinvention stage, or go straight to the 5-Day Sprint if you're ready to move fast.</p>
+  <div class="cta-footer-btns">
+    <a href="https://docs.google.com/forms/d/1PnNuPdBgq0L60vpY6Mn41hbJwFaqm-qvDATNgGKvkQo/edit?usp=drivesdk" class="btn-gold">Take the Free Assessment →</a>
+    <a href="https://yosnes.github.io/sprint.html" class="btn-secondary" style="border-color:rgba(253,246,236,0.3);color:#FDF6EC;">View the 5-Day Sprint</a>
+  </div>
+</section>
 
-      // Product card tap-to-reveal (touch devices)
-      (function() {
-        document.querySelectorAll('.group').forEach(function(card) {
-          card.addEventListener('click', function(e) {
-            if (e.target.closest('a')) return;
-            var isOpen = this.classList.contains('touch-open');
-            document.querySelectorAll('.group.touch-open').forEach(function(c) {
-              c.classList.remove('touch-open');
-            });
-            if (!isOpen) this.classList.add('touch-open');
-          });
-        });
-      })();
-
-      // Testimonial carousel
-      (function() {
-        var testimonials = [
-          {
-            quote: '"I came in feeling stuck and completely unclear about my next step. By Day 3, I had rewritten my professional story. By Day 5, I had a real roadmap — and the confidence to actually follow it."',
-            name: 'SPRINT PARTICIPANT',
-            location: 'Career Transition, New York'
-          },
-          {
-            quote: '"The Reinvention Matrix gave me clarity I\'d been searching for for two years. I finally understood what was actually holding me back — and what to do about it."',
-            name: 'SPRINT PARTICIPANT',
-            location: 'Executive, Financial Services'
-          },
-          {
-            quote: '"Andrew\'s frameworks are the most practical tools I\'ve ever used for career reinvention. The Future-Self Identity Blueprint changed how I think about myself professionally."',
-            name: 'SPRINT PARTICIPANT',
-            location: 'Entrepreneur, Los Angeles'
-          }
-        ];
-        var current = 0;
-        var quoteEl = document.getElementById('t-quote');
-        var nameEl = document.getElementById('t-name');
-        var locationEl = document.getElementById('t-location');
-
-        function show(index) {
-          var t = testimonials[index];
-          quoteEl.textContent = t.quote;
-          nameEl.textContent = t.name;
-          locationEl.textContent = t.location;
-        }
-
-        document.getElementById('t-prev').addEventListener('click', function() {
-          current = (current - 1 + testimonials.length) % testimonials.length;
-          show(current);
-        });
-
-        document.getElementById('t-next').addEventListener('click', function() {
-          current = (current + 1) % testimonials.length;
-          show(current);
-        });
-      })();
-  </script>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <img class="footer-mark" src="Transparent mark without words.png" alt="PFS">
+    <div class="footer-name">Project Future Self</div>
+  </div>
+  <p>© 2025 Project Future Self. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms</a>
+    <a href="https://yosnes.github.io/contact.html">Contact</a>
+  </div>
+</footer>
 
 </body>
-
 </html>
