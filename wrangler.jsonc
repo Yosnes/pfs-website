@@ -14,8 +14,8 @@
   ],
   "routes": [
     {
-      "pattern": "projectfuture.com/api/*",
-      "zone_name": "projectfuture.com"
+      "pattern": "projectfutureself.com/api/*",
+      "zone_name": "projectfutureself.com"
     }
   ]
 }
