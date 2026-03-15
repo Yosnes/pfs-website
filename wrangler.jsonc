@@ -11,5 +11,12 @@
   },
   "compatibility_flags": [
     "nodejs_compat"
+  ],
+  "routes": [
+    {
+      "pattern": "/api/*",
+      "zone_name": "projectfutureself.com"
+    }
   ]
 }
+
