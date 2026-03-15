@@ -1,3 +1,173 @@
+/* ================================================
+   PROJECT FUTURE SELF — Design Token System
+   Three colors. That's the rule.
+   ================================================ */
+
+:root {
+
+  /* ── Core Brand ── */
+  --pfs-navy:         #0D1F3C;
+  --pfs-gold:         #F5A31A;
+  --pfs-amber-white:  #FDF6EC;
+
+  /* ── Navy Tints ── */
+  --pfs-navy-70:      #3a4e6b;  /* hover states */
+  --pfs-navy-50:      #8091aa;  /* borders, dividers */
+  --pfs-navy-25:      #c0c8d5;  /* subtle borders */
+  --pfs-navy-10:      #e8ebf0;  /* subtle fills */
+
+  /* ── Gold Tints ── */
+  --pfs-gold-80:      #f7b947;  /* hover states */
+  --pfs-gold-50:      #fad18a;  /* mid fills */
+  --pfs-gold-25:      #fce8bf;  /* tag backgrounds */
+  --pfs-gold-10:      #FFF3DC;  /* callout fills */
+
+  /* ── Semantic Roles ── */
+  --color-primary:      var(--pfs-navy);
+  --color-accent:       var(--pfs-gold);
+  --color-background:   var(--pfs-amber-white);
+  --color-text:         var(--pfs-navy);
+  --color-text-muted:   var(--pfs-navy-50);
+  --color-border:       var(--pfs-navy-25);
+  --color-callout-bg:   var(--pfs-gold-10);
+  --color-hover:        var(--pfs-navy-70);
+  --color-accent-hover: var(--pfs-gold-80);
+
+  /* ── Typography ── */
+  --font-primary:        'Lato', sans-serif;
+  --font-weight-black:   900;
+  --font-weight-bold:    700;
+  --font-weight-regular: 400;
+  --font-weight-light:   300;
+
+  /* ── Border Radius ── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+}
+
+/* ================================================
+   PFS Utility Classes
+   Use these anywhere Tailwind CDN classes aren't
+   enough, or to keep brand intent explicit.
+   ================================================ */
+
+/* ── Backgrounds ── */
+.bg-pfs-navy         { background-color: var(--pfs-navy); }
+.bg-pfs-gold         { background-color: var(--pfs-gold); }
+.bg-pfs-amber-white  { background-color: var(--pfs-amber-white); }
+.bg-pfs-gold-10      { background-color: var(--pfs-gold-10); }
+.bg-pfs-gold-25      { background-color: var(--pfs-gold-25); }
+.bg-pfs-navy-10      { background-color: var(--pfs-navy-10); }
+
+/* ── Text ── */
+.text-pfs-navy       { color: var(--pfs-navy); }
+.text-pfs-gold       { color: var(--pfs-gold); }
+.text-pfs-muted      { color: var(--pfs-navy-50); }
+
+/* ── Borders ── */
+.border-pfs-navy     { border-color: var(--pfs-navy); }
+.border-pfs-gold     { border-color: var(--pfs-gold); }
+.border-pfs-subtle   { border-color: var(--pfs-navy-25); }
+
+/* ── Hover states ── */
+.hover-pfs-navy:hover  { background-color: var(--pfs-navy-70); }
+.hover-pfs-gold:hover  { background-color: var(--pfs-gold-80); }
+
+/* ── Component Patterns ── */
+
+/* Primary CTA button */
+.btn-pfs-primary {
+  background-color: var(--pfs-gold);
+  color: var(--pfs-navy);
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-black);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 12px 28px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.btn-pfs-primary:hover {
+  background-color: var(--pfs-gold-80);
+}
+
+/* Secondary / ghost button */
+.btn-pfs-secondary {
+  background-color: transparent;
+  color: var(--pfs-gold);
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-black);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 11px 28px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--pfs-gold);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-pfs-secondary:hover {
+  background-color: var(--pfs-gold);
+  color: var(--pfs-navy);
+}
+
+/* Callout / Key Insight block */
+.callout-pfs {
+  background-color: var(--pfs-gold-10);
+  border-left: 3px solid var(--pfs-gold);
+  color: var(--pfs-navy);
+  padding: 12px 16px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Card */
+.card-pfs {
+  background-color: #ffffff;
+  border: 1px solid var(--pfs-navy-25);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  color: var(--pfs-navy);
+}
+
+/* Tag / Badge */
+.tag-pfs {
+  display: inline-block;
+  background-color: var(--pfs-gold-25);
+  color: var(--pfs-navy);
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-bold);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+}
+
+/* Section divider rule */
+.divider-pfs {
+  border: none;
+  border-top: 1px solid var(--pfs-navy-25);
+  margin: 32px 0;
+}
+
+/* Accent divider (gold) */
+.divider-pfs-accent {
+  border: none;
+  border-top: 2px solid var(--pfs-gold);
+  margin: 32px 0;
+}
+
+/* ================================================
+   Existing Site Styles — unchanged below this line
+   ================================================ */
+
 body {
   font-family: 'Lato', sans-serif;
 }
