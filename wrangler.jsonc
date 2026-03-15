@@ -16,7 +16,12 @@
     {
       "type": "kv_namespace",
       "namespace_id": "969d8b89ad2147a0afc6ef592c4793a2",
-      "name": "DOWNLOAD_TOKENS Gina is she going to go get some food Are you gonna wait another 10 minutes till Mom's done"
+      "name": "DOWNLOAD_TOKENS"
+    },
+    {
+      "type": "r2_bucket",
+      "bucket_name": "pfs-products",
+      "name": "PRODUCTS_BUCKET"
     }
   ],
   "routes": [
