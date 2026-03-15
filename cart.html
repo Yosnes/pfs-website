@@ -37,8 +37,8 @@
   .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover { color: var(--navy); }
   .nav-cart-link { display: flex; align-items: center; position: relative; color: var(--gold-dark) !important; }
-  .nav-cta { font-size: 12px !important; font-weight: 700 !important; padding: 9px 20px; background: var(--navy); color: var(--gold) !important; border-radius: 24px; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
-  .nav-cta:hover { background: var(--slate) !important; transform: translateY(-1px); }
+  .nav-cta { font-size: 12px !important; font-weight: 800 !important; padding: 9px 20px; background: var(--gold); color: var(--navy) !important; border-radius: 24px; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .nav-cta:hover { background: #f8b83a !important; transform: translateY(-1px); }
   .cart-badge { position: absolute; top: -6px; right: -6px; background: var(--gold); color: var(--navy); font-size: 9px; font-weight: 900; border-radius: 50%; width: 16px; height: 16px; display: none; align-items: center; justify-content: center; }
   .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
   .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; }
@@ -134,7 +134,7 @@
         <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
         <span class="cart-badge" id="cart-badge">0</span>
       </a>
-      <a href="assessment.html" class="nav-cta">Free Assessment ↗</a>
+      <a href="assessment.html" class="nav-cta">Take the Free Assessment</a>
     </div>
     <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
       <span></span><span></span><span></span>
