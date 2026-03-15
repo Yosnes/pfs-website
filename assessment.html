@@ -1,312 +1,1819 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Transformation Readiness Assessment – Project Future Self</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --navy:       #0D1F3C;
-    --slate:      #1E3A5F;
-    --gold:       #F5A31A;
-    --gold-dark:  #C07D0A;
-    --amber-bg:   #FDF6EC;
-    --amber-mid:  #F5E8CC;
-    --text-dark:  #1A1208;
-    --text-mid:   #3D2E14;
-    --text-muted: #7A6240;
-    --white:      #FFFFFF;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--amber-bg); color: var(--text-dark); line-height: 1.6; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transformation Readiness Assessment – Project Future Self</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0D1F3C;
+      --slate: #1E3A5F;
+      --gold: #F5A31A;
+      --gold-dark: #C07D0A;
+      --amber-bg: #FDF6EC;
+      --amber-mid: #F5E8CC;
+      --text-dark: #1A1208;
+      --text-mid: #3D2E14;
+      --text-muted: #7A6240;
+      --white: #FFFFFF;
+    }
 
-  /* ── NAV ── */
-  nav { position: sticky; top: 0; z-index: 100; background: rgba(253,246,236,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(13,31,60,0.08); padding: 0 5%; }
-  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 72px; }
-  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .nav-mark { height: 44px; width: auto; }
-  .nav-wordmark { line-height: 1.15; }
-  .nav-wordmark .nw-top { font-size: 9px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
-  .nav-wordmark .nw-main { font-size: 16px; font-weight: 800; letter-spacing: 0.02em; color: var(--navy); text-transform: uppercase; }
-  .nav-wordmark .nw-tag { font-size: 7px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dark); }
-  .nav-links { display: flex; align-items: center; gap: 28px; }
-  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--navy); }
-  .nav-links a.active { color: var(--navy); font-weight: 700; }
-  .nav-cta { font-size: 12px !important; font-weight: 800 !important; padding: 9px 20px; background: var(--gold); color: var(--navy) !important; border-radius: 24px; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
-  .nav-cta:hover { background: #f8b83a !important; transform: translateY(-1px); }
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
-  .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
 
-  /* ── BUTTONS ── */
-  .btn-gold { display: inline-block; padding: 14px 32px; background: var(--gold); color: var(--navy); font-size: 14px; font-weight: 800; border-radius: 28px; text-decoration: none; transition: all 0.2s; }
-  .btn-gold:hover { background: #f8b83a; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,163,26,0.35); }
-  .btn-primary { display: inline-block; padding: 14px 28px; background: var(--navy); color: var(--gold); font-size: 14px; font-weight: 700; border-radius: 32px; text-decoration: none; transition: all 0.2s; }
-  .btn-primary:hover { background: var(--slate); transform: translateY(-2px); }
+    html {
+      scroll-behavior: smooth
+    }
 
-  /* ── SECTIONS ── */
-  section { padding: 72px 5%; }
-  .section-inner { max-width: 1100px; margin: 0 auto; }
-  .section-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 10px; }
-  .section-h2 { font-family: 'DM Serif Display', serif; font-size: clamp(26px, 3.5vw, 40px); font-weight: 400; color: var(--navy); line-height: 1.15; margin-bottom: 8px; }
-  .gold-rule { width: 40px; height: 3px; background: var(--gold); border-radius: 2px; margin-top: 14px; margin-bottom: 36px; }
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      background: var(--amber-bg);
+      color: var(--text-dark);
+      line-height: 1.6
+    }
 
-  /* ── HERO ── */
-  .hero { background: var(--navy); padding: 80px 5%; text-align: center; position: relative; overflow: hidden; }
-  .hero::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(245,163,26,0.07) 0%, transparent 65%); pointer-events: none; }
-  .hero-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
-  .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(34px, 5vw, 60px); font-weight: 400; color: #FDF6EC; line-height: 1.1; margin-bottom: 20px; }
-  .hero-sub { font-size: 16px; color: rgba(253,246,236,0.65); line-height: 1.75; max-width: 560px; margin: 0 auto 32px; }
-  .hero-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-bottom: 36px; }
-  .hero-badge { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(253,246,236,0.7); }
-  .hero-badge-check { color: var(--gold); font-weight: 900; font-size: 16px; }
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(253, 246, 236, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(13, 31, 60, 0.08);
+      padding: 0 5%
+    }
 
-  /* ── DIMENSIONS SECTION ── */
-  .dims-section { background: var(--white); }
-  .dims-sub { font-size: 14px; color: var(--text-muted); max-width: 560px; margin-bottom: 40px; line-height: 1.7; }
-  .dims-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .dim-card { background: var(--amber-bg); border: 1px solid var(--amber-mid); border-radius: 12px; overflow: hidden; transition: box-shadow 0.2s; }
-  .dim-card:hover { box-shadow: 0 4px 20px rgba(13,31,60,0.08); }
-  .dim-bar { height: 4px; }
-  .dim-body { padding: 20px; }
-  .dim-num-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-  .dim-num { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0; }
-  .dim-title { font-size: 15px; font-weight: 700; color: var(--navy); line-height: 1.3; }
-  .dim-what { font-size: 13px; color: var(--text-mid); line-height: 1.6; margin-bottom: 10px; }
-  .dim-why { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
-  .dim-label { font-weight: 700; }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px
+    }
 
-  .dim-1 .dim-bar { background: linear-gradient(90deg, #7a3d00, #E8821A); }
-  .dim-1 .dim-num { background: rgba(232,130,26,0.12); color: #C07D0A; }
-  .dim-2 .dim-bar { background: linear-gradient(90deg, #5a3000, #C07D0A); }
-  .dim-2 .dim-num { background: rgba(192,125,10,0.12); color: #9a6400; }
-  .dim-3 .dim-bar { background: linear-gradient(90deg, #7a5000, #F5A31A); }
-  .dim-3 .dim-num { background: rgba(245,163,26,0.12); color: var(--gold-dark); }
-  .dim-4 .dim-bar { background: linear-gradient(90deg, #0e2a6e, #1E3A5F); }
-  .dim-4 .dim-num { background: rgba(30,58,95,0.1); color: var(--navy); }
-  .dim-5 .dim-bar { background: linear-gradient(90deg, #5a1a00, #E8821A); }
-  .dim-5 .dim-num { background: rgba(232,130,26,0.1); color: #C07D0A; }
-  .dim-note { background: var(--amber-bg); border: 1px solid rgba(245,163,26,0.3); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; justify-content: center; }
-  .dim-note-title { font-size: 13px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 10px; }
-  .dim-note p { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none
+    }
 
-  /* ── RESULTS SECTION ── */
-  .results-section { background: var(--amber-bg); }
-  .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-  .result-item { text-align: center; }
-  .result-icon { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
-  .result-title { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
-  .result-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+    .nav-mark {
+      height: 44px;
+      width: auto
+    }
 
-  /* ── BOTTOM CTA ── */
-  .cta-section { background: var(--navy); text-align: center; }
-  .cta-section .section-eyebrow { color: var(--gold); }
-  .cta-h2 { font-family: 'DM Serif Display', serif; font-size: clamp(28px, 4vw, 46px); font-weight: 400; color: #FDF6EC; margin-bottom: 16px; line-height: 1.15; }
-  .cta-sub { font-size: 14px; color: rgba(253,246,236,0.55); max-width: 440px; margin: 0 auto 36px; line-height: 1.7; }
-  .cta-note { font-size: 11px; color: rgba(253,246,236,0.25); margin-top: 16px; }
+    .nav-wordmark .nw-top {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--text-muted)
+    }
 
-  /* ── FOOTER ── */
-  footer { background: #060F1E; padding: 28px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-  .footer-brand { display: flex; align-items: center; gap: 10px; }
-  .footer-mark { height: 32px; width: auto; opacity: 0.8; }
-  .footer-name { font-size: 12px; font-weight: 700; color: rgba(253,246,236,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
-  footer p { font-size: 11px; color: rgba(253,246,236,0.3); }
-  .footer-links { display: flex; gap: 16px; }
-  .footer-links a { font-size: 11px; color: rgba(253,246,236,0.3); text-decoration: none; }
-  .footer-links a:hover { color: rgba(253,246,236,0.6); }
+    .nav-wordmark .nw-main {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: .02em;
+      color: var(--navy);
+      text-transform: uppercase
+    }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    .nav-links { display: none; }
-    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: rgba(253,246,236,0.98); padding: 16px 5% 20px; border-bottom: 1px solid rgba(13,31,60,0.1); gap: 14px; z-index: 99; }
-    .hamburger { display: flex; }
-    .dims-grid { grid-template-columns: 1fr; }
-    .results-grid { grid-template-columns: 1fr; gap: 24px; }
-  }
-  @media (min-width: 769px) and (max-width: 1024px) {
-    .dims-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-</style>
+    .nav-wordmark .nw-tag {
+      font-size: 7px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--gold-dark)
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-mid);
+      text-decoration: none;
+      transition: color .2s
+    }
+
+    .nav-links a:hover {
+      color: var(--navy)
+    }
+
+    .nav-links a.active {
+      color: var(--navy);
+      font-weight: 700
+    }
+
+    .nav-cta {
+      font-size: 12px !important;
+      font-weight: 800 !important;
+      padding: 9px 20px;
+      background: var(--gold);
+      color: var(--navy) !important;
+      border-radius: 24px;
+      transition: background .2s, transform .15s;
+      white-space: nowrap
+    }
+
+    .nav-cta:hover {
+      background: #f8b83a !important;
+      transform: translateY(-1px)
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--navy);
+      border-radius: 2px
+    }
+
+    /* PAGE HEADER */
+    .page-header {
+      background: var(--navy);
+      padding: 80px 5% 64px;
+      text-align: center
+    }
+
+    .page-header .eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px
+    }
+
+    .page-header h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 400;
+      color: #FDF6EC;
+      line-height: 1.1;
+      margin-bottom: 16px
+    }
+
+    .page-header p {
+      font-size: 15px;
+      color: rgba(253, 246, 236, 0.55);
+      max-width: 540px;
+      margin: 0 auto;
+      line-height: 1.75
+    }
+
+    /* QUIZ */
+    .quiz-wrapper {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 48px 5% 80px
+    }
+
+    .screen {
+      display: none
+    }
+
+    .screen.active {
+      display: block
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--amber-mid);
+      border-radius: 16px;
+      padding: 40px
+    }
+
+    .intro-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: 8px
+    }
+
+    .intro-h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      color: var(--navy);
+      margin-bottom: 8px
+    }
+
+    .gold-rule {
+      width: 40px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin: 12px 0 24px
+    }
+
+    .intro-desc {
+      font-size: 15px;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 28px
+    }
+
+    .dim-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 28px
+    }
+
+    .dim-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-mid)
+    }
+
+    .dim-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px
+    }
+
+    .field label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-muted)
+    }
+
+    .field input {
+      background: var(--amber-bg);
+      border: 1.5px solid rgba(13, 31, 60, 0.12);
+      color: var(--text-dark);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      transition: border-color .2s;
+      outline: none
+    }
+
+    .field input:focus {
+      border-color: var(--gold)
+    }
+
+    .field input::placeholder {
+      color: rgba(13, 31, 60, 0.25)
+    }
+
+    .progress-header {
+      margin-bottom: 28px
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px
+    }
+
+    .progress-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-muted)
+    }
+
+    .progress-count {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--navy)
+    }
+
+    .progress-track {
+      height: 6px;
+      background: var(--amber-mid);
+      border-radius: 6px;
+      overflow: hidden
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 6px;
+      transition: width .4s ease
+    }
+
+    .dim-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 12px;
+      margin-bottom: 18px
+    }
+
+    .question-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: var(--navy);
+      line-height: 1.35;
+      margin-bottom: 26px
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px
+    }
+
+    .opt {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      background: var(--amber-bg);
+      border: 1.5px solid transparent;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--text-mid);
+      transition: all .15s;
+      line-height: 1.45;
+      text-align: left;
+      width: 100%
+    }
+
+    .opt:hover {
+      border-color: var(--gold);
+      background: #FFF8EE;
+      color: var(--navy)
+    }
+
+    .opt.sel {
+      border-color: var(--navy);
+      background: #EEF3FB;
+      color: var(--navy);
+      font-weight: 600
+    }
+
+    .opt-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(13, 31, 60, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      transition: all .15s
+    }
+
+    .opt.sel .opt-num {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: var(--white)
+    }
+
+    .quiz-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .btn-back {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px 0;
+      transition: color .2s
+    }
+
+    .btn-back:hover {
+      color: var(--navy)
+    }
+
+    .btn-next {
+      padding: 13px 28px;
+      background: var(--navy);
+      color: var(--gold);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      border: none;
+      border-radius: 32px;
+      cursor: pointer;
+      transition: all .2s
+    }
+
+    .btn-next:hover:not(:disabled) {
+      background: var(--slate);
+      transform: translateY(-2px)
+    }
+
+    .btn-next:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+      transform: none
+    }
+
+    /* RESULTS */
+    .results-hero {
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      margin-bottom: 28px
+    }
+
+    .r-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px
+    }
+
+    .r-name {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(253, 246, 236, 0.45);
+      margin-bottom: 6px
+    }
+
+    .r-level {
+      font-family: 'DM Serif Display', serif;
+      font-size: 30px;
+      color: #FDF6EC;
+      margin-bottom: 8px;
+      line-height: 1.2
+    }
+
+    .r-score {
+      font-size: 13px;
+      color: rgba(253, 246, 236, 0.45);
+      margin-bottom: 18px
+    }
+
+    .r-bar-track {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      max-width: 320px;
+      margin: 0 auto 18px;
+      overflow: hidden
+    }
+
+    .r-bar-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 8px;
+      transition: width 1s ease
+    }
+
+    .r-desc {
+      font-size: 14px;
+      color: rgba(253, 246, 236, 0.6);
+      line-height: 1.7;
+      max-width: 500px;
+      margin: 0 auto
+    }
+
+    .dim-results {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-bottom: 28px
+    }
+
+    .dim-card {
+      background: var(--white);
+      border: 1px solid var(--amber-mid);
+      border-radius: 12px;
+      padding: 24px
+    }
+
+    .dim-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+
+    .dim-name {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--navy)
+    }
+
+    .dim-lbl {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 12px
+    }
+
+    .dim-bar-track {
+      height: 5px;
+      background: var(--amber-mid);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 14px
+    }
+
+    .dim-bar-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 1.2s ease
+    }
+
+    .dim-insight {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.65
+    }
+
+    .btn-report {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      border: none;
+      border-radius: 32px;
+      cursor: pointer;
+      transition: all .2s;
+      margin-bottom: 20px;
+      text-align: center
+    }
+
+    .btn-report:hover {
+      background: #f8b83a;
+      transform: translateY(-2px)
+    }
+
+    .results-cta {
+      background: linear-gradient(135deg, var(--navy), var(--slate));
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      margin-bottom: 20px
+    }
+
+    .results-cta h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 26px;
+      color: #FDF6EC;
+      margin-bottom: 12px
+    }
+
+    .results-cta p {
+      font-size: 14px;
+      color: rgba(253, 246, 236, 0.6);
+      margin-bottom: 24px;
+      line-height: 1.7;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto
+    }
+
+    .btn-gold-link {
+      display: inline-block;
+      padding: 14px 32px;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      border-radius: 32px;
+      text-decoration: none;
+      transition: all .2s
+    }
+
+    .btn-gold-link:hover {
+      background: #f8b83a;
+      transform: translateY(-2px)
+    }
+
+    .submit-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 10px
+    }
+
+    /* REPORT OVERLAY */
+    #rpt-overlay {
+      position: fixed;
+      inset: 0;
+      background: #fff;
+      z-index: 500;
+      overflow-y: auto;
+      display: none
+    }
+
+    #rpt-actions {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      gap: 12px;
+      flex-wrap: wrap
+    }
+
+    .rpt-action-btn {
+      padding: 9px 18px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 24px;
+      cursor: pointer;
+      transition: all .2s;
+      white-space: nowrap
+    }
+
+    .rpt-btn-back {
+      background: none;
+      border: 1.5px solid #d1d5db;
+      color: #374151
+    }
+
+    .rpt-btn-back:hover {
+      border-color: #374151
+    }
+
+    .rpt-btn-email {
+      background: var(--navy);
+      color: var(--gold);
+      border: none
+    }
+
+    .rpt-btn-email:hover {
+      background: var(--slate)
+    }
+
+    .rpt-btn-print {
+      background: var(--gold);
+      color: var(--navy);
+      border: none
+    }
+
+    .rpt-btn-print:hover {
+      background: #f8b83a
+    }
+
+    #rpt-email-note {
+      font-size: 11px;
+      color: #6b7280;
+      width: 100%
+    }
+
+    /* REPORT PAGES */
+    .rpt-pages {
+      max-width: 740px;
+      margin: 0 auto;
+      padding: 32px 24px 60px
+    }
+
+    .rpt-page {
+      background: #fff;
+      padding: 52px 56px;
+      margin-bottom: 32px;
+      border: 1px solid #e5e7eb;
+      border-radius: 4px
+    }
+
+    .rpt-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 32px
+    }
+
+    .rpt-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1
+    }
+
+    .rpt-logo img {
+      height: 56px;
+      width: auto
+    }
+
+    .rpt-logo-brand {
+      font-size: 15px;
+      font-weight: 800;
+      color: #0D1F3C;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-top: 4px
+    }
+
+    .rpt-logo-tag {
+      font-size: 8px;
+      color: #0F766E;
+      letter-spacing: .14em;
+      text-transform: uppercase
+    }
+
+    .rpt-name-corner {
+      font-size: 11px;
+      color: #9ca3af;
+      text-align: right;
+      min-width: 120px
+    }
+
+    .rpt-pagenum {
+      font-size: 10px;
+      color: #9ca3af;
+      min-width: 30px
+    }
+
+    .rpt-title {
+      font-size: 22px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #111;
+      font-family: 'DM Sans', sans-serif
+    }
+
+    .rpt-sub-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #6b7280;
+      text-align: center;
+      margin-bottom: 6px
+    }
+
+    .rpt-chart {
+      margin: 16px 0 20px
+    }
+
+    .rpt-overall {
+      text-align: center;
+      margin-bottom: 20px
+    }
+
+    .rpt-overall-level {
+      font-size: 15px;
+      font-weight: 700;
+      color: #111
+    }
+
+    .rpt-overall-score {
+      font-size: 15px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 12px
+    }
+
+    .rpt-body {
+      font-size: 13px;
+      line-height: 1.75;
+      color: #222;
+      margin-bottom: 12px;
+      font-family: 'DM Sans', sans-serif
+    }
+
+    .rpt-section {
+      font-size: 14px;
+      font-weight: 700;
+      color: #111;
+      margin: 20px 0 8px;
+      font-family: 'DM Sans', sans-serif
+    }
+
+    .rpt-bullets {
+      list-style: disc;
+      padding-left: 22px;
+      margin: 6px 0 14px;
+      font-size: 13px;
+      line-height: 1.65;
+      color: #222
+    }
+
+    .rpt-bullets li {
+      margin-bottom: 4px
+    }
+
+    .rpt-dim-h {
+      font-size: 14px;
+      font-weight: 700;
+      color: #111;
+      margin: 22px 0 8px;
+      font-family: 'DM Sans', sans-serif
+    }
+
+    .rpt-sub-lbl {
+      font-size: 13px;
+      font-weight: 700;
+      color: #111;
+      margin: 10px 0 3px;
+      font-family: 'DM Sans', sans-serif
+    }
+
+    .rpt-quote {
+      text-align: center;
+      font-style: italic;
+      font-size: 14px;
+      color: #4b5563;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 20px;
+      margin-top: 32px
+    }
+
+    .rpt-footer {
+      border-top: 1px solid #d1d5db;
+      padding-top: 10px;
+      margin-top: 36px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #9ca3af
+    }
+
+    .rpt-hr {
+      border: none;
+      border-top: 1px solid #e5e7eb;
+      margin: 20px 0
+    }
+
+    .rpt-big-section {
+      font-size: 17px;
+      font-weight: 700;
+      color: #111;
+      margin: 24px 0 10px;
+      font-family: 'DM Sans', sans-serif
+    }
+
+    /* FOOTER */
+    footer {
+      background: #060F1E;
+      padding: 28px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .footer-mark {
+      height: 32px;
+      width: auto;
+      opacity: .8
+    }
+
+    .footer-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(253, 246, 236, 0.5);
+      letter-spacing: .08em;
+      text-transform: uppercase
+    }
+
+    footer>p {
+      font-size: 11px;
+      color: rgba(253, 246, 236, 0.3)
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px
+    }
+
+    .footer-links a {
+      font-size: 11px;
+      color: rgba(253, 246, 236, 0.3);
+      text-decoration: none
+    }
+
+    .footer-links a:hover {
+      color: rgba(253, 246, 236, 0.6)
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:768px) {
+      .nav-links {
+        display: none
+      }
+
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: rgba(253, 246, 236, 0.98);
+        padding: 16px 5% 20px;
+        border-bottom: 1px solid rgba(13, 31, 60, 0.1);
+        gap: 14px;
+        z-index: 99
+      }
+
+      .hamburger {
+        display: flex
+      }
+
+      .dim-grid {
+        grid-template-columns: 1fr
+      }
+
+      .field-row {
+        grid-template-columns: 1fr
+      }
+
+      .card {
+        padding: 28px 20px
+      }
+
+      .question-text {
+        font-size: 19px
+      }
+
+      .rpt-page {
+        padding: 32px 24px
+      }
+
+      .rpt-hdr {
+        flex-direction: column;
+        gap: 8px
+      }
+
+      .rpt-name-corner {
+        text-align: left
+      }
+    }
+
+    @media print {
+
+      nav,
+      .page-header,
+      .quiz-wrapper,
+      footer,
+      #rpt-actions {
+        display: none !important
+      }
+
+      #rpt-overlay {
+        display: block !important;
+        position: static !important;
+        overflow: visible !important
+      }
+
+      .rpt-pages {
+        padding: 0
+      }
+
+      .rpt-page {
+        page-break-after: always;
+        border: none;
+        margin: 0;
+        padding: 40px 52px;
+        border-radius: 0
+      }
+
+      .rpt-page:last-of-type {
+        page-break-after: auto
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-inner">
-    <a href="index.html" class="nav-brand">
-      <img class="nav-mark" src="Transparent mark without words.png" alt="Project Future Self mark">
-      <div class="nav-wordmark">
-        <div class="nw-top">Project</div>
-        <div class="nw-main">Future Self</div>
-        <div class="nw-tag">Reinvent · Redesign · Reclaim</div>
-      </div>
-    </a>
-    <div class="nav-links" id="nav-links">
-      <a href="sprint.html">5-Day Sprint</a>
-      <a href="index.html#about">About</a>
-      <a href="assessment.html" class="active">Assessment</a>
-      <a href="products.html">Products</a>
-      <a href="contact.html">Contact</a>
-      <a href="https://docs.google.com/forms/d/1PnNuPdBgq0L60vpY6Mn41hbJwFaqm-qvDATNgGKvkQo/edit?usp=drivesdk" target="_blank" rel="noopener" class="nav-cta">Take the Free Assessment</a>
-    </div>
-    <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
-      <span></span><span></span><span></span>
-    </div>
-  </div>
-</nav>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-eyebrow">Free Assessment · Project Future Self</div>
-  <h1>Transformation Readiness<br>Assessment</h1>
-  <p class="hero-sub">Identify your exact reinvention stage, discover what's been holding you back, and get a personalized action plan — in under 10 minutes. At no cost.</p>
-  <div class="hero-badges">
-    <div class="hero-badge"><span class="hero-badge-check">✓</span> 100% Free</div>
-    <div class="hero-badge"><span class="hero-badge-check">✓</span> Under 10 Minutes</div>
-    <div class="hero-badge"><span class="hero-badge-check">✓</span> Personalized Action Plan</div>
-    <div class="hero-badge"><span class="hero-badge-check">✓</span> No Credit Card Required</div>
-  </div>
-  <a href="https://docs.google.com/forms/d/1PnNuPdBgq0L60vpY6Mn41hbJwFaqm-qvDATNgGKvkQo/edit?usp=drivesdk" target="_blank" rel="noopener" class="btn-gold">Take the Free Assessment →</a>
-</div>
-
-<!-- DIMENSIONS -->
-<section class="dims-section">
-  <div class="section-inner">
-    <div class="section-eyebrow">Inside the Assessment</div>
-    <h2 class="section-h2">Your 5-Dimension Readiness Profile</h2>
-    <div class="gold-rule" style="margin-bottom:16px;"></div>
-    <p class="dims-sub">Your results are built around five core dimensions — each a critical ingredient for meaningful, sustainable change. Together, they reveal where alignment already exists and where focus will create the greatest momentum.</p>
-    <div class="dims-grid">
-
-      <div class="dim-card dim-1">
-        <div class="dim-bar"></div>
-        <div class="dim-body">
-          <div class="dim-num-wrap">
-            <div class="dim-num">01</div>
-            <div class="dim-title">Clarity &amp; Self-Awareness</div>
-          </div>
-          <p class="dim-what"><span class="dim-label" style="color:var(--gold-dark);">What it measures:</span> Your understanding of who you are, what no longer fits, and who you are becoming.</p>
-          <p class="dim-why"><span class="dim-label">Why it matters:</span> Without clarity, effort is scattered. Transformation requires knowing what you're moving toward and why change is necessary.</p>
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">
+        <img class="nav-mark" src="Transparent mark without words.png" alt="Project Future Self mark">
+        <div class="nav-wordmark">
+          <div class="nw-top">Project</div>
+          <div class="nw-main">Future Self</div>
+          <div class="nw-tag">Reinvent · Redesign · Reclaim</div>
         </div>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="sprint.html">5-Day Sprint</a>
+        <a href="index.html#about">About</a>
+        <a href="assessment.html" class="active">Assessment</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact</a>
+        <a href="assessment.html" class="nav-cta">Take the Free Assessment</a>
       </div>
-
-      <div class="dim-card dim-2">
-        <div class="dim-bar"></div>
-        <div class="dim-body">
-          <div class="dim-num-wrap">
-            <div class="dim-num">02</div>
-            <div class="dim-title">Emotional Resilience &amp; Adaptability</div>
-          </div>
-          <p class="dim-what"><span class="dim-label" style="color:var(--gold-dark);">What it measures:</span> Your ability to navigate uncertainty, self-doubt, and discomfort during change.</p>
-          <p class="dim-why"><span class="dim-label">Why it matters:</span> Reinvention is emotionally demanding. Resilience determines whether you move through a challenge or stop when things feel uncomfortable.</p>
-        </div>
-      </div>
-
-      <div class="dim-card dim-3">
-        <div class="dim-bar"></div>
-        <div class="dim-body">
-          <div class="dim-num-wrap">
-            <div class="dim-num">03</div>
-            <div class="dim-title">Support &amp; Environment</div>
-          </div>
-          <p class="dim-what"><span class="dim-label" style="color:var(--gold-dark);">What it measures:</span> Whether your relationships, routines, and surroundings support your growth.</p>
-          <p class="dim-why"><span class="dim-label">Why it matters:</span> Even motivated individuals struggle in unsupportive environments. Context can accelerate or constrain progress.</p>
-        </div>
-      </div>
-
-      <div class="dim-card dim-4">
-        <div class="dim-bar"></div>
-        <div class="dim-body">
-          <div class="dim-num-wrap">
-            <div class="dim-num">04</div>
-            <div class="dim-title">Action Orientation &amp; Follow-Through</div>
-          </div>
-          <p class="dim-what"><span class="dim-label" style="color:var(--gold-dark);">What it measures:</span> Your ability to take consistent action and turn intention into behavior.</p>
-          <p class="dim-why"><span class="dim-label">Why it matters:</span> Insight alone does not create change. Progress depends on execution, habits, and follow-through.</p>
-        </div>
-      </div>
-
-      <div class="dim-card dim-5">
-        <div class="dim-bar"></div>
-        <div class="dim-body">
-          <div class="dim-num-wrap">
-            <div class="dim-num">05</div>
-            <div class="dim-title">Purpose &amp; Motivation</div>
-          </div>
-          <p class="dim-what"><span class="dim-label" style="color:var(--gold-dark);">What it measures:</span> The strength of your internal "why" for transformation.</p>
-          <p class="dim-why"><span class="dim-label">Why it matters:</span> Purpose fuels sustained effort. Without it, change feels heavy and short-lived.</p>
-        </div>
-      </div>
-
-      <div class="dim-note">
-        <div class="dim-note-title">A Diagnostic, Not a Judgment</div>
-        <p>Sustainable change comes from strengthening the right areas — not pushing harder everywhere. Your profile shows you exactly where to focus.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- WHAT YOU'LL RECEIVE -->
-<section class="results-section">
-  <div class="section-inner">
-    <div class="section-eyebrow" style="text-align:center;">Your Results Include</div>
-    <h2 class="section-h2" style="text-align:center;">What You'll Walk Away With</h2>
-    <div class="gold-rule" style="margin:14px auto 48px;"></div>
-    <div class="results-grid">
-      <div class="result-item">
-        <div class="result-icon" style="background:linear-gradient(135deg,#7a3d00,#E8821A);">
-          <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-        </div>
-        <div class="result-title">Reinvention Stage Diagnosis</div>
-        <p class="result-desc">Know exactly where you are in your reinvention cycle — and what that means for your next steps.</p>
-      </div>
-      <div class="result-item">
-        <div class="result-icon" style="background:linear-gradient(135deg,#7a5000,#F5A31A);">
-          <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        </div>
-        <div class="result-title">Key Blockers Identified</div>
-        <p class="result-desc">Discover the specific dimensions holding you back — so you can stop pushing hard in the wrong places.</p>
-      </div>
-      <div class="result-item">
-        <div class="result-icon" style="background:linear-gradient(135deg,#5a1a00,#C07D0A);">
-          <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
-        </div>
-        <div class="result-title">Personalized Action Plan</div>
-        <p class="result-desc">Leave with a clear, targeted set of actions matched to your unique readiness profile — not generic advice.</p>
+      <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
+        <span></span><span></span><span></span>
       </div>
     </div>
-  </div>
-</section>
+  </nav>
 
-<!-- BOTTOM CTA -->
-<section class="cta-section">
-  <div class="section-inner" style="text-align:center;">
-    <div class="section-eyebrow">Free · 10 Minutes · No Credit Card</div>
-    <h2 class="cta-h2">Ready to Find Out<br>Where You Stand?</h2>
-    <p class="cta-sub">This profile is a diagnostic, not a judgment. Sustainable change comes from strengthening the right areas — and this assessment shows you exactly which ones.</p>
-    <a href="https://docs.google.com/forms/d/1PnNuPdBgq0L60vpY6Mn41hbJwFaqm-qvDATNgGKvkQo/edit?usp=drivesdk" target="_blank" rel="noopener" class="btn-gold">Take the Free Assessment →</a>
-    <p class="cta-note">* No cost. No credit card required.</p>
+  <div class="page-header">
+    <div class="eyebrow">Free Self-Assessment</div>
+    <h1>Transformation Readiness<br>Assessment</h1>
+    <p>Understand where you stand across the five dimensions of reinvention — and get a personalized report in minutes.
+    </p>
   </div>
-</section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-brand">
-    <img class="footer-mark" src="Transparent mark without words.png" alt="PFS">
-    <div class="footer-name">Project Future Self</div>
-  </div>
-  <p>© 2025 Project Future Self. All rights reserved.</p>
-  <div class="footer-links">
-    <a href="#">Privacy Policy</a>
-    <a href="#">Terms</a>
-    <a href="contact.html">Contact</a>
-  </div>
-</footer>
+  <div class="quiz-wrapper">
 
+    <div class="screen active" id="screen-intro">
+      <div class="card">
+        <div class="intro-eyebrow">Where Do You Stand?</div>
+        <div class="intro-h2">Know Before You Leap</div>
+        <div class="gold-rule"></div>
+        <p class="intro-desc">Every transformation starts with awareness. This 15-question assessment measures your
+          readiness across five core dimensions and delivers a personalized report with specific insights. No right or
+          wrong answers — just honesty.</p>
+        <div class="dim-grid">
+          <div class="dim-item">
+            <div class="dim-dot" style="background:#3B82F6"></div>Clarity &amp; Self-Awareness
+          </div>
+          <div class="dim-item">
+            <div class="dim-dot" style="background:#10B981"></div>Emotional Resilience
+          </div>
+          <div class="dim-item">
+            <div class="dim-dot" style="background:#8B5CF6"></div>Support &amp; Environment
+          </div>
+          <div class="dim-item">
+            <div class="dim-dot" style="background:#F59E0B"></div>Action &amp; Follow-Through
+          </div>
+          <div class="dim-item">
+            <div class="dim-dot" style="background:#EF4444"></div>Purpose &amp; Motivation
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label>Your Name</label><input type="text" id="inp-name" placeholder="First and last name"
+              autocomplete="name"></div>
+          <div class="field"><label>Email Address</label><input type="email" id="inp-email" placeholder="your@email.com"
+              autocomplete="email"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+          <p style="font-size:12px;color:var(--text-muted)">Takes about 3–4 minutes · Free · No commitment</p>
+          <button class="btn-next" onclick="startQuiz()">Begin Assessment →</button>
+        </div>
+        <p id="intro-err" style="font-size:12px;color:#DC2626;margin-top:10px;display:none">Please enter your name and a
+          valid email to continue.</p>
+      </div>
+    </div>
+
+    <div class="screen" id="screen-question">
+      <div class="progress-header">
+        <div class="progress-meta">
+          <span class="progress-label">Transformation Readiness</span>
+          <span class="progress-count" id="prog-count">Question 1 of 15</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="prog-fill" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="dim-badge" id="dim-badge"></div>
+        <div class="question-text" id="q-text"></div>
+        <div class="options-list" id="opts"></div>
+        <div class="quiz-nav">
+          <button class="btn-back" id="btn-back" onclick="prevQ()">← Back</button>
+          <button class="btn-next" id="btn-next" onclick="nextQ()" disabled>Next →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen" id="screen-results">
+      <div id="results-content"></div>
+    </div>
+
+  </div>
+
+  <!-- REPORT OVERLAY -->
+  <div id="rpt-overlay">
+    <div id="rpt-actions">
+      <button class="rpt-action-btn rpt-btn-back" onclick="hideReport()">← Back to Results</button>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="rpt-action-btn rpt-btn-email" id="rpt-email-btn" onclick="emailReport()">Email Report to
+          Both</button>
+        <button class="rpt-action-btn rpt-btn-print" onclick="window.print()">Print / Save as PDF</button>
+      </div>
+      <p id="rpt-email-note" style="display:none"></p>
+    </div>
+    <div class="rpt-pages" id="rpt-content"></div>
+  </div>
+
+  <footer>
+    <div class="footer-brand">
+      <img class="footer-mark" src="Transparent mark without words.png" alt="PFS">
+      <div class="footer-name">Project Future Self</div>
+    </div>
+    <p>© 2025 Project Future Self. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a><a href="#">Terms</a><a href="contact.html">Contact</a>
+    </div>
+  </footer>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    // ─────────────────────────────────────────────────────────────────────────────
+    // EMAIL CONFIGURATION
+    // To enable email delivery, follow these steps:
+    //   1. Create a free account at https://www.emailjs.com (200 emails/month free)
+    //   2. Go to "Email Services" → connect your Gmail account → copy the Service ID
+    //   3. Go to "Email Templates" → create a new template with these variables:
+    //        {{to_email}}, {{to_name}}, {{subject}}, {{report_html}}
+    //      Set the template's "To Email" field to: {{to_email}}
+    //      Set the template's Content Type to HTML and use {{{report_html}}} in the body
+    //   4. Go to "Account" → copy your Public Key
+    //   5. Fill in the values below and set EMAILJS_ENABLED = true
+    // ─────────────────────────────────────────────────────────────────────────────
+    const EJS = {
+      enabled: true,                            // ← set to true after setup
+      publicKey: 'azNrFst1oVKrSFzR6',               // Account > API Keys
+      serviceId: 'service_046cuee',               // Email Services tab
+      templateId: 'template_syyrgwu',              // Email Templates tab
+      andrewEmail: 'andrew@projectfutureself.com'
+    };
+
+    // ── QUIZ DATA ────────────────────────────────────────────────────────────────
+    // Scoring weights:
+    //   Clarity    = Q3+Q4+Q6+Q12+Q17           (max 25)
+    //   Resilience = Q5+Q7+Q11+Q14              (max 20)
+    //   Support    = Q8+Q15                     (max 10)
+    //   Action     = Q9+Q10+Q13                 (max 15)
+    //   Purpose    = Q16 + 0.5×Q3 + 0.5×Q12    (max 10)
+
+    const DIMS = {
+      clarity: { name: 'Clarity & Self-Awareness', color: '#3B82F6', bg: '#DBEAFE', tc: '#1D4ED8', max: 25 },
+      resilience: { name: 'Emotional Resilience & Adaptability', color: '#10B981', bg: '#D1FAE5', tc: '#047857', max: 20 },
+      support: { name: 'Support & Environment', color: '#8B5CF6', bg: '#EDE9FE', tc: '#6D28D9', max: 10 },
+      action: { name: 'Action Orientation & Follow-Through', color: '#F59E0B', bg: '#FEF3C7', tc: '#B45309', max: 15 },
+      purpose: { name: 'Purpose & Motivation', color: '#EF4444', bg: '#FEE2E2', tc: '#B91C1C', max: 10 }
+    };
+
+    const QS = [
+      {
+        id: 'q3', dim: 'clarity', text: 'When you think about making a big change, what best describes your current state of mind?',
+        opts: ["I'm exploring ideas but not sure what's next.", "I've noticed something needs to change, but I'm hesitating.", "I'm taking small steps but feel inconsistent.", "I'm actively shifting things in my life.", "I'm fully committed and moving forward with clarity."]
+      },
+      {
+        id: 'q4', dim: 'clarity', text: 'How often do you reflect on your strengths and what truly matters to you?',
+        opts: ["Rarely — life just keeps moving.", "Occasionally when things feel off.", "Sometimes, though not in a structured way.", "Often — I set aside time for reflection.", "Regularly — it's part of my routine."]
+      },
+      {
+        id: 'q5', dim: 'resilience', text: 'When challenges or setbacks arise, how do you usually respond?',
+        opts: ["I freeze or avoid them until they pass.", "I get discouraged easily.", "I try to push through but feel drained.", "I adapt and bounce back after some time.", "I recover quickly and look for the lesson."]
+      },
+      {
+        id: 'q6', dim: 'clarity', text: "What's your level of clarity about where you want to go next?",
+        opts: ["I honestly have no idea.", "I have a few ideas but nothing clear.", "I can see some direction but it's foggy.", "I'm mostly clear on the path ahead.", "I know exactly where I'm heading and why."]
+      },
+      {
+        id: 'q7', dim: 'resilience', text: 'How do you handle uncertainty or new beginnings?',
+        opts: ["I avoid them when I can.", "They make me anxious but I deal with it.", "I'm learning to embrace them.", "I see them as opportunities for growth.", "I thrive on change and possibility."]
+      },
+      {
+        id: 'q8', dim: 'support', text: 'How supported do you feel by the people around you in your growth journey?',
+        opts: ["Not supported at all.", "A few people get it, but most don't.", "Somewhat supported but still misunderstood.", "Mostly supported — I have a few allies.", "Fully supported and encouraged."]
+      },
+      {
+        id: 'q9', dim: 'action', text: 'How consistently do you follow through on goals you set for yourself?',
+        opts: ["Rarely.", "Occasionally.", "About half the time.", "Often.", "Almost always."]
+      },
+      {
+        id: 'q10', dim: 'action', text: 'Which statement best fits your current habits or routines?',
+        opts: ["I don't have any real structure.", "I try but struggle to keep routines.", "I have some habits but they're inconsistent.", "I've built a few solid routines that help me grow.", "My days are structured around who I want to become."]
+      },
+      {
+        id: 'q11', dim: 'resilience', text: 'When faced with self-doubt, what usually happens?',
+        opts: ["I stop or talk myself out of action.", "I procrastinate until motivation returns.", "I take action, but it's inconsistent.", "I push through and usually find momentum.", "I use self-doubt as fuel to improve."]
+      },
+      {
+        id: 'q12', dim: 'clarity', text: "How aligned does your current life feel with who you're becoming?",
+        opts: ["Not at all.", "Slightly aligned.", "Somewhat aligned.", "Mostly aligned.", "Completely aligned."]
+      },
+      {
+        id: 'q13', dim: 'action', text: 'How often do you intentionally step outside your comfort zone?',
+        opts: ["Almost never.", "Occasionally.", "Sometimes.", "Often.", "Regularly — it's part of my growth."]
+      },
+      {
+        id: 'q14', dim: 'resilience', text: 'How ready are you to let go of things (roles, habits, identities) that no longer fit?',
+        opts: ["Not ready.", "I know I should but struggle to act.", "Slowly getting there.", "I'm already releasing what no longer serves me.", "I've made peace with letting go completely."]
+      },
+      {
+        id: 'q15', dim: 'support', text: 'How would you describe your current environment?',
+        opts: ["Chaotic or draining.", "Neutral — it doesn't help or hurt.", "Somewhat supportive.", "Mostly supportive and energizing.", "Designed to help me grow and thrive."]
+      },
+      {
+        id: 'q16', dim: 'purpose', text: 'How strong is your sense of purpose right now?',
+        opts: ["I don't really know what my purpose is.", "I'm exploring what it might be.", "I have a few ideas but not full clarity.", "I feel connected to a purpose that motivates me.", "My actions are fully aligned with my purpose."]
+      },
+      {
+        id: 'q17', dim: 'clarity', text: 'When you imagine your future self, how connected do you feel to that version of you?',
+        opts: ["It feels like a stranger.", "Hard to picture clearly.", "I can visualize them sometimes.", "I often feel inspired by who I'm becoming.", "I already feel like I'm stepping into that version now."]
+      }
+    ];
+
+    // ── LEVEL DATA ───────────────────────────────────────────────────────────────
+    // max = upper % threshold. Matches existing PDF reports:
+    //   35/80 = 43.75% → "Awakening"  |  62/80 = 77.5% → "Transformation Ready"
+    const LEVELS = [
+      {
+        max: 30, level: 'Early Awareness',
+        desc: "You are at the beginning of the reinvention journey. The awareness that brought you here is the first real step — most people never get this honest with themselves. This is not a setback. It is an opening.",
+        opening: "The first step in any transformation is noticing that something needs to change. You are at that threshold. What is needed now is not a plan — it is safety, structure, and space to begin understanding what the signals inside you are actually pointing toward.",
+        focus: ["Create space for honest reflection before taking action", "Identify one thing that clearly no longer fits", "Find a single anchor of support you can rely on", "Allow clarity to emerge gradually rather than forcing it"],
+        step: 'Reinvention Reflection Workbook',
+        stepDesc: "A structured guide designed to help you slow down, surface what matters, and create the internal conditions for meaningful change.",
+        stepBullets: ["Surface what is misaligned before deciding what to change", "Build the internal foundation transformation requires", "Move at the pace that creates clarity, not pressure"],
+        pattern: "You are in a pre-movement phase. Before action or strategy becomes relevant, the priority is stabilization — creating enough internal clarity and external support to make forward movement feel possible rather than overwhelming.",
+        quote: "Transformation begins with permission to change."
+      },
+
+      {
+        max: 50, level: 'Awakening',
+        desc: "You are recognizing that something needs to change. While the direction is not yet fully clear, awareness has surfaced — and that matters. This stage is about orientation, not speed. It is a legitimate and necessary phase of transformation.",
+        opening: "You are in the early phase of recognizing that something needs to change. While the direction forward is not yet clear, awareness has begun to surface, and that matters. This stage is less about momentum and more about orientation, safety, and rebuilding internal capacity. This is a legitimate and necessary phase of transformation, not a setback.\n\nWhat will not help is trying to force motivation or over-commit before the direction feels real. What helps now is alignment: making the next chapter more defined, so action stops feeling like self-discipline and starts feeling like a natural extension of clarity.",
+        focus: ["Stabilize your direction before increasing output", "Use existing support more deliberately instead of carrying it alone", "Reduce the gap between intention and execution", "Let purpose become specific enough to guide choices", "Build confidence through consistency, not intensity"],
+        step: 'Reinvention Reflection Workbook',
+        stepDesc: "A guided self-discovery experience designed to help you slow down, regain clarity, and create the conditions for meaningful change.",
+        stepBullets: ["Translate general awareness into clearer personal direction", "Reconnect to motivation through specificity rather than pressure", "Reduce the gap between intention and follow-through", "Use the support you have in a more targeted, functional way"],
+        pattern: "Partially supported and moderately self-aware, but not yet internally anchored. You are not blocked by chaos or complete instability. You are constrained by an unclear 'why' and inconsistent follow-through — meaning the next phase is about creating definition and repeatability, not pushing for a dramatic leap.",
+        quote: "Transformation begins when awareness is met with support, not force."
+      },
+
+      {
+        max: 65, level: 'Building Momentum',
+        desc: "Something has shifted. You have meaningful self-awareness and a growing sense of direction, but the structures and habits that would allow you to move with consistency are still taking shape. You are past the beginning — now it is about converting awareness into sustained, directional momentum.",
+        opening: "Something has shifted. You have meaningful self-awareness and a growing sense of direction, but the structures and habits that would allow you to move with consistency are still taking shape. You are past the beginning — the challenge now is converting awareness into sustained, directional movement.\n\nThe internal groundwork is present. What is needed now is a container for it — a framework that turns recognition into a repeatable system.",
+        focus: ["Convert awareness into a defined direction", "Build one reliable daily routine that anchors your identity", "Reduce the number of simultaneous commitments", "Invest in a structure that carries you through friction"],
+        step: '5-Day Reinvention Sprint',
+        stepDesc: "A structured five-day live experience designed to convert awareness into clarity, momentum, and a 90-Day Reinvention Roadmap.",
+        stepBullets: ["Crystallize your direction with the Reinvention Matrix", "Build daily momentum through structured action missions", "Design your 90-Day Reinvention Roadmap on Day 5", "Join a cohort of people who understand this journey"],
+        pattern: "You have the internal insight to know what change looks like, but the systems, environment, and follow-through needed to sustain it are still being built. The work now is translation — moving from understanding to structure, and from structure to habit.",
+        quote: "Momentum is not built through intensity. It is built through direction and repetition."
+      },
+
+      {
+        max: 82, level: 'Transformation Ready',
+        desc: "You are operating from a position of clarity, emotional strength, and forward momentum. You have already done significant internal work and are now ready to move decisively into expansion.",
+        opening: "You are operating from a position of clarity, emotional strength, and forward momentum. This shows you have already done significant internal work and are now ready to move decisively into expansion.\n\nThe primary opportunity ahead is optimizing your environment and systems so they match the level of clarity and capability you already possess. At this stage, growth does not come from more reflection — it comes from precision, environment design, and strategic execution.",
+        focus: ["Shift from preparation to intentional expansion", "Simplify commitments to increase focus and leverage", "Upgrade support structures to match your current level", "Focus on high-leverage actions over high-volume effort"],
+        step: '5-Day Reinvention Sprint',
+        stepDesc: "An advanced, high-caliber environment that aligns execution with purpose and accelerates your transformation.",
+        stepBullets: ["Align execution with your clearly defined purpose", "Remove external friction limiting your progress", "Design your 90-Day Reinvention Roadmap with precision", "Surround yourself with peers operating at a similar level"],
+        pattern: "You are ready for expansion, not correction. Your clarity, resilience, and motivation are already in place. The work now is about choosing the right resources and designing conditions that allow you to operate at your full capacity.",
+        quote: "Growth comes less from insight and more from choosing the right structure."
+      },
+
+      {
+        max: 100, level: 'Fully Aligned',
+        desc: "You have achieved a rare level of internal alignment across all five dimensions. You are not preparing for transformation — you are already in it. The question now is not whether you are ready. It is where to direct this level of capacity.",
+        opening: "You have achieved a rare level of internal alignment across all five dimensions. Your clarity, resilience, support, execution, and purpose are working together. You are not preparing for transformation — you are in it.\n\nThe question is no longer whether you are ready. It is where to direct this level of capacity for maximum impact.",
+        focus: ["Deploy capacity strategically rather than expansively", "Curate your environment to match your level of alignment", "Choose opportunities based on purpose, not just potential", "Build systems that carry your performance beyond yourself"],
+        step: '5-Day Reinvention Sprint',
+        stepDesc: "A high-accountability framework to operationalize your alignment and execute at the next level.",
+        stepBullets: ["Translate full alignment into a structured execution system", "Amplify impact through strategic environment design", "Build the 90-Day Roadmap that matches your potential", "Engage with peers operating at an equivalent level"],
+        pattern: "You are operating at a high level of integrated readiness. The next step is not building more capacity — it is strategic deployment of the capacity you already have, in the right environment, with the right structure.",
+        quote: "The question is no longer if you are ready. It is what you are ready for."
+      }
+    ];
+
+    // ── DIMENSION REPORT CONTENT ─────────────────────────────────────────────────
+    // Per dimension, 5 tiers (by % score): label, at-a-glance, meaning, momentum
+    const RDIM = {
+      clarity: [
+        {
+          max: 30, label: 'Unclear', glance: 'Direction and identity are not yet accessible',
+          meaning: "Your sense of self and direction feels disconnected right now. This often follows a period of significant stress, loss, or prolonged misalignment between how you have been living and what actually matters to you. The work here is not to force clarity — it is to create the conditions where it can emerge.",
+          momentum: "Begin with honest subtraction: what is clearly not you, not working, and not worth continuing? Clarity most often arrives through elimination before it arrives through definition."
+        },
+        {
+          max: 50, label: 'Developing', glance: 'General awareness present, direction still forming',
+          meaning: "You have a workable level of self-awareness, but it may feel general rather than precise. You likely know what is misaligned but not yet what the alternative should look like, which can create a pattern of considering multiple directions without committing fully to one.",
+          momentum: "Move from insight to definition. Tighten the language of what you want, what you will no longer tolerate, and what you are actually choosing. Imprecise language creates imprecise action."
+        },
+        {
+          max: 65, label: 'Emerging', glance: 'Direction visible but not yet fully defined',
+          meaning: "Your clarity is functional and growing. You can identify what is not working and articulate what you want instead. The direction is visible, but it feels more like a general heading than a defined destination.",
+          momentum: "Clarify the next 12 months specifically. What does progress look like? What decisions does that clarity make obvious? Start with those."
+        },
+        {
+          max: 82, label: 'Expanding', glance: 'Strong sense of direction and identity',
+          meaning: "You have a grounded understanding of yourself. You recognize misalignment quickly, articulate what matters to you, and stay connected to a future version of yourself that feels real. You are past the exploratory phase.",
+          momentum: "Commit fully to one direction and remove secondary paths that dilute focus. Over-analyzing options at this stage will slow you down rather than help you."
+        },
+        {
+          max: 100, label: 'Strong', glance: 'Exceptional clarity — integrated and action-ready',
+          meaning: "You have exceptional clarity about who you are and what you are moving toward. Your sense of identity is stable, your direction is defined, and your decisions flow from a consistent internal framework.",
+          momentum: "Use this clarity as a filter for every resource, relationship, and opportunity you pursue. Not everything that looks like opportunity serves your direction."
+        }
+      ],
+      resilience: [
+        {
+          max: 30, label: 'Fragile', glance: 'Change feels overwhelming or depleting',
+          meaning: "Uncertainty and setbacks tend to create withdrawal rather than engagement. This is not a permanent state — it often reflects accumulated stress or environments that have demanded too much for too long. Before momentum is possible, recovery is necessary.",
+          momentum: "Focus on stabilizing before accelerating. Reduce the number of simultaneous demands on your attention and establish one predictable anchor in your daily routine."
+        },
+        {
+          max: 50, label: 'Developing', glance: 'Recovery is possible, sustained change feels taxing',
+          meaning: "You can adapt and recover, but sustained uncertainty feels draining. At this level, resilience tends to support short-term pushes but struggles with ongoing ambiguity — especially when progress is not immediately visible.",
+          momentum: "Narrow your commitments and increase predictability. Resilience builds faster when the path ahead is clearer and the number of unknowns is smaller."
+        },
+        {
+          max: 65, label: 'Building', glance: 'Adapting to change with growing confidence',
+          meaning: "You are developing the emotional capacity to navigate change without being derailed. Setbacks slow you but do not stop you. You are learning — through direct experience — where your edges are and how to work with them intentionally.",
+          momentum: "Identify one recurring challenge that consistently drains your energy. Design a specific response so it becomes predictable and requires less recovery time each time it appears."
+        },
+        {
+          max: 82, label: 'Resilient', glance: 'Handles uncertainty and challenge with confidence',
+          meaning: "You handle uncertainty and challenge with confidence. Emotional discomfort does not derail you — it tends to sharpen your thinking and resolve. You are capable of navigating change that includes risk, visibility, and complexity.",
+          momentum: "Use resilience not just to endure difficulty, but to take bolder steps. Your ceiling is not resistance — it is the scope of what you are willing to attempt."
+        },
+        {
+          max: 100, label: 'Strong', glance: 'High capacity to navigate uncertainty and setbacks',
+          meaning: "Your emotional resilience is a defining strength. You move through setbacks quickly, extract learning efficiently, and maintain forward orientation even in extended uncertainty. This is a rare and compounding advantage.",
+          momentum: "Use this strength to model and extend stability to those around you. Build systems and environments that carry your resilience forward even when you are not actively managing them."
+        }
+      ],
+      support: [
+        {
+          max: 30, label: 'Constraining', glance: 'Environment actively limiting growth',
+          meaning: "Your current environment — the people, structures, and routines around you — is actively working against your growth. This is one of the most underestimated obstacles to transformation. Before pursuing change at scale, this needs to be addressed.",
+          momentum: "Before strategy, address environment. Identify the single relationship or context creating the most friction and begin to reduce your exposure to it, even incrementally."
+        },
+        {
+          max: 50, label: 'Unstable', glance: 'Support is inconsistent and unreliable',
+          meaning: "Your environment is variable — sometimes helpful, sometimes undermining. The people around you may mean well but not understand what you are trying to do, or the structures that occasionally support you cannot be relied upon consistently.",
+          momentum: "Find one reliable anchor of support and invest in it deliberately. A single consistent source of understanding can stabilize an otherwise unpredictable environment."
+        },
+        {
+          max: 65, label: 'Stabilizing', glance: 'Some support present, not yet fully utilized',
+          meaning: "You have supportive conditions available — at least one relationship, structure, or environment that is not actively working against you. The primary risk is under-utilization: having support accessible but not drawing on it in a way that actually changes your experience.",
+          momentum: "Identify specifically what kind of support is useful to you right now — accountability, encouragement, feedback, or space — and ask for it directly rather than hoping it appears."
+        },
+        {
+          max: 82, label: 'Moderately Supportive', glance: 'Generally supportive, with some friction',
+          meaning: "Your environment is not working against you, but it may not yet be fully optimized for your next level. Some relationships, routines, or structures may still reflect who you were rather than who you are becoming.",
+          momentum: "Redesign your environment deliberately: people, inputs, routines. Ensure it reinforces who you are becoming, not who you were."
+        },
+        {
+          max: 100, label: 'Fully Supportive', glance: 'Environment designed to support growth',
+          meaning: "You have built or found an environment that actively supports your growth. The people around you understand your direction, and your routines and structures reflect the version of yourself you are becoming. This is a meaningful competitive advantage.",
+          momentum: "Protect and expand this environment at each new stage. Leverage the collective intelligence of your support network before going it alone on major decisions."
+        }
+      ],
+      action: [
+        {
+          max: 30, label: 'Inactive', glance: 'Action not yet consistent or accessible',
+          meaning: "Consistent action is not currently accessible. This is not a capacity issue — it is often what happens when clarity and purpose are not yet strong enough to carry behavior through normal resistance and friction. Action is being asked to do work that only clarity can do.",
+          momentum: "Do not force action. Address what is upstream of it: a clearer direction and a more defined 'why.' When those stabilize, consistent action tends to emerge naturally."
+        },
+        {
+          max: 50, label: 'Constraining', glance: 'Initiates action, follow-through not yet reliable',
+          meaning: "You can initiate action, but follow-through is not yet dependable. This is often what happens when purpose is not strong enough to carry behavior through friction. The issue is not ability or motivation — it is that action is being asked to compensate for uncertainty.",
+          momentum: "Make execution smaller and more repeatable. Consistency is the current growth edge, not ambition. One reliable habit creates more momentum than ten inconsistent intentions."
+        },
+        {
+          max: 65, label: 'Inconsistent', glance: 'Action happening, consistency still developing',
+          meaning: "You take action but struggle to sustain it over time. Productive periods exist alongside slow ones, and the gap between what you intend and what you do is wider than you would like. The capacity is present — the system to support it is not.",
+          momentum: "Build one keystone habit — a short daily action that anchors the identity of someone who follows through. Consistency at a small scale creates confidence at a larger scale."
+        },
+        {
+          max: 82, label: 'Consistent', glance: 'Consistent execution with room to increase leverage',
+          meaning: "You take action consistently and are willing to do what is uncomfortable. You are not stuck in overthinking or perpetual planning. Execution is a strength, not a weakness. The question now is not how to act more — it is how to act more strategically.",
+          momentum: "Shift from effort-based action to leverage-based action: fewer moves, bigger impact. The goal is not more activity — it is more strategic deployment of effort."
+        },
+        {
+          max: 100, label: 'Strong', glance: 'Highly consistent execution and strong follow-through',
+          meaning: "You are highly action-oriented with strong follow-through. You do not wait for conditions to be perfect, and you convert decisions into behavior reliably. This is an exceptional operational strength that compounds over time.",
+          momentum: "Channel this capacity toward your highest-leverage priorities. The risk at this level is productive busyness — action that is consistent but not directional. Ensure what you are executing on is aligned with where you are actually going."
+        }
+      ],
+      purpose: [
+        {
+          max: 30, label: 'Absent', glance: 'Sense of purpose not yet present or accessible',
+          meaning: "A clear sense of purpose has not yet emerged or reconnected. This often follows significant disruption, loss, or an extended period of living according to external expectations rather than internal meaning. The absence here is temporary — not permanent.",
+          momentum: "Do not search for purpose analytically. Notice instead what makes time feel meaningful, even briefly. Purpose tends to clarify itself through engagement and reflection, not through forced discovery."
+        },
+        {
+          max: 50, label: 'Emerging', glance: 'Motivation present but not yet anchored',
+          meaning: "Motivation exists, but it is not anchored. You may feel periodic bursts of desire to change followed by flatness or doubt. This tends to happen when purpose is still conceptual — something you want to want — rather than something you feel as true in daily choices.",
+          momentum: "Let purpose become grounded and specific. What are you building, and what is it in service of, in terms simple enough to believe without effort?"
+        },
+        {
+          max: 65, label: 'Developing', glance: 'Purpose visible but not yet fully integrated',
+          meaning: "You have a working sense of what matters to you, and it influences your decisions in meaningful ways. Purpose is there, but it may feel more like a goal you are moving toward than an identity you are already inhabiting.",
+          momentum: "Close the gap between purpose and identity. Act as the person your purpose describes — not because it is fully true yet, but because the identity tends to precede the achievement."
+        },
+        {
+          max: 82, label: 'Building', glance: 'Clear, meaning-driven internal fuel',
+          meaning: "Your desire for change is driven by meaning rather than external pressure. You are motivated by impact, alignment, and long-term fulfillment. Purpose is a renewable energy source — it sustains effort even when outcomes are not immediate.",
+          momentum: "Translate purpose into a defined mission with measurable milestones. Purpose without structure can become inspiration without traction."
+        },
+        {
+          max: 100, label: 'Strong', glance: 'Purpose fully integrated and action-aligned',
+          meaning: "Your sense of purpose is fully integrated. You do not need external validation to know why you are doing what you are doing. Your actions, decisions, and commitments are organized around a clear and durable internal 'why.'",
+          momentum: "Use your purpose as a curation tool. Say yes to what advances it and no to everything else — regardless of how attractive or reasonable the alternatives appear."
+        }
+      ]
+    };
+
+    // ── STATE ────────────────────────────────────────────────────────────────────
+    let state = { name: '', email: '', cur: 0, ans: {}, scores: null };
+
+    // ── NAVIGATION ───────────────────────────────────────────────────────────────
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+    function startQuiz() {
+      const n = document.getElementById('inp-name').value.trim();
+      const e = document.getElementById('inp-email').value.trim();
+      if (!n || !e || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) {
+        document.getElementById('intro-err').style.display = 'block'; return;
+      }
+      document.getElementById('intro-err').style.display = 'none';
+      state.name = n; state.email = e; state.cur = 0; state.ans = {};
+      showScreen('screen-question'); renderQ();
+    }
+    function prevQ() {
+      if (state.cur > 0) { state.cur--; renderQ(); } else showScreen('screen-intro');
+    }
+    function nextQ() {
+      if (!state.ans[QS[state.cur].id]) return;
+      if (state.cur < QS.length - 1) { state.cur++; renderQ(); } else showResults();
+    }
+
+    // ── QUESTION RENDER ──────────────────────────────────────────────────────────
+    function renderQ() {
+      const q = QS[state.cur], d = DIMS[q.dim];
+      const total = QS.length, cur = state.cur + 1;
+      document.getElementById('prog-count').textContent = `Question ${cur} of ${total}`;
+      document.getElementById('prog-fill').style.width = ((cur - 1) / total * 100) + '%';
+      const badge = document.getElementById('dim-badge');
+      badge.textContent = d.name;
+      badge.style.cssText = `background:${d.bg};color:${d.tc};display:inline-block;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:12px;margin-bottom:18px;`;
+      document.getElementById('q-text').textContent = q.text;
+      const saved = state.ans[q.id] || null;
+      const list = document.getElementById('opts'); list.innerHTML = '';
+      q.opts.forEach((opt, i) => {
+        const score = i + 1, btn = document.createElement('button');
+        btn.className = 'opt' + (saved === score ? ' sel' : '');
+        btn.innerHTML = `<span class="opt-num">${String.fromCharCode(65 + i)}</span><span>${opt}</span>`;
+        btn.onclick = () => pick(score);
+        list.appendChild(btn);
+      });
+      const nxt = document.getElementById('btn-next');
+      nxt.disabled = !saved;
+      nxt.textContent = state.cur === QS.length - 1 ? 'See My Results →' : 'Next →';
+      document.getElementById('btn-back').style.visibility = state.cur === 0 ? 'hidden' : 'visible';
+    }
+    function pick(score) {
+      state.ans[QS[state.cur].id] = score;
+      document.querySelectorAll('.opt').forEach((b, i) => b.classList.toggle('sel', i + 1 === score));
+      document.getElementById('btn-next').disabled = false;
+    }
+
+    // ── SCORING ──────────────────────────────────────────────────────────────────
+    function calcScores() {
+      const g = id => state.ans[id] || 0;
+      const raw = {
+        clarity: g('q3') + g('q4') + g('q6') + g('q12') + g('q17'),
+        resilience: g('q5') + g('q7') + g('q11') + g('q14'),
+        support: g('q8') + g('q15'),
+        action: g('q9') + g('q10') + g('q13'),
+        purpose: g('q16') + g('q3') * 0.5 + g('q12') * 0.5
+      };
+      const pct = {}, dimOrder = ['clarity', 'resilience', 'support', 'action', 'purpose'];
+      let totalRaw = 0, totalMax = 0;
+      dimOrder.forEach(d => {
+        pct[d] = Math.round(raw[d] / DIMS[d].max * 100);
+        totalRaw += raw[d]; totalMax += DIMS[d].max;
+      });
+      // Display raw as integer for clarity/resilience/support/action; show .5 for purpose
+      const displayRaw = {
+        clarity: raw.clarity,
+        resilience: raw.resilience,
+        support: raw.support,
+        action: raw.action,
+        purpose: Math.round(raw.purpose * 2) / 2
+      };
+      return { raw, displayRaw, pct, totalRaw: Math.round(totalRaw * 2) / 2, totalMax, overall: Math.round(totalRaw / totalMax * 100) };
+    }
+    function getLevel(arr, pct) { return arr.find(x => pct <= x.max) || arr[arr.length - 1]; }
+    function getDimLevel(dimKey, pct) { return RDIM[dimKey].find(x => pct <= x.max) || RDIM[dimKey][RDIM[dimKey].length - 1]; }
+    function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+    // ── QUIZ RESULTS SCREEN ──────────────────────────────────────────────────────
+    function showResults() {
+      showScreen('screen-results');
+      const sc = calcScores(); state.scores = sc;
+      const ol = getLevel(LEVELS, sc.overall);
+      const dimOrder = ['clarity', 'resilience', 'support', 'action', 'purpose'];
+      let html = `
+  <div class="results-hero">
+    <div class="r-eyebrow">Your Readiness Profile</div>
+    <div class="r-name">${esc(state.name)}</div>
+    <div class="r-level">${ol.level}</div>
+    <div class="r-score">Overall Score: ${sc.totalRaw} / ${sc.totalMax} &nbsp;·&nbsp; ${sc.overall}%</div>
+    <div class="r-bar-track"><div class="r-bar-fill" id="bar-overall" style="width:0%"></div></div>
+    <div class="r-desc">${ol.desc}</div>
+  </div>
+  <div class="dim-results">`;
+      dimOrder.forEach(d => {
+        const dim = DIMS[d], pct = sc.pct[d], dl = getDimLevel(d, pct);
+        html += `<div class="dim-card">
+      <div class="dim-top">
+        <div class="dim-name">${dim.name}</div>
+        <div class="dim-lbl" style="background:${dim.bg};color:${dim.tc};">${dl.label} &nbsp; ${pct}%</div>
+      </div>
+      <div class="dim-bar-track"><div class="dim-bar-fill" id="bar-${d}" style="width:0%;background:${dim.color};"></div></div>
+      <div class="dim-insight">${dl.glance}</div>
+    </div>`;
+      });
+      html += `</div>
+  <button class="btn-report" onclick="generateAndShowReport()">View Your Full In-Depth Report →</button>
+  <div class="results-cta">
+    <h3>Ready to Accelerate Your Transformation?</h3>
+    <p>The 5-Day Reinvention Sprint addresses exactly what your profile reveals — with daily coaching, proven frameworks, and a community that understands the reinvention journey.</p>
+    <a href="sprint.html" class="btn-gold-link">Learn About the 5-Day Sprint →</a>
+  </div>
+  <p class="submit-note" id="submit-note" style="margin-top:16px">Sending results to Andrew...</p>`;
+      document.getElementById('results-content').innerHTML = html;
+      setTimeout(() => {
+        document.getElementById('bar-overall').style.width = sc.overall + '%';
+        dimOrder.forEach(d => { const el = document.getElementById('bar-' + d); if (el) el.style.width = sc.pct[d] + '%'; });
+      }, 100);
+      submitToFormspree(sc, ol.level);
+    }
+
+    // ── FORMSPREE (Andrew notification) ─────────────────────────────────────────
+    function submitToFormspree(sc, levelName) {
+      const dimOrder = ['clarity', 'resilience', 'support', 'action', 'purpose'];
+      const dimLines = dimOrder.map(d => `${DIMS[d].name}: ${sc.pct[d]}% (${getDimLevel(d, sc.pct[d]).label})`).join('\n');
+      fetch('https://formspree.io/f/xyknjnoy', {
+        method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          _subject: `Assessment – ${state.name} – ${levelName}`,
+          _replyto: state.email, name: state.name, email: state.email,
+          overall_level: levelName, overall_score: `${sc.totalRaw}/${sc.totalMax} (${sc.overall}%)`,
+          clarity: `${sc.pct.clarity}%`, resilience: `${sc.pct.resilience}%`,
+          support: `${sc.pct.support}%`, action: `${sc.pct.action}%`, purpose: `${sc.pct.purpose}%`,
+          message: `New assessment: ${state.name} (${state.email})\nOverall: ${levelName} — ${sc.overall}%\n\n${dimLines}`
+        })
+      }).then(r => {
+        const el = document.getElementById('submit-note');
+        if (el) el.textContent = r.ok ? '✓ Andrew has been notified of your results.' : '';
+      }).catch(() => {
+        const el = document.getElementById('submit-note');
+        if (el) el.textContent = '';
+      });
+    }
+
+    // ── BAR CHART SVG ────────────────────────────────────────────────────────────
+    function buildBarChart(sc) {
+      const bars = [
+        { label: 'Clarity &\nSelf-Awareness', pct: sc.pct.clarity },
+        { label: 'Emotional\nResilience', pct: sc.pct.resilience },
+        { label: 'Support &\nEnvironment', pct: sc.pct.support },
+        { label: 'Action\nOrientation', pct: sc.pct.action },
+        { label: 'Purpose &\nMotivation', pct: sc.pct.purpose }
+      ];
+      const W = 500, H = 240, pL = 52, pR = 16, pT = 28, pB = 72;
+      const cW = W - pL - pR, cH = H - pT - pB;
+      const bW = cW / bars.length * 0.55, gap = cW / bars.length;
+      let s = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;font-family:Arial,Helvetica,sans-serif;">`;
+      s += `<text x="${W / 2}" y="16" text-anchor="middle" font-size="9.5" fill="#6b7280">Transformation Readiness Profile by Theme (Total Score: ${sc.totalRaw})</text>`;
+      // grid + y-axis
+      [0, 20, 40, 60, 80, 100].forEach(v => {
+        const y = pT + cH * (1 - v / 100);
+        s += `<line x1="${pL}" x2="${W - pR}" y1="${y}" y2="${y}" stroke="#e5e7eb" stroke-width="${v === 0 ? 1 : .5}"/>`;
+        s += `<text x="${pL - 4}" y="${y + 3.5}" text-anchor="end" font-size="9" fill="#9ca3af">${v}</text>`;
+      });
+      s += `<text transform="rotate(-90)" x="${-(pT + cH / 2)}" y="13" text-anchor="middle" font-size="9" fill="#9ca3af">Readiness Level (%)</text>`;
+      // bars
+      bars.forEach((bar, i) => {
+        const bH = cH * bar.pct / 100, x = pL + i * gap + (gap - bW) / 2, y = pT + cH - bH;
+        s += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bW.toFixed(1)}" height="${bH.toFixed(1)}" fill="#1E3A5F" rx="2"/>`;
+        const cx = x + bW / 2, ly = pT + cH + 14;
+        bar.label.split('\n').forEach((ln, li) => {
+          s += `<text transform="rotate(-40,${cx.toFixed(1)},${(ly + li * 11).toFixed(1)})" x="${cx.toFixed(1)}" y="${(ly + li * 11).toFixed(1)}" text-anchor="end" font-size="9" fill="#374151">${ln}</text>`;
+        });
+      });
+      s += `<line x1="${pL}" x2="${W - pR}" y1="${pT + cH}" y2="${pT + cH}" stroke="#374151" stroke-width="1"/>`;
+      s += `<line x1="${pL}" x2="${pL}" y1="${pT}" y2="${pT + cH}" stroke="#374151" stroke-width="1"/>`;
+      s += '</svg>';
+      return s;
+    }
+
+    // ── LOGO BLOCK ───────────────────────────────────────────────────────────────
+    function logoBlock() {
+      return `<div class="rpt-logo">
+    <img src="Transparent mark without words.png" alt="PFS" style="height:52px;width:auto;">
+    <div class="rpt-logo-brand">Project Future Self</div>
+    <div class="rpt-logo-tag">Reinvent · Redesign · Reclaim</div>
+  </div>`;
+    }
+    function footerBlock() {
+      return `<div class="rpt-footer"><span>Andrew Asnes</span><span>Andrew@projectfutureself.com</span></div>`;
+    }
+
+    // ── REPORT GENERATION ────────────────────────────────────────────────────────
+    function generateAndShowReport() {
+      const sc = state.scores || calcScores();
+      const ol = getLevel(LEVELS, sc.overall);
+      const dimOrder = ['clarity', 'resilience', 'support', 'action', 'purpose'];
+
+      // ── PAGE 1: SNAPSHOT ────────────────────────────────────────────────────
+      let p1 = `<div class="rpt-page">
+    <div class="rpt-hdr">${logoBlock()}<div class="rpt-name-corner">${esc(state.name)}</div></div>
+    <div class="rpt-title">Your Transformation Readiness Snapshot</div>
+    <div class="rpt-chart">${buildBarChart(sc)}</div>
+    <div class="rpt-overall">
+      <div class="rpt-overall-level">Overall Readiness Level: <em>${ol.level}</em></div>
+      <div class="rpt-overall-score">Total Score: ${sc.totalRaw}</div>
+    </div>
+    <p class="rpt-body">${ol.opening.split('\n\n')[0]}</p>`;
+
+      // at-a-glance
+      p1 += `<div class="rpt-section">At-a-Glance Theme Summary</div><ul class="rpt-bullets">`;
+      dimOrder.forEach(d => {
+        const dl = getDimLevel(d, sc.pct[d]);
+        p1 += `<li><strong>${DIMS[d].name} (${sc.displayRaw[d]}):</strong> ${dl.glance}</li>`;
+      });
+      p1 += `</ul>`;
+
+      // recommended focus
+      p1 += `<div class="rpt-section">Recommended Focus</div><ul class="rpt-bullets">`;
+      ol.focus.forEach(f => { p1 += `<li>${f}</li>`; });
+      p1 += `</ul>`;
+
+      // next step
+      p1 += `<div class="rpt-section">Recommended Next Step</div>
+  <p class="rpt-body">You are best served by the <strong>${ol.step}</strong> — ${ol.stepDesc}</p>
+  <div class="rpt-quote"><em>${ol.quote}</em></div>
+  ${footerBlock()}
+  </div>`;
+
+      // ── PAGE 2: IN-DEPTH REPORT ──────────────────────────────────────────────
+      const para2 = ol.opening.split('\n\n');
+      let p2 = `<div class="rpt-page">
+    <div class="rpt-hdr"><div class="rpt-pagenum">2</div>${logoBlock()}<div class="rpt-name-corner">${esc(state.name)}</div></div>
+    <div class="rpt-big-section">In-Depth Transformation Readiness Report</div>`;
+      para2.forEach(p => { if (p) p2 += `<p class="rpt-body">${p}</p>`; });
+      p2 += `<div class="rpt-section">Theme-by-Theme Analysis</div>`;
+
+      // First 3 dimensions on page 2
+      dimOrder.slice(0, 3).forEach(d => {
+        const dl = getDimLevel(d, sc.pct[d]);
+        p2 += `<div class="rpt-dim-h">${DIMS[d].name}: ${dl.label} (${sc.displayRaw[d]})</div>
+    <p class="rpt-body">${dl.meaning}</p>
+    <div class="rpt-sub-lbl">Focus going forward / Growth momentum:</div>
+    <p class="rpt-body">${dl.momentum}</p>`;
+      });
+      p2 += footerBlock() + '</div>';
+
+      // ── PAGE 3: REMAINING DIMS + PATTERN + NEXT STEP ────────────────────────
+      let p3 = `<div class="rpt-page">
+    <div class="rpt-hdr"><div class="rpt-pagenum">3</div>${logoBlock()}<div class="rpt-name-corner">${esc(state.name)}</div></div>`;
+      dimOrder.slice(3).forEach(d => {
+        const dl = getDimLevel(d, sc.pct[d]);
+        p3 += `<div class="rpt-dim-h">${DIMS[d].name}: ${dl.label} (${sc.displayRaw[d]})</div>
+    <p class="rpt-body">${dl.meaning}</p>
+    <div class="rpt-sub-lbl">Focus going forward / Growth momentum:</div>
+    <p class="rpt-body">${dl.momentum}</p>`;
+      });
+
+      p3 += `<div class="rpt-hr"></div>
+  <div class="rpt-big-section">Your Reinvention Pattern</div>
+  <p class="rpt-body">${ol.pattern}</p>
+  <div class="rpt-big-section">Recommended Next Step</div>
+  <p class="rpt-body">You are best served by the <strong>${ol.step}</strong> because it provides a structured way to:</p>
+  <ul class="rpt-bullets">`;
+      ol.stepBullets.forEach(b => { p3 += `<li>${b}</li>`; });
+      p3 += `</ul>
+  <div class="rpt-quote"><em>${ol.quote}</em></div>
+  ${footerBlock()}
+  </div>`;
+
+      document.getElementById('rpt-content').innerHTML = p1 + p2 + p3;
+      document.getElementById('rpt-overlay').style.display = 'block';
+      document.getElementById('rpt-email-note').style.display = 'none';
+      window.scrollTo(0, 0);
+    }
+
+    function hideReport() {
+      document.getElementById('rpt-overlay').style.display = 'none';
+    }
+
+    // ── EMAILJS ──────────────────────────────────────────────────────────────────
+    function emailReport() {
+      const note = document.getElementById('rpt-email-note');
+      note.style.display = 'block';
+      if (!EJS.enabled) {
+        note.innerHTML = 'Email delivery requires EmailJS setup. See the code comments in assessment.html for instructions, or <a href="contact.html" style="color:var(--navy)">contact Andrew</a> directly.';
+        return;
+      }
+      note.textContent = 'Sending…';
+      emailjs.init(EJS.publicKey);
+      const sc = state.scores || calcScores();
+      const ol = getLevel(LEVELS, sc.overall);
+      const reportHtml = document.getElementById('rpt-content').innerHTML;
+      // Build simple text summary for fallback
+      const summary = `Overall Level: ${ol.level} (${sc.overall}%)\nTotal Score: ${sc.totalRaw}/${sc.totalMax}\n\n` +
+        ['clarity', 'resilience', 'support', 'action', 'purpose'].map(d => `${DIMS[d].name}: ${sc.pct[d]}% (${getDimLevel(d, sc.pct[d]).label})`).join('\n');
+
+      const sendEmail = (toEmail, toName, subject) => emailjs.send(EJS.serviceId, EJS.templateId, {
+        to_email: toEmail, to_name: toName, subject,
+        report_html: reportHtml, summary
+      });
+
+      Promise.all([
+        sendEmail(state.email, state.name, `Your Transformation Readiness Report – ${ol.level}`),
+        sendEmail(EJS.andrewEmail, 'Andrew', `New Assessment: ${state.name} – ${ol.level} (${sc.overall}%)`)
+      ]).then(() => {
+        note.textContent = `✓ Report emailed to ${state.email} and Andrew.`;
+      }).catch(err => {
+        console.error('EmailJS error:', err);
+        note.textContent = 'Email failed. Please use Print / Save as PDF instead.';
+      });
+    }
+  </script>
 </body>
+
 </html>
