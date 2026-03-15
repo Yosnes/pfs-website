@@ -5,7 +5,6 @@ const PRODUCTS = {
   price_1TBLmXF8dcdrC71H9I5HIjjh: { file: 'Personal Brand Starter Kit-FINAL.pdf',      name: 'Personal Brand Starter Kit' },
   price_1TBLltF8dcdrC71H687JYbtZ: { file: 'Job Search Accelerator System-FINAL.pdf',   name: 'Job Search Accelerator System' },
   price_1TBLkkF8dcdrC71Hka3eGZIb: { file: 'Career Pivot Playbook-FINAL.pdf',           name: 'Career Pivot Playbook' },
-  IMPACT_STORY_PRICE_ID_PLACEHOLDER: { file: 'Impact Story Template-FINAL.pdf',        name: 'Impact Story Template' },
 };
 
 async function verifyStripeSignature(body, sigHeader, secret) {

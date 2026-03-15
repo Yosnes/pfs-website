@@ -4,7 +4,7 @@ compatibility_date = "2024-09-23"
 
 [[kv_namespaces]]
 binding = "DOWNLOAD_TOKENS"
-id = "REPLACE_WITH_KV_NAMESPACE_ID"
+id = "969d8b89ad2147a0afc6ef592c4793a2"
 
 [[r2_buckets]]
 binding = "PRODUCTS_BUCKET"
