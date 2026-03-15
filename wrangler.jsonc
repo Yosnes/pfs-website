@@ -13,9 +13,9 @@
     "nodejs_compat"
   ],
   "routes": [
-    {
-      "pattern": "projectfutureself.com/api/*",
-      "zone_name": "projectfutureself.com"
+  {
+    "pattern": "https://projectfutureself.com/api/*",
+    "zone_name": "projectfutureself.com"
     }
   ]
 }
