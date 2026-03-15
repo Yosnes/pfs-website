@@ -2,20 +2,23 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     
-    // Example: Store something in KV
+    // Example: Use KV namespace
     if (url.pathname === '/api/cache' && request.method === 'POST') {
       const data = await request.json();
-      await env.MY_KV.put('cached_data', JSON.stringify(data));
+      await env.DOWNLOAD_TOKENS.put('cached_data', JSON.stringify(data));
       return new Response('Cached!', { status: 200 });
     }
     
-    // Example: Get something from KV
-    if (url.pathname === '/api/cache' && request.method === 'GET') {
-      const cached = await env.MY_KV.get('cached_data');
-      return new Response(cached || 'Nothing cached', { status: 200 });
+    // Example: Use R2 bucket
+    if (url.pathname === '/api/products' && request.method === 'GET') {
+      const object = await env.PRODUCTS_BUCKET.get('products.json');
+      if (object) {
+        return new Response(await object.text(), { status: 200 });
+      }
+      return new Response('Not found', { status: 404 });
     }
     
-    // Your existing routes...
+    // Your existing Stripe webhook handler
     if (url.pathname === '/api/stripe-webhook') {
       const stripeSignature = request.headers.get('stripe-signature');
       
@@ -46,6 +49,7 @@ export default {
       return new Response('No stripe-signature header', { status: 400 });
     }
     
+    // Your existing Resend email handler
     if (url.pathname === '/api/send-email' && request.method === 'POST') {
       try {
         const data = await request.json();
