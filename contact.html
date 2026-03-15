@@ -1,164 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact Us – Project Future Self</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'pfs-orange': '#E8821A',
-            'pfs-blue':   '#1B5EE0',
-            'pfs-gold':   '#F5A31A',
-            'rs-navy':    '#0d1421',
-            'rs-darker':  '#0a1120',
-          },
-          fontFamily: { lato: ['Lato', 'sans-serif'] },
-        }
-      }
-    }
-  </script>
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us – Project Future Self</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0D1F3C;
+    --slate:      #1E3A5F;
+    --gold:       #F5A31A;
+    --gold-dark:  #C07D0A;
+    --amber-bg:   #FDF6EC;
+    --amber-mid:  #F5E8CC;
+    --text-dark:  #1A1208;
+    --text-mid:   #3D2E14;
+    --text-muted: #7A6240;
+    --white:      #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--amber-bg); color: var(--text-dark); line-height: 1.6; }
+
+  /* ── NAV ── */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(253,246,236,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(13,31,60,0.08); padding: 0 5%; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-mark { height: 44px; width: auto; }
+  .nav-wordmark { line-height: 1.15; }
+  .nav-wordmark .nw-top { font-size: 9px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+  .nav-wordmark .nw-main { font-size: 16px; font-weight: 800; letter-spacing: 0.02em; color: var(--navy); text-transform: uppercase; }
+  .nav-wordmark .nw-tag { font-size: 7px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dark); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-links a.active { color: var(--navy); font-weight: 700; }
+  .nav-cta { font-size: 12px !important; font-weight: 700 !important; padding: 9px 20px; background: var(--navy); color: var(--gold) !important; border-radius: 24px; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .nav-cta:hover { background: var(--slate) !important; transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; }
+
+  /* ── PAGE HEADER ── */
+  .page-header { background: var(--navy); padding: 80px 5% 64px; text-align: center; }
+  .page-header .eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  .page-header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(34px, 5vw, 56px); font-weight: 400; color: #FDF6EC; line-height: 1.1; margin-bottom: 16px; }
+  .page-header p { font-size: 15px; color: rgba(253,246,236,0.55); max-width: 500px; margin: 0 auto; line-height: 1.75; }
+
+  /* ── CONTACT SECTION ── */
+  .contact-section { background: var(--amber-bg); padding: 72px 5%; }
+  .contact-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 400px; gap: 64px; align-items: start; }
+
+  /* Form */
+  .form-title { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 8px; }
+  .form-h2 { font-family: 'DM Serif Display', serif; font-size: 30px; font-weight: 400; color: var(--navy); margin-bottom: 8px; }
+  .gold-rule { width: 40px; height: 3px; background: var(--gold); border-radius: 2px; margin-bottom: 32px; margin-top: 12px; }
+  .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+  .form-field label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+  .form-field input, .form-field textarea {
+    background: var(--white); border: 1.5px solid rgba(13,31,60,0.12);
+    color: var(--text-dark); font-family: 'DM Sans', sans-serif; font-size: 14px;
+    padding: 12px 16px; border-radius: 8px; transition: border-color 0.2s; outline: none;
+  }
+  .form-field input::placeholder, .form-field textarea::placeholder { color: rgba(13,31,60,0.25); }
+  .form-field input:focus, .form-field textarea:focus { border-color: var(--gold); }
+  .form-field textarea { resize: none; }
+  .btn-submit { display: block; width: auto; padding: 14px 32px; background: var(--navy); color: var(--gold); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; border: none; border-radius: 32px; cursor: pointer; transition: all 0.2s; }
+  .btn-submit:hover { background: var(--slate); transform: translateY(-2px); }
+
+  /* Info panel */
+  .info-panel { display: flex; flex-direction: column; gap: 28px; }
+  .info-card { background: var(--white); border: 1px solid var(--amber-mid); border-radius: 12px; padding: 24px; }
+  .info-icon { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+  .info-title { font-size: 13px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--navy); margin-bottom: 6px; }
+  .info-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+  .info-link { display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 700; color: var(--navy); text-decoration: none; }
+  .info-link:hover { color: var(--gold-dark); }
+
+  .info-direct { background: var(--white); border: 1px solid var(--amber-mid); border-radius: 12px; padding: 24px; }
+  .info-direct-title { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+  .contact-item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-mid); margin-bottom: 10px; }
+  .contact-item a { color: var(--navy); text-decoration: none; font-weight: 600; }
+  .contact-item a:hover { color: var(--gold-dark); }
+  .contact-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+
+  /* ── FOOTER ── */
+  footer { background: #060F1E; padding: 28px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-brand { display: flex; align-items: center; gap: 10px; }
+  .footer-mark { height: 32px; width: auto; opacity: 0.8; }
+  .footer-name { font-size: 12px; font-weight: 700; color: rgba(253,246,236,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+  footer > p { font-size: 11px; color: rgba(253,246,236,0.3); }
+  .footer-links { display: flex; gap: 16px; }
+  .footer-links a { font-size: 11px; color: rgba(253,246,236,0.3); text-decoration: none; }
+  .footer-links a:hover { color: rgba(253,246,236,0.6); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: rgba(253,246,236,0.98); padding: 16px 5% 20px; border-bottom: 1px solid rgba(13,31,60,0.1); gap: 14px; z-index: 99; }
+    .hamburger { display: flex; }
+    .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+    .form-grid-2 { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
-<body class="bg-rs-navy text-white">
+<body>
 
-  <!-- NAVIGATION -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-rs-darker border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-14">
-      <a href="index.html" class="text-white font-black uppercase tracking-widest" style="font-size:13px; letter-spacing:0.16em;">PROJECT FUTURE SELF</a>
-      <div class="hidden lg:flex items-center gap-7">
-        <a href="products.html"                  class="nav-link">5-Day Sprint</a>
-        <a href="index.html#about"               class="nav-link">About Andrew</a>
-        <a href="index.html#assessment"          class="nav-link">Assessment</a>
-        <a href="products.html"                  class="nav-link">Products</a>
-        <a href="index.html#testimonials"        class="nav-link">Testimonials</a>
-        <a href="contact.html" class="nav-link" style="color:#fff;">Contact Us</a>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img class="nav-mark" src="Transparent mark without words.png" alt="Project Future Self mark">
+      <div class="nav-wordmark">
+        <div class="nw-top">Project</div>
+        <div class="nw-main">Future Self</div>
+        <div class="nw-tag">Reinvent · Redesign · Reclaim</div>
       </div>
-      <div class="flex items-center gap-3">
-        <a href="assessment.html" class="hidden sm:inline-block bg-pfs-gold text-black text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-sm hover:bg-yellow-300 transition-colors whitespace-nowrap" style="font-size:11px;">TAKE THE FREE ASSESSMENT</a>
-        <button id="mobile-menu-btn" class="lg:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 ml-1" aria-label="Open menu">
-          <span class="block w-5 h-0.5 bg-white"></span>
-          <span class="block w-5 h-0.5 bg-white"></span>
-          <span class="block w-5 h-0.5 bg-white"></span>
-        </button>
-      </div>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="sprint.html">5-Day Sprint</a>
+      <a href="index.html#about">About</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="products.html">Products</a>
+      <a href="contact.html" class="active">Contact</a>
+      <a href="assessment.html" class="nav-cta">Free Assessment ↗</a>
     </div>
-    <div id="mobile-menu" class="hidden lg:hidden bg-rs-darker border-t border-white/10">
-      <div class="flex flex-col px-6 py-4 gap-0 divide-y divide-white/10">
-        <a href="sprint.html"             class="nav-link py-3">5-Day Sprint</a>
-        <a href="index.html#about"        class="nav-link py-3">About Andrew</a>
-        <a href="assessment.html"         class="nav-link py-3">Assessment</a>
-        <a href="products.html"           class="nav-link py-3">Products</a>
-        <a href="index.html#testimonials" class="nav-link py-3">Testimonials</a>
-        <a href="contact.html"            class="nav-link py-3" style="color:#fff;">Contact Us</a>
-        <a href="assessment.html"         class="bg-pfs-gold text-black text-xs font-bold uppercase tracking-widest px-4 py-3 mt-3 text-center rounded-sm hover:bg-yellow-300 transition-colors" style="font-size:11px;">TAKE THE FREE ASSESSMENT</a>
-      </div>
+    <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <!-- PAGE HEADER -->
-  <section class="pt-32 pb-16" style="background: linear-gradient(160deg, #0e1a30 0%, #1c3154 40%, #0a1120 100%);">
-    <div class="max-w-3xl mx-auto px-6 text-center">
-      <p class="text-pfs-gold text-xs font-bold uppercase tracking-widest mb-4">GET IN TOUCH</p>
-      <h1 class="text-white font-black uppercase leading-tight mb-4" style="font-size: clamp(36px, 5vw, 64px); letter-spacing:-0.02em;">Contact Us</h1>
-      <p class="text-gray-400 text-base leading-relaxed max-w-xl mx-auto">Have a question about the 5-Day Reinvention Sprint or our programs? Ready to start your transformation? We'd love to hear from you.</p>
-    </div>
-  </section>
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="eyebrow">Get In Touch</div>
+  <h1>Contact Us</h1>
+  <p>Have a question about the 5-Day Reinvention Sprint or our programs? Ready to start your transformation? We'd love to hear from you.</p>
+</div>
 
-  <!-- CONTACT FORM -->
-  <section class="bg-rs-darker py-20">
-    <div class="max-w-2xl mx-auto px-6">
-      <form class="flex flex-col gap-6">
-        <!-- Name row -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="flex flex-col gap-1.5">
-            <label class="text-gray-400 text-xs uppercase tracking-widest font-semibold">First Name</label>
-            <input type="text" placeholder="First name" class="bg-white/5 border border-white/15 text-white text-sm px-4 py-3 rounded-sm placeholder-white/25 focus:outline-none focus:border-pfs-gold transition-colors" />
+<!-- CONTACT SECTION -->
+<section class="contact-section">
+  <div class="contact-inner">
+
+    <!-- FORM -->
+    <div>
+      <div class="form-title">Send a Message</div>
+      <div class="form-h2">How Can We Help?</div>
+      <div class="gold-rule"></div>
+
+      <form>
+        <div class="form-grid-2">
+          <div class="form-field">
+            <label>First Name</label>
+            <input type="text" placeholder="First name">
           </div>
-          <div class="flex flex-col gap-1.5">
-            <label class="text-gray-400 text-xs uppercase tracking-widest font-semibold">Last Name</label>
-            <input type="text" placeholder="Last name" class="bg-white/5 border border-white/15 text-white text-sm px-4 py-3 rounded-sm placeholder-white/25 focus:outline-none focus:border-pfs-gold transition-colors" />
+          <div class="form-field">
+            <label>Last Name</label>
+            <input type="text" placeholder="Last name">
           </div>
         </div>
-        <!-- Email -->
-        <div class="flex flex-col gap-1.5">
-          <label class="text-gray-400 text-xs uppercase tracking-widest font-semibold">Email Address</label>
-          <input type="email" placeholder="your@email.com" class="bg-white/5 border border-white/15 text-white text-sm px-4 py-3 rounded-sm placeholder-white/25 focus:outline-none focus:border-pfs-gold transition-colors" />
+        <div class="form-field">
+          <label>Email Address</label>
+          <input type="email" placeholder="your@email.com">
         </div>
-        <!-- Message -->
-        <div class="flex flex-col gap-1.5">
-          <label class="text-gray-400 text-xs uppercase tracking-widest font-semibold">Tell Us What You'd Like to Know</label>
-          <textarea rows="6" placeholder="Write your message here..." class="bg-white/5 border border-white/15 text-white text-sm px-4 py-3 rounded-sm placeholder-white/25 focus:outline-none focus:border-pfs-gold transition-colors resize-none"></textarea>
+        <div class="form-field">
+          <label>Tell Us What You'd Like to Know</label>
+          <textarea rows="6" placeholder="Write your message here..."></textarea>
         </div>
-        <!-- Submit -->
-        <button type="submit" class="bg-pfs-gold text-black font-black uppercase text-sm tracking-widest px-10 py-4 hover:bg-yellow-300 transition-colors self-start">SEND MESSAGE</button>
+        <button type="submit" class="btn-submit">Send Message →</button>
       </form>
     </div>
-  </section>
 
-  <!-- WORK WITH ANDREW INFO -->
-  <section class="bg-rs-navy py-16 border-t border-white/10">
-    <div class="max-w-4xl mx-auto px-6">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-        <div class="flex flex-col items-center gap-3">
-          <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background:linear-gradient(135deg,#1B5EE0,#E8821A);">
-            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-          </div>
-          <h3 class="text-white font-black text-sm uppercase tracking-widest">Work With Andrew</h3>
-          <p class="text-gray-400 text-xs leading-relaxed">Interested in 1:1 coaching, group programs, or speaking engagements? Reach out and let's talk.</p>
+    <!-- INFO PANEL -->
+    <div class="info-panel">
+
+      <div class="info-card">
+        <div class="info-icon" style="background:linear-gradient(135deg,#0e2040,#1E3A5F);">
+          <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
         </div>
-        <div class="flex flex-col items-center gap-3">
-          <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background:linear-gradient(135deg,#E8821A,#F5A31A);">
-            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-          </div>
-          <h3 class="text-white font-black text-sm uppercase tracking-widest">5-Day Sprint Inquiries</h3>
-          <p class="text-gray-400 text-xs leading-relaxed">Questions about the next 5-Day Reinvention Sprint cohort? We'll get back to you within 24 hours.</p>
-        </div>
-        <div class="flex flex-col items-center gap-3">
-          <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background:linear-gradient(135deg,#0e2a6e,#1B5EE0);">
-            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          </div>
-          <h3 class="text-white font-black text-sm uppercase tracking-widest">Free Assessment</h3>
-          <p class="text-gray-400 text-xs leading-relaxed">Not sure where to start? Take the free Transformation Readiness Assessment — no commitment required.</p>
-        </div>
+        <div class="info-title">Work With Andrew</div>
+        <p class="info-desc">Interested in 1:1 coaching, group programs, or speaking engagements? Reach out and let's talk.</p>
+        <a href="sprint.html" class="info-link">View the 5-Day Sprint →</a>
       </div>
-    </div>
-  </section>
 
-  <!-- FOOTER -->
-  <footer class="bg-rs-darker border-t border-white/10 py-10">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-      <a href="index.html" class="text-white font-black uppercase tracking-widest" style="font-size:13px; letter-spacing:0.16em;">PROJECT FUTURE SELF</a>
-      <p class="text-gray-600 text-xs">© 2024 Project Future Self. All rights reserved.</p>
-      <div class="flex items-center gap-5">
-        <a href="#" class="text-gray-500 hover:text-white transition-colors">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557a9.83 9.83 0 01-2.828.775 4.932 4.932 0 002.165-2.724 9.864 9.864 0 01-3.127 1.195 4.916 4.916 0 00-8.384 4.482C7.691 8.094 4.066 6.13 1.64 3.161a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.061a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.937 4.937 0 004.604 3.417 9.868 9.868 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.054 0 13.999-7.496 13.999-13.986 0-.209 0-.42-.015-.63a9.936 9.936 0 002.46-2.548l-.047-.02z"/></svg>
-        </a>
-        <a href="#" class="text-gray-500 hover:text-white transition-colors">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        </a>
-        <a href="#" class="text-gray-500 hover:text-white transition-colors">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        </a>
+      <div class="info-card">
+        <div class="info-icon" style="background:linear-gradient(135deg,#7a3d00,#C07D0A);">
+          <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        </div>
+        <div class="info-title">5-Day Sprint Inquiries</div>
+        <p class="info-desc">Questions about the next 5-Day Reinvention Sprint cohort? We'll get back to you within 24 hours.</p>
+        <a href="sprint.html#apply" class="info-link">Apply Now →</a>
       </div>
-    </div>
-  </footer>
 
-  <script>
-    (function() {
-      var btn  = document.getElementById('mobile-menu-btn');
-      var menu = document.getElementById('mobile-menu');
-      if (!btn || !menu) return;
-      btn.addEventListener('click', function() { menu.classList.toggle('hidden'); });
-      menu.querySelectorAll('a').forEach(function(link) {
-        link.addEventListener('click', function() { menu.classList.add('hidden'); });
-      });
-    })();
-  </script>
+      <div class="info-card">
+        <div class="info-icon" style="background:linear-gradient(135deg,#5a4000,#F5A31A);">
+          <svg width="20" height="20" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div class="info-title">Free Assessment</div>
+        <p class="info-desc">Not sure where to start? Take the free Transformation Readiness Assessment — no commitment required.</p>
+        <a href="assessment.html" class="info-link">Take It Free →</a>
+      </div>
+
+      <div class="info-direct">
+        <div class="info-direct-title">Direct Contact</div>
+        <div class="contact-item"><div class="contact-dot"></div><a href="mailto:andrew@projectfutureself.com">andrew@projectfutureself.com</a></div>
+        <div class="contact-item"><div class="contact-dot"></div><a href="tel:6467838148">646-783-8148</a></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <img class="footer-mark" src="Transparent mark without words.png" alt="PFS">
+    <div class="footer-name">Project Future Self</div>
+  </div>
+  <p>© 2025 Project Future Self. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
 
 </body>
 </html>

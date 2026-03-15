@@ -1,338 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Transformation Readiness Assessment – Project Future Self</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'pfs-orange': '#E8821A',
-            'pfs-blue': '#1B5EE0',
-            'pfs-gold': '#F5A31A',
-            'rs-navy': '#0d1421',
-            'rs-darker': '#0a1120',
-          },
-        }
-      }
-    }
-  </script>
-  <style>
-    body {
-      font-family: 'Lato', sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transformation Readiness Assessment – Project Future Self</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0D1F3C;
+    --slate:      #1E3A5F;
+    --gold:       #F5A31A;
+    --gold-dark:  #C07D0A;
+    --amber-bg:   #FDF6EC;
+    --amber-mid:  #F5E8CC;
+    --text-dark:  #1A1208;
+    --text-mid:   #3D2E14;
+    --text-muted: #7A6240;
+    --white:      #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--amber-bg); color: var(--text-dark); line-height: 1.6; }
 
-    .nav-link {
-      font-size: 12px;
-      letter-spacing: 0.05em;
-      color: #ccc;
-      transition: color 0.2s;
-    }
+  /* ── NAV ── */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(253,246,236,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(13,31,60,0.08); padding: 0 5%; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-mark { height: 44px; width: auto; }
+  .nav-wordmark { line-height: 1.15; }
+  .nav-wordmark .nw-top { font-size: 9px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+  .nav-wordmark .nw-main { font-size: 16px; font-weight: 800; letter-spacing: 0.02em; color: var(--navy); text-transform: uppercase; }
+  .nav-wordmark .nw-tag { font-size: 7px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dark); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-links a.active { color: var(--navy); font-weight: 700; }
+  .nav-cta { font-size: 12px !important; font-weight: 700 !important; padding: 9px 20px; background: var(--navy); color: var(--gold) !important; border-radius: 24px; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .nav-cta:hover { background: var(--slate) !important; transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; }
 
-    .nav-link:hover {
-      color: #fff;
-    }
-  </style>
+  /* ── BUTTONS ── */
+  .btn-gold { display: inline-block; padding: 14px 32px; background: var(--gold); color: var(--navy); font-size: 14px; font-weight: 800; border-radius: 28px; text-decoration: none; transition: all 0.2s; }
+  .btn-gold:hover { background: #f8b83a; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,163,26,0.35); }
+  .btn-primary { display: inline-block; padding: 14px 28px; background: var(--navy); color: var(--gold); font-size: 14px; font-weight: 700; border-radius: 32px; text-decoration: none; transition: all 0.2s; }
+  .btn-primary:hover { background: var(--slate); transform: translateY(-2px); }
+
+  /* ── SECTIONS ── */
+  section { padding: 72px 5%; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 10px; }
+  .section-h2 { font-family: 'DM Serif Display', serif; font-size: clamp(26px, 3.5vw, 40px); font-weight: 400; color: var(--navy); line-height: 1.15; margin-bottom: 8px; }
+  .gold-rule { width: 40px; height: 3px; background: var(--gold); border-radius: 2px; margin-top: 14px; margin-bottom: 36px; }
+
+  /* ── HERO ── */
+  .hero { background: var(--navy); padding: 80px 5%; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(245,163,26,0.07) 0%, transparent 65%); pointer-events: none; }
+  .hero-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(34px, 5vw, 60px); font-weight: 400; color: #FDF6EC; line-height: 1.1; margin-bottom: 20px; }
+  .hero-sub { font-size: 16px; color: rgba(253,246,236,0.65); line-height: 1.75; max-width: 560px; margin: 0 auto 32px; }
+  .hero-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-bottom: 36px; }
+  .hero-badge { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(253,246,236,0.7); }
+  .hero-badge-check { color: var(--gold); font-weight: 900; font-size: 16px; }
+
+  /* ── DIMENSIONS SECTION ── */
+  .dims-section { background: var(--white); }
+  .dims-sub { font-size: 14px; color: var(--text-muted); max-width: 560px; margin-bottom: 40px; line-height: 1.7; }
+  .dims-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .dim-card { background: var(--amber-bg); border: 1px solid var(--amber-mid); border-radius: 12px; overflow: hidden; transition: box-shadow 0.2s; }
+  .dim-card:hover { box-shadow: 0 4px 20px rgba(13,31,60,0.08); }
+  .dim-bar { height: 4px; }
+  .dim-body { padding: 20px; }
+  .dim-num-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .dim-num { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0; }
+  .dim-title { font-size: 15px; font-weight: 700; color: var(--navy); line-height: 1.3; }
+  .dim-what { font-size: 13px; color: var(--text-mid); line-height: 1.6; margin-bottom: 10px; }
+  .dim-why { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+  .dim-label { font-weight: 700; }
+
+  .dim-1 .dim-bar { background: linear-gradient(90deg, #7a3d00, #E8821A); }
+  .dim-1 .dim-num { background: rgba(232,130,26,0.12); color: #C07D0A; }
+  .dim-2 .dim-bar { background: linear-gradient(90deg, #5a3000, #C07D0A); }
+  .dim-2 .dim-num { background: rgba(192,125,10,0.12); color: #9a6400; }
+  .dim-3 .dim-bar { background: linear-gradient(90deg, #7a5000, #F5A31A); }
+  .dim-3 .dim-num { background: rgba(245,163,26,0.12); color: var(--gold-dark); }
+  .dim-4 .dim-bar { background: linear-gradient(90deg, #0e2a6e, #1E3A5F); }
+  .dim-4 .dim-num { background: rgba(30,58,95,0.1); color: var(--navy); }
+  .dim-5 .dim-bar { background: linear-gradient(90deg, #5a1a00, #E8821A); }
+  .dim-5 .dim-num { background: rgba(232,130,26,0.1); color: #C07D0A; }
+  .dim-note { background: var(--amber-bg); border: 1px solid rgba(245,163,26,0.3); border-radius: 12px; padding: 24px; display: flex; flex-direction: column; justify-content: center; }
+  .dim-note-title { font-size: 13px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 10px; }
+  .dim-note p { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+  /* ── RESULTS SECTION ── */
+  .results-section { background: var(--amber-bg); }
+  .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .result-item { text-align: center; }
+  .result-icon { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+  .result-title { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+  .result-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+
+  /* ── BOTTOM CTA ── */
+  .cta-section { background: var(--navy); text-align: center; }
+  .cta-section .section-eyebrow { color: var(--gold); }
+  .cta-h2 { font-family: 'DM Serif Display', serif; font-size: clamp(28px, 4vw, 46px); font-weight: 400; color: #FDF6EC; margin-bottom: 16px; line-height: 1.15; }
+  .cta-sub { font-size: 14px; color: rgba(253,246,236,0.55); max-width: 440px; margin: 0 auto 36px; line-height: 1.7; }
+  .cta-note { font-size: 11px; color: rgba(253,246,236,0.25); margin-top: 16px; }
+
+  /* ── FOOTER ── */
+  footer { background: #060F1E; padding: 28px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-brand { display: flex; align-items: center; gap: 10px; }
+  .footer-mark { height: 32px; width: auto; opacity: 0.8; }
+  .footer-name { font-size: 12px; font-weight: 700; color: rgba(253,246,236,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+  footer p { font-size: 11px; color: rgba(253,246,236,0.3); }
+  .footer-links { display: flex; gap: 16px; }
+  .footer-links a { font-size: 11px; color: rgba(253,246,236,0.3); text-decoration: none; }
+  .footer-links a:hover { color: rgba(253,246,236,0.6); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: rgba(253,246,236,0.98); padding: 16px 5% 20px; border-bottom: 1px solid rgba(13,31,60,0.1); gap: 14px; z-index: 99; }
+    .hamburger { display: flex; }
+    .dims-grid { grid-template-columns: 1fr; }
+    .results-grid { grid-template-columns: 1fr; gap: 24px; }
+  }
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .dims-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
 </head>
+<body>
 
-<body class="bg-rs-navy text-white">
-
-  <!-- NAV -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-rs-darker border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-14">
-      <a href="index.html" class="text-white font-black uppercase tracking-widest"
-        style="font-size:13px; letter-spacing:0.16em;">PROJECT FUTURE SELF</a>
-      <div class="hidden lg:flex items-center gap-7">
-        <a href="sprint.html" class="nav-link">5-Day Sprint</a>
-        <a href="index.html#about" class="nav-link">About Andrew</a>
-        <a href="assessment.html" class="nav-link text-white">Assessment</a>
-        <a href="products.html" class="nav-link">Products</a>
-        <a href="index.html#testimonials" class="nav-link">Testimonials</a>
-        <a href="contact.html" class="nav-link">Contact Us</a>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img class="nav-mark" src="Transparent mark without words.png" alt="Project Future Self mark">
+      <div class="nav-wordmark">
+        <div class="nw-top">Project</div>
+        <div class="nw-main">Future Self</div>
+        <div class="nw-tag">Reinvent · Redesign · Reclaim</div>
       </div>
-      <div class="flex items-center gap-3">
-        <a href="cart.html" class="relative flex items-center p-1 text-gray-300 hover:text-white transition-colors"
-          title="Cart">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-            stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-          </svg>
-          <span id="cart-badge"
-            class="absolute -top-1 -right-1 bg-pfs-gold text-black font-black rounded-full w-4 h-4 items-center justify-center hidden"
-            style="font-size:9px;">0</span>
-        </a>
-        <a href="https://docs.google.com/forms/d/1PnNuPdBgq0L60vpY6Mn41hbJwFaqm-qvDATNgGKvkQo/edit?usp=drivesdk"
-          target="_blank" rel="noopener"
-          class="bg-pfs-gold text-black text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-sm hover:bg-yellow-300 transition-colors whitespace-nowrap"
-          style="font-size:11px;">TAKE THE FREE ASSESSMENT</a>
-      </div>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="sprint.html">5-Day Sprint</a>
+      <a href="index.html#about">About</a>
+      <a href="assessment.html" class="active">Assessment</a>
+      <a href="products.html">Products</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://docs.google.com/forms/d/1PnNuPdBgq0L60vpY6Mn41hbJwFaqm-qvDATNgGKvkQo/edit?usp=drivesdk" target="_blank" rel="noopener" class="nav-cta">Free Assessment ↗</a>
     </div>
-  </nav>
-
-  <!-- HERO -->
-  <section class="pt-32 pb-20 px-6 relative overflow-hidden"
-    style="background: linear-gradient(160deg, #3d1e00 0%, #7a3d00 25%, #1a0d00 60%, #0a1120 100%);">
-    <div class="absolute inset-0 pointer-events-none"
-      style="background: radial-gradient(ellipse at 50% 0%, rgba(232,130,26,0.12) 0%, transparent 65%);"></div>
-    <div class="max-w-3xl mx-auto text-center relative">
-      <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-4">Free Assessment · Project Future Self
-      </p>
-      <h1 class="text-white font-black mb-5"
-        style="font-size: clamp(36px,6vw,64px); line-height:1.05; letter-spacing:-0.01em;">Transformation
-        Readiness<br />Assessment</h1>
-      <p class="text-gray-300 leading-relaxed mb-8 max-w-xl mx-auto" style="font-size:17px;">Identify your exact
-        reinvention stage, discover what's been holding you back, and get a personalized action plan — in under 10
-        minutes. At no cost.</p>
-      <div class="flex flex-wrap items-center justify-center gap-5 mb-10">
-        <span class="flex items-center gap-2 text-sm text-gray-300"><span
-            class="text-pfs-gold font-black text-base">✓</span> 100% Free</span>
-        <span class="w-px h-4 bg-white/20 hidden sm:block"></span>
-        <span class="flex items-center gap-2 text-sm text-gray-300"><span
-            class="text-pfs-gold font-black text-base">✓</span> Under 10 Minutes</span>
-        <span class="w-px h-4 bg-white/20 hidden sm:block"></span>
-        <span class="flex items-center gap-2 text-sm text-gray-300"><span
-            class="text-pfs-gold font-black text-base">✓</span> Personalized Action Plan</span>
-        <span class="w-px h-4 bg-white/20 hidden sm:block"></span>
-        <span class="flex items-center gap-2 text-sm text-gray-300"><span
-            class="text-pfs-gold font-black text-base">✓</span> No Credit Card Required</span>
-      </div>
-      <a href="https://docs.google.com/forms/d/1PnNuPdBgq0L60vpY6Mn41hbJwFaqm-qvDATNgGKvkQo/edit?usp=drivesdk"
-        target="_blank" rel="noopener"
-        class="inline-block bg-pfs-gold text-black font-black uppercase tracking-widest px-12 py-5 hover:bg-yellow-300 transition-colors"
-        style="font-size:13px; letter-spacing:0.12em;">Take the Free Assessment →</a>
+    <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
     </div>
-  </section>
+  </div>
+</nav>
 
-  <!-- WHAT THIS MEASURES -->
-  <section class="bg-rs-darker py-16 px-6">
-    <div class="max-w-5xl mx-auto">
-      <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-2 text-center">Inside the Assessment</p>
-      <h2 class="text-white font-black text-3xl mb-3 text-center">Your 5-Dimension Readiness Profile</h2>
-      <p class="text-gray-400 text-sm text-center mb-12 max-w-xl mx-auto leading-relaxed">Your results are built around
-        five core dimensions — each a critical ingredient for meaningful, sustainable change. Together, they reveal
-        where alignment already exists and where focus will create the greatest momentum.</p>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Free Assessment · Project Future Self</div>
+  <h1>Transformation Readiness<br>Assessment</h1>
+  <p class="hero-sub">Identify your exact reinvention stage, discover what's been holding you back, and get a personalized action plan — in under 10 minutes. At no cost.</p>
+  <div class="hero-badges">
+    <div class="hero-badge"><span class="hero-badge-check">✓</span> 100% Free</div>
+    <div class="hero-badge"><span class="hero-badge-check">✓</span> Under 10 Minutes</div>
+    <div class="hero-badge"><span class="hero-badge-check">✓</span> Personalized Action Plan</div>
+    <div class="hero-badge"><span class="hero-badge-check">✓</span> No Credit Card Required</div>
+  </div>
+  <a href="https://docs.google.com/forms/d/1PnNuPdBgq0L60vpY6Mn41hbJwFaqm-qvDATNgGKvkQo/edit?usp=drivesdk" target="_blank" rel="noopener" class="btn-gold">Take the Free Assessment →</a>
+</div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+<!-- DIMENSIONS -->
+<section class="dims-section">
+  <div class="section-inner">
+    <div class="section-eyebrow">Inside the Assessment</div>
+    <h2 class="section-h2">Your 5-Dimension Readiness Profile</h2>
+    <div class="gold-rule" style="margin-bottom:16px;"></div>
+    <p class="dims-sub">Your results are built around five core dimensions — each a critical ingredient for meaningful, sustainable change. Together, they reveal where alignment already exists and where focus will create the greatest momentum.</p>
+    <div class="dims-grid">
 
-        <!-- 1. Clarity & Self-Awareness -->
-        <div
-          class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/30 transition-colors">
-          <div class="h-1.5" style="background:linear-gradient(90deg,#7a3d00,#E8821A);"></div>
-          <div class="p-6">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-                style="background:rgba(232,130,26,0.15);">
-                <span class="text-pfs-orange font-black" style="font-size:11px;">01</span>
-              </div>
-              <h3 class="text-white font-black text-base leading-tight">Clarity &amp; Self-Awareness</h3>
-            </div>
-            <p class="text-gray-400 text-xs leading-relaxed mb-3"><span class="text-pfs-gold font-bold">What it
-                measures:</span> Your understanding of who you are, what no longer fits, and who you are becoming.</p>
-            <p class="text-gray-500 text-xs leading-relaxed"><span class="text-gray-400 font-bold">Why it
-                matters:</span> Without clarity, effort is scattered. Transformation requires knowing what you're moving
-              toward and why change is necessary.</p>
+      <div class="dim-card dim-1">
+        <div class="dim-bar"></div>
+        <div class="dim-body">
+          <div class="dim-num-wrap">
+            <div class="dim-num">01</div>
+            <div class="dim-title">Clarity &amp; Self-Awareness</div>
           </div>
+          <p class="dim-what"><span class="dim-label" style="color:var(--gold-dark);">What it measures:</span> Your understanding of who you are, what no longer fits, and who you are becoming.</p>
+          <p class="dim-why"><span class="dim-label">Why it matters:</span> Without clarity, effort is scattered. Transformation requires knowing what you're moving toward and why change is necessary.</p>
         </div>
+      </div>
 
-        <!-- 2. Emotional Resilience & Adaptability -->
-        <div
-          class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/30 transition-colors">
-          <div class="h-1.5" style="background:linear-gradient(90deg,#6b2a00,#c96c10);"></div>
-          <div class="p-6">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-                style="background:rgba(201,108,16,0.15);">
-                <span class="font-black" style="font-size:11px; color:#c96c10;">02</span>
-              </div>
-              <h3 class="text-white font-black text-base leading-tight">Emotional Resilience &amp; Adaptability</h3>
-            </div>
-            <p class="text-gray-400 text-xs leading-relaxed mb-3"><span class="text-pfs-gold font-bold">What it
-                measures:</span> Your ability to navigate uncertainty, self-doubt, and discomfort during change.</p>
-            <p class="text-gray-500 text-xs leading-relaxed"><span class="text-gray-400 font-bold">Why it
-                matters:</span> Reinvention is emotionally demanding. Resilience determines whether you move through a
-              challenge or stop when things feel uncomfortable.</p>
+      <div class="dim-card dim-2">
+        <div class="dim-bar"></div>
+        <div class="dim-body">
+          <div class="dim-num-wrap">
+            <div class="dim-num">02</div>
+            <div class="dim-title">Emotional Resilience &amp; Adaptability</div>
           </div>
+          <p class="dim-what"><span class="dim-label" style="color:var(--gold-dark);">What it measures:</span> Your ability to navigate uncertainty, self-doubt, and discomfort during change.</p>
+          <p class="dim-why"><span class="dim-label">Why it matters:</span> Reinvention is emotionally demanding. Resilience determines whether you move through a challenge or stop when things feel uncomfortable.</p>
         </div>
+      </div>
 
-        <!-- 3. Support & Environment -->
-        <div
-          class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/30 transition-colors">
-          <div class="h-1.5" style="background:linear-gradient(90deg,#7a5000,#F5A31A);"></div>
-          <div class="p-6">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-                style="background:rgba(245,163,26,0.15);">
-                <span class="text-pfs-gold font-black" style="font-size:11px;">03</span>
-              </div>
-              <h3 class="text-white font-black text-base leading-tight">Support &amp; Environment</h3>
-            </div>
-            <p class="text-gray-400 text-xs leading-relaxed mb-3"><span class="text-pfs-gold font-bold">What it
-                measures:</span> Whether your relationships, routines, and surroundings support your growth.</p>
-            <p class="text-gray-500 text-xs leading-relaxed"><span class="text-gray-400 font-bold">Why it
-                matters:</span> Even motivated individuals struggle in unsupportive environments. Context can accelerate
-              or constrain progress.</p>
+      <div class="dim-card dim-3">
+        <div class="dim-bar"></div>
+        <div class="dim-body">
+          <div class="dim-num-wrap">
+            <div class="dim-num">03</div>
+            <div class="dim-title">Support &amp; Environment</div>
           </div>
+          <p class="dim-what"><span class="dim-label" style="color:var(--gold-dark);">What it measures:</span> Whether your relationships, routines, and surroundings support your growth.</p>
+          <p class="dim-why"><span class="dim-label">Why it matters:</span> Even motivated individuals struggle in unsupportive environments. Context can accelerate or constrain progress.</p>
         </div>
+      </div>
 
-        <!-- 4. Action Orientation & Follow-Through -->
-        <div
-          class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/30 transition-colors">
-          <div class="h-1.5" style="background:linear-gradient(90deg,#0e2a6e,#1B5EE0);"></div>
-          <div class="p-6">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-                style="background:rgba(27,94,224,0.15);">
-                <span class="text-pfs-blue font-black" style="font-size:11px;">04</span>
-              </div>
-              <h3 class="text-white font-black text-base leading-tight">Action Orientation &amp; Follow-Through</h3>
-            </div>
-            <p class="text-gray-400 text-xs leading-relaxed mb-3"><span class="text-pfs-gold font-bold">What it
-                measures:</span> Your ability to take consistent action and turn intention into behavior.</p>
-            <p class="text-gray-500 text-xs leading-relaxed"><span class="text-gray-400 font-bold">Why it
-                matters:</span> Insight alone does not create change. Progress depends on execution, habits, and
-              follow-through.</p>
+      <div class="dim-card dim-4">
+        <div class="dim-bar"></div>
+        <div class="dim-body">
+          <div class="dim-num-wrap">
+            <div class="dim-num">04</div>
+            <div class="dim-title">Action Orientation &amp; Follow-Through</div>
           </div>
+          <p class="dim-what"><span class="dim-label" style="color:var(--gold-dark);">What it measures:</span> Your ability to take consistent action and turn intention into behavior.</p>
+          <p class="dim-why"><span class="dim-label">Why it matters:</span> Insight alone does not create change. Progress depends on execution, habits, and follow-through.</p>
         </div>
+      </div>
 
-        <!-- 5. Purpose & Motivation -->
-        <div
-          class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/30 transition-colors">
-          <div class="h-1.5" style="background:linear-gradient(90deg,#5a1a00,#E8821A);"></div>
-          <div class="p-6">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0"
-                style="background:rgba(232,130,26,0.1);">
-                <span class="text-pfs-orange font-black" style="font-size:11px;">05</span>
-              </div>
-              <h3 class="text-white font-black text-base leading-tight">Purpose &amp; Motivation</h3>
-            </div>
-            <p class="text-gray-400 text-xs leading-relaxed mb-3"><span class="text-pfs-gold font-bold">What it
-                measures:</span> The strength of your internal "why" for transformation.</p>
-            <p class="text-gray-500 text-xs leading-relaxed"><span class="text-gray-400 font-bold">Why it
-                matters:</span> Purpose fuels sustained effort. Without it, change feels heavy and short-lived.</p>
+      <div class="dim-card dim-5">
+        <div class="dim-bar"></div>
+        <div class="dim-body">
+          <div class="dim-num-wrap">
+            <div class="dim-num">05</div>
+            <div class="dim-title">Purpose &amp; Motivation</div>
           </div>
+          <p class="dim-what"><span class="dim-label" style="color:var(--gold-dark);">What it measures:</span> The strength of your internal "why" for transformation.</p>
+          <p class="dim-why"><span class="dim-label">Why it matters:</span> Purpose fuels sustained effort. Without it, change feels heavy and short-lived.</p>
         </div>
+      </div>
 
-        <!-- Diagnostic note card -->
-        <div
-          class="bg-rs-navy rounded-sm overflow-hidden border border-pfs-gold/20 hover:border-pfs-gold/40 transition-colors flex items-center">
-          <div class="p-6">
-            <p class="text-pfs-gold font-black text-sm uppercase tracking-widest mb-3">A Diagnostic, Not a Judgment</p>
-            <p class="text-gray-400 text-xs leading-relaxed">Sustainable change comes from strengthening the right areas
-              — not pushing harder everywhere. Your profile shows you exactly where to focus.</p>
-          </div>
+      <div class="dim-note">
+        <div class="dim-note-title">A Diagnostic, Not a Judgment</div>
+        <p>Sustainable change comes from strengthening the right areas — not pushing harder everywhere. Your profile shows you exactly where to focus.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU'LL RECEIVE -->
+<section class="results-section">
+  <div class="section-inner">
+    <div class="section-eyebrow" style="text-align:center;">Your Results Include</div>
+    <h2 class="section-h2" style="text-align:center;">What You'll Walk Away With</h2>
+    <div class="gold-rule" style="margin:14px auto 48px;"></div>
+    <div class="results-grid">
+      <div class="result-item">
+        <div class="result-icon" style="background:linear-gradient(135deg,#7a3d00,#E8821A);">
+          <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
         </div>
-
+        <div class="result-title">Reinvention Stage Diagnosis</div>
+        <p class="result-desc">Know exactly where you are in your reinvention cycle — and what that means for your next steps.</p>
+      </div>
+      <div class="result-item">
+        <div class="result-icon" style="background:linear-gradient(135deg,#7a5000,#F5A31A);">
+          <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <div class="result-title">Key Blockers Identified</div>
+        <p class="result-desc">Discover the specific dimensions holding you back — so you can stop pushing hard in the wrong places.</p>
+      </div>
+      <div class="result-item">
+        <div class="result-icon" style="background:linear-gradient(135deg,#5a1a00,#C07D0A);">
+          <svg width="24" height="24" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+        </div>
+        <div class="result-title">Personalized Action Plan</div>
+        <p class="result-desc">Leave with a clear, targeted set of actions matched to your unique readiness profile — not generic advice.</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- WHAT YOU'LL RECEIVE -->
-  <section class="bg-rs-navy py-16 px-6 border-t border-white/10">
-    <div class="max-w-4xl mx-auto">
-      <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-2 text-center">Your Results Include</p>
-      <h2 class="text-white font-black text-3xl mb-12 text-center">What You'll Walk Away With</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- BOTTOM CTA -->
+<section class="cta-section">
+  <div class="section-inner" style="text-align:center;">
+    <div class="section-eyebrow">Free · 10 Minutes · No Credit Card</div>
+    <h2 class="cta-h2">Ready to Find Out<br>Where You Stand?</h2>
+    <p class="cta-sub">This profile is a diagnostic, not a judgment. Sustainable change comes from strengthening the right areas — and this assessment shows you exactly which ones.</p>
+    <a href="https://docs.google.com/forms/d/1PnNuPdBgq0L60vpY6Mn41hbJwFaqm-qvDATNgGKvkQo/edit?usp=drivesdk" target="_blank" rel="noopener" class="btn-gold">Take the Free Assessment →</a>
+    <p class="cta-note">* No cost. No credit card required.</p>
+  </div>
+</section>
 
-        <div class="text-center px-4">
-          <div class="w-14 h-14 rounded-full mx-auto flex items-center justify-center mb-4"
-            style="background:linear-gradient(135deg,#7a3d00,#E8821A);">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>
-          </div>
-          <h3 class="text-white font-black text-base mb-2">Reinvention Stage Diagnosis</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Know exactly where you are in your reinvention cycle — and
-            what that means for your next steps.</p>
-        </div>
-
-        <div class="text-center px-4">
-          <div class="w-14 h-14 rounded-full mx-auto flex items-center justify-center mb-4"
-            style="background:linear-gradient(135deg,#7a5000,#F5A31A);">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-          </div>
-          <h3 class="text-white font-black text-base mb-2">Key Blockers Identified</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Discover the specific dimensions holding you back — so you
-            can stop pushing hard in the wrong places.</p>
-        </div>
-
-        <div class="text-center px-4">
-          <div class="w-14 h-14 rounded-full mx-auto flex items-center justify-center mb-4"
-            style="background:linear-gradient(135deg,#5a1a00,#c96c10);">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-            </svg>
-          </div>
-          <h3 class="text-white font-black text-base mb-2">Personalized Action Plan</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">Leave with a clear, targeted set of actions matched to your
-            unique readiness profile — not generic advice.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- BOTTOM CTA -->
-  <section class="py-20 px-6 border-t border-white/10"
-    style="background: linear-gradient(160deg, #3d1e00 0%, #7a3d00 30%, #0a1120 100%);">
-    <div class="max-w-2xl mx-auto text-center">
-      <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-4">Free · 10 Minutes · No Credit Card</p>
-      <h2 class="text-white font-black text-4xl mb-4" style="line-height:1.1;">Ready to Find Out Where You Stand?</h2>
-      <p class="text-gray-300 text-sm leading-relaxed mb-10 max-w-md mx-auto">This profile is a diagnostic, not a
-        judgment. Sustainable change comes from strengthening the right areas — and this assessment shows you exactly
-        which ones.</p>
-      <a href="https://docs.google.com/forms/d/1PnNuPdBgq0L60vpY6Mn41hbJwFaqm-qvDATNgGKvkQo/edit?usp=drivesdk"
-        target="_blank" rel="noopener"
-        class="inline-block bg-pfs-gold text-black font-black uppercase tracking-widest px-12 py-5 hover:bg-yellow-300 transition-colors"
-        style="font-size:13px; letter-spacing:0.12em;">Take the Free Assessment →</a>
-      <p class="text-gray-600 text-xs mt-4">* No cost. No credit card required.</p>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="bg-rs-darker py-8 border-t border-white/10">
-    <div
-      class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-      <a href="index.html" class="text-white font-black uppercase tracking-widest"
-        style="font-size:12px; letter-spacing:0.16em;">PROJECT FUTURE SELF</a>
-      <div class="flex items-center gap-5">
-        <a href="index.html" class="hover:text-gray-300 transition-colors">Home</a>
-        <a href="products.html" class="hover:text-gray-300 transition-colors">Products</a>
-        <a href="contact.html" class="hover:text-gray-300 transition-colors">Contact Us</a>
-      </div>
-      <p>&copy; Project Future Self. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script>
-      (function () {
-        function updateCartBadge() {
-          const cart = JSON.parse(localStorage.getItem('pfs-cart') || '[]');
-          const count = cart.reduce((sum, item) => sum + item.qty, 0);
-          const badge = document.getElementById('cart-badge');
-          if (badge) {
-            badge.textContent = count;
-            badge.classList.toggle('hidden', count === 0);
-            badge.classList.toggle('flex', count > 0);
-          }
-        }
-        document.addEventListener('DOMContentLoaded', updateCartBadge);
-      })();
-  </script>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <img class="footer-mark" src="Transparent mark without words.png" alt="PFS">
+    <div class="footer-name">Project Future Self</div>
+  </div>
+  <p>© 2025 Project Future Self. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
 
 </body>
-
 </html>

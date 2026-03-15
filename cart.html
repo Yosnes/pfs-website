@@ -1,194 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cart – Project Future Self</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'pfs-orange': '#E8821A',
-            'pfs-blue':   '#1B5EE0',
-            'pfs-gold':   '#F5A31A',
-            'rs-navy':    '#0d1421',
-            'rs-darker':  '#0a1120',
-          },
-        }
-      }
-    }
-  </script>
-  <style>
-    body { font-family: 'Lato', sans-serif; }
-    .nav-link { font-size: 12px; letter-spacing: 0.05em; color: #ccc; transition: color 0.2s; }
-    .nav-link:hover { color: #fff; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart – Project Future Self</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0D1F3C;
+    --slate:      #1E3A5F;
+    --gold:       #F5A31A;
+    --gold-dark:  #C07D0A;
+    --amber-bg:   #FDF6EC;
+    --amber-mid:  #F5E8CC;
+    --text-dark:  #1A1208;
+    --text-mid:   #3D2E14;
+    --text-muted: #7A6240;
+    --white:      #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--amber-bg); color: var(--text-dark); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+
+  /* ── NAV ── */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(253,246,236,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(13,31,60,0.08); padding: 0 5%; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-mark { height: 44px; width: auto; }
+  .nav-wordmark { line-height: 1.15; }
+  .nav-wordmark .nw-top { font-size: 9px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+  .nav-wordmark .nw-main { font-size: 16px; font-weight: 800; letter-spacing: 0.02em; color: var(--navy); text-transform: uppercase; }
+  .nav-wordmark .nw-tag { font-size: 7px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dark); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cart-link { display: flex; align-items: center; position: relative; color: var(--gold-dark) !important; }
+  .nav-cta { font-size: 12px !important; font-weight: 700 !important; padding: 9px 20px; background: var(--navy); color: var(--gold) !important; border-radius: 24px; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .nav-cta:hover { background: var(--slate) !important; transform: translateY(-1px); }
+  .cart-badge { position: absolute; top: -6px; right: -6px; background: var(--gold); color: var(--navy); font-size: 9px; font-weight: 900; border-radius: 50%; width: 16px; height: 16px; display: none; align-items: center; justify-content: center; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; }
+
+  /* ── MAIN ── */
+  main { flex: 1; padding: 64px 5%; }
+  .cart-inner { max-width: 1000px; margin: 0 auto; }
+  .cart-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 8px; }
+  .cart-title { font-family: 'DM Serif Display', serif; font-size: clamp(28px, 4vw, 44px); font-weight: 400; color: var(--navy); margin-bottom: 36px; }
+
+  /* EMPTY STATE */
+  .cart-empty { text-align: center; padding: 80px 0; }
+  .cart-empty svg { color: var(--amber-mid); margin-bottom: 20px; }
+  .cart-empty p { font-size: 16px; color: var(--text-muted); margin-bottom: 28px; }
+  .btn-primary { display: inline-block; padding: 14px 28px; background: var(--navy); color: var(--gold); font-size: 14px; font-weight: 700; border-radius: 32px; text-decoration: none; transition: all 0.2s; }
+  .btn-primary:hover { background: var(--slate); transform: translateY(-2px); }
+
+  /* CART LAYOUT */
+  .cart-layout { display: flex; gap: 40px; align-items: flex-start; }
+  .cart-items-col { flex: 1; min-width: 0; }
+  .cart-summary-col { width: 300px; flex-shrink: 0; }
+
+  /* ITEM ROW */
+  .cart-item { background: var(--white); border: 1px solid var(--amber-mid); border-radius: 12px; padding: 18px 20px; margin-bottom: 12px; display: flex; align-items: center; gap: 16px; }
+  .cart-item-info { flex: 1; min-width: 0; }
+  .cart-item-name { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cart-item-price { font-size: 13px; font-weight: 600; color: var(--gold-dark); }
+  .qty-controls { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .qty-btn { width: 30px; height: 30px; border: 1.5px solid rgba(13,31,60,0.15); background: var(--amber-bg); color: var(--navy); font-size: 16px; font-weight: 700; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; line-height: 1; }
+  .qty-btn:hover { border-color: var(--navy); background: var(--amber-mid); }
+  .qty-num { font-size: 14px; font-weight: 700; color: var(--navy); width: 24px; text-align: center; }
+  .remove-btn { background: none; border: none; font-size: 11px; font-weight: 600; color: var(--text-muted); cursor: pointer; text-transform: uppercase; letter-spacing: 0.06em; padding: 4px; transition: color 0.15s; flex-shrink: 0; }
+  .remove-btn:hover { color: #c0392b; }
+
+  /* ORDER SUMMARY */
+  .summary-box { background: var(--white); border: 1px solid var(--amber-mid); border-radius: 14px; padding: 24px; position: sticky; top: 100px; }
+  .summary-title { font-size: 10px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 18px; }
+  .summary-lines { margin-bottom: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .summary-line { display: flex; justify-content: space-between; gap: 8px; }
+  .summary-line-name { font-size: 12px; color: var(--text-muted); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .summary-line-price { font-size: 12px; color: var(--text-mid); font-weight: 600; flex-shrink: 0; }
+  .summary-divider { border: none; border-top: 1px solid var(--amber-mid); margin: 16px 0; }
+  .summary-total-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .summary-total-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+  .summary-total-amount { font-size: 28px; font-weight: 800; color: var(--navy); }
+  .included-note { font-size: 11px; color: var(--text-muted); line-height: 1.55; margin-bottom: 20px; display: none; }
+  .btn-checkout { display: block; width: 100%; padding: 14px; background: var(--navy); color: var(--gold); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 800; border: none; border-radius: 28px; cursor: pointer; transition: all 0.2s; margin-bottom: 10px; }
+  .btn-checkout:hover { background: var(--slate); transform: translateY(-1px); }
+  .continue-link { display: block; text-align: center; font-size: 12px; color: var(--text-muted); text-decoration: none; padding: 6px; transition: color 0.2s; }
+  .continue-link:hover { color: var(--navy); }
+
+  /* ── FOOTER ── */
+  footer { background: #060F1E; padding: 28px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-brand { display: flex; align-items: center; gap: 10px; }
+  .footer-mark { height: 32px; width: auto; opacity: 0.8; }
+  .footer-name { font-size: 12px; font-weight: 700; color: rgba(253,246,236,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+  footer > p { font-size: 11px; color: rgba(253,246,236,0.3); }
+  .footer-links { display: flex; gap: 16px; }
+  .footer-links a { font-size: 11px; color: rgba(253,246,236,0.3); text-decoration: none; }
+  .footer-links a:hover { color: rgba(253,246,236,0.6); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: rgba(253,246,236,0.98); padding: 16px 5% 20px; border-bottom: 1px solid rgba(13,31,60,0.1); gap: 14px; z-index: 99; }
+    .hamburger { display: flex; }
+    .cart-layout { flex-direction: column; }
+    .cart-summary-col { width: 100%; }
+    .summary-box { position: static; }
+  }
+</style>
 </head>
-<body class="bg-rs-navy text-white">
+<body>
 
-  <!-- NAV -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-rs-darker border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-14">
-      <a href="index.html" class="text-white font-black uppercase tracking-widest" style="font-size:13px; letter-spacing:0.16em;">PROJECT FUTURE SELF</a>
-      <div class="hidden lg:flex items-center gap-7">
-        <a href="sprint.html" class="nav-link">5-Day Sprint</a>
-        <a href="index.html#about" class="nav-link">About Andrew</a>
-        <a href="index.html#assessment" class="nav-link">Assessment</a>
-        <a href="products.html" class="nav-link">Products</a>
-        <a href="index.html#testimonials" class="nav-link">Testimonials</a>
-        <a href="contact.html" class="nav-link">Contact Us</a>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img class="nav-mark" src="Transparent mark without words.png" alt="Project Future Self mark">
+      <div class="nav-wordmark">
+        <div class="nw-top">Project</div>
+        <div class="nw-main">Future Self</div>
+        <div class="nw-tag">Reinvent · Redesign · Reclaim</div>
       </div>
-      <div class="flex items-center gap-3">
-        <a href="cart.html" class="relative flex items-center p-1 text-pfs-gold" title="Cart">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-          </svg>
-          <span id="cart-badge" class="absolute -top-1 -right-1 bg-pfs-gold text-black font-black rounded-full w-4 h-4 items-center justify-center hidden" style="font-size:9px;">0</span>
-        </a>
-        <a href="assessment.html" class="bg-pfs-gold text-black text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-sm hover:bg-yellow-300 transition-colors whitespace-nowrap" style="font-size:11px;">TAKE THE FREE ASSESSMENT</a>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="sprint.html">5-Day Sprint</a>
+      <a href="index.html#about">About</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="products.html">Products</a>
+      <a href="contact.html">Contact</a>
+      <a href="cart.html" class="nav-cart-link" title="Cart">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        <span class="cart-badge" id="cart-badge">0</span>
+      </a>
+      <a href="assessment.html" class="nav-cta">Free Assessment ↗</a>
+    </div>
+    <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main>
+  <div class="cart-inner">
+    <div class="cart-eyebrow">Your Selection</div>
+    <h1 class="cart-title">Cart</h1>
+
+    <!-- EMPTY STATE -->
+    <div id="cart-empty" style="display:none;">
+      <div class="cart-empty">
+        <svg width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        <p>Your cart is empty.</p>
+        <a href="products.html" class="btn-primary">Browse Products →</a>
       </div>
     </div>
-  </nav>
 
-  <!-- CART -->
-  <section class="pt-28 pb-20 min-h-screen" style="background: linear-gradient(160deg, #0e1a30 0%, #0a1120 100%);">
-    <div class="max-w-5xl mx-auto px-6">
-      <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-2">Your Selection</p>
-      <h1 class="text-white font-black text-4xl mb-8">Cart</h1>
+    <!-- CART WITH ITEMS -->
+    <div id="cart-content" style="display:none;">
+      <div class="cart-layout">
 
-      <!-- EMPTY STATE -->
-      <div id="cart-empty" class="hidden text-center py-24">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-14 h-14 text-gray-600 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
-        <p class="text-gray-400 text-lg mb-6">Your cart is empty.</p>
-        <a href="products.html" class="inline-block bg-pfs-gold text-black font-black uppercase text-sm tracking-widest px-8 py-4 hover:bg-yellow-300 transition-colors">Browse Products →</a>
-      </div>
+        <!-- ITEMS -->
+        <div class="cart-items-col" id="cart-items"></div>
 
-      <!-- CART WITH ITEMS -->
-      <div id="cart-content" class="hidden">
-        <div class="flex flex-col lg:flex-row gap-8 items-start">
-
-          <!-- ITEMS LIST -->
-          <div class="flex-1" id="cart-items"></div>
-
-          <!-- ORDER SUMMARY -->
-          <div class="w-full lg:w-80 flex-shrink-0">
-            <div class="bg-rs-darker border border-white/10 p-6">
-              <h2 class="text-white font-black uppercase tracking-widest mb-5" style="font-size:12px; letter-spacing:0.14em;">Order Summary</h2>
-              <div id="summary-lines" class="space-y-2 mb-5"></div>
-              <div class="border-t border-white/10 pt-4 mb-6">
-                <div class="flex justify-between items-baseline">
-                  <span class="text-gray-400 text-sm uppercase tracking-widest" style="font-size:11px;">Subtotal</span>
-                  <span id="cart-total" class="text-pfs-gold font-black text-2xl">$0</span>
-                </div>
-                <p id="included-note" class="text-gray-500 text-xs mt-2 leading-relaxed hidden">* Items marked "–" are included with the 5-Day Reinvention Sprint at no additional cost.</p>
-              </div>
-              <button onclick="alert('Checkout coming soon!')" class="w-full bg-pfs-gold text-black font-black uppercase text-sm tracking-widest py-4 hover:bg-yellow-300 transition-colors mb-3">Proceed to Checkout →</button>
-              <a href="products.html" class="block text-center text-gray-500 text-xs uppercase tracking-widest hover:text-white transition-colors py-2">← Continue Shopping</a>
+        <!-- SUMMARY -->
+        <div class="cart-summary-col">
+          <div class="summary-box">
+            <div class="summary-title">Order Summary</div>
+            <div class="summary-lines" id="summary-lines"></div>
+            <hr class="summary-divider">
+            <div class="summary-total-row">
+              <span class="summary-total-label">Subtotal</span>
+              <span class="summary-total-amount" id="cart-total">$0</span>
             </div>
+            <p class="included-note" id="included-note">* Items marked "–" are included with the 5-Day Sprint at no additional cost.</p>
+            <button class="btn-checkout" onclick="checkout()">Proceed to Checkout →</button>
+            <a href="products.html" class="continue-link">← Continue Shopping</a>
           </div>
-
         </div>
+
       </div>
     </div>
-  </section>
+  </div>
+</main>
 
-  <!-- FOOTER -->
-  <footer class="bg-rs-darker py-8 border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-      <a href="index.html" class="text-white font-black uppercase tracking-widest" style="font-size:12px; letter-spacing:0.16em;">PROJECT FUTURE SELF</a>
-      <div class="flex items-center gap-5">
-        <a href="index.html" class="hover:text-gray-300 transition-colors">Home</a>
-        <a href="products.html" class="hover:text-gray-300 transition-colors">Products</a>
-        <a href="contact.html" class="hover:text-gray-300 transition-colors">Contact Us</a>
-      </div>
-      <p>&copy; Project Future Self. All rights reserved.</p>
-    </div>
-  </footer>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <img class="footer-mark" src="Transparent mark without words.png" alt="PFS">
+    <div class="footer-name">Project Future Self</div>
+  </div>
+  <p>© 2025 Project Future Self. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
 
-  <script>
-    function getCart() {
-      return JSON.parse(localStorage.getItem('pfs-cart') || '[]');
-    }
-    function saveCart(cart) {
-      localStorage.setItem('pfs-cart', JSON.stringify(cart));
-    }
-    function updateCartBadge() {
-      const cart = getCart();
-      const count = cart.reduce((sum, item) => sum + item.qty, 0);
-      const badge = document.getElementById('cart-badge');
-      if (badge) {
-        badge.textContent = count;
-        badge.classList.toggle('hidden', count === 0);
-        badge.classList.toggle('flex', count > 0);
-      }
-    }
-    function renderCart() {
-      const cart = getCart();
-      updateCartBadge();
-      const emptyEl = document.getElementById('cart-empty');
-      const contentEl = document.getElementById('cart-content');
-      if (cart.length === 0) {
-        emptyEl.classList.remove('hidden');
-        contentEl.classList.add('hidden');
-        return;
-      }
-      emptyEl.classList.add('hidden');
-      contentEl.classList.remove('hidden');
+<script>
+  function getCart() { return JSON.parse(localStorage.getItem('pfs-cart') || '[]'); }
+  function saveCart(cart) { localStorage.setItem('pfs-cart', JSON.stringify(cart)); }
 
-      // Render item rows
-      document.getElementById('cart-items').innerHTML = cart.map((item, i) => `
-        <div class="bg-rs-darker border border-white/10 p-5 mb-3 flex items-center gap-4">
-          <div class="flex-1 min-w-0">
-            <p class="text-white font-black text-sm leading-snug">${item.name}</p>
-            <p class="text-pfs-gold font-bold text-sm mt-1">${item.price}</p>
-          </div>
-          <div class="flex items-center gap-2 flex-shrink-0">
-            <button onclick="changeQty(${i}, -1)" class="w-7 h-7 flex items-center justify-center bg-white/10 text-white hover:bg-white/20 transition-colors font-bold">−</button>
-            <span class="text-white font-bold w-5 text-center text-sm">${item.qty}</span>
-            <button onclick="changeQty(${i}, 1)" class="w-7 h-7 flex items-center justify-center bg-white/10 text-white hover:bg-white/20 transition-colors font-bold">+</button>
-          </div>
-          <button onclick="removeItem(${i})" class="text-gray-600 hover:text-red-400 transition-colors text-xs uppercase tracking-widest flex-shrink-0 ml-1">Remove</button>
+  function updateCartBadge() {
+    const cart = getCart();
+    const count = cart.reduce((sum, item) => sum + item.qty, 0);
+    const badge = document.getElementById('cart-badge');
+    if (badge) { badge.textContent = count; badge.style.display = count > 0 ? 'flex' : 'none'; }
+  }
+
+  function renderCart() {
+    const cart = getCart();
+    updateCartBadge();
+    const emptyEl = document.getElementById('cart-empty');
+    const contentEl = document.getElementById('cart-content');
+    if (cart.length === 0) {
+      emptyEl.style.display = 'block';
+      contentEl.style.display = 'none';
+      return;
+    }
+    emptyEl.style.display = 'none';
+    contentEl.style.display = 'block';
+
+    document.getElementById('cart-items').innerHTML = cart.map((item, i) => `
+      <div class="cart-item">
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-price">${item.price}</div>
         </div>
-      `).join('');
+        <div class="qty-controls">
+          <button class="qty-btn" onclick="changeQty(${i}, -1)">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${i}, 1)">+</button>
+        </div>
+        <button class="remove-btn" onclick="removeItem(${i})">Remove</button>
+      </div>
+    `).join('');
 
-      // Render summary lines + total
-      let total = 0;
-      let hasIncluded = false;
-      document.getElementById('summary-lines').innerHTML = cart.map(item => {
-        const lineTotal = item.priceNum * item.qty;
-        total += lineTotal;
-        if (item.priceNum === 0) hasIncluded = true;
-        return `
-          <div class="flex justify-between text-xs text-gray-400 gap-2">
-            <span class="flex-1 truncate">${item.name}${item.qty > 1 ? ' ×' + item.qty : ''}</span>
-            <span class="flex-shrink-0">${item.priceNum > 0 ? '$' + (lineTotal).toLocaleString() : '–'}</span>
-          </div>
-        `;
-      }).join('');
+    let total = 0;
+    let hasIncluded = false;
+    document.getElementById('summary-lines').innerHTML = cart.map(item => {
+      const lineTotal = item.priceNum * item.qty;
+      total += lineTotal;
+      if (item.priceNum === 0) hasIncluded = true;
+      return `
+        <div class="summary-line">
+          <span class="summary-line-name">${item.name}${item.qty > 1 ? ' ×' + item.qty : ''}</span>
+          <span class="summary-line-price">${item.priceNum > 0 ? '$' + lineTotal.toLocaleString() : '–'}</span>
+        </div>
+      `;
+    }).join('');
 
-      document.getElementById('cart-total').textContent = '$' + total.toLocaleString();
-      const noteEl = document.getElementById('included-note');
-      noteEl.classList.toggle('hidden', !hasIncluded);
-    }
-    function changeQty(index, delta) {
-      const cart = getCart();
-      cart[index].qty = Math.max(1, cart[index].qty + delta);
-      saveCart(cart);
-      renderCart();
-    }
-    function removeItem(index) {
-      const cart = getCart();
-      cart.splice(index, 1);
-      saveCart(cart);
-      renderCart();
-    }
-    document.addEventListener('DOMContentLoaded', renderCart);
-  </script>
+    document.getElementById('cart-total').textContent = '$' + total.toLocaleString();
+    const noteEl = document.getElementById('included-note');
+    noteEl.style.display = hasIncluded ? 'block' : 'none';
+  }
+
+  function changeQty(index, delta) {
+    const cart = getCart();
+    cart[index].qty = Math.max(1, cart[index].qty + delta);
+    saveCart(cart); renderCart();
+  }
+
+  function removeItem(index) {
+    const cart = getCart();
+    cart.splice(index, 1);
+    saveCart(cart); renderCart();
+  }
+
+  function checkout() {
+    const cart = getCart();
+    if (cart.length === 0) return;
+    const items = cart.map(item => `${item.name} (${item.price}) x${item.qty}`).join('\n');
+    const total = cart.reduce((sum, item) => sum + item.priceNum * item.qty, 0);
+    const subject = encodeURIComponent('Order Inquiry – Project Future Self');
+    const body = encodeURIComponent(
+      'Hi Andrew,\n\nI\'d like to complete my order:\n\n' + items +
+      '\n\nTotal: $' + total.toLocaleString() +
+      '\n\nPlease let me know how to proceed.\n\nThank you!'
+    );
+    window.location.href = 'mailto:andrew@projectfutureself.com?subject=' + subject + '&body=' + body;
+  }
+
+  document.addEventListener('DOMContentLoaded', renderCart);
+</script>
 
 </body>
 </html>

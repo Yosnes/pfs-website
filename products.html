@@ -1,349 +1,365 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Programs & Products – Project Future Self</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'pfs-orange': '#E8821A',
-            'pfs-blue':   '#1B5EE0',
-            'pfs-gold':   '#F5A31A',
-            'rs-navy':    '#0d1421',
-            'rs-darker':  '#0a1120',
-          },
-        }
-      }
-    }
-  </script>
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programs &amp; Products – Project Future Self</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0D1F3C;
+    --slate:      #1E3A5F;
+    --gold:       #F5A31A;
+    --gold-dark:  #C07D0A;
+    --amber-bg:   #FDF6EC;
+    --amber-mid:  #F5E8CC;
+    --text-dark:  #1A1208;
+    --text-mid:   #3D2E14;
+    --text-muted: #7A6240;
+    --white:      #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--amber-bg); color: var(--text-dark); line-height: 1.6; }
+
+  /* ── NAV ── */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(253,246,236,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(13,31,60,0.08); padding: 0 5%; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-mark { height: 44px; width: auto; }
+  .nav-wordmark { line-height: 1.15; }
+  .nav-wordmark .nw-top { font-size: 9px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+  .nav-wordmark .nw-main { font-size: 16px; font-weight: 800; letter-spacing: 0.02em; color: var(--navy); text-transform: uppercase; }
+  .nav-wordmark .nw-tag { font-size: 7px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dark); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-links a.active { color: var(--navy); font-weight: 700; }
+  .nav-cta { font-size: 12px !important; font-weight: 700 !important; padding: 9px 20px; background: var(--navy); color: var(--gold) !important; border-radius: 24px; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .nav-cta:hover { background: var(--slate) !important; transform: translateY(-1px); }
+  .nav-cart { display: flex; align-items: center; position: relative; color: var(--text-mid); text-decoration: none; }
+  .nav-cart:hover { color: var(--navy); }
+  .cart-badge { position: absolute; top: -6px; right: -6px; background: var(--gold); color: var(--navy); font-size: 9px; font-weight: 900; border-radius: 50%; width: 16px; height: 16px; display: none; align-items: center; justify-content: center; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; }
+
+  /* ── PAGE HEADER ── */
+  .page-header { background: var(--navy); padding: 80px 5% 64px; }
+  .page-header .eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  .page-header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 4.5vw, 54px); font-weight: 400; color: #FDF6EC; line-height: 1.1; margin-bottom: 14px; }
+  .page-header p { font-size: 15px; color: rgba(253,246,236,0.5); max-width: 500px; line-height: 1.75; }
+
+  /* ── SECTIONS ── */
+  section { padding: 72px 5%; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 10px; }
+  .section-h2 { font-family: 'DM Serif Display', serif; font-size: clamp(26px, 3vw, 38px); font-weight: 400; color: var(--navy); line-height: 1.15; margin-bottom: 6px; }
+  .gold-rule { width: 40px; height: 3px; background: var(--gold); border-radius: 2px; margin-top: 14px; margin-bottom: 36px; }
+
+  /* ── PROGRAMS TABLE ── */
+  .table-wrap { overflow-x: auto; }
+  table.ptable { width: 100%; border-collapse: collapse; }
+  .ptable thead tr { border-bottom: 2px solid var(--gold); }
+  .ptable th {
+    text-align: left; font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-muted); padding: 0 12px 12px 0;
+  }
+  .ptable th:last-child { text-align: right; padding-right: 0; }
+  .ptable td {
+    padding: 14px 12px 14px 0; font-size: 14px; color: var(--text-mid);
+    border-bottom: 1px solid rgba(13,31,60,0.07); vertical-align: middle;
+  }
+  .ptable td:first-child { color: var(--navy); font-weight: 600; max-width: 360px; }
+  .ptable td:nth-child(3) { font-weight: 700; color: var(--gold-dark); white-space: nowrap; }
+  .ptable td:last-child { text-align: right; padding-right: 0; }
+  .ptable tr.featured { background: rgba(245,163,26,0.05); }
+  .flagship-badge {
+    display: inline-block; font-size: 9px; font-weight: 800; padding: 2px 7px;
+    background: var(--gold); color: var(--navy); border-radius: 4px;
+    letter-spacing: 0.06em; text-transform: uppercase; margin-left: 8px; vertical-align: middle;
+  }
+  .prod-sub { font-size: 12px; color: var(--text-muted); font-weight: 400; display: block; margin-top: 3px; }
+  .free-tag { color: #1a7a30 !important; }
+  .included-tag { color: var(--text-muted) !important; font-size: 12px !important; font-style: italic; }
+  .btn-cart {
+    display: inline-block; padding: 8px 18px; background: var(--navy); color: var(--gold);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    border: none; border-radius: 20px; cursor: pointer; text-decoration: none;
+    transition: all 0.2s; white-space: nowrap; font-family: 'DM Sans', sans-serif;
+  }
+  .btn-cart:hover { background: var(--slate); transform: translateY(-1px); }
+  .btn-cart-ghost {
+    display: inline-block; padding: 7px 18px; background: transparent; color: var(--navy);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    border: 1.5px solid rgba(13,31,60,0.2); border-radius: 20px; cursor: pointer;
+    text-decoration: none; transition: all 0.2s; white-space: nowrap; font-family: 'DM Sans', sans-serif;
+  }
+  .btn-cart-ghost:hover { border-color: var(--navy); background: rgba(13,31,60,0.04); }
+  .btn-free {
+    display: inline-block; padding: 8px 18px; background: var(--gold); color: var(--navy);
+    font-size: 11px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase;
+    border: none; border-radius: 20px; cursor: pointer; text-decoration: none;
+    transition: all 0.2s; white-space: nowrap; font-family: 'DM Sans', sans-serif;
+  }
+  .btn-free:hover { background: #f8b83a; transform: translateY(-1px); }
+
+  /* Section dividers */
+  .category-row td { padding-top: 32px; padding-bottom: 6px; border-bottom: none; }
+  .category-label { font-size: 9px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+
+  /* ── FOOTER ── */
+  footer { background: #060F1E; padding: 28px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-brand { display: flex; align-items: center; gap: 10px; }
+  .footer-mark { height: 32px; width: auto; opacity: 0.8; }
+  .footer-name { font-size: 12px; font-weight: 700; color: rgba(253,246,236,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+  footer > p { font-size: 11px; color: rgba(253,246,236,0.3); }
+  .footer-links { display: flex; gap: 16px; }
+  .footer-links a { font-size: 11px; color: rgba(253,246,236,0.3); text-decoration: none; }
+  .footer-links a:hover { color: rgba(253,246,236,0.6); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: rgba(253,246,236,0.98); padding: 16px 5% 20px; border-bottom: 1px solid rgba(13,31,60,0.1); gap: 14px; z-index: 99; }
+    .hamburger { display: flex; }
+    .ptable th:nth-child(2), .ptable td:nth-child(2) { display: none; }
+  }
+</style>
 </head>
-<body class="bg-rs-navy text-white">
+<body>
 
-  <!-- NAV -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-rs-darker border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-14">
-      <a href="index.html" class="text-white font-black uppercase tracking-widest" style="font-size:13px; letter-spacing:0.16em;">PROJECT FUTURE SELF</a>
-      <div class="hidden lg:flex items-center gap-7">
-        <a href="sprint.html"                     class="nav-link text-white">5-Day Sprint</a>
-        <a href="index.html#about"               class="nav-link">About Andrew</a>
-        <a href="assessment.html"                  class="nav-link">Assessment</a>
-        <a href="products.html"                  class="nav-link text-white">Products</a>
-        <a href="index.html#testimonials"        class="nav-link">Testimonials</a>
-        <a href="contact.html"                   class="nav-link">Contact Us</a>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img class="nav-mark" src="Transparent mark without words.png" alt="Project Future Self mark">
+      <div class="nav-wordmark">
+        <div class="nw-top">Project</div>
+        <div class="nw-main">Future Self</div>
+        <div class="nw-tag">Reinvent · Redesign · Reclaim</div>
       </div>
-      <div class="flex items-center gap-3">
-        <a href="cart.html" class="relative flex items-center p-1 text-gray-300 hover:text-white transition-colors" title="Cart">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-          </svg>
-          <span id="cart-badge" class="absolute -top-1 -right-1 bg-pfs-gold text-black font-black rounded-full w-4 h-4 items-center justify-center hidden" style="font-size:9px;">0</span>
-        </a>
-        <a href="assessment.html" class="hidden sm:inline-block bg-pfs-gold text-black text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-sm hover:bg-yellow-300 transition-colors whitespace-nowrap" style="font-size:11px;">TAKE THE FREE ASSESSMENT</a>
-        <button id="mobile-menu-btn" class="lg:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 ml-1" aria-label="Open menu">
-          <span class="block w-5 h-0.5 bg-white"></span>
-          <span class="block w-5 h-0.5 bg-white"></span>
-          <span class="block w-5 h-0.5 bg-white"></span>
-        </button>
-      </div>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="sprint.html">5-Day Sprint</a>
+      <a href="index.html#about">About</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="products.html" class="active">Products</a>
+      <a href="contact.html">Contact</a>
+      <a href="cart.html" class="nav-cart" title="Cart">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        <span class="cart-badge" id="cart-badge">0</span>
+      </a>
+      <a href="assessment.html" class="nav-cta">Free Assessment ↗</a>
     </div>
-    <div id="mobile-menu" class="hidden lg:hidden bg-rs-darker border-t border-white/10">
-      <div class="flex flex-col px-6 py-4 gap-0 divide-y divide-white/10">
-        <a href="sprint.html"           class="nav-link py-3">5-Day Sprint</a>
-        <a href="index.html#about"      class="nav-link py-3">About Andrew</a>
-        <a href="assessment.html"       class="nav-link py-3">Assessment</a>
-        <a href="products.html"         class="nav-link py-3" style="color:#fff;">Products</a>
-        <a href="index.html#testimonials" class="nav-link py-3">Testimonials</a>
-        <a href="contact.html"          class="nav-link py-3">Contact Us</a>
-        <a href="assessment.html"       class="bg-pfs-gold text-black text-xs font-bold uppercase tracking-widest px-4 py-3 mt-3 text-center rounded-sm hover:bg-yellow-300 transition-colors" style="font-size:11px;">TAKE THE FREE ASSESSMENT</a>
-      </div>
+    <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <!-- PAGE HEADER -->
-  <section class="pt-28 pb-12 px-6" style="background: linear-gradient(160deg, #0e1a30 0%, #1c3154 35%, #0a1120 100%);">
-    <div class="max-w-7xl mx-auto">
-      <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-2">Project Future Self</p>
-      <h1 class="text-white font-black text-5xl mb-3">Programs &amp; Products</h1>
-      <p class="text-gray-400 text-sm max-w-xl">Choose your path. Every product and program is designed to move you from stuck to in motion — with tools you keep and use for life.</p>
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="eyebrow">Project Future Self</div>
+  <h1>Programs &amp; Products</h1>
+  <p>Choose your path. Every product and program is designed to move you from stuck to in motion — with tools you keep and use for life.</p>
+</div>
+
+<!-- PRODUCTS TABLE -->
+<section>
+  <div class="section-inner">
+    <div class="section-eyebrow">Complete Suite</div>
+    <h2 class="section-h2">Everything You Need to Reinvent</h2>
+    <div class="gold-rule"></div>
+    <div class="table-wrap">
+      <table class="ptable">
+        <thead>
+          <tr>
+            <th style="width:50%">Program / Product</th>
+            <th style="width:16%">Format</th>
+            <th style="width:12%">Price</th>
+            <th style="width:22%; text-align:right;">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- LIVE PROGRAM -->
+          <tr class="category-row"><td colspan="4"><span class="category-label">Live Program</span></td></tr>
+          <tr class="featured">
+            <td>
+              5-Day Reinvention Sprint <span class="flagship-badge">Flagship</span>
+              <span class="prod-sub">Live coaching · 5 days · 90-Day Roadmap · 4 proprietary tools included</span>
+            </td>
+            <td>Live Program</td>
+            <td>$499</td>
+            <td><a href="sprint.html#apply" class="btn-cart">Apply Now →</a></td>
+          </tr>
+
+          <!-- FREE TOOL -->
+          <tr class="category-row"><td colspan="4"><span class="category-label">Free Tool</span></td></tr>
+          <tr>
+            <td>
+              Transformation Readiness Assessment
+              <span class="prod-sub">10 min · Instant personalized action plan · 5-dimension profile</span>
+            </td>
+            <td>Free Tool</td>
+            <td class="free-tag">Free</td>
+            <td><a href="assessment.html" class="btn-free">Take Free →</a></td>
+          </tr>
+
+          <!-- CAREER -->
+          <tr class="category-row"><td colspan="4"><span class="category-label">Career Tools</span></td></tr>
+          <tr>
+            <td>
+              Career Pivot Playbook
+              <span class="prod-sub">Step-by-step guide for executing a strategic career pivot</span>
+            </td>
+            <td>Digital Guide</td>
+            <td>$149</td>
+            <td><button class="btn-cart" onclick="addToCart('Career Pivot Playbook', '$149', 149)">Add to Cart</button></td>
+          </tr>
+          <tr>
+            <td>
+              Job Search Accelerator System
+              <span class="prod-sub">Compress months of searching into weeks</span>
+            </td>
+            <td>Digital System</td>
+            <td>$149</td>
+            <td><button class="btn-cart" onclick="addToCart('Job Search Accelerator System', '$149', 149)">Add to Cart</button></td>
+          </tr>
+          <tr>
+            <td>
+              AI-Enhanced Career Toolkit
+              <span class="prod-sub">Leverage AI to accelerate your career reinvention</span>
+            </td>
+            <td>Digital Toolkit</td>
+            <td>$99</td>
+            <td><button class="btn-cart" onclick="addToCart('AI-Enhanced Career Toolkit', '$99', 99)">Add to Cart</button></td>
+          </tr>
+
+          <!-- IDENTITY & BRAND -->
+          <tr class="category-row"><td colspan="4"><span class="category-label">Identity &amp; Brand</span></td></tr>
+          <tr>
+            <td>
+              Personal Brand Starter Kit
+              <span class="prod-sub">LinkedIn, bio, elevator pitch &amp; complete online presence</span>
+            </td>
+            <td>Digital Kit</td>
+            <td>$79</td>
+            <td><button class="btn-cart" onclick="addToCart('Personal Brand Starter Kit', '$79', 79)">Add to Cart</button></td>
+          </tr>
+          <tr>
+            <td>
+              Confidence Reset Protocol
+              <span class="prod-sub">Rebuild self-belief with proven tools, reframes &amp; daily practices</span>
+            </td>
+            <td>Digital Protocol</td>
+            <td>$49</td>
+            <td><button class="btn-cart" onclick="addToCart('Confidence Reset Protocol', '$49', 49)">Add to Cart</button></td>
+          </tr>
+          <tr>
+            <td>
+              Skill Monetization Toolkit
+              <span class="prod-sub">Turn your expertise into new income streams</span>
+            </td>
+            <td>Digital Toolkit</td>
+            <td>$99</td>
+            <td><button class="btn-cart" onclick="addToCart('Skill Monetization Toolkit', '$99', 99)">Add to Cart</button></td>
+          </tr>
+
+          <!-- NARRATIVE -->
+          <tr class="category-row"><td colspan="4"><span class="category-label">Narrative &amp; Story</span></td></tr>
+          <tr>
+            <td>
+              Reinvention Story Pack
+              <span class="prod-sub">Templates &amp; frameworks to tell your reinvention story powerfully</span>
+            </td>
+            <td>Digital Pack</td>
+            <td>$79</td>
+            <td><button class="btn-cart" onclick="addToCart('Reinvention Story Pack', '$79', 79)">Add to Cart</button></td>
+          </tr>
+
+          <!-- INCLUDED WITH SPRINT -->
+          <tr class="category-row"><td colspan="4"><span class="category-label">Included With 5-Day Sprint</span></td></tr>
+          <tr>
+            <td>
+              Reinvention Reflection Workbook
+              <span class="prod-sub">Guided reflection exercises to process your past and design your next chapter</span>
+            </td>
+            <td>Digital Workbook</td>
+            <td class="included-tag">With Sprint</td>
+            <td><button class="btn-cart-ghost" onclick="addToCart('Reinvention Reflection Workbook', 'Included with 5-Day Sprint', 0)">Add to Cart</button></td>
+          </tr>
+          <tr>
+            <td>
+              Reinvention Matrix — Core Components
+              <span class="prod-sub">The foundational framework behind the 5-Day Sprint</span>
+            </td>
+            <td>Framework</td>
+            <td class="included-tag">With Sprint</td>
+            <td><button class="btn-cart-ghost" onclick="addToCart('Reinvention Matrix — Core Components', 'Included with 5-Day Sprint', 0)">Add to Cart</button></td>
+          </tr>
+          <tr>
+            <td>
+              Impact Story Template
+              <span class="prod-sub">Structured template for compelling professional impact stories</span>
+            </td>
+            <td>Template</td>
+            <td class="included-tag">With Sprint</td>
+            <td><button class="btn-cart-ghost" onclick="addToCart('Impact Story Template', 'Included with 5-Day Sprint', 0)">Add to Cart</button></td>
+          </tr>
+          <tr>
+            <td>
+              Future Self OS™
+              <span class="prod-sub">Your personal operating system for sustained identity change</span>
+            </td>
+            <td>System</td>
+            <td class="included-tag">With Sprint</td>
+            <td><button class="btn-cart-ghost" onclick="addToCart('Future Self OS™', 'Included with 5-Day Sprint', 0)">Add to Cart</button></td>
+          </tr>
+
+        </tbody>
+      </table>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FEATURED: 5-DAY SPRINT -->
-  <section class="bg-rs-darker py-14 border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-6">
-      <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-6">Featured Program</p>
-      <div class="grid md:grid-cols-2 gap-10 items-center">
-        <div class="relative rounded-sm overflow-hidden" style="aspect-ratio:16/9; background:linear-gradient(135deg,#0e2a6e,#1B5EE0);">
-          <div class="absolute inset-0 flex items-center justify-center">
-            <div class="text-center">
-              <p class="text-white/20 font-black text-6xl uppercase tracking-widest">SPRINT</p>
-              <p class="text-white/40 text-xs uppercase tracking-widest mt-1">5-Day Reinvention Program</p>
-            </div>
-          </div>
-        </div>
-        <div>
-          <h2 class="text-white font-black text-4xl mb-2">5-Day Reinvention Sprint</h2>
-          <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-4">Live Coaching Program</p>
-          <p class="text-gray-300 text-sm leading-relaxed mb-4">A fast-paced, structured transformation workshop. In just one week, you'll diagnose exactly where you are in your reinvention cycle, define who you are becoming, rewrite the story you tell the world, and build a real 90-Day Roadmap you can execute immediately.</p>
-          <ul class="space-y-2 mb-6">
-            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-pfs-gold mt-0.5">✓</span> Future-Self Identity Blueprint</li>
-            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-pfs-gold mt-0.5">✓</span> Reinvention Matrix Diagnosis</li>
-            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-pfs-gold mt-0.5">✓</span> Powerful Professional Narrative</li>
-            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-pfs-gold mt-0.5">✓</span> 90-Day Reinvention Roadmap</li>
-            <li class="flex items-start gap-2 text-sm text-gray-300"><span class="text-pfs-gold mt-0.5">✓</span> Future Self OS™</li>
-          </ul>
-          <p class="text-pfs-gold font-black text-3xl mb-4">$499</p>
-          <a href="sprint.html#apply" class="inline-block bg-pfs-gold text-black font-black uppercase text-sm tracking-widest px-8 py-4 hover:bg-yellow-300 transition-colors">Apply for the Sprint →</a>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <img class="footer-mark" src="Transparent mark without words.png" alt="PFS">
+    <div class="footer-name">Project Future Self</div>
+  </div>
+  <p>© 2025 Project Future Self. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
 
-  <!-- FREE: ASSESSMENT -->
-  <section class="bg-rs-navy py-10 border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-8">
-      <div class="flex-shrink-0 w-24 h-24 rounded-full flex items-center justify-center" style="background:linear-gradient(135deg,#7a3d00,#E8821A);">
-        <span class="text-white font-black text-sm uppercase text-center leading-tight">FREE</span>
-      </div>
-      <div class="flex-1">
-        <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Free Assessment</p>
-        <h3 class="text-white font-black text-2xl mb-1">Transformation Readiness Assessment</h3>
-        <p class="text-gray-400 text-sm">Identify your exact reinvention stage and discover what's been holding you back. Get a personalized action plan in under 10 minutes — at no cost.</p>
-        <p class="text-pfs-gold font-black text-2xl mt-3">Free</p>
-      </div>
-      <div class="flex-shrink-0">
-        <a href="assessment.html" class="inline-block bg-pfs-gold text-black font-black uppercase text-sm tracking-widest px-8 py-4 hover:bg-yellow-300 transition-colors whitespace-nowrap">Take the Free Assessment</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ALL DIGITAL PRODUCTS -->
-  <section class="bg-rs-darker py-14">
-    <div class="max-w-7xl mx-auto px-6">
-      <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-2">Complete Product Suite</p>
-      <h2 class="text-white font-black text-3xl mb-8">All Programs &amp; Products</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <!-- 5-Day Reinvention Sprint -->
-        <div class="bg-rs-navy rounded-sm overflow-hidden border border-pfs-blue/40 hover:border-pfs-gold/40 transition-colors">
-          <div class="h-32" style="background:linear-gradient(135deg,#0e2a6e,#1B5EE0);"></div>
-          <div class="p-6">
-            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Live Program</p>
-            <h3 class="text-white font-black text-lg mb-2">5-Day Reinvention Sprint</h3>
-            <p class="text-gray-400 text-sm leading-relaxed mb-4">A fast-paced workshop where you diagnose where you are, define who you're becoming, rewrite your story, and build your 90-Day Roadmap — in just 5 days.</p>
-            <p class="text-pfs-gold font-black text-2xl mb-4">$499</p>
-            <a href="sprint.html#apply" class="block w-full bg-pfs-blue text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors text-center">Apply for the Sprint →</a>
-          </div>
-        </div>
-
-        <!-- Transformation Readiness Assessment -->
-        <div class="bg-rs-navy rounded-sm overflow-hidden border border-pfs-orange/30 hover:border-pfs-gold/40 transition-colors">
-          <div class="h-32" style="background:linear-gradient(135deg,#7a3d00,#E8821A);"></div>
-          <div class="p-6">
-            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Free Tool</p>
-            <h3 class="text-white font-black text-lg mb-2">Transformation Readiness Assessment</h3>
-            <p class="text-gray-400 text-sm leading-relaxed mb-4">Identify your exact reinvention stage and discover what's been holding you back. Get a personalized action plan in under 10 minutes — at no cost.</p>
-            <p class="text-pfs-gold font-black text-2xl mb-4">Free</p>
-            <button onclick="window.location.href='assessment.html'" class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Take the Assessment →</button>
-          </div>
-        </div>
-
-        <!-- Career Pivot Playbook -->
-        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
-          <div class="h-32" style="background:linear-gradient(135deg,#0a1a3a,#1a2a5e);"></div>
-          <div class="p-6">
-            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Career</p>
-            <h3 class="text-white font-black text-lg mb-2">Career Pivot Playbook</h3>
-            <p class="text-gray-400 text-sm leading-relaxed mb-4">A step-by-step guide for executing a strategic career pivot — from identifying transferable skills to landing your next role in a new field.</p>
-            <p class="text-pfs-gold font-black text-2xl mb-4">$149</p>
-            <button onclick="addToCart('Career Pivot Playbook', '$149', 149)" class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
-          </div>
-        </div>
-
-        <!-- Confidence Reset Protocol -->
-        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
-          <div class="h-32" style="background:linear-gradient(135deg,#2a1005,#5a2a10);"></div>
-          <div class="p-6">
-            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Identity</p>
-            <h3 class="text-white font-black text-lg mb-2">Confidence Reset Protocol</h3>
-            <p class="text-gray-400 text-sm leading-relaxed mb-4">A targeted reset for professionals experiencing confidence gaps. Rebuild your self-belief with proven tools, reframes, and daily practice missions.</p>
-            <p class="text-pfs-gold font-black text-2xl mb-4">$49</p>
-            <button onclick="addToCart('Confidence Reset Protocol', '$49', 49)" class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
-          </div>
-        </div>
-
-        <!-- Personal Brand Starter Kit -->
-        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
-          <div class="h-32" style="background:linear-gradient(135deg,#083020,#0f4a30);"></div>
-          <div class="p-6">
-            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Branding</p>
-            <h3 class="text-white font-black text-lg mb-2">Personal Brand Starter Kit</h3>
-            <p class="text-gray-400 text-sm leading-relaxed mb-4">Everything you need to craft a compelling professional brand — LinkedIn optimization, bio, elevator pitch, and complete online presence strategy.</p>
-            <p class="text-pfs-gold font-black text-2xl mb-4">$79</p>
-            <button onclick="addToCart('Personal Brand Starter Kit', '$79', 79)" class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
-          </div>
-        </div>
-
-        <!-- Skill Monetization Toolkit -->
-        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
-          <div class="h-32" style="background:linear-gradient(135deg,#1a0a2e,#3a1a5e);"></div>
-          <div class="p-6">
-            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Income</p>
-            <h3 class="text-white font-black text-lg mb-2">Skill Monetization Toolkit</h3>
-            <p class="text-gray-400 text-sm leading-relaxed mb-4">Identify your most valuable skills, package them into offers, and turn your expertise into new income streams with proven frameworks.</p>
-            <p class="text-pfs-gold font-black text-2xl mb-4">$99</p>
-            <button onclick="addToCart('Skill Monetization Toolkit', '$99', 99)" class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
-          </div>
-        </div>
-
-        <!-- Reinvention Story Pack -->
-        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
-          <div class="h-32" style="background:linear-gradient(135deg,#0a2010,#1a4020);"></div>
-          <div class="p-6">
-            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Narrative</p>
-            <h3 class="text-white font-black text-lg mb-2">Reinvention Story Pack</h3>
-            <p class="text-gray-400 text-sm leading-relaxed mb-4">Templates and frameworks to articulate your reinvention story powerfully — for interviews, networking, LinkedIn, and every room you walk into.</p>
-            <p class="text-pfs-gold font-black text-2xl mb-4">$79</p>
-            <button onclick="addToCart('Reinvention Story Pack', '$79', 79)" class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
-          </div>
-        </div>
-
-        <!-- Job Search Accelerator System -->
-        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
-          <div class="h-32" style="background:linear-gradient(135deg,#1e1008,#3a2010);"></div>
-          <div class="p-6">
-            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Career</p>
-            <h3 class="text-white font-black text-lg mb-2">Job Search Accelerator System</h3>
-            <p class="text-gray-400 text-sm leading-relaxed mb-4">A systematic process that compresses months of searching into weeks — with outreach templates, tracking tools, and positioning strategies.</p>
-            <p class="text-pfs-gold font-black text-2xl mb-4">$149</p>
-            <button onclick="addToCart('Job Search Accelerator System', '$149', 149)" class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
-          </div>
-        </div>
-
-        <!-- Reinvention Reflection Workbook -->
-        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
-          <div class="h-32" style="background:linear-gradient(135deg,#0f0f20,#1a1a35);"></div>
-          <div class="p-6">
-            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Identity</p>
-            <h3 class="text-white font-black text-lg mb-2">Reinvention Reflection Workbook</h3>
-            <p class="text-gray-400 text-sm leading-relaxed mb-4">Guided reflection exercises to process where you've been, get clear on where you're going, and design the next chapter with real intention.</p>
-            <p class="text-pfs-gold font-black text-sm mb-4 uppercase tracking-wide">Included with 5-Day Sprint</p>
-            <button onclick="addToCart('Reinvention Reflection Workbook', 'Included with 5-Day Sprint', 0)" class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
-          </div>
-        </div>
-
-        <!-- Reinvention Matrix -->
-        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
-          <div class="h-32" style="background:linear-gradient(135deg,#081820,#0f2a38);"></div>
-          <div class="p-6">
-            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Framework</p>
-            <h3 class="text-white font-black text-lg mb-2">Reinvention Matrix — Core Components</h3>
-            <p class="text-gray-400 text-sm leading-relaxed mb-4">The foundational framework behind the 5-Day Sprint. Map your reinvention stage and identify the exact levers that will move you forward.</p>
-            <p class="text-pfs-gold font-black text-sm mb-4 uppercase tracking-wide">Included with 5-Day Sprint</p>
-            <button onclick="addToCart('Reinvention Matrix — Core Components', 'Included with 5-Day Sprint', 0)" class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
-          </div>
-        </div>
-
-        <!-- Impact Story Template -->
-        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
-          <div class="h-32" style="background:linear-gradient(135deg,#0a1a18,#102e2a);"></div>
-          <div class="p-6">
-            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Narrative</p>
-            <h3 class="text-white font-black text-lg mb-2">Impact Story Template</h3>
-            <p class="text-gray-400 text-sm leading-relaxed mb-4">A structured template for crafting compelling professional impact stories — perfect for interviews, proposals, and building authority in any room.</p>
-            <p class="text-pfs-gold font-black text-sm mb-4 uppercase tracking-wide">Included with 5-Day Sprint</p>
-            <button onclick="addToCart('Impact Story Template', 'Included with 5-Day Sprint', 0)" class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
-          </div>
-        </div>
-
-        <!-- Future Self OS -->
-        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
-          <div class="h-32" style="background:linear-gradient(135deg,#2a0e00,#E8821A);"></div>
-          <div class="p-6">
-            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">System</p>
-            <h3 class="text-white font-black text-lg mb-2">Future Self OS™</h3>
-            <p class="text-gray-400 text-sm leading-relaxed mb-4">Your personal operating system for sustained identity change — daily habits, decision frameworks, and momentum-building practices for long-term transformation.</p>
-            <p class="text-pfs-gold font-black text-sm mb-4 uppercase tracking-wide">Included with 5-Day Sprint</p>
-            <button onclick="addToCart('Future Self OS™', 'Included with 5-Day Sprint', 0)" class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
-          </div>
-        </div>
-
-        <!-- AI-Enhanced Career Toolkit -->
-        <div class="bg-rs-navy rounded-sm overflow-hidden border border-white/10 hover:border-pfs-gold/40 transition-colors">
-          <div class="h-32" style="background:linear-gradient(135deg,#0a1a2e,#1a3a5e);"></div>
-          <div class="p-6">
-            <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">AI Tools</p>
-            <h3 class="text-white font-black text-lg mb-2">AI-Enhanced Career Toolkit</h3>
-            <p class="text-gray-400 text-sm leading-relaxed mb-4">Leverage AI tools to accelerate your career reinvention — from resume optimization and interview prep to personal brand building and opportunity discovery.</p>
-            <p class="text-pfs-gold font-black text-2xl mb-4">$99</p>
-            <button onclick="addToCart('AI-Enhanced Career Toolkit', '$99', 99)" class="w-full bg-white/10 text-white text-xs font-bold uppercase tracking-widest py-3 hover:bg-pfs-gold hover:text-black transition-colors">Purchase →</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="bg-rs-darker py-8 border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-      <a href="index.html" class="text-white font-black uppercase tracking-widest" style="font-size:12px; letter-spacing:0.16em;">PROJECT FUTURE SELF</a>
-      <div class="flex items-center gap-5">
-        <a href="index.html" class="hover:text-gray-300 transition-colors">Home</a>
-        <a href="products.html" class="text-pfs-gold">Products</a>
-        <a href="contact.html" class="hover:text-gray-300 transition-colors">Contact Us</a>
-      </div>
-      <p>&copy; Project Future Self. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script>
-    function getCart() {
-      return JSON.parse(localStorage.getItem('pfs-cart') || '[]');
+<script>
+  function getCart() { return JSON.parse(localStorage.getItem('pfs-cart') || '[]'); }
+  function saveCart(cart) { localStorage.setItem('pfs-cart', JSON.stringify(cart)); }
+  function addToCart(name, price, priceNum) {
+    const cart = getCart();
+    const existing = cart.find(item => item.name === name);
+    if (existing) { existing.qty++; } else { cart.push({ name, price, priceNum, qty: 1 }); }
+    saveCart(cart);
+    window.location.href = 'cart.html';
+  }
+  function updateCartBadge() {
+    const cart = getCart();
+    const count = cart.reduce((sum, item) => sum + item.qty, 0);
+    const badge = document.getElementById('cart-badge');
+    if (badge) {
+      badge.textContent = count;
+      badge.style.display = count > 0 ? 'flex' : 'none';
     }
-    function saveCart(cart) {
-      localStorage.setItem('pfs-cart', JSON.stringify(cart));
-    }
-    function addToCart(name, price, priceNum) {
-      const cart = getCart();
-      const existing = cart.find(item => item.name === name);
-      if (existing) {
-        existing.qty++;
-      } else {
-        cart.push({ name, price, priceNum, qty: 1 });
-      }
-      saveCart(cart);
-      window.location.href = 'cart.html';
-    }
-    function updateCartBadge() {
-      const cart = getCart();
-      const count = cart.reduce((sum, item) => sum + item.qty, 0);
-      const badge = document.getElementById('cart-badge');
-      if (badge) {
-        badge.textContent = count;
-        badge.classList.toggle('hidden', count === 0);
-        badge.classList.toggle('flex', count > 0);
-      }
-    }
-    document.addEventListener('DOMContentLoaded', updateCartBadge);
+  }
+  document.addEventListener('DOMContentLoaded', updateCartBadge);
+</script>
 
-    // Mobile hamburger menu
-    (function() {
-      var btn  = document.getElementById('mobile-menu-btn');
-      var menu = document.getElementById('mobile-menu');
-      if (!btn || !menu) return;
-      btn.addEventListener('click', function() { menu.classList.toggle('hidden'); });
-      menu.querySelectorAll('a').forEach(function(link) {
-        link.addEventListener('click', function() { menu.classList.add('hidden'); });
-      });
-    })();
-  </script>
 </body>
 </html>

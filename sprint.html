@@ -1,540 +1,640 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>5-Day Reinvention Sprint – Project Future Self</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'pfs-orange': '#E8821A',
-            'pfs-blue':   '#1B5EE0',
-            'pfs-gold':   '#F5A31A',
-            'rs-navy':    '#0d1421',
-            'rs-darker':  '#0a1120',
-          },
-        }
-      }
-    }
-  </script>
-  <style>
-    body { font-family: 'Lato', sans-serif; }
-    .nav-link { font-size: 12px; letter-spacing: 0.05em; color: #ccc; transition: color 0.2s; }
-    .nav-link:hover { color: #fff; }
-    .day-card { transition: transform 0.2s, border-color 0.2s; }
-    .day-card:hover { transform: translateY(-2px); }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5-Day Reinvention Sprint – Project Future Self</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0D1F3C;
+    --slate:      #1E3A5F;
+    --slate-mid:  #2A4A72;
+    --gold:       #F5A31A;
+    --gold-dark:  #C07D0A;
+    --gold-pale:  #FEF3DC;
+    --amber-bg:   #FDF6EC;
+    --amber-mid:  #F5E8CC;
+    --text-dark:  #1A1208;
+    --text-mid:   #3D2E14;
+    --text-muted: #7A6240;
+    --white:      #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--amber-bg); color: var(--text-dark); line-height: 1.6; }
+
+  /* ── NAV ── */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(253,246,236,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(13,31,60,0.08); padding: 0 5%; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-mark { height: 44px; width: auto; }
+  .nav-wordmark { line-height: 1.15; }
+  .nav-wordmark .nw-top { font-size: 9px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+  .nav-wordmark .nw-main { font-size: 16px; font-weight: 800; letter-spacing: 0.02em; color: var(--navy); text-transform: uppercase; }
+  .nav-wordmark .nw-tag { font-size: 7px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dark); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-links a.active { color: var(--navy); font-weight: 700; }
+  .nav-cta { font-size: 12px !important; font-weight: 700 !important; padding: 9px 20px; background: var(--navy); color: var(--gold) !important; border-radius: 24px; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .nav-cta:hover { background: var(--slate) !important; transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: all 0.3s; }
+
+  /* ── BUTTONS ── */
+  .btn-primary { display: inline-block; padding: 14px 28px; background: var(--navy); color: var(--gold); font-size: 14px; font-weight: 700; border-radius: 32px; text-decoration: none; transition: all 0.2s; }
+  .btn-primary:hover { background: var(--slate); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,31,60,0.2); }
+  .btn-secondary { display: inline-block; padding: 14px 26px; border: 1.5px solid rgba(13,31,60,0.25); color: var(--navy); font-size: 14px; font-weight: 600; border-radius: 32px; text-decoration: none; transition: all 0.2s; }
+  .btn-secondary:hover { border-color: var(--navy); background: rgba(13,31,60,0.04); }
+  .btn-gold { display: inline-block; padding: 13px 28px; background: var(--gold); color: var(--navy); font-size: 13px; font-weight: 800; border-radius: 28px; text-decoration: none; white-space: nowrap; transition: all 0.2s; }
+  .btn-gold:hover { background: #f8b83a; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,163,26,0.35); }
+
+  /* ── SECTIONS ── */
+  section { padding: 72px 5%; }
+  .section-inner { max-width: 1000px; margin: 0 auto; }
+  .section-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 10px; }
+  .section-h2 { font-family: 'DM Serif Display', serif; font-size: clamp(26px, 3.5vw, 40px); font-weight: 400; color: var(--navy); line-height: 1.15; margin-bottom: 8px; }
+  .gold-rule { width: 40px; height: 3px; background: var(--gold); border-radius: 2px; margin-top: 14px; margin-bottom: 32px; }
+
+  /* ── HERO ── */
+  .hero { background: var(--navy); padding: 80px 5%; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -80px; right: -60px; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(245,163,26,0.08) 0%, transparent 65%); pointer-events: none; }
+  .hero-inner { max-width: 1000px; margin: 0 auto; }
+  .hero-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(36px, 5.5vw, 68px); font-weight: 400; color: #FDF6EC; line-height: 1.05; margin-bottom: 20px; }
+  .hero-sub { font-size: 16px; color: rgba(253,246,236,0.65); line-height: 1.75; max-width: 600px; margin-bottom: 32px; }
+  .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+  .hero-price { font-size: 14px; color: rgba(253,246,236,0.45); }
+  .hero-price strong { color: var(--gold); font-size: 22px; font-weight: 800; }
+
+  /* ── ASSESSMENT CALLOUT ── */
+  .asmt-callout { background: var(--slate); padding: 20px 5%; }
+  .asmt-callout-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .asmt-icon { width: 36px; height: 36px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 900; color: var(--navy); flex-shrink: 0; }
+  .asmt-text { flex: 1; font-size: 14px; color: rgba(253,246,236,0.75); min-width: 200px; }
+  .asmt-text strong { color: #FDF6EC; }
+  .asmt-text a { color: var(--gold); text-decoration: none; }
+  .asmt-text a:hover { text-decoration: underline; }
+
+  /* ── WHAT IS SPRINT ── */
+  .what-section { background: var(--amber-bg); }
+  .what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  .what-body { font-size: 15px; color: var(--text-mid); line-height: 1.8; margin-bottom: 16px; }
+  .feature-list { display: flex; flex-direction: column; gap: 18px; }
+  .feature-item { display: flex; align-items: flex-start; gap: 14px; }
+  .feat-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--amber-mid); border: 1px solid rgba(13,31,60,0.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--navy); }
+  .feat-name { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+  .feat-desc { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
+
+  /* ── WHO IT'S FOR ── */
+  .who-section { background: var(--white); }
+  .who-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .who-card { display: flex; align-items: flex-start; gap: 12px; padding: 18px; background: var(--amber-bg); border-radius: 10px; border: 1px solid var(--amber-mid); }
+  .who-check { color: var(--gold); font-size: 18px; font-weight: 900; flex-shrink: 0; margin-top: 1px; }
+  .who-card p { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
+
+  /* ── SCHEDULE ── */
+  .schedule-section { background: var(--amber-bg); }
+  .schedule-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 32px; }
+  .day-cards { display: flex; flex-direction: column; gap: 12px; }
+  .day-card { background: var(--white); border: 1px solid var(--amber-mid); border-radius: 12px; overflow: hidden; display: flex; transition: box-shadow 0.2s; }
+  .day-card:hover { box-shadow: 0 4px 20px rgba(13,31,60,0.08); }
+  .day-num { width: 88px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px 12px; text-align: center; }
+  .day-label { font-size: 8px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 4px; }
+  .day-n { font-family: 'DM Serif Display', serif; font-size: 48px; font-weight: 400; line-height: 1; }
+  .day-body { padding: 20px 24px; flex: 1; border-left: 1px solid var(--amber-mid); }
+  .day-theme { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 4px; }
+  .day-title { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+  .day-desc { font-size: 13px; color: var(--text-mid); line-height: 1.65; margin-bottom: 12px; }
+  .day-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .day-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; }
+
+  /* Day color schemes */
+  .day-1 .day-num { background: linear-gradient(160deg,#0e2040,#1E3A5F); }
+  .day-1 .day-label { color: rgba(253,246,236,0.4); }
+  .day-1 .day-n { color: #FDF6EC; }
+  .day-1 .day-theme { color: #4A7FBC; }
+  .day-1 .day-tag { background: rgba(30,58,95,0.08); color: #1E3A5F; }
+
+  .day-2 .day-num { background: linear-gradient(160deg,#6b2a00,#C07D0A); }
+  .day-2 .day-label { color: rgba(253,246,236,0.4); }
+  .day-2 .day-n { color: #FDF6EC; }
+  .day-2 .day-theme { color: var(--gold-dark); }
+  .day-2 .day-tag { background: rgba(192,125,10,0.1); color: var(--gold-dark); }
+
+  .day-3 .day-num { background: linear-gradient(160deg,#5a4000,#F5A31A); }
+  .day-3 .day-label { color: rgba(253,246,236,0.4); }
+  .day-3 .day-n { color: #FDF6EC; }
+  .day-3 .day-theme { color: var(--gold-dark); }
+  .day-3 .day-tag { background: rgba(245,163,26,0.12); color: var(--gold-dark); }
+
+  .day-4 .day-num { background: linear-gradient(160deg,#2a0a4e,#5a2a8e); }
+  .day-4 .day-label { color: rgba(253,246,236,0.4); }
+  .day-4 .day-n { color: #FDF6EC; }
+  .day-4 .day-theme { color: #7c5aac; }
+  .day-4 .day-tag { background: rgba(124,90,172,0.1); color: #7c5aac; }
+
+  .day-5 .day-num { background: linear-gradient(160deg,#3a2000,#F5A31A); }
+  .day-5 .day-label { color: rgba(253,246,236,0.4); }
+  .day-5 .day-n { color: #FDF6EC; }
+  .day-5 .day-theme { color: var(--gold-dark); }
+  .day-5 .day-tag { background: rgba(245,163,26,0.15); color: var(--gold-dark); }
+  .day-5 { border-color: rgba(245,163,26,0.4); box-shadow: 0 0 0 1px rgba(245,163,26,0.15); }
+
+  /* ── DELIVERABLES ── */
+  .deliverables-section { background: var(--navy); }
+  .deliverables-section .section-eyebrow { color: var(--gold); }
+  .deliverables-section .section-h2 { color: #FDF6EC; }
+  .deliv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .deliv-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(245,163,26,0.12); border-radius: 12px; padding: 22px; }
+  .deliv-icon-wrap { width: 40px; height: 40px; border-radius: 10px; background: rgba(245,163,26,0.12); display: flex; align-items: center; justify-content: center; margin-bottom: 14px; color: var(--gold); }
+  .deliv-name { font-size: 14px; font-weight: 700; color: #FDF6EC; margin-bottom: 6px; }
+  .deliv-desc { font-size: 12px; color: rgba(253,246,236,0.5); line-height: 1.6; }
+
+  /* ── INVESTMENT ── */
+  .investment-section { background: var(--amber-bg); text-align: center; }
+  .price-display { display: flex; align-items: baseline; gap: 6px; justify-content: center; margin-bottom: 8px; }
+  .price-amount { font-size: 56px; font-weight: 800; color: var(--navy); line-height: 1; }
+  .price-note { font-size: 14px; color: var(--text-muted); }
+  .inv-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 40px; }
+  .checklist { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 500px; margin: 0 auto 40px; text-align: left; }
+  .checklist-item { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-mid); }
+  .check-dot { width: 18px; height: 18px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 10px; color: var(--navy); font-weight: 900; }
+
+  /* ── APPLICATION FORM ── */
+  .form-section { background: var(--navy); }
+  .form-section .section-eyebrow { color: var(--gold); }
+  .form-section .section-h2 { color: #FDF6EC; }
+  .form-sub { font-size: 14px; color: rgba(253,246,236,0.55); margin-bottom: 36px; line-height: 1.7; }
+  .asmt-reminder { background: rgba(245,163,26,0.08); border: 1px solid rgba(245,163,26,0.2); border-radius: 10px; padding: 16px 20px; margin-bottom: 32px; display: flex; gap: 12px; align-items: flex-start; }
+  .asmt-reminder-icon { width: 24px; height: 24px; border-radius: 50%; background: rgba(245,163,26,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .asmt-reminder p { font-size: 14px; color: rgba(253,246,236,0.7); line-height: 1.6; }
+  .asmt-reminder p strong { color: #FDF6EC; }
+  .asmt-reminder a { color: var(--gold); text-decoration: none; }
+  .asmt-reminder a:hover { text-decoration: underline; }
+  .form-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+  .form-field label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(253,246,236,0.5); }
+  .form-field label span { color: var(--gold); }
+  .form-field .hint { font-size: 11px; color: rgba(253,246,236,0.3); margin-top: -2px; margin-bottom: 4px; }
+  .form-field input, .form-field textarea {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+    color: #FDF6EC; font-family: 'DM Sans', sans-serif; font-size: 14px;
+    padding: 12px 16px; border-radius: 8px; transition: border-color 0.2s; outline: none;
+  }
+  .form-field input::placeholder, .form-field textarea::placeholder { color: rgba(253,246,236,0.2); }
+  .form-field input:focus, .form-field textarea:focus { border-color: var(--gold); }
+  .form-field textarea { resize: none; }
+  .form-checkbox { display: flex; align-items: flex-start; gap: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 16px; margin-bottom: 24px; cursor: pointer; }
+  .form-checkbox input[type=checkbox] { margin-top: 2px; accent-color: var(--gold); width: 16px; height: 16px; flex-shrink: 0; }
+  .form-checkbox label { font-size: 14px; color: rgba(253,246,236,0.65); cursor: pointer; line-height: 1.55; }
+  .form-checkbox a { color: var(--gold); text-decoration: none; }
+  .form-submit { width: 100%; padding: 16px; background: var(--gold); color: var(--navy); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; }
+  .form-submit:hover { background: #f8b83a; }
+  .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  .form-error { display: none; text-align: center; color: #ff7b7b; font-size: 13px; margin-top: 12px; }
+  .form-note { text-align: center; font-size: 12px; color: rgba(253,246,236,0.3); margin-top: 10px; }
+  .form-success { display: none; text-align: center; padding: 60px 0; }
+  .success-icon { width: 64px; height: 64px; border-radius: 50%; background: rgba(245,163,26,0.12); border: 1px solid rgba(245,163,26,0.3); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+  .form-success h3 { font-family: 'DM Serif Display', serif; font-size: 28px; color: #FDF6EC; margin-bottom: 12px; }
+  .form-success p { font-size: 14px; color: rgba(253,246,236,0.55); max-width: 360px; margin: 0 auto 28px; line-height: 1.65; }
+
+  /* ── FOOTER ── */
+  footer { background: #060F1E; padding: 28px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-brand { display: flex; align-items: center; gap: 10px; }
+  .footer-mark { height: 32px; width: auto; opacity: 0.8; }
+  .footer-name { font-size: 12px; font-weight: 700; color: rgba(253,246,236,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+  footer p { font-size: 11px; color: rgba(253,246,236,0.3); }
+  .footer-links { display: flex; gap: 16px; }
+  .footer-links a { font-size: 11px; color: rgba(253,246,236,0.3); text-decoration: none; }
+  .footer-links a:hover { color: rgba(253,246,236,0.6); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: rgba(253,246,236,0.98); padding: 16px 5% 20px; border-bottom: 1px solid rgba(13,31,60,0.1); gap: 14px; z-index: 99; }
+    .hamburger { display: flex; }
+    .what-grid { grid-template-columns: 1fr; gap: 32px; }
+    .who-grid { grid-template-columns: 1fr; }
+    .day-card { flex-direction: column; }
+    .day-num { width: 100%; padding: 16px; flex-direction: row; justify-content: flex-start; gap: 12px; }
+    .day-body { border-left: none; border-top: 1px solid var(--amber-mid); }
+    .deliv-grid { grid-template-columns: 1fr; }
+    .checklist { grid-template-columns: 1fr; }
+    .form-grid-2 { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
-<body class="bg-rs-navy text-white">
+<body>
 
-  <!-- NAV -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-rs-darker border-b border-white/10">
-    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-14">
-      <a href="index.html" class="text-white font-black uppercase tracking-widest" style="font-size:13px; letter-spacing:0.16em;">PROJECT FUTURE SELF</a>
-      <div class="hidden lg:flex items-center gap-7">
-        <a href="sprint.html"                 class="nav-link text-white">5-Day Sprint</a>
-        <a href="index.html#about"            class="nav-link">About Andrew</a>
-        <a href="assessment.html"             class="nav-link">Assessment</a>
-        <a href="products.html"               class="nav-link">Products</a>
-        <a href="index.html#testimonials"     class="nav-link">Testimonials</a>
-        <a href="contact.html"                class="nav-link">Contact Us</a>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img class="nav-mark" src="Transparent mark without words.png" alt="Project Future Self mark">
+      <div class="nav-wordmark">
+        <div class="nw-top">Project</div>
+        <div class="nw-main">Future Self</div>
+        <div class="nw-tag">Reinvent · Redesign · Reclaim</div>
       </div>
-      <div class="flex items-center gap-3">
-        <a href="cart.html" class="relative flex items-center p-1 text-gray-300 hover:text-white transition-colors" title="Cart">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-          </svg>
-          <span id="cart-badge" class="absolute -top-1 -right-1 bg-pfs-gold text-black font-black rounded-full w-4 h-4 items-center justify-center hidden" style="font-size:9px;">0</span>
-        </a>
-        <a href="assessment.html" class="bg-pfs-gold text-black text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-sm hover:bg-yellow-300 transition-colors whitespace-nowrap" style="font-size:11px;">TAKE THE FREE ASSESSMENT</a>
-      </div>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="sprint.html" class="active">5-Day Sprint</a>
+      <a href="index.html#about">About</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="products.html">Products</a>
+      <a href="contact.html">Contact</a>
+      <a href="assessment.html" class="nav-cta">Free Assessment ↗</a>
     </div>
-  </nav>
-
-  <!-- HERO -->
-  <section class="pt-28 pb-20 px-6 relative overflow-hidden" style="background: linear-gradient(135deg, #0b1a40 0%, #1B5EE0 50%, #0e2040 100%);">
-    <!-- Background text watermark -->
-    <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
-      <p class="text-white/5 font-black uppercase tracking-widest text-center leading-none" style="font-size: clamp(80px, 18vw, 220px);">SPRINT</p>
-    </div>
-    <div class="max-w-4xl mx-auto relative z-10 text-center">
-      <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-4">Live Coaching Program</p>
-      <h1 class="text-white font-black mb-5 leading-tight" style="font-size: clamp(36px, 6vw, 72px);">5-Day Reinvention Sprint</h1>
-      <p class="text-blue-100 text-lg leading-relaxed max-w-2xl mx-auto mb-8">In just one week, you'll diagnose where you are, define who you're becoming, rewrite your professional story, and walk away with a 90-Day Roadmap you can execute immediately.</p>
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-        <a href="#apply" class="bg-pfs-gold text-black font-black uppercase text-sm tracking-widest px-10 py-4 hover:bg-yellow-300 transition-colors">Apply for the Sprint →</a>
-        <a href="#schedule" class="border border-white/40 text-white font-bold uppercase text-sm tracking-widest px-10 py-4 hover:border-white hover:bg-white/10 transition-colors">See the 5-Day Schedule</a>
-      </div>
-      <p class="text-blue-200/70 text-sm">Investment: <span class="text-pfs-gold font-black text-xl">$499</span></p>
-    </div>
-  </section>
-
-  <!-- ASSESSMENT CALLOUT -->
-  <div class="bg-pfs-orange/20 border-y border-pfs-orange/40">
-    <div class="max-w-4xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center gap-4">
-      <div class="flex-shrink-0 w-8 h-8 rounded-full bg-pfs-orange flex items-center justify-center font-black text-white text-sm">!</div>
-      <p class="text-orange-200 text-sm text-center sm:text-left"><strong class="text-white">Before you apply,</strong> we strongly recommend completing the free Transformation Readiness Assessment. It takes under 10 minutes and ensures the Sprint is the right next step for you.</p>
-      <a href="assessment.html" class="flex-shrink-0 bg-pfs-orange text-white font-bold uppercase text-xs tracking-widest px-5 py-2 hover:bg-orange-400 transition-colors whitespace-nowrap">Take the Assessment →</a>
+    <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
     </div>
   </div>
+</nav>
 
-  <!-- WHAT IS THE SPRINT -->
-  <section class="bg-rs-darker py-16 px-6 border-b border-white/10">
-    <div class="max-w-4xl mx-auto">
-      <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-3">The Program</p>
-      <h2 class="text-white font-black text-4xl mb-6">What Is the 5-Day Reinvention Sprint?</h2>
-      <div class="grid md:grid-cols-2 gap-10 items-start">
-        <div>
-          <p class="text-gray-300 text-base leading-relaxed mb-4">The 5-Day Reinvention Sprint is a live, small-group coaching workshop designed for professionals who are ready to stop waiting and start moving. Over five focused days, you'll work through a structured process that takes you from stuck and uncertain to clear, confident, and in motion.</p>
-          <p class="text-gray-300 text-base leading-relaxed">This isn't a passive seminar or a pre-recorded course. Each day includes live coaching sessions, hands-on exercises, and a concrete action mission — so you leave every session with something real.</p>
-        </div>
-        <div class="space-y-4">
-          <div class="flex items-start gap-3">
-            <div class="flex-shrink-0 w-10 h-10 rounded-sm bg-pfs-blue/20 border border-pfs-blue/40 flex items-center justify-center">
-              <svg class="w-5 h-5 text-pfs-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-            </div>
-            <div>
-              <p class="text-white font-bold text-sm">Small Group Format</p>
-              <p class="text-gray-400 text-sm">Intimate cohort for real coaching, real feedback, real breakthroughs.</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-3">
-            <div class="flex-shrink-0 w-10 h-10 rounded-sm bg-pfs-gold/10 border border-pfs-gold/30 flex items-center justify-center">
-              <svg class="w-5 h-5 text-pfs-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-            </div>
-            <div>
-              <p class="text-white font-bold text-sm">Daily Action Missions</p>
-              <p class="text-gray-400 text-sm">Each session ends with a mission you complete before the next day — progress every 24 hours.</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-3">
-            <div class="flex-shrink-0 w-10 h-10 rounded-sm bg-pfs-orange/10 border border-pfs-orange/30 flex items-center justify-center">
-              <svg class="w-5 h-5 text-pfs-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-            </div>
-            <div>
-              <p class="text-white font-bold text-sm">Tools You Keep Forever</p>
-              <p class="text-gray-400 text-sm">Every framework, template, and blueprint is yours — designed for ongoing use long after the sprint ends.</p>
-            </div>
-          </div>
-          <div class="flex items-start gap-3">
-            <div class="flex-shrink-0 w-10 h-10 rounded-sm bg-pfs-blue/10 border border-pfs-blue/30 flex items-center justify-center">
-              <svg class="w-5 h-5 text-pfs-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
-            </div>
-            <div>
-              <p class="text-white font-bold text-sm">90-Day Roadmap on Day 5</p>
-              <p class="text-gray-400 text-sm">You leave the sprint with a personalized, executable roadmap — not a concept, a plan.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Live Coaching Program</div>
+    <h1>5-Day Reinvention<br>Sprint</h1>
+    <p class="hero-sub">In just one week, you'll diagnose where you are, define who you're becoming, rewrite your professional story, and walk away with a 90-Day Roadmap you can execute immediately.</p>
+    <div class="hero-ctas">
+      <a href="#apply" class="btn-gold">Apply for the Sprint →</a>
+      <a href="#schedule" class="btn-secondary" style="border-color:rgba(253,246,236,0.25);color:#FDF6EC;">See the 5-Day Schedule</a>
     </div>
-  </section>
+    <div class="hero-price">Investment: <strong>$499</strong></div>
+  </div>
+</div>
 
-  <!-- WHO IS THIS FOR -->
-  <section class="bg-rs-navy py-14 px-6 border-b border-white/10">
-    <div class="max-w-4xl mx-auto">
-      <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-3">Is This You?</p>
-      <h2 class="text-white font-black text-3xl mb-8">Who the Sprint Is Built For</h2>
-      <div class="grid sm:grid-cols-2 gap-4">
-        <div class="flex items-start gap-3 bg-rs-darker rounded-sm p-4 border border-white/10">
-          <span class="text-pfs-gold mt-0.5 font-black">✓</span>
-          <p class="text-gray-300 text-sm leading-relaxed">Professionals who feel stuck and know it's time for a change — but can't get clear on what that change actually looks like.</p>
-        </div>
-        <div class="flex items-start gap-3 bg-rs-darker rounded-sm p-4 border border-white/10">
-          <span class="text-pfs-gold mt-0.5 font-black">✓</span>
-          <p class="text-gray-300 text-sm leading-relaxed">People who've tried self-help books, courses, and advice — but haven't found a structured process that actually moves them forward.</p>
-        </div>
-        <div class="flex items-start gap-3 bg-rs-darker rounded-sm p-4 border border-white/10">
-          <span class="text-pfs-gold mt-0.5 font-black">✓</span>
-          <p class="text-gray-300 text-sm leading-relaxed">Career pivotters, returning professionals, and anyone navigating a major transition who needs clarity, direction, and a real plan.</p>
-        </div>
-        <div class="flex items-start gap-3 bg-rs-darker rounded-sm p-4 border border-white/10">
-          <span class="text-pfs-gold mt-0.5 font-black">✓</span>
-          <p class="text-gray-300 text-sm leading-relaxed">Anyone who's been through a setback — job loss, burnout, or a life pivot — and is ready to turn it into their greatest opportunity.</p>
-        </div>
-        <div class="flex items-start gap-3 bg-rs-darker rounded-sm p-4 border border-white/10">
-          <span class="text-pfs-gold mt-0.5 font-black">✓</span>
-          <p class="text-gray-300 text-sm leading-relaxed">High achievers who feel disconnected from their purpose and want to redefine what success looks like on their own terms.</p>
-        </div>
-        <div class="flex items-start gap-3 bg-rs-darker rounded-sm p-4 border border-white/10">
-          <span class="text-pfs-gold mt-0.5 font-black">✓</span>
-          <p class="text-gray-300 text-sm leading-relaxed">Doers who are done thinking and are ready to take focused, structured action — in just five days.</p>
-        </div>
+<!-- ASSESSMENT CALLOUT -->
+<div class="asmt-callout">
+  <div class="asmt-callout-inner">
+    <div class="asmt-icon">!</div>
+    <p class="asmt-text"><strong>Before you apply,</strong> we strongly recommend completing the free Transformation Readiness Assessment. It takes under 10 minutes and ensures the Sprint is the right next step for you.</p>
+    <a href="assessment.html" class="btn-gold" style="font-size:12px;padding:10px 20px;">Take the Assessment →</a>
+  </div>
+</div>
+
+<!-- WHAT IS THE SPRINT -->
+<section class="what-section">
+  <div class="section-inner">
+    <div class="section-eyebrow">The Program</div>
+    <h2 class="section-h2">What Is the 5-Day Reinvention Sprint?</h2>
+    <div class="gold-rule"></div>
+    <div class="what-grid">
+      <div>
+        <p class="what-body">The 5-Day Reinvention Sprint is a live, small-group coaching workshop designed for professionals who are ready to stop waiting and start moving. Over five focused days, you'll work through a structured process that takes you from stuck and uncertain to clear, confident, and in motion.</p>
+        <p class="what-body">This isn't a passive seminar or a pre-recorded course. Each day includes live coaching sessions, hands-on exercises, and a concrete action mission — so you leave every session with something real.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- 5-DAY SCHEDULE -->
-  <section id="schedule" class="bg-rs-darker py-16 px-6 border-b border-white/10">
-    <div class="max-w-4xl mx-auto">
-      <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-3">The Curriculum</p>
-      <h2 class="text-white font-black text-3xl mb-2">The 5-Day Schedule</h2>
-      <p class="text-gray-400 text-sm mb-10">Each day is a live session + a daily action mission you complete before the next session.</p>
-
-      <div class="space-y-4">
-
-        <!-- Day 1 -->
-        <div class="day-card bg-rs-navy rounded-sm border border-pfs-blue/30 hover:border-pfs-blue/70 overflow-hidden">
-          <div class="flex flex-col sm:flex-row">
-            <div class="sm:w-40 flex-shrink-0 flex flex-col items-center justify-center py-6 px-4 text-center" style="background: linear-gradient(135deg, #0e2a6e, #1B5EE0);">
-              <p class="text-blue-200/60 text-xs uppercase tracking-widest font-bold mb-1">Day</p>
-              <p class="text-white font-black text-5xl leading-none">1</p>
-            </div>
-            <div class="p-6 flex-1">
-              <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Where Am I Really?</p>
-              <h3 class="text-white font-black text-xl mb-2">Reinvention Matrix + Transformation Readiness Assessment</h3>
-              <p class="text-gray-400 text-sm leading-relaxed mb-4">You can't navigate to where you're going if you don't know where you actually are. Day 1 breaks down the brutal, honest truth of your current position — professionally and personally. Using the Reinvention Matrix, you'll map your exact reinvention stage and identify the patterns that have been keeping you stuck.</p>
-              <div class="flex flex-wrap gap-2">
-                <span class="bg-pfs-blue/10 border border-pfs-blue/30 text-blue-300 text-xs font-bold uppercase tracking-wide px-3 py-1">Reinvention Matrix</span>
-                <span class="bg-pfs-blue/10 border border-pfs-blue/30 text-blue-300 text-xs font-bold uppercase tracking-wide px-3 py-1">Readiness Diagnosis</span>
-                <span class="bg-pfs-blue/10 border border-pfs-blue/30 text-blue-300 text-xs font-bold uppercase tracking-wide px-3 py-1">Daily Action Mission</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Day 2 -->
-        <div class="day-card bg-rs-navy rounded-sm border border-pfs-orange/30 hover:border-pfs-orange/70 overflow-hidden">
-          <div class="flex flex-col sm:flex-row">
-            <div class="sm:w-40 flex-shrink-0 flex flex-col items-center justify-center py-6 px-4 text-center" style="background: linear-gradient(135deg, #7a3d00, #E8821A);">
-              <p class="text-orange-200/60 text-xs uppercase tracking-widest font-bold mb-1">Day</p>
-              <p class="text-white font-black text-5xl leading-none">2</p>
-            </div>
-            <div class="p-6 flex-1">
-              <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">Who Am I Becoming?</p>
-              <h3 class="text-white font-black text-xl mb-2">Future-Self Identity Blueprint</h3>
-              <p class="text-gray-400 text-sm leading-relaxed mb-4">Reinvention isn't just about changing what you do — it's about becoming who you need to be. Day 2 is devoted to building a vivid, specific, and executable vision of your Future Self. You'll create your Future-Self Identity Blueprint: the values, strengths, roles, and non-negotiables that define the person you're becoming.</p>
-              <div class="flex flex-wrap gap-2">
-                <span class="bg-pfs-orange/10 border border-pfs-orange/30 text-orange-300 text-xs font-bold uppercase tracking-wide px-3 py-1">Identity Blueprint</span>
-                <span class="bg-pfs-orange/10 border border-pfs-orange/30 text-orange-300 text-xs font-bold uppercase tracking-wide px-3 py-1">Values Mapping</span>
-                <span class="bg-pfs-orange/10 border border-pfs-orange/30 text-orange-300 text-xs font-bold uppercase tracking-wide px-3 py-1">Daily Action Mission</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Day 3 -->
-        <div class="day-card bg-rs-navy rounded-sm border border-pfs-gold/30 hover:border-pfs-gold/70 overflow-hidden">
-          <div class="flex flex-col sm:flex-row">
-            <div class="sm:w-40 flex-shrink-0 flex flex-col items-center justify-center py-6 px-4 text-center" style="background: linear-gradient(135deg, #5a4000, #F5A31A);">
-              <p class="text-yellow-200/60 text-xs uppercase tracking-widest font-bold mb-1">Day</p>
-              <p class="text-white font-black text-5xl leading-none">3</p>
-            </div>
-            <div class="p-6 flex-1">
-              <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">How Do I Tell My Story?</p>
-              <h3 class="text-white font-black text-xl mb-2">Narrative Flip Model</h3>
-              <p class="text-gray-400 text-sm leading-relaxed mb-4">The story you tell about yourself determines the opportunities you attract. Day 3 introduces the Narrative Flip Model — a framework for transforming your reinvention from a liability into your greatest asset. You'll craft a professional narrative that is honest, compelling, and positions your pivot as a strength.</p>
-              <div class="flex flex-wrap gap-2">
-                <span class="bg-pfs-gold/10 border border-pfs-gold/30 text-yellow-300 text-xs font-bold uppercase tracking-wide px-3 py-1">Narrative Flip Model</span>
-                <span class="bg-pfs-gold/10 border border-pfs-gold/30 text-yellow-300 text-xs font-bold uppercase tracking-wide px-3 py-1">Story Workshop</span>
-                <span class="bg-pfs-gold/10 border border-pfs-gold/30 text-yellow-300 text-xs font-bold uppercase tracking-wide px-3 py-1">Daily Action Mission</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Day 4 -->
-        <div class="day-card bg-rs-navy rounded-sm border border-purple-500/30 hover:border-purple-500/70 overflow-hidden">
-          <div class="flex flex-col sm:flex-row">
-            <div class="sm:w-40 flex-shrink-0 flex flex-col items-center justify-center py-6 px-4 text-center" style="background: linear-gradient(135deg, #2a0a4e, #7c3aed);">
-              <p class="text-purple-200/60 text-xs uppercase tracking-widest font-bold mb-1">Day</p>
-              <p class="text-white font-black text-5xl leading-none">4</p>
-            </div>
-            <div class="p-6 flex-1">
-              <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">How Do I Turn This Into Opportunity?</p>
-              <h3 class="text-white font-black text-xl mb-2">Opportunity Engine Templates™</h3>
-              <p class="text-gray-400 text-sm leading-relaxed mb-4">With clarity on who you are and where you're going, Day 4 shifts to offense. Using the Opportunity Engine Templates™, you'll identify where your reinvented identity creates the most leverage — in your current role, in the job market, or as an entrepreneur — and map out the specific moves to capitalize on it.</p>
-              <div class="flex flex-wrap gap-2">
-                <span class="bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-bold uppercase tracking-wide px-3 py-1">Opportunity Engine™</span>
-                <span class="bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-bold uppercase tracking-wide px-3 py-1">Leverage Mapping</span>
-                <span class="bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-bold uppercase tracking-wide px-3 py-1">Daily Action Mission</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Day 5 -->
-        <div class="day-card bg-rs-navy rounded-sm border border-pfs-gold/50 hover:border-pfs-gold overflow-hidden" style="box-shadow: 0 0 30px rgba(245,163,26,0.08);">
-          <div class="flex flex-col sm:flex-row">
-            <div class="sm:w-40 flex-shrink-0 flex flex-col items-center justify-center py-6 px-4 text-center" style="background: linear-gradient(135deg, #3a2000, #F5A31A);">
-              <p class="text-yellow-200/60 text-xs uppercase tracking-widest font-bold mb-1">Day</p>
-              <p class="text-white font-black text-5xl leading-none">5</p>
-            </div>
-            <div class="p-6 flex-1">
-              <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-1">What Happens Next?</p>
-              <h3 class="text-white font-black text-xl mb-2">90-Day Reinvention Roadmap + Future Self OS™</h3>
-              <p class="text-gray-400 text-sm leading-relaxed mb-4">Day 5 is about execution. You'll build your complete 90-Day Reinvention Roadmap — a real, milestone-driven plan covering the next 12 weeks. Then you'll configure your Future Self OS™: the personal operating system (habits, routines, decision frameworks) designed to sustain your momentum long after the sprint is over.</p>
-              <div class="flex flex-wrap gap-2">
-                <span class="bg-pfs-gold/10 border border-pfs-gold/40 text-yellow-300 text-xs font-bold uppercase tracking-wide px-3 py-1">90-Day Roadmap</span>
-                <span class="bg-pfs-gold/10 border border-pfs-gold/40 text-yellow-300 text-xs font-bold uppercase tracking-wide px-3 py-1">Future Self OS™</span>
-                <span class="bg-pfs-gold/10 border border-pfs-gold/40 text-yellow-300 text-xs font-bold uppercase tracking-wide px-3 py-1">Graduation Coaching</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- WHAT YOU WALK AWAY WITH -->
-  <section class="bg-rs-navy py-16 px-6 border-b border-white/10">
-    <div class="max-w-4xl mx-auto">
-      <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-3">Your Deliverables</p>
-      <h2 class="text-white font-black text-3xl mb-10">What You'll Walk Away With</h2>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-
-        <div class="bg-rs-darker rounded-sm p-5 border border-pfs-blue/30">
-          <div class="w-10 h-10 rounded-sm flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #0e2a6e, #1B5EE0);">
-            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-          </div>
-          <h4 class="text-white font-black text-sm mb-1">Future-Self Identity Blueprint</h4>
-          <p class="text-gray-400 text-xs leading-relaxed">A fully developed portrait of who you are becoming — values, strengths, roles, and the identity that drives every decision going forward.</p>
-        </div>
-
-        <div class="bg-rs-darker rounded-sm p-5 border border-pfs-orange/30">
-          <div class="w-10 h-10 rounded-sm flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #7a3d00, #E8821A);">
-            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
-          </div>
-          <h4 class="text-white font-black text-sm mb-1">Reinvention Matrix Diagnosis</h4>
-          <p class="text-gray-400 text-xs leading-relaxed">A clear, honest map of exactly where you are in your reinvention cycle and what levers will move you forward fastest.</p>
-        </div>
-
-        <div class="bg-rs-darker rounded-sm p-5 border border-pfs-gold/30">
-          <div class="w-10 h-10 rounded-sm flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #5a4000, #F5A31A);">
-            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
-          </div>
-          <h4 class="text-white font-black text-sm mb-1">Powerful Professional Narrative</h4>
-          <p class="text-gray-400 text-xs leading-relaxed">A refined, authentic story about your reinvention that makes your pivot a competitive advantage in any room or conversation.</p>
-        </div>
-
-        <div class="bg-rs-darker rounded-sm p-5 border border-pfs-gold/50" style="box-shadow: 0 0 20px rgba(245,163,26,0.06);">
-          <div class="w-10 h-10 rounded-sm flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #3a2000, #F5A31A);">
-            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
-          </div>
-          <h4 class="text-white font-black text-sm mb-1">90-Day Reinvention Roadmap</h4>
-          <p class="text-gray-400 text-xs leading-relaxed">A milestone-by-milestone action plan covering the 90 days immediately following the sprint — specific, actionable, and built around your goals.</p>
-        </div>
-
-        <div class="bg-rs-darker rounded-sm p-5 border border-pfs-orange/30">
-          <div class="w-10 h-10 rounded-sm flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #2a0e00, #E8821A);">
-            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-          </div>
-          <h4 class="text-white font-black text-sm mb-1">Future Self OS™</h4>
-          <p class="text-gray-400 text-xs leading-relaxed">Your personal operating system — the daily habits, decision frameworks, and momentum practices that sustain your transformation over the long term.</p>
-        </div>
-
-        <div class="bg-rs-darker rounded-sm p-5 border border-white/10">
-          <div class="w-10 h-10 rounded-sm flex items-center justify-center mb-4 bg-white/10">
-            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
-          </div>
-          <h4 class="text-white font-black text-sm mb-1">Bonus Tools Included</h4>
-          <p class="text-gray-400 text-xs leading-relaxed">Reinvention Reflection Workbook, Reinvention Matrix Core Components, and the Impact Story Template — all included at no additional cost.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- INVESTMENT -->
-  <section class="bg-rs-darker py-14 px-6 border-b border-white/10">
-    <div class="max-w-3xl mx-auto text-center">
-      <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-3">Investment</p>
-      <h2 class="text-white font-black text-3xl mb-4">Everything You Need — In One Week</h2>
-      <p class="text-pfs-gold font-black mb-3" style="font-size: 56px; line-height:1;">$499</p>
-      <p class="text-gray-400 text-sm mb-8">One-time investment. All tools, frameworks, and sessions included.</p>
-      <div class="grid sm:grid-cols-2 gap-3 text-left max-w-xl mx-auto mb-8">
-        <div class="flex items-center gap-2 text-sm text-gray-300"><span class="text-pfs-gold">✓</span> 5 live coaching sessions</div>
-        <div class="flex items-center gap-2 text-sm text-gray-300"><span class="text-pfs-gold">✓</span> Daily action missions</div>
-        <div class="flex items-center gap-2 text-sm text-gray-300"><span class="text-pfs-gold">✓</span> Future-Self Identity Blueprint</div>
-        <div class="flex items-center gap-2 text-sm text-gray-300"><span class="text-pfs-gold">✓</span> Reinvention Matrix Diagnosis</div>
-        <div class="flex items-center gap-2 text-sm text-gray-300"><span class="text-pfs-gold">✓</span> Narrative Flip Model workshop</div>
-        <div class="flex items-center gap-2 text-sm text-gray-300"><span class="text-pfs-gold">✓</span> Opportunity Engine Templates™</div>
-        <div class="flex items-center gap-2 text-sm text-gray-300"><span class="text-pfs-gold">✓</span> 90-Day Reinvention Roadmap</div>
-        <div class="flex items-center gap-2 text-sm text-gray-300"><span class="text-pfs-gold">✓</span> Future Self OS™</div>
-        <div class="flex items-center gap-2 text-sm text-gray-300"><span class="text-pfs-gold">✓</span> Reinvention Reflection Workbook</div>
-        <div class="flex items-center gap-2 text-sm text-gray-300"><span class="text-pfs-gold">✓</span> Impact Story Template</div>
-      </div>
-      <a href="#apply" class="inline-block bg-pfs-gold text-black font-black uppercase text-sm tracking-widest px-12 py-4 hover:bg-yellow-300 transition-colors">Apply for the Sprint →</a>
-    </div>
-  </section>
-
-  <!-- APPLICATION FORM -->
-  <section id="apply" class="bg-rs-navy py-16 px-6">
-    <div class="max-w-2xl mx-auto">
-      <p class="text-pfs-gold text-xs uppercase tracking-widest font-bold mb-3">Apply Now</p>
-      <h2 class="text-white font-black text-3xl mb-2">Sprint Application</h2>
-      <p class="text-gray-400 text-sm mb-8">Spots are limited. Complete the application below — Andrew reviews every submission personally to ensure this is the right fit for you.</p>
-
-      <!-- Assessment reminder -->
-      <div class="bg-pfs-orange/10 border border-pfs-orange/40 rounded-sm p-4 mb-8 flex items-start gap-3">
-        <div class="flex-shrink-0 w-6 h-6 rounded-full bg-pfs-orange/30 flex items-center justify-center mt-0.5">
-          <svg class="w-3 h-3 text-pfs-orange" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>
-        </div>
-        <div>
-          <p class="text-orange-200 text-sm"><strong class="text-white">Have you taken the Transformation Readiness Assessment?</strong> If not, we strongly recommend completing it first — it helps us understand where you are and confirm this Sprint is the right fit. <a href="assessment.html" class="text-pfs-gold hover:underline">Take it free here →</a></p>
-        </div>
-      </div>
-
-      <form id="sprint-application" class="space-y-5" onsubmit="handleSubmit(event)" novalidate>
-        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-
-        <!-- Name row -->
-        <div class="grid sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs uppercase tracking-widest font-bold text-gray-400 mb-2">First Name <span class="text-pfs-orange">*</span></label>
-            <input type="text" name="firstName" required placeholder="Andrew"
-              class="w-full bg-rs-darker border border-white/20 text-white text-sm px-4 py-3 rounded-sm focus:outline-none focus:border-pfs-gold placeholder-gray-600 transition-colors" />
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feat-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
           </div>
           <div>
-            <label class="block text-xs uppercase tracking-widest font-bold text-gray-400 mb-2">Last Name <span class="text-pfs-orange">*</span></label>
-            <input type="text" name="lastName" required placeholder="Asnes"
-              class="w-full bg-rs-darker border border-white/20 text-white text-sm px-4 py-3 rounded-sm focus:outline-none focus:border-pfs-gold placeholder-gray-600 transition-colors" />
+            <div class="feat-name">Small Group Format</div>
+            <div class="feat-desc">Intimate cohort for real coaching, real feedback, real breakthroughs.</div>
           </div>
         </div>
-
-        <!-- Contact row -->
-        <div class="grid sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs uppercase tracking-widest font-bold text-gray-400 mb-2">Email Address <span class="text-pfs-orange">*</span></label>
-            <input type="email" name="email" required placeholder="you@example.com"
-              class="w-full bg-rs-darker border border-white/20 text-white text-sm px-4 py-3 rounded-sm focus:outline-none focus:border-pfs-gold placeholder-gray-600 transition-colors" />
+        <div class="feature-item">
+          <div class="feat-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
           </div>
           <div>
-            <label class="block text-xs uppercase tracking-widest font-bold text-gray-400 mb-2">Phone Number <span class="text-pfs-orange">*</span></label>
-            <input type="tel" name="phone" required placeholder="(646) 555-0100"
-              class="w-full bg-rs-darker border border-white/20 text-white text-sm px-4 py-3 rounded-sm focus:outline-none focus:border-pfs-gold placeholder-gray-600 transition-colors" />
+            <div class="feat-name">Daily Action Missions</div>
+            <div class="feat-desc">Each session ends with a mission you complete before the next day — progress every 24 hours.</div>
           </div>
         </div>
-
-        <!-- Question 1 -->
-        <div>
-          <label class="block text-xs uppercase tracking-widest font-bold text-gray-400 mb-2">
-            Where are you right now, and what has you considering the Sprint? <span class="text-pfs-orange">*</span>
-          </label>
-          <p class="text-gray-500 text-xs mb-2">Describe your current professional situation — what's working, what isn't, and what prompted you to look for change.</p>
-          <textarea name="q1" required rows="4" placeholder="e.g., I've been in the same role for 6 years and feel completely stuck. I know I need to make a change but I don't know what direction to go or how to start..."
-            class="w-full bg-rs-darker border border-white/20 text-white text-sm px-4 py-3 rounded-sm focus:outline-none focus:border-pfs-gold placeholder-gray-600 resize-none transition-colors"></textarea>
+        <div class="feature-item">
+          <div class="feat-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div>
+            <div class="feat-name">Tools You Keep Forever</div>
+            <div class="feat-desc">Every framework, template, and blueprint is yours — designed for ongoing use long after the sprint ends.</div>
+          </div>
         </div>
-
-        <!-- Question 2 -->
-        <div>
-          <label class="block text-xs uppercase tracking-widest font-bold text-gray-400 mb-2">
-            What does success look like for you 90 days after the Sprint? <span class="text-pfs-orange">*</span>
-          </label>
-          <p class="text-gray-500 text-xs mb-2">Be as specific as possible. What would need to be true — professionally and personally — for this to have been worth your time and investment?</p>
-          <textarea name="q2" required rows="4" placeholder="e.g., I would have a clear direction for my career pivot, a compelling story to tell, and be actively pursuing 3–5 target opportunities with real momentum..."
-            class="w-full bg-rs-darker border border-white/20 text-white text-sm px-4 py-3 rounded-sm focus:outline-none focus:border-pfs-gold placeholder-gray-600 resize-none transition-colors"></textarea>
+        <div class="feature-item">
+          <div class="feat-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+          </div>
+          <div>
+            <div class="feat-name">90-Day Roadmap on Day 5</div>
+            <div class="feat-desc">You leave the sprint with a personalized, executable roadmap — not a concept, a plan.</div>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <!-- Question 3 -->
-        <div>
-          <label class="block text-xs uppercase tracking-widest font-bold text-gray-400 mb-2">
-            What has been your biggest obstacle to reinvention — and what makes now different? <span class="text-pfs-orange">*</span>
-          </label>
-          <p class="text-gray-500 text-xs mb-2">Honesty here helps Andrew tailor the experience. What's held you back before, and why are you ready to commit to change now?</p>
-          <textarea name="q3" required rows="4" placeholder="e.g., Fear of making the wrong move has kept me paralyzed for two years. Now I'm at a point where staying still feels riskier than acting, and I'm ready to invest in doing this right..."
-            class="w-full bg-rs-darker border border-white/20 text-white text-sm px-4 py-3 rounded-sm focus:outline-none focus:border-pfs-gold placeholder-gray-600 resize-none transition-colors"></textarea>
+<!-- WHO IT'S FOR -->
+<section class="who-section">
+  <div class="section-inner">
+    <div class="section-eyebrow">Is This You?</div>
+    <h2 class="section-h2">Who the Sprint Is Built For</h2>
+    <div class="gold-rule"></div>
+    <div class="who-grid">
+      <div class="who-card"><span class="who-check">✓</span><p>Professionals who feel stuck and know it's time for a change — but can't get clear on what that change actually looks like.</p></div>
+      <div class="who-card"><span class="who-check">✓</span><p>People who've tried self-help books, courses, and advice — but haven't found a structured process that actually moves them forward.</p></div>
+      <div class="who-card"><span class="who-check">✓</span><p>Career pivotters, returning professionals, and anyone navigating a major transition who needs clarity, direction, and a real plan.</p></div>
+      <div class="who-card"><span class="who-check">✓</span><p>Anyone who's been through a setback — job loss, burnout, or a life pivot — and is ready to turn it into their greatest opportunity.</p></div>
+      <div class="who-card"><span class="who-check">✓</span><p>High achievers who feel disconnected from their purpose and want to redefine what success looks like on their own terms.</p></div>
+      <div class="who-card"><span class="who-check">✓</span><p>Doers who are done thinking and are ready to take focused, structured action — in just five days.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5-DAY SCHEDULE -->
+<section class="schedule-section" id="schedule">
+  <div class="section-inner">
+    <div class="section-eyebrow">The Curriculum</div>
+    <h2 class="section-h2">The 5-Day Schedule</h2>
+    <div class="gold-rule" style="margin-bottom:8px;"></div>
+    <p class="schedule-sub">Each day is a live session + a daily action mission you complete before the next session.</p>
+    <div class="day-cards">
+
+      <div class="day-card day-1">
+        <div class="day-num">
+          <div class="day-label">Day</div>
+          <div class="day-n">1</div>
         </div>
-
-        <!-- Assessment checkbox -->
-        <div class="flex items-start gap-3 bg-rs-darker border border-white/10 rounded-sm p-4">
-          <input type="checkbox" name="tookAssessment" id="tookAssessment"
-            class="mt-0.5 w-4 h-4 accent-pfs-gold flex-shrink-0" />
-          <label for="tookAssessment" class="text-sm text-gray-300 cursor-pointer">
-            I have completed (or plan to complete) the <a href="assessment.html" class="text-pfs-gold hover:underline">Transformation Readiness Assessment</a> before the Sprint begins.
-          </label>
+        <div class="day-body">
+          <div class="day-theme">Where Am I Really?</div>
+          <div class="day-title">Reinvention Matrix + Transformation Readiness Assessment</div>
+          <p class="day-desc">You can't navigate to where you're going if you don't know where you actually are. Day 1 breaks down the brutal, honest truth of your current position — professionally and personally. Using the Reinvention Matrix, you'll map your exact reinvention stage and identify the patterns that have been keeping you stuck.</p>
+          <div class="day-tags">
+            <span class="day-tag">Reinvention Matrix</span>
+            <span class="day-tag">Readiness Diagnosis</span>
+            <span class="day-tag">Daily Action Mission</span>
+          </div>
         </div>
+      </div>
 
-        <div class="pt-2">
-          <button type="submit" id="submit-btn" class="w-full bg-pfs-gold text-black font-black uppercase tracking-widest py-4 hover:bg-yellow-300 transition-colors text-sm">
-            Submit My Application →
-          </button>
-          <p id="form-error" class="hidden text-center text-red-400 text-xs mt-3">Something went wrong. Please try again or email us directly at andrew@projectfutureself.com.</p>
-          <p class="text-center text-gray-500 text-xs mt-3">Andrew reviews every application personally. You'll hear back within 48 hours.</p>
+      <div class="day-card day-2">
+        <div class="day-num">
+          <div class="day-label">Day</div>
+          <div class="day-n">2</div>
         </div>
-
-      </form>
-
-      <!-- Success message (hidden by default) -->
-      <div id="form-success" class="hidden text-center py-12">
-        <div class="w-16 h-16 rounded-full bg-pfs-gold/20 border border-pfs-gold/40 flex items-center justify-center mx-auto mb-5">
-          <svg class="w-8 h-8 text-pfs-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+        <div class="day-body">
+          <div class="day-theme">Who Am I Becoming?</div>
+          <div class="day-title">Future-Self Identity Blueprint</div>
+          <p class="day-desc">Reinvention isn't just about changing what you do — it's about becoming who you need to be. Day 2 is devoted to building a vivid, specific, and executable vision of your Future Self. You'll create your Future-Self Identity Blueprint: the values, strengths, roles, and non-negotiables that define the person you're becoming.</p>
+          <div class="day-tags">
+            <span class="day-tag">Identity Blueprint</span>
+            <span class="day-tag">Values Mapping</span>
+            <span class="day-tag">Daily Action Mission</span>
+          </div>
         </div>
-        <h3 class="text-white font-black text-2xl mb-3">Application Received</h3>
-        <p class="text-gray-400 text-sm max-w-sm mx-auto mb-6">Thank you for applying to the 5-Day Reinvention Sprint. Andrew will review your application and be in touch within 48 hours.</p>
-        <a href="index.html" class="inline-block border border-pfs-gold text-pfs-gold font-bold uppercase text-xs tracking-widest px-8 py-3 hover:bg-pfs-gold hover:text-black transition-colors">Back to Home</a>
+      </div>
+
+      <div class="day-card day-3">
+        <div class="day-num">
+          <div class="day-label">Day</div>
+          <div class="day-n">3</div>
+        </div>
+        <div class="day-body">
+          <div class="day-theme">How Do I Tell My Story?</div>
+          <div class="day-title">Narrative Flip Model</div>
+          <p class="day-desc">The story you tell about yourself determines the opportunities you attract. Day 3 introduces the Narrative Flip Model — a framework for transforming your reinvention from a liability into your greatest asset. You'll craft a professional narrative that is honest, compelling, and positions your pivot as a strength.</p>
+          <div class="day-tags">
+            <span class="day-tag">Narrative Flip Model</span>
+            <span class="day-tag">Story Workshop</span>
+            <span class="day-tag">Daily Action Mission</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="day-card day-4">
+        <div class="day-num">
+          <div class="day-label">Day</div>
+          <div class="day-n">4</div>
+        </div>
+        <div class="day-body">
+          <div class="day-theme">How Do I Turn This Into Opportunity?</div>
+          <div class="day-title">Opportunity Engine Templates™</div>
+          <p class="day-desc">With clarity on who you are and where you're going, Day 4 shifts to offense. Using the Opportunity Engine Templates™, you'll identify where your reinvented identity creates the most leverage — in your current role, in the job market, or as an entrepreneur — and map out the specific moves to capitalize on it.</p>
+          <div class="day-tags">
+            <span class="day-tag">Opportunity Engine™</span>
+            <span class="day-tag">Leverage Mapping</span>
+            <span class="day-tag">Daily Action Mission</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="day-card day-5">
+        <div class="day-num">
+          <div class="day-label">Day</div>
+          <div class="day-n">5</div>
+        </div>
+        <div class="day-body">
+          <div class="day-theme">What Happens Next?</div>
+          <div class="day-title">90-Day Reinvention Roadmap + Future Self OS™</div>
+          <p class="day-desc">Day 5 is about execution. You'll build your complete 90-Day Reinvention Roadmap — a real, milestone-driven plan covering the next 12 weeks. Then you'll configure your Future Self OS™: the personal operating system (habits, routines, decision frameworks) designed to sustain your momentum long after the sprint is over.</p>
+          <div class="day-tags">
+            <span class="day-tag">90-Day Roadmap</span>
+            <span class="day-tag">Future Self OS™</span>
+            <span class="day-tag">Graduation Coaching</span>
+          </div>
+        </div>
       </div>
 
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer class="bg-rs-darker py-8 border-t border-white/10">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-      <a href="index.html" class="text-white font-black uppercase tracking-widest" style="font-size:12px; letter-spacing:0.16em;">PROJECT FUTURE SELF</a>
-      <div class="flex items-center gap-5">
-        <a href="index.html" class="hover:text-gray-300 transition-colors">Home</a>
-        <a href="products.html" class="hover:text-gray-300 transition-colors">Products</a>
-        <a href="assessment.html" class="hover:text-gray-300 transition-colors">Assessment</a>
-        <a href="contact.html" class="hover:text-gray-300 transition-colors">Contact Us</a>
+<!-- DELIVERABLES -->
+<section class="deliverables-section">
+  <div class="section-inner">
+    <div class="section-eyebrow">Your Deliverables</div>
+    <h2 class="section-h2">What You'll Walk Away With</h2>
+    <div class="gold-rule"></div>
+    <div class="deliv-grid">
+      <div class="deliv-card">
+        <div class="deliv-icon-wrap"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg></div>
+        <div class="deliv-name">Future-Self Identity Blueprint</div>
+        <p class="deliv-desc">A fully developed portrait of who you are becoming — values, strengths, roles, and the identity that drives every decision going forward.</p>
       </div>
-      <p>&copy; Project Future Self. All rights reserved.</p>
+      <div class="deliv-card">
+        <div class="deliv-icon-wrap"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg></div>
+        <div class="deliv-name">Reinvention Matrix Diagnosis</div>
+        <p class="deliv-desc">A clear, honest map of exactly where you are in your reinvention cycle and what levers will move you forward fastest.</p>
+      </div>
+      <div class="deliv-card">
+        <div class="deliv-icon-wrap"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></div>
+        <div class="deliv-name">Powerful Professional Narrative</div>
+        <p class="deliv-desc">A refined, authentic story about your reinvention that makes your pivot a competitive advantage in any room or conversation.</p>
+      </div>
+      <div class="deliv-card">
+        <div class="deliv-icon-wrap"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg></div>
+        <div class="deliv-name">90-Day Reinvention Roadmap</div>
+        <p class="deliv-desc">A milestone-by-milestone action plan covering the 90 days immediately following the sprint — specific, actionable, and built around your goals.</p>
+      </div>
+      <div class="deliv-card">
+        <div class="deliv-icon-wrap"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+        <div class="deliv-name">Future Self OS™</div>
+        <p class="deliv-desc">Your personal operating system — daily habits, decision frameworks, and momentum practices that sustain your transformation over the long term.</p>
+      </div>
+      <div class="deliv-card">
+        <div class="deliv-icon-wrap"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
+        <div class="deliv-name">Bonus Tools Included</div>
+        <p class="deliv-desc">Reinvention Reflection Workbook, Reinvention Matrix Core Components, and the Impact Story Template — all included at no additional cost.</p>
+      </div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script>
-    // Cart badge
-    (function() {
-      const cart = JSON.parse(localStorage.getItem('pfs-cart') || '[]');
-      const count = cart.reduce(function(sum, item) { return sum + item.qty; }, 0);
-      const badge = document.getElementById('cart-badge');
-      if (badge && count > 0) {
-        badge.textContent = count;
-        badge.classList.remove('hidden');
-        badge.classList.add('flex');
-      }
-    })();
+<!-- INVESTMENT -->
+<section class="investment-section">
+  <div class="section-inner">
+    <div class="section-eyebrow">Investment</div>
+    <h2 class="section-h2">Everything You Need — In One Week</h2>
+    <div class="gold-rule" style="margin:14px auto 8px;"></div>
+    <div class="price-display"><span class="price-amount">$499</span></div>
+    <p class="inv-sub">One-time investment. All tools, frameworks, and sessions included.</p>
+    <div class="checklist">
+      <div class="checklist-item"><div class="check-dot">✓</div>5 live coaching sessions</div>
+      <div class="checklist-item"><div class="check-dot">✓</div>Daily action missions</div>
+      <div class="checklist-item"><div class="check-dot">✓</div>Future-Self Identity Blueprint</div>
+      <div class="checklist-item"><div class="check-dot">✓</div>Reinvention Matrix Diagnosis</div>
+      <div class="checklist-item"><div class="check-dot">✓</div>Narrative Flip Model workshop</div>
+      <div class="checklist-item"><div class="check-dot">✓</div>Opportunity Engine Templates™</div>
+      <div class="checklist-item"><div class="check-dot">✓</div>90-Day Reinvention Roadmap</div>
+      <div class="checklist-item"><div class="check-dot">✓</div>Future Self OS™</div>
+      <div class="checklist-item"><div class="check-dot">✓</div>Reinvention Reflection Workbook</div>
+      <div class="checklist-item"><div class="check-dot">✓</div>Impact Story Template</div>
+    </div>
+    <a href="#apply" class="btn-primary" style="display:inline-block;">Apply for the Sprint →</a>
+  </div>
+</section>
 
-    // Form submit handler — posts to Formspree, stays on page
-    function handleSubmit(e) {
-      e.preventDefault();
-      const form = document.getElementById('sprint-application');
-      const btn = document.getElementById('submit-btn');
-      const errorMsg = document.getElementById('form-error');
-      const success = document.getElementById('form-success');
+<!-- APPLICATION FORM -->
+<section class="form-section" id="apply">
+  <div class="section-inner" style="max-width:680px;">
+    <div class="section-eyebrow">Apply Now</div>
+    <h2 class="section-h2">Sprint Application</h2>
+    <div class="gold-rule"></div>
+    <p class="form-sub">Spots are limited. Complete the application below — Andrew reviews every submission personally to ensure this is the right fit for you.</p>
 
-      btn.disabled = true;
-      btn.textContent = 'Submitting…';
-      errorMsg.classList.add('hidden');
+    <div class="asmt-reminder">
+      <div class="asmt-reminder-icon">
+        <svg width="12" height="12" fill="currentColor" viewBox="0 0 20 20" style="color:var(--gold);"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+      </div>
+      <p><strong>Have you taken the Transformation Readiness Assessment?</strong> If not, we strongly recommend completing it first. <a href="assessment.html">Take it free here →</a></p>
+    </div>
 
-      fetch('https://formspree.io/f/xyknjnoy', {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(function(res) {
-        if (res.ok) {
-          form.classList.add('hidden');
-          success.classList.remove('hidden');
-          success.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-          btn.disabled = false;
-          btn.textContent = 'Submit My Application →';
-          errorMsg.classList.remove('hidden');
-        }
-      })
-      .catch(function() {
+    <form id="sprint-application" onsubmit="handleSubmit(event)" novalidate>
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+      <div class="form-grid-2">
+        <div class="form-field">
+          <label>First Name <span>*</span></label>
+          <input type="text" name="firstName" required placeholder="Andrew">
+        </div>
+        <div class="form-field">
+          <label>Last Name <span>*</span></label>
+          <input type="text" name="lastName" required placeholder="Asnes">
+        </div>
+      </div>
+
+      <div class="form-grid-2">
+        <div class="form-field">
+          <label>Email Address <span>*</span></label>
+          <input type="email" name="email" required placeholder="you@example.com">
+        </div>
+        <div class="form-field">
+          <label>Phone Number <span>*</span></label>
+          <input type="tel" name="phone" required placeholder="(646) 555-0100">
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Where are you right now, and what has you considering the Sprint? <span>*</span></label>
+        <p class="hint">Describe your current professional situation — what's working, what isn't, and what prompted you to look for change.</p>
+        <textarea name="q1" required rows="4" placeholder="e.g., I've been in the same role for 6 years and feel completely stuck. I know I need to make a change but I don't know what direction to go or how to start..."></textarea>
+      </div>
+
+      <div class="form-field">
+        <label>What does success look like for you 90 days after the Sprint? <span>*</span></label>
+        <p class="hint">Be as specific as possible. What would need to be true — professionally and personally — for this to have been worth your time and investment?</p>
+        <textarea name="q2" required rows="4" placeholder="e.g., I would have a clear direction for my career pivot, a compelling story to tell, and be actively pursuing 3–5 target opportunities with real momentum..."></textarea>
+      </div>
+
+      <div class="form-field">
+        <label>What has been your biggest obstacle to reinvention — and what makes now different? <span>*</span></label>
+        <p class="hint">Honesty here helps Andrew tailor the experience. What's held you back before, and why are you ready to commit to change now?</p>
+        <textarea name="q3" required rows="4" placeholder="e.g., Fear of making the wrong move has kept me paralyzed for two years. Now I'm at a point where staying still feels riskier than acting..."></textarea>
+      </div>
+
+      <div class="form-checkbox">
+        <input type="checkbox" name="tookAssessment" id="tookAssessment">
+        <label for="tookAssessment">I have completed (or plan to complete) the <a href="assessment.html">Transformation Readiness Assessment</a> before the Sprint begins.</label>
+      </div>
+
+      <button type="submit" class="form-submit" id="submit-btn">Submit My Application →</button>
+      <p class="form-error" id="form-error">Something went wrong. Please try again or email us at <a href="mailto:andrew@projectfutureself.com" style="color:var(--gold);">andrew@projectfutureself.com</a></p>
+      <p class="form-note">Andrew reviews every application personally. You'll hear back within 48 hours.</p>
+    </form>
+
+    <div class="form-success" id="form-success">
+      <div class="success-icon">
+        <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="color:var(--gold);"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+      </div>
+      <h3>Application Received</h3>
+      <p>Thank you for applying to the 5-Day Reinvention Sprint. Andrew will review your application and be in touch within 48 hours.</p>
+      <a href="index.html" class="btn-secondary" style="border-color:rgba(245,163,26,0.3);color:var(--gold);">Back to Home</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <img class="footer-mark" src="Transparent mark without words.png" alt="PFS">
+    <div class="footer-name">Project Future Self</div>
+  </div>
+  <p>© 2025 Project Future Self. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('sprint-application');
+    const btn = document.getElementById('submit-btn');
+    const errorMsg = document.getElementById('form-error');
+    const success = document.getElementById('form-success');
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+    errorMsg.style.display = 'none';
+    fetch('https://formspree.io/f/xyknjnoy', {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function(res) {
+      if (res.ok) {
+        form.style.display = 'none';
+        success.style.display = 'block';
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
         btn.disabled = false;
         btn.textContent = 'Submit My Application →';
-        errorMsg.classList.remove('hidden');
-      });
-    }
-  </script>
+        errorMsg.style.display = 'block';
+      }
+    }).catch(function() {
+      btn.disabled = false;
+      btn.textContent = 'Submit My Application →';
+      errorMsg.style.display = 'block';
+    });
+  }
+</script>
 
 </body>
 </html>
