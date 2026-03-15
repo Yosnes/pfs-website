@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Purchase Complete – Project Future Self</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0D1F3C;
+    --slate:      #1E3A5F;
+    --gold:       #F5A31A;
+    --gold-dark:  #C07D0A;
+    --amber-bg:   #FDF6EC;
+    --amber-mid:  #F5E8CC;
+    --text-dark:  #1A1208;
+    --text-mid:   #3D2E14;
+    --text-muted: #7A6240;
+    --white:      #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--amber-bg); color: var(--text-dark); line-height: 1.6; }
+
+  /* ── NAV ── */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(253,246,236,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(13,31,60,0.08); padding: 0 5%; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-mark { height: 44px; width: auto; }
+  .nav-wordmark { line-height: 1.15; }
+  .nav-wordmark .nw-top { font-size: 9px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+  .nav-wordmark .nw-main { font-size: 16px; font-weight: 800; letter-spacing: 0.02em; color: var(--navy); text-transform: uppercase; }
+  .nav-wordmark .nw-tag { font-size: 7px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dark); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta { font-size: 12px !important; font-weight: 800 !important; padding: 9px 20px; background: var(--gold); color: var(--navy) !important; border-radius: 24px; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .nav-cta:hover { background: #f8b83a !important; transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; }
+
+  /* ── PAGE HEADER ── */
+  .page-header { background: var(--navy); padding: 80px 5% 64px; text-align: center; }
+  .page-header .eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  .page-header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 4.5vw, 54px); font-weight: 400; color: #FDF6EC; line-height: 1.1; margin-bottom: 18px; }
+  .page-header p { font-size: 16px; color: rgba(253,246,236,0.65); max-width: 560px; margin: 0 auto; line-height: 1.75; }
+
+  /* ── CONTENT ── */
+  section { padding: 72px 5%; }
+  .section-inner { max-width: 640px; margin: 0 auto; }
+
+  /* ── CARD ── */
+  .card { background: var(--white); border: 1.5px solid var(--amber-mid); border-radius: 16px; padding: 48px 40px; box-shadow: 0 4px 32px rgba(13,31,60,0.07); }
+  .card-heading { font-family: 'DM Serif Display', serif; font-size: 22px; font-weight: 400; color: var(--navy); margin-bottom: 20px; }
+  .tips-list { list-style: none; margin-bottom: 32px; }
+  .tips-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--text-mid); line-height: 1.65; padding: 10px 0; border-bottom: 1px solid var(--amber-mid); }
+  .tips-list li:last-child { border-bottom: none; }
+  .tip-icon { flex-shrink: 0; width: 22px; height: 22px; background: var(--amber-mid); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+  .tip-icon svg { width: 11px; height: 11px; color: var(--gold-dark); }
+  .btn-primary { display: inline-block; padding: 13px 28px; background: var(--gold); color: var(--navy); font-size: 13px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; border-radius: 26px; transition: background 0.2s, transform 0.15s; }
+  .btn-primary:hover { background: #f8b83a; transform: translateY(-1px); }
+  .btn-actions { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 8px; }
+  .link-secondary { font-size: 13px; font-weight: 600; color: var(--navy); text-decoration: none; opacity: 0.65; transition: opacity 0.2s; }
+  .link-secondary:hover { opacity: 1; }
+  .divider { width: 40px; height: 3px; background: var(--gold); border-radius: 2px; margin: 0 auto 32px; }
+
+  /* ── FOOTER ── */
+  footer { background: #060F1E; padding: 28px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-brand { display: flex; align-items: center; gap: 10px; }
+  .footer-mark { height: 32px; width: auto; opacity: 0.8; }
+  .footer-name { font-size: 12px; font-weight: 700; color: rgba(253,246,236,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+  footer > p { font-size: 11px; color: rgba(253,246,236,0.3); }
+  .footer-links { display: flex; gap: 16px; }
+  .footer-links a { font-size: 11px; color: rgba(253,246,236,0.3); text-decoration: none; }
+  .footer-links a:hover { color: rgba(253,246,236,0.6); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: rgba(253,246,236,0.98); padding: 16px 5% 20px; border-bottom: 1px solid rgba(13,31,60,0.1); gap: 14px; z-index: 99; }
+    .hamburger { display: flex; }
+    .card { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img class="nav-mark" src="Transparent mark without words.png" alt="Project Future Self mark">
+      <div class="nav-wordmark">
+        <div class="nw-top">Project</div>
+        <div class="nw-main">Future Self</div>
+        <div class="nw-tag">Reinvent · Redesign · Reclaim</div>
+      </div>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="sprint.html">5-Day Sprint</a>
+      <a href="index.html#about">About</a>
+      <a href="products.html">Products</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="contact.html">Contact</a>
+      <a href="assessment.html" class="nav-cta">Take the Free Assessment</a>
+    </div>
+    <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="eyebrow">Purchase Complete</div>
+  <h1>Your Download Is On Its Way</h1>
+  <p>Check your inbox — your download link will arrive within a minute. The link is valid for 24 hours and allows up to 3 downloads.</p>
+</div>
+
+<!-- CONTENT -->
+<section>
+  <div class="section-inner">
+    <div class="card">
+      <h2 class="card-heading">Didn't receive the email?</h2>
+      <div class="divider"></div>
+      <ul class="tips-list">
+        <li>
+          <span class="tip-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          <span>Check your <strong>spam or junk folder</strong> — delivery emails sometimes land there.</span>
+        </li>
+        <li>
+          <span class="tip-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </span>
+          <span>Allow <strong>1–2 minutes</strong> for the email to arrive — it's on its way.</span>
+        </li>
+        <li>
+          <span class="tip-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </span>
+          <span>Still nothing? Email <a href="mailto:andrew@projectfutureself.com" style="color:var(--gold-dark);font-weight:600;">andrew@projectfutureself.com</a> and Andrew will send your file directly.</span>
+        </li>
+      </ul>
+      <div class="btn-actions">
+        <a href="products.html" class="btn-primary">Browse More Products →</a>
+        <a href="assessment.html" class="link-secondary">Take the Free Assessment →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <img class="footer-mark" src="Transparent mark without words.png" alt="PFS">
+    <div class="footer-name">Project Future Self</div>
+  </div>
+  <p>© 2025 Project Future Self. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>

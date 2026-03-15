@@ -39,9 +39,6 @@
   .nav-links a.active { color: var(--navy); font-weight: 700; }
   .nav-cta { font-size: 12px !important; font-weight: 800 !important; padding: 9px 20px; background: var(--gold); color: var(--navy) !important; border-radius: 24px; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
   .nav-cta:hover { background: #f8b83a !important; transform: translateY(-1px); }
-  .nav-cart { display: flex; align-items: center; position: relative; color: var(--text-mid); text-decoration: none; }
-  .nav-cart:hover { color: var(--navy); }
-  .cart-badge { position: absolute; top: -6px; right: -6px; background: var(--gold); color: var(--navy); font-size: 9px; font-weight: 900; border-radius: 50%; width: 16px; height: 16px; display: none; align-items: center; justify-content: center; }
   .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
   .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; }
 
@@ -147,10 +144,6 @@
       <a href="products.html" class="active">Products</a>
       <a href="assessment.html">Assessment</a>
       <a href="contact.html">Contact</a>
-      <a href="cart.html" class="nav-cart" title="Cart">
-        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-        <span class="cart-badge" id="cart-badge">0</span>
-      </a>
       <a href="assessment.html" class="nav-cta">Take the Free Assessment</a>
     </div>
     <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
@@ -217,7 +210,7 @@
             </td>
             <td>Digital Guide</td>
             <td>$149</td>
-            <td><button class="btn-cart" onclick="addToCart('Career Pivot Playbook', '$149', 149)">Add to Cart</button></td>
+            <td><a href="/api/create-checkout?price=price_1TBLkkF8dcdrC71Hka3eGZIb" class="btn-cart">Buy Now →</a></td>
           </tr>
           <tr>
             <td>
@@ -226,7 +219,7 @@
             </td>
             <td>Digital System</td>
             <td>$149</td>
-            <td><button class="btn-cart" onclick="addToCart('Job Search Accelerator System', '$149', 149)">Add to Cart</button></td>
+            <td><a href="/api/create-checkout?price=price_1TBLltF8dcdrC71H687JYbtZ" class="btn-cart">Buy Now →</a></td>
           </tr>
           <tr>
             <td>
@@ -247,7 +240,7 @@
             </td>
             <td>Digital Kit</td>
             <td>$79</td>
-            <td><button class="btn-cart" onclick="addToCart('Personal Brand Starter Kit', '$79', 79)">Add to Cart</button></td>
+            <td><a href="/api/create-checkout?price=price_1TBLmXF8dcdrC71H9I5HIjjh" class="btn-cart">Buy Now →</a></td>
           </tr>
           <tr>
             <td>
@@ -256,7 +249,7 @@
             </td>
             <td>Digital Protocol</td>
             <td>$49</td>
-            <td><button class="btn-cart" onclick="addToCart('Confidence Reset Protocol', '$49', 49)">Add to Cart</button></td>
+            <td><a href="/api/create-checkout?price=price_1TBLnHF8dcdrC71H43YBOyUk" class="btn-cart">Buy Now →</a></td>
           </tr>
           <tr>
             <td>
@@ -265,7 +258,7 @@
             </td>
             <td>Digital Toolkit</td>
             <td>$99</td>
-            <td><button class="btn-cart" onclick="addToCart('Skill Monetization Toolkit', '$99', 99)">Add to Cart</button></td>
+            <td><a href="/api/create-checkout?price=price_1TBLoPF8dcdrC71H0sFah9go" class="btn-cart">Buy Now →</a></td>
           </tr>
 
           <!-- NARRATIVE -->
@@ -277,7 +270,7 @@
             </td>
             <td>Digital Pack</td>
             <td>$79</td>
-            <td><button class="btn-cart" onclick="addToCart('Reinvention Story Pack', '$79', 79)">Add to Cart</button></td>
+            <td><a href="/api/create-checkout?price=price_1TBLphF8dcdrC71Hh95PYFLH" class="btn-cart">Buy Now →</a></td>
           </tr>
 
           <!-- INCLUDED WITH SPRINT -->
@@ -339,27 +332,6 @@
   </div>
 </footer>
 
-<script>
-  function getCart() { return JSON.parse(localStorage.getItem('pfs-cart') || '[]'); }
-  function saveCart(cart) { localStorage.setItem('pfs-cart', JSON.stringify(cart)); }
-  function addToCart(name, price, priceNum) {
-    const cart = getCart();
-    const existing = cart.find(item => item.name === name);
-    if (existing) { existing.qty++; } else { cart.push({ name, price, priceNum, qty: 1 }); }
-    saveCart(cart);
-    window.location.href = 'cart.html';
-  }
-  function updateCartBadge() {
-    const cart = getCart();
-    const count = cart.reduce((sum, item) => sum + item.qty, 0);
-    const badge = document.getElementById('cart-badge');
-    if (badge) {
-      badge.textContent = count;
-      badge.style.display = count > 0 ? 'flex' : 'none';
-    }
-  }
-  document.addEventListener('DOMContentLoaded', updateCartBadge);
-</script>
 
 </body>
 </html>
