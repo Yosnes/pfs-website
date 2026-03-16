@@ -68,6 +68,10 @@ export async function onRequestGet({ request, env }) {
   const url = new URL(request.url);
   const token = url.searchParams.get('token');
 
+  console.log('[download] token:', token);
+  console.log('[download] DOWNLOAD_TOKENS binding present:', !!env.DOWNLOAD_TOKENS);
+  console.log('[download] PRODUCTS_BUCKET binding present:', !!env.PRODUCTS_BUCKET);
+
   if (!token) {
     return errorPage(
       400,
@@ -119,6 +123,7 @@ export async function onRequestGet({ request, env }) {
   }
 
   // Fetch from R2
+  console.log('[download] fetching from R2:', tokenData.file);
   const object = await env.PRODUCTS_BUCKET.get(tokenData.file);
 
   if (!object) {
