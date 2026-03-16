@@ -5,12 +5,12 @@ const PRODUCTS = {
   price_1TBLmXF8dcdrC71H9I5HIjjh: { file: 'Personal Brand Starter Kit-FINAL.pdf',      name: 'Personal Brand Starter Kit' },
   price_1TBLltF8dcdrC71H687JYbtZ: { file: 'Job Search Accelerator System-FINAL.pdf',   name: 'Job Search Accelerator System' },
   price_1TBLkkF8dcdrC71Hka3eGZIb: { file: 'Career Pivot Playbook-FINAL.pdf',           name: 'Career Pivot Playbook' },
-  IMPACT_STORY_PRICE_ID_PLACEHOLDER: { file: 'Impact Story Template-FINAL.pdf',        name: 'Impact Story Template' },
 };
 
 export async function onRequestGet({ request, env }) {
   const url = new URL(request.url);
   const priceId = url.searchParams.get('price');
+  const origin = url.origin;
 
   if (!priceId || !PRODUCTS[priceId]) {
     return new Response('Invalid or missing price ID', { status: 400 });
@@ -21,8 +21,8 @@ export async function onRequestGet({ request, env }) {
     'line_items[0][price]': priceId,
     'line_items[0][quantity]': '1',
     mode: 'payment',
-    success_url: 'https://projectfutureself.com/download-success.html',
-    cancel_url: 'https://projectfutureself.com/products.html',
+    success_url: `${origin}/download-success.html`,
+    cancel_url: `${origin}/products.html`,
   });
 
   const response = await fetch('https://api.stripe.com/v1/checkout/sessions', {
