@@ -33,14 +33,55 @@
   .nav-wordmark .nw-top { font-size: 9px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
   .nav-wordmark .nw-main { font-size: 16px; font-weight: 800; letter-spacing: 0.02em; color: var(--navy); text-transform: uppercase; }
   .nav-wordmark .nw-tag { font-size: 7px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dark); }
+  .nav-right { display: flex; align-items: center; gap: 8px; }
   .nav-links { display: flex; align-items: center; gap: 28px; }
   .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover { color: var(--navy); }
   .nav-links a.active { color: var(--navy); font-weight: 700; }
   .nav-cta { font-size: 12px !important; font-weight: 800 !important; padding: 9px 20px; background: var(--gold); color: var(--navy) !important; border-radius: 24px; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
   .nav-cta:hover { background: #f8b83a !important; transform: translateY(-1px); }
+
+  /* Cart icon */
+  .nav-cart { position: relative; background: none; border: none; cursor: pointer; padding: 8px; display: flex; align-items: center; color: var(--navy); margin-left: 8px; }
+  .nav-cart svg { width: 22px; height: 22px; stroke: var(--navy); fill: none; }
+  .cart-badge { position: absolute; top: 2px; right: 2px; background: var(--gold); color: var(--navy); font-size: 9px; font-weight: 800; width: 16px; height: 16px; border-radius: 50%; display: none; align-items: center; justify-content: center; line-height: 1; }
+  .cart-badge.visible { display: flex; }
+
   .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
   .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; }
+
+  /* ── CART OVERLAY & DRAWER ── */
+  .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+  .cart-overlay.open { opacity: 1; pointer-events: all; }
+
+  .cart-drawer { position: fixed; top: 0; right: 0; bottom: 0; width: 400px; max-width: 100vw; background: var(--white); z-index: 201; transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); display: flex; flex-direction: column; box-shadow: -4px 0 40px rgba(13,31,60,0.18); }
+  .cart-drawer.open { transform: translateX(0); }
+
+  .cart-head { padding: 24px 24px 20px; border-bottom: 1px solid var(--amber-mid); display: flex; align-items: center; justify-content: space-between; }
+  .cart-head-title { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--navy); }
+  .cart-head-close { background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 28px; line-height: 1; padding: 0 2px; transition: color 0.15s; }
+  .cart-head-close:hover { color: var(--navy); }
+
+  .cart-body { flex: 1; overflow-y: auto; padding: 8px 24px; }
+  .cart-empty { text-align: center; padding: 64px 0; color: var(--text-muted); font-size: 14px; line-height: 1.7; }
+  .cart-empty strong { display: block; font-size: 16px; color: var(--navy); margin-bottom: 6px; }
+
+  .cart-item { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--amber-mid); }
+  .cart-item:last-child { border-bottom: none; }
+  .cart-item-info { flex: 1; min-width: 0; }
+  .cart-item-name { font-size: 14px; font-weight: 600; color: var(--navy); line-height: 1.4; margin-bottom: 3px; }
+  .cart-item-price { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+  .cart-item-remove { background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 20px; line-height: 1; padding: 2px 4px; transition: color 0.15s; flex-shrink: 0; margin-top: -2px; }
+  .cart-item-remove:hover { color: #b91c1c; }
+
+  .cart-foot { padding: 20px 24px 28px; border-top: 1.5px solid var(--amber-mid); }
+  .cart-total-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px; }
+  .cart-total-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+  .cart-total-amt { font-family: 'DM Serif Display', serif; font-size: 30px; color: var(--navy); }
+  .btn-checkout { display: block; width: 100%; padding: 15px; background: var(--gold); color: var(--navy); font-size: 13px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; border: none; border-radius: 32px; cursor: pointer; text-align: center; transition: all 0.2s; font-family: 'DM Sans', sans-serif; }
+  .btn-checkout:hover:not(:disabled) { background: #f8b83a; transform: translateY(-1px); }
+  .btn-checkout:disabled { opacity: 0.45; cursor: not-allowed; }
+  .cart-note { font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 12px; line-height: 1.6; }
 
   /* ── PAGE HEADER ── */
   .page-header { background: var(--navy); padding: 80px 5% 64px; }
@@ -80,13 +121,17 @@
   .prod-sub { font-size: 12px; color: var(--text-muted); font-weight: 400; display: block; margin-top: 3px; }
   .free-tag { color: #1a7a30 !important; }
   .included-tag { color: var(--text-muted) !important; font-size: 12px !important; font-style: italic; }
+
+  /* Buttons */
   .btn-cart {
     display: inline-block; padding: 8px 18px; background: var(--navy); color: var(--gold);
     font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
     border: none; border-radius: 20px; cursor: pointer; text-decoration: none;
     transition: all 0.2s; white-space: nowrap; font-family: 'DM Sans', sans-serif;
   }
-  .btn-cart:hover { background: var(--slate); transform: translateY(-1px); }
+  .btn-cart:hover:not(:disabled) { background: var(--slate); transform: translateY(-1px); }
+  .btn-cart.added { background: #166534; color: #fff; cursor: default; }
+  .btn-cart.added:hover { transform: none; background: #166534; }
   .btn-cart-ghost {
     display: inline-block; padding: 7px 18px; background: transparent; color: var(--navy);
     font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
@@ -127,6 +172,26 @@
 </head>
 <body>
 
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+
+<!-- CART DRAWER -->
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-head">
+    <div class="cart-head-title">Your Cart</div>
+    <button class="cart-head-close" onclick="closeCart()">×</button>
+  </div>
+  <div class="cart-body" id="cart-items"></div>
+  <div class="cart-foot">
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-amt" id="cart-total">$0</span>
+    </div>
+    <button class="btn-checkout" id="btn-checkout" onclick="checkout()" disabled>Proceed to Checkout →</button>
+    <p class="cart-note">Secure checkout via Stripe. You'll receive download links by email.</p>
+  </div>
+</div>
+
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
@@ -138,16 +203,25 @@
         <div class="nw-tag">Reinvent · Redesign · Reclaim</div>
       </div>
     </a>
-    <div class="nav-links" id="nav-links">
-      <a href="sprint.html">5-Day Sprint</a>
-      <a href="index.html#about">About</a>
-      <a href="products.html" class="active">Products</a>
-      <a href="assessment.html">Assessment</a>
-      <a href="contact.html">Contact</a>
-      <a href="assessment.html" class="nav-cta">Take the Free Assessment</a>
-    </div>
-    <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
-      <span></span><span></span><span></span>
+    <div class="nav-right">
+      <div class="nav-links" id="nav-links">
+        <a href="sprint.html">5-Day Sprint</a>
+        <a href="index.html#about">About</a>
+        <a href="products.html" class="active">Products</a>
+        <a href="assessment.html">Assessment</a>
+        <a href="contact.html">Contact</a>
+        <a href="assessment.html" class="nav-cta">Take the Free Assessment</a>
+      </div>
+      <button class="nav-cart" id="nav-cart" onclick="openCart()" aria-label="View cart">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+        <span class="cart-badge" id="cart-badge">0</span>
+      </button>
+      <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </div>
     </div>
   </div>
 </nav>
@@ -210,7 +284,7 @@
             </td>
             <td>Digital Guide</td>
             <td>$149</td>
-            <td><a href="/api/create-checkout?price=price_1TBLkkF8dcdrC71Hka3eGZIb" class="btn-cart">Buy Now →</a></td>
+            <td><button class="btn-cart" data-price-id="price_1TBLkkF8dcdrC71Hka3eGZIb" data-name="Career Pivot Playbook" data-price="149" onclick="addToCart(this)">Add to Cart</button></td>
           </tr>
           <tr>
             <td>
@@ -219,10 +293,9 @@
             </td>
             <td>Digital System</td>
             <td>$149</td>
-            <td><a href="/api/create-checkout?price=price_1TBLltF8dcdrC71H687JYbtZ" class="btn-cart">Buy Now →</a></td>
+            <td><button class="btn-cart" data-price-id="price_1TBLltF8dcdrC71H687JYbtZ" data-name="Job Search Accelerator System" data-price="149" onclick="addToCart(this)">Add to Cart</button></td>
           </tr>
           <!-- AI-Enhanced Career Toolkit hidden -->
-
 
           <!-- IDENTITY & BRAND -->
           <tr class="category-row"><td colspan="4"><span class="category-label">Identity &amp; Brand</span></td></tr>
@@ -233,7 +306,7 @@
             </td>
             <td>Digital Kit</td>
             <td>$79</td>
-            <td><a href="/api/create-checkout?price=price_1TBLmXF8dcdrC71H9I5HIjjh" class="btn-cart">Buy Now →</a></td>
+            <td><button class="btn-cart" data-price-id="price_1TBLmXF8dcdrC71H9I5HIjjh" data-name="Personal Brand Starter Kit" data-price="79" onclick="addToCart(this)">Add to Cart</button></td>
           </tr>
           <tr>
             <td>
@@ -242,7 +315,7 @@
             </td>
             <td>Digital Protocol</td>
             <td>$49</td>
-            <td><a href="/api/create-checkout?price=price_1TBLnHF8dcdrC71H43YBOyUk" class="btn-cart">Buy Now →</a></td>
+            <td><button class="btn-cart" data-price-id="price_1TBLnHF8dcdrC71H43YBOyUk" data-name="Confidence Reset Protocol" data-price="49" onclick="addToCart(this)">Add to Cart</button></td>
           </tr>
           <tr>
             <td>
@@ -251,7 +324,7 @@
             </td>
             <td>Digital Toolkit</td>
             <td>$99</td>
-            <td><a href="/api/create-checkout?price=price_1TBLoPF8dcdrC71H0sFah9go" class="btn-cart">Buy Now →</a></td>
+            <td><button class="btn-cart" data-price-id="price_1TBLoPF8dcdrC71H0sFah9go" data-name="Skill Monetization Toolkit" data-price="99" onclick="addToCart(this)">Add to Cart</button></td>
           </tr>
 
           <!-- NARRATIVE -->
@@ -263,7 +336,7 @@
             </td>
             <td>Digital Pack</td>
             <td>$79</td>
-            <td><a href="/api/create-checkout?price=price_1TBLphF8dcdrC71Hh95PYFLH" class="btn-cart">Buy Now →</a></td>
+            <td><button class="btn-cart" data-price-id="price_1TBLphF8dcdrC71Hh95PYFLH" data-name="Reinvention Story Pack" data-price="79" onclick="addToCart(this)">Add to Cart</button></td>
           </tr>
 
           <!-- INCLUDED WITH SPRINT -->
@@ -325,6 +398,102 @@
   </div>
 </footer>
 
+<script>
+  const CART_KEY = 'pfs_cart';
+
+  function getCart() {
+    try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch { return []; }
+  }
+
+  function saveCart(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  }
+
+  function addToCart(btn) {
+    const priceId = btn.dataset.priceId;
+    const name = btn.dataset.name;
+    const price = parseInt(btn.dataset.price, 10);
+    const cart = getCart();
+    if (cart.find(i => i.priceId === priceId)) return;
+    cart.push({ priceId, name, price });
+    saveCart(cart);
+    btn.textContent = 'Added ✓';
+    btn.classList.add('added');
+    btn.disabled = true;
+    updateBadge();
+    renderCart();
+    openCart();
+  }
+
+  function removeFromCart(priceId) {
+    saveCart(getCart().filter(i => i.priceId !== priceId));
+    updateBadge();
+    renderCart();
+    syncButtons();
+  }
+
+  function updateBadge() {
+    const n = getCart().length;
+    const badge = document.getElementById('cart-badge');
+    badge.textContent = n;
+    badge.classList.toggle('visible', n > 0);
+  }
+
+  function renderCart() {
+    const cart = getCart();
+    const container = document.getElementById('cart-items');
+    const total = cart.reduce((s, i) => s + i.price, 0);
+    document.getElementById('cart-total').textContent = '$' + total;
+    document.getElementById('btn-checkout').disabled = cart.length === 0;
+
+    if (cart.length === 0) {
+      container.innerHTML = '<div class="cart-empty"><strong>Your cart is empty</strong>Add products above to get started.</div>';
+      return;
+    }
+
+    container.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-price">$${item.price}</div>
+        </div>
+        <button class="cart-item-remove" onclick="removeFromCart('${item.priceId}')" title="Remove">×</button>
+      </div>
+    `).join('');
+  }
+
+  function syncButtons() {
+    const cart = getCart();
+    document.querySelectorAll('.btn-cart[data-price-id]').forEach(btn => {
+      const inCart = cart.some(i => i.priceId === btn.dataset.priceId);
+      btn.textContent = inCart ? 'Added ✓' : 'Add to Cart';
+      btn.classList.toggle('added', inCart);
+      btn.disabled = inCart;
+    });
+  }
+
+  function openCart() {
+    document.getElementById('cart-drawer').classList.add('open');
+    document.getElementById('cart-overlay').classList.add('open');
+  }
+
+  function closeCart() {
+    document.getElementById('cart-drawer').classList.remove('open');
+    document.getElementById('cart-overlay').classList.remove('open');
+  }
+
+  function checkout() {
+    const cart = getCart();
+    if (!cart.length) return;
+    const prices = cart.map(i => i.priceId).join(',');
+    window.location.href = `/api/create-checkout?prices=${prices}`;
+  }
+
+  // Init on load
+  updateBadge();
+  renderCart();
+  syncButtons();
+</script>
 
 </body>
 </html>

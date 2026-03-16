@@ -9,20 +9,33 @@ const PRODUCTS = {
 
 export async function onRequestGet({ request, env }) {
   const url = new URL(request.url);
-  const priceId = url.searchParams.get('price');
   const origin = url.origin;
 
-  if (!priceId || !PRODUCTS[priceId]) {
-    return new Response('Invalid or missing price ID', { status: 400 });
+  // Accept ?prices=id1,id2,id3 (cart) or legacy ?price=id (single)
+  const raw = url.searchParams.get('prices') || url.searchParams.get('price');
+
+  if (!raw) {
+    return new Response('Missing price parameter', { status: 400 });
+  }
+
+  const priceIds = raw.split(',').map(p => p.trim()).filter(Boolean);
+
+  for (const priceId of priceIds) {
+    if (!PRODUCTS[priceId]) {
+      return new Response(`Invalid price ID: ${priceId}`, { status: 400 });
+    }
   }
 
   const params = new URLSearchParams({
     'payment_method_types[]': 'card',
-    'line_items[0][price]': priceId,
-    'line_items[0][quantity]': '1',
     mode: 'payment',
     success_url: `${origin}/download-success.html`,
     cancel_url: `${origin}/products.html`,
+  });
+
+  priceIds.forEach((priceId, i) => {
+    params.append(`line_items[${i}][price]`, priceId);
+    params.append(`line_items[${i}][quantity]`, '1');
   });
 
   const response = await fetch('https://api.stripe.com/v1/checkout/sessions', {
@@ -41,6 +54,5 @@ export async function onRequestGet({ request, env }) {
   }
 
   const session = await response.json();
-
   return Response.redirect(session.url, 303);
 }
