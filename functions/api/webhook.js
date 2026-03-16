@@ -102,11 +102,16 @@ export async function onRequestPost({ request, env }) {
   const body = await request.text();
   const sigHeader = request.headers.get('stripe-signature') || '';
 
+  console.log('[webhook] received event, sig header present:', !!sigHeader);
+
   // Verify signature
   const valid = await verifyStripeSignature(body, sigHeader, env.STRIPE_WEBHOOK_SECRET);
   if (!valid) {
+    console.error('[webhook] signature verification failed');
     return new Response('Invalid signature', { status: 400 });
   }
+
+  console.log('[webhook] signature verified');
 
   let event;
   try {
@@ -115,6 +120,8 @@ export async function onRequestPost({ request, env }) {
     return new Response('Invalid JSON', { status: 400 });
   }
 
+  console.log('[webhook] event type:', event.type);
+
   // Only handle checkout completion
   if (event.type !== 'checkout.session.completed') {
     return new Response('OK', { status: 200 });
@@ -122,6 +129,9 @@ export async function onRequestPost({ request, env }) {
 
   const session = event.data.object;
   const customerEmail = session.customer_details?.email || session.customer_email;
+
+  console.log('[webhook] customer email:', customerEmail);
+  console.log('[webhook] session id:', session.id);
 
   // Fetch line items to get price ID
   const lineItemsRes = await fetch(
@@ -132,18 +142,23 @@ export async function onRequestPost({ request, env }) {
   );
 
   if (!lineItemsRes.ok) {
-    console.error('Failed to fetch line items for session', session.id);
+    const errText = await lineItemsRes.text();
+    console.error('[webhook] failed to fetch line items:', errText);
     return new Response('OK', { status: 200 });
   }
 
   const lineItemsData = await lineItemsRes.json();
   const priceId = lineItemsData.data?.[0]?.price?.id;
+  console.log('[webhook] price ID:', priceId);
+
   const product = PRODUCTS[priceId];
 
   if (!product) {
-    console.error('Unknown price ID:', priceId);
+    console.error('[webhook] unknown price ID:', priceId);
     return new Response('OK', { status: 200 });
   }
+
+  console.log('[webhook] product:', product.name);
 
   // Generate download token
   const token = crypto.randomUUID();
@@ -161,8 +176,13 @@ export async function onRequestPost({ request, env }) {
     expirationTtl: 86400,
   });
 
+  console.log('[webhook] token stored in KV:', token);
+
   // Send email via Resend
   const downloadUrl = `https://projectfutureself.com/api/download?token=${token}`;
+
+  console.log('[webhook] sending email to:', customerEmail);
+  console.log('[webhook] RESEND_API_KEY present:', !!env.RESEND_API_KEY);
 
   const emailRes = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -180,8 +200,10 @@ export async function onRequestPost({ request, env }) {
 
   if (!emailRes.ok) {
     const errText = await emailRes.text();
-    console.error('Resend error:', errText);
-    // Still return 200 to Stripe — email failure shouldn't cause retries
+    console.error('[webhook] Resend error:', errText);
+  } else {
+    const emailData = await emailRes.json();
+    console.log('[webhook] email sent, Resend ID:', emailData.id);
   }
 
   return new Response('OK', { status: 200 });
