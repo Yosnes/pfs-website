@@ -88,7 +88,7 @@ export async function onRequestGet({ request, env }) {
       404,
       'Link Not Found',
       'Link Expired or Invalid',
-      'This download link has expired or is no longer valid. Download links are active for 24 hours. If you need help, contact <a href="mailto:andrew@projectfutureself.com" style="color:#C07D0A;">andrew@projectfutureself.com</a>.'
+      'This download link has expired or is no longer valid. Download links are active for 24 hours. If you need help, contact <a href="mailto:support@projectfutureself.com" style="color:#C07D0A;">support@projectfutureself.com</a>.'
     );
   }
 
@@ -100,7 +100,7 @@ export async function onRequestGet({ request, env }) {
       500,
       'Error',
       'Something Went Wrong',
-      'There was an error processing your download. Please contact <a href="mailto:andrew@projectfutureself.com" style="color:#C07D0A;">andrew@projectfutureself.com</a> for assistance.'
+      'There was an error processing your download. Please contact <a href="mailto:support@projectfutureself.com" style="color:#C07D0A;">support@projectfutureself.com</a> for assistance.'
     );
   }
 
@@ -109,7 +109,7 @@ export async function onRequestGet({ request, env }) {
       410,
       'Link Expired',
       'This Link Has Expired',
-      'Your download link was valid for 24 hours and has now expired. Please contact <a href="mailto:andrew@projectfutureself.com" style="color:#C07D0A;">andrew@projectfutureself.com</a> if you need a new link.'
+      'Your download link was valid for 24 hours and has now expired. Please contact <a href="mailto:support@projectfutureself.com" style="color:#C07D0A;">support@projectfutureself.com</a> if you need a new link.'
     );
   }
 
@@ -118,7 +118,7 @@ export async function onRequestGet({ request, env }) {
       410,
       'Download Limit Reached',
       'Download Limit Reached',
-      `You have already downloaded this file ${tokenData.maxDownloads} times, which is the maximum allowed. If you need additional access, contact <a href="mailto:andrew@projectfutureself.com" style="color:#C07D0A;">andrew@projectfutureself.com</a>.`
+      `You have already downloaded this file ${tokenData.maxDownloads} times, which is the maximum allowed. If you need additional access, contact <a href="mailto:support@projectfutureself.com" style="color:#C07D0A;">support@projectfutureself.com</a>.`
     );
   }
 
@@ -132,7 +132,7 @@ export async function onRequestGet({ request, env }) {
       404,
       'File Not Found',
       'File Unavailable',
-      'We could not find your file. Please contact <a href="mailto:andrew@projectfutureself.com" style="color:#C07D0A;">andrew@projectfutureself.com</a> and we\'ll get it to you right away.'
+      'We could not find your file. Please contact <a href="mailto:support@projectfutureself.com" style="color:#C07D0A;">support@projectfutureself.com</a> and we\'ll get it to you right away.'
     );
   }
 

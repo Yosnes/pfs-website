@@ -79,7 +79,7 @@ function buildEmailHtml(productName, downloadUrl) {
 
             <!-- Expiry note -->
             <p style="font-size:12px;color:#7A6240;text-align:center;line-height:1.6;margin:0 0 8px;">This link expires in <strong>24 hours</strong> and allows up to <strong>3 downloads</strong>.</p>
-            <p style="font-size:12px;color:#7A6240;text-align:center;line-height:1.6;margin:0;">If you have any issues, reply to this email or contact <a href="mailto:andrew@projectfutureself.com" style="color:#C07D0A;">andrew@projectfutureself.com</a></p>
+            <p style="font-size:12px;color:#7A6240;text-align:center;line-height:1.6;margin:0;">If you have any issues, reply to this email or contact <a href="mailto:support@projectfutureself.com" style="color:#C07D0A;">support@projectfutureself.com</a></p>
           </td>
         </tr>
 
