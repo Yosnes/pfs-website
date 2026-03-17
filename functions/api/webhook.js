@@ -174,6 +174,15 @@ export async function onRequestPost({ request, env }) {
       name: product.name,
       url: `https://projectfutureself.com/api/download?token=${token}`,
     });
+
+    // Log download to Google Sheets
+    if (env.SHEETS_WEBHOOK_URL) {
+      await fetch(env.SHEETS_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'download', email: customerEmail, name: '', product: product.name }),
+      }).catch(err => console.error('[webhook] Sheets error:', err));
+    }
   }
 
   if (emailItems.length === 0) {

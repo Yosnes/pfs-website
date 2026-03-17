@@ -1659,6 +1659,7 @@
         dimOrder.forEach(d => { const el = document.getElementById('bar-' + d); if (el) el.style.width = sc.pct[d] + '%'; });
       }, 100);
       submitToFormspree(sc, ol.level);
+      submitToSheets(sc, ol.level);
     }
 
     // ── FORMSPREE (Andrew notification) ─────────────────────────────────────────
@@ -1682,6 +1683,22 @@
         const el = document.getElementById('submit-note');
         if (el) el.textContent = '';
       });
+    }
+
+    // ── GOOGLE SHEETS LOGGING ────────────────────────────────────────────────────
+    function submitToSheets(sc, levelName) {
+      fetch('https://script.google.com/macros/s/AKfycbysfFcYl-v8DMHRbYnEd_c1M02N9fWmSdITvhZbBIoBwUi11OFPWK28ONxZGze0jlmRZA/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'assessment',
+          name: state.name,
+          email: state.email,
+          score: sc.overall,
+          scoreLabel: levelName,
+        }),
+      }).catch(() => {});
     }
 
     // ── REPORT HELPERS ───────────────────────────────────────────────────────────
