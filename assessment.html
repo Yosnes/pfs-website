@@ -1240,9 +1240,8 @@
     <div id="rpt-actions">
       <button class="rpt-action-btn rpt-btn-back" onclick="hideReport()">← Back to Results</button>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="rpt-action-btn rpt-btn-email" id="rpt-email-btn" onclick="emailReport()">Email Report to
-          Both</button>
-        <button class="rpt-action-btn rpt-btn-print" onclick="window.print()">Print / Save as PDF</button>
+        <button class="rpt-action-btn rpt-btn-print" id="rpt-download-btn" onclick="downloadReportPDF()">Download PDF</button>
+        <button class="rpt-action-btn rpt-btn-email" id="rpt-email-btn" onclick="emailReportPDF()">Email Report</button>
       </div>
       <p id="rpt-email-note" style="display:none"></p>
     </div>
@@ -1260,29 +1259,7 @@
     </div>
   </footer>
 
-  <!-- EmailJS SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
-    // ─────────────────────────────────────────────────────────────────────────────
-    // EMAIL CONFIGURATION
-    // To enable email delivery, follow these steps:
-    //   1. Create a free account at https://www.emailjs.com (200 emails/month free)
-    //   2. Go to "Email Services" → connect your Gmail account → copy the Service ID
-    //   3. Go to "Email Templates" → create a new template with these variables:
-    //        {{to_email}}, {{to_name}}, {{subject}}, {{report_html}}
-    //      Set the template's "To Email" field to: {{to_email}}
-    //      Set the template's Content Type to HTML and use {{{report_html}}} in the body
-    //   4. Go to "Account" → copy your Public Key
-    //   5. Fill in the values below and set EMAILJS_ENABLED = true
-    // ─────────────────────────────────────────────────────────────────────────────
-    const EJS = {
-      enabled: true,                            // ← set to true after setup
-      publicKey: 'azNrFst1oVKrSFzR6',               // Account > API Keys
-      serviceId: 'service_046cuee',               // Email Services tab
-      templateId: 'template_syyrgwu',              // Email Templates tab
-      andrewEmail: 'support@projectfutureself.com'
-    };
-
     // ── QUIZ DATA ────────────────────────────────────────────────────────────────
     // Scoring weights:
     //   Clarity    = Q3+Q4+Q6+Q12+Q17           (max 25)
@@ -1826,37 +1803,102 @@
       document.getElementById('rpt-overlay').style.display = 'none';
     }
 
-    // ── EMAILJS ──────────────────────────────────────────────────────────────────
-    function emailReport() {
-      const note = document.getElementById('rpt-email-note');
-      note.style.display = 'block';
-      if (!EJS.enabled) {
-        note.innerHTML = 'Email delivery requires EmailJS setup. See the code comments in assessment.html for instructions, or <a href="contact.html" style="color:var(--navy)">contact Andrew</a> directly.';
-        return;
-      }
-      note.textContent = 'Sending…';
-      emailjs.init(EJS.publicKey);
+    // ── PDF REPORT ───────────────────────────────────────────────────────────────
+    const VERCEL_PDF_URL = 'https://pfs-pdf-api.vercel.app/api/generate-pdf';
+
+    function buildReportData() {
       const sc = state.scores || calcScores();
       const ol = getLevel(LEVELS, sc.overall);
-      const reportHtml = document.getElementById('rpt-content').innerHTML;
-      // Build simple text summary for fallback
-      const summary = `Overall Level: ${ol.level} (${sc.overall}%)\nTotal Score: ${sc.totalRaw}/${sc.totalMax}\n\n` +
-        ['clarity', 'resilience', 'support', 'action', 'purpose'].map(d => `${DIMS[d].name}: ${sc.pct[d]}% (${getDimLevel(d, sc.pct[d]).label})`).join('\n');
+      const dimOrder = ['clarity', 'resilience', 'support', 'action', 'purpose'];
 
-      const sendEmail = (toEmail, toName, subject) => emailjs.send(EJS.serviceId, EJS.templateId, {
-        to_email: toEmail, to_name: toName, subject,
-        report_html: reportHtml, summary
+      const dims = {};
+      dimOrder.forEach(d => {
+        const dl = getDimLevel(d, sc.pct[d]);
+        dims[d] = { pct: sc.pct[d], lbl: dl.label, insight: dl.glance, deep: dl.meaning, mom: dl.momentum };
       });
 
-      Promise.all([
-        sendEmail(state.email, state.name, `Your Transformation Readiness Report – ${ol.level}`),
-        sendEmail(EJS.andrewEmail, 'Andrew', `New Assessment: ${state.name} – ${ol.level} (${sc.overall}%)`)
-      ]).then(() => {
-        note.textContent = `✓ Report emailed to ${state.email} and Andrew.`;
-      }).catch(err => {
-        console.error('EmailJS error:', err);
-        note.textContent = 'Email failed. Please use Print / Save as PDF instead.';
-      });
+      // Standout strength: highest-scoring dimension
+      const topDim = dimOrder.reduce((a, b) => sc.pct[a] >= sc.pct[b] ? a : b);
+      const topDl = getDimLevel(topDim, sc.pct[topDim]);
+      const standoutText = `<strong>Standout Strength:</strong> Your ${DIMS[topDim].name} score (${sc.pct[topDim]}%) leads your profile. ${topDl.meaning}`;
+
+      const dateStr = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+      return {
+        name: state.name,
+        email: state.email,
+        date: dateStr,
+        scoreLabel: ol.level,
+        totalScore: `${sc.totalRaw} / ${sc.totalMax}`,
+        overallPct: String(sc.overall),
+        heroDesc: ol.desc,
+        standoutText,
+        dims,
+        patternText: ol.pattern,
+        nextTitle: ol.step,
+        nextBody: ol.stepDesc,
+        quoteText: ol.quote,
+        quoteAttr: '',
+      };
+    }
+
+    async function downloadReportPDF() {
+      const btn = document.getElementById('rpt-download-btn');
+      const note = document.getElementById('rpt-email-note');
+      btn.textContent = 'Generating…';
+      btn.disabled = true;
+      note.style.display = 'none';
+      try {
+        const data = buildReportData();
+        const res = await fetch(VERCEL_PDF_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (!res.ok) throw new Error(`API error ${res.status}`);
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${data.name.replace(/\s+/g, '-').toLowerCase()}-transformation-report.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      } catch (e) {
+        console.error('Download failed:', e);
+        note.style.display = 'block';
+        note.textContent = 'PDF generation failed. Please try again.';
+      } finally {
+        btn.textContent = 'Download PDF';
+        btn.disabled = false;
+      }
+    }
+
+    async function emailReportPDF() {
+      const btn = document.getElementById('rpt-email-btn');
+      const note = document.getElementById('rpt-email-note');
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+      note.style.display = 'none';
+      try {
+        const data = buildReportData();
+        const res = await fetch('/api/email-report', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (!res.ok) throw new Error(`API error ${res.status}`);
+        note.style.display = 'block';
+        note.textContent = `✓ Report sent to ${data.email}.`;
+      } catch (e) {
+        console.error('Email failed:', e);
+        note.style.display = 'block';
+        note.textContent = 'Email failed. Try Download PDF instead.';
+      } finally {
+        btn.textContent = 'Email Report';
+        btn.disabled = false;
+      }
     }
   </script>
 </body>
