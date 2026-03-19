@@ -1,10 +1,10 @@
 const PRODUCTS = {
-  price_1TBLphF8dcdrC71Hh95PYFLH: { file: 'Reinvention Story Pack-FINAL.pdf',         name: 'Reinvention Story Pack' },
-  price_1TBLoPF8dcdrC71H0sFah9go: { file: 'Skill Monetization Toolkit-FINAL.pdf',      name: 'Skill Monetization Toolkit' },
-  price_1TBLnHF8dcdrC71H43YBOyUk: { file: 'Confidence Reset Protocol-FINAL.pdf',       name: 'Confidence Reset Protocol' },
-  price_1TBLmXF8dcdrC71H9I5HIjjh: { file: 'Personal Brand Starter Kit-FINAL.pdf',      name: 'Personal Brand Starter Kit' },
-  price_1TBLltF8dcdrC71H687JYbtZ: { file: 'Job Search Accelerator System-FINAL.pdf',   name: 'Job Search Accelerator System' },
-  price_1TBLkkF8dcdrC71Hka3eGZIb: { file: 'Career Pivot Playbook-FINAL.pdf',           name: 'Career Pivot Playbook' },
+  price_1TCjYyF6VZVb4XEICZIVq9qp: { file: 'Reinvention Story Pack-FINAL.pdf',         name: 'Reinvention Story Pack' },
+  price_1TCjZ2F6VZVb4XEIthU2o9zy: { file: 'Skill Monetization Toolkit-FINAL.pdf',      name: 'Skill Monetization Toolkit' },
+  price_1TCjZ4F6VZVb4XEIKDzarUqM: { file: 'Confidence Reset Protocol-FINAL.pdf',       name: 'Confidence Reset Protocol' },
+  price_1TCjZ6F6VZVb4XEI1eezZHWj: { file: 'Personal Brand Starter Kit-FINAL.pdf',      name: 'Personal Brand Starter Kit' },
+  price_1TCjZ9F6VZVb4XEIonDOyhUn: { file: 'Job Search Accelerator System-FINAL.pdf',   name: 'Job Search Accelerator System' },
+  price_1TCjZAF6VZVb4XEId0grYtvR: { file: 'Career Pivot Playbook-FINAL.pdf',           name: 'Career Pivot Playbook' },
 };
 
 async function verifyStripeSignature(body, sigHeader, secret) {
