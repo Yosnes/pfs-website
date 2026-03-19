@@ -29,6 +29,7 @@ export async function onRequestGet({ request, env }) {
   const params = new URLSearchParams({
     'payment_method_types[]': 'card',
     mode: 'payment',
+    allow_promotion_codes: 'true',
     success_url: `${origin}/download-success.html`,
     cancel_url: `${origin}/products.html`,
   });
