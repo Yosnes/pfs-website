@@ -1241,7 +1241,7 @@
       <button class="rpt-action-btn rpt-btn-back" onclick="hideReport()">← Back to Results</button>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="rpt-action-btn rpt-btn-print" id="rpt-download-btn" onclick="downloadReportPDF()">Download PDF</button>
-        <button class="rpt-action-btn rpt-btn-email" id="rpt-email-btn" onclick="emailReportPDF()" style="display:none">Email Report</button>
+        <button class="rpt-action-btn rpt-btn-email" id="rpt-email-btn" onclick="emailReportPDF()">Email Report</button>
       </div>
       <p id="rpt-email-note" style="display:none"></p>
     </div>
@@ -1803,32 +1803,37 @@
       document.getElementById('rpt-overlay').style.display = 'none';
     }
 
-       // ── PDF REPORT ───────────────────────────────────────────────────────────────
+    // ── PDF REPORT ───────────────────────────────────────────────────────────────
     const VERCEL_PDF_URL = 'https://pfs-pdf-api-production.up.railway.app/api/generate-pdf';
 
     function buildReportData() {
       const sc = state.scores || calcScores();
       const ol = getLevel(LEVELS, sc.overall);
       const dimOrder = ['clarity', 'resilience', 'support', 'action', 'purpose'];
+
       const dims = {};
       dimOrder.forEach(d => {
         const dl = getDimLevel(d, sc.pct[d]);
         dims[d] = { pct: sc.pct[d], lbl: dl.label, insight: dl.glance, deep: dl.meaning, mom: dl.momentum };
       });
+
+      // Standout strength: highest-scoring dimension
       const topDim = dimOrder.reduce((a, b) => sc.pct[a] >= sc.pct[b] ? a : b);
       const topDl = getDimLevel(topDim, sc.pct[topDim]);
-      const standoutText = '<strong>Standout Strength:</strong> Your ' + DIMS[topDim].name + ' score (' + sc.pct[topDim] + '%) leads your profile. ' + topDl.meaning;
+      const standoutText = `<strong>Standout Strength:</strong> Your ${DIMS[topDim].name} score (${sc.pct[topDim]}%) leads your profile. ${topDl.meaning}`;
+
       const dateStr = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
       return {
         name: state.name,
         email: state.email,
         date: dateStr,
         scoreLabel: ol.level,
-        totalScore: sc.totalRaw + ' / ' + sc.totalMax,
+        totalScore: `${sc.totalRaw} / ${sc.totalMax}`,
         overallPct: String(sc.overall),
         heroDesc: ol.desc,
-        standoutText: standoutText,
-        dims: dims,
+        standoutText,
+        dims,
         patternText: ol.pattern,
         nextTitle: ol.step,
         nextBody: ol.stepDesc,
@@ -1840,7 +1845,7 @@
     async function downloadReportPDF() {
       const btn = document.getElementById('rpt-download-btn');
       const note = document.getElementById('rpt-email-note');
-      btn.textContent = 'Generating...';
+      btn.textContent = 'Generating…';
       btn.disabled = true;
       note.style.display = 'none';
       try {
@@ -1850,12 +1855,12 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
-        if (!res.ok) throw new Error('API error ' + res.status);
+        if (!res.ok) throw new Error(`API error ${res.status}`);
         const blob = await res.blob();
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = data.name.replace(/\s+/g, '-').toLowerCase() + '-transformation-report.pdf';
+        a.download = `${data.name.replace(/\s+/g, '-').toLowerCase()}-transformation-report.pdf`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -1873,7 +1878,7 @@
     async function emailReportPDF() {
       const btn = document.getElementById('rpt-email-btn');
       const note = document.getElementById('rpt-email-note');
-      btn.textContent = 'Sending...';
+      btn.textContent = 'Sending…';
       btn.disabled = true;
       note.style.display = 'none';
       try {
@@ -1883,9 +1888,9 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
-        if (!res.ok) throw new Error('API error ' + res.status);
+        if (!res.ok) throw new Error(`API error ${res.status}`);
         note.style.display = 'block';
-        note.textContent = 'Report sent to ' + data.email + '.';
+        note.textContent = `✓ Report sent to ${data.email}.`;
       } catch (e) {
         console.error('Email failed:', e);
         note.style.display = 'block';
@@ -1899,4 +1904,3 @@
 </body>
 
 </html>
-
