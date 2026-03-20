@@ -176,7 +176,13 @@
   function confirmBooking() {
     document.getElementById('calendar-section').style.display = 'none';
     document.getElementById('booked-confirmation').style.display = 'block';
-    window.scrollTo({ top: document.getElementById('booked-confirmation').offsetTop - 100, behavior: 'smooth' });
+    document.getElementById('status-bar').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Auto-show confirmation if redirected back from Google Calendar with ?booked=true
+  if (new URLSearchParams(window.location.search).get('booked') === 'true') {
+    confirmBooking();
   }
 
   const raw = localStorage.getItem('pfs_report_data');
@@ -200,7 +206,7 @@
       .catch(() => {
         document.getElementById('status-bar').textContent = 'Report delivery in progress — Andrew will have your results shortly.';
       });
-  } else {
+  } else if (new URLSearchParams(window.location.search).get('booked') !== 'true') {
     document.getElementById('status-bar').style.display = 'none';
   }
 </script>
