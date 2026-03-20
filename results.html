@@ -139,12 +139,8 @@
       <h3>Book a 1:1 Results Review</h3>
       <p class="sub">30 minutes · Free · Via Zoom</p>
       <div class="calendar-wrap">
-        <!-- Google Calendar Appointment Scheduling begin -->
-        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ15Yckc_pnhezBqOua4LOUmCXe5tSAvRYr6nP63bVZ2fFZ3esBx9KmCe-sD3im3LCpnZZAOvfwY?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
-        <!-- end Google Calendar Appointment Scheduling -->
-      </div>
-      <div style="text-align:center;margin-top:24px;">
-        <button onclick="confirmBooking()" style="background:none;border:none;font-size:13px;font-weight:600;color:var(--text-muted);cursor:pointer;text-decoration:underline;text-underline-offset:3px;">I've scheduled my appointment ✓</button>
+        <div class="calendly-inline-widget" data-url="https://calendly.com/andrew-projectfutureself/30min" style="min-width:320px;height:660px;"></div>
+        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
       </div>
     </div>
 
@@ -180,10 +176,12 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // Auto-show confirmation if redirected back from Google Calendar with ?booked=true
-  if (new URLSearchParams(window.location.search).get('booked') === 'true') {
-    confirmBooking();
-  }
+  // Auto-show confirmation when Calendly booking is completed
+  window.addEventListener('message', function(e) {
+    if (e.data.event === 'calendly.event_scheduled') {
+      confirmBooking();
+    }
+  });
 
   const raw = localStorage.getItem('pfs_report_data');
   localStorage.removeItem('pfs_report_data');
@@ -206,7 +204,7 @@
       .catch(() => {
         document.getElementById('status-bar').textContent = 'Report delivery in progress — Andrew will have your results shortly.';
       });
-  } else if (new URLSearchParams(window.location.search).get('booked') !== 'true') {
+  } else {
     document.getElementById('status-bar').style.display = 'none';
   }
 </script>
