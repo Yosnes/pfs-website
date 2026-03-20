@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Results – Project Future Self</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0D1F3C;
+    --slate:      #1E3A5F;
+    --gold:       #F5A31A;
+    --gold-dark:  #C07D0A;
+    --amber-bg:   #FDF6EC;
+    --amber-mid:  #F5E8CC;
+    --text-dark:  #1A1208;
+    --text-mid:   #3D2E14;
+    --text-muted: #7A6240;
+    --white:      #FFFFFF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--amber-bg); color: var(--text-dark); line-height: 1.6; }
+
+  /* ── NAV ── */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(253,246,236,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(13,31,60,0.08); padding: 0 5%; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-mark { height: 44px; width: auto; }
+  .nav-wordmark { line-height: 1.15; }
+  .nav-wordmark .nw-top { font-size: 9px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+  .nav-wordmark .nw-main { font-size: 16px; font-weight: 800; letter-spacing: 0.02em; color: var(--navy); text-transform: uppercase; }
+  .nav-wordmark .nw-tag { font-size: 7px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dark); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta { font-size: 12px !important; font-weight: 800 !important; padding: 9px 20px; background: var(--gold); color: var(--navy) !important; border-radius: 24px; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .nav-cta:hover { background: #f8b83a !important; transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; }
+
+  /* ── PAGE HEADER ── */
+  .page-header { background: var(--navy); padding: 80px 5% 64px; text-align: center; }
+  .page-header .eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  .page-header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 4.5vw, 54px); font-weight: 400; color: #FDF6EC; line-height: 1.1; margin-bottom: 18px; }
+  .page-header p { font-size: 16px; color: rgba(253,246,236,0.65); max-width: 580px; margin: 0 auto; line-height: 1.75; }
+
+  /* ── STATUS BAR ── */
+  .status-bar { text-align: center; padding: 14px 5%; background: var(--amber-mid); border-bottom: 1px solid rgba(13,31,60,0.08); font-size: 13px; color: var(--text-muted); }
+  .status-bar.done { color: #2E7D32; background: #F1F8E9; border-color: #C5E1A5; }
+
+  /* ── CONTENT ── */
+  section { padding: 64px 5%; }
+  .section-inner { max-width: 780px; margin: 0 auto; }
+
+  /* ── INTRO ── */
+  .intro-text { text-align: center; margin-bottom: 40px; }
+  .intro-text h2 { font-family: 'DM Serif Display', serif; font-size: clamp(22px, 3vw, 30px); color: var(--navy); margin-bottom: 14px; }
+  .intro-text p { font-size: 15px; color: var(--text-mid); max-width: 540px; margin: 0 auto; line-height: 1.75; }
+
+  /* ── DIVIDER ── */
+  .divider { width: 40px; height: 3px; background: var(--gold); border-radius: 2px; margin: 0 auto 32px; }
+
+  /* ── CALENDAR CARD ── */
+  .calendar-card { background: var(--white); border: 1.5px solid var(--amber-mid); border-radius: 16px; padding: 40px 40px 32px; box-shadow: 0 4px 32px rgba(13,31,60,0.07); }
+  .calendar-card h3 { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--navy); margin-bottom: 8px; }
+  .calendar-card .sub { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; }
+  .calendar-wrap { border-radius: 8px; overflow: hidden; border: 1px solid var(--amber-mid); }
+
+  /* ── FOOTER ── */
+  footer { background: #060F1E; padding: 28px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-brand { display: flex; align-items: center; gap: 10px; }
+  .footer-mark { height: 32px; width: auto; opacity: 0.8; }
+  .footer-name { font-size: 12px; font-weight: 700; color: rgba(253,246,236,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+  footer > p { font-size: 11px; color: rgba(253,246,236,0.3); }
+  .footer-links { display: flex; gap: 16px; }
+  .footer-links a { font-size: 11px; color: rgba(253,246,236,0.3); text-decoration: none; }
+  .footer-links a:hover { color: rgba(253,246,236,0.6); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: rgba(253,246,236,0.98); padding: 16px 5% 20px; border-bottom: 1px solid rgba(13,31,60,0.1); gap: 14px; z-index: 99; }
+    .hamburger { display: flex; }
+    .calendar-card { padding: 28px 20px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img class="nav-mark" src="Transparent mark without words.png" alt="Project Future Self mark">
+      <div class="nav-wordmark">
+        <div class="nw-top">Project</div>
+        <div class="nw-main">Future Self</div>
+        <div class="nw-tag">Reinvent · Redesign · Reclaim</div>
+      </div>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="sprint.html">5-Day Sprint</a>
+      <a href="index.html#about">About</a>
+      <a href="products.html">Products</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="contact.html">Contact</a>
+      <a href="assessment.html" class="nav-cta">Take the Free Assessment</a>
+    </div>
+    <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- STATUS BAR -->
+<div class="status-bar" id="status-bar">Preparing your personalized report...</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="eyebrow">Transformation Readiness Assessment</div>
+  <h1>Your Report Is Being Prepared</h1>
+  <p>We're generating your personalized results. In the meantime, book a time with Andrew to walk through your findings together.</p>
+</div>
+
+<!-- CONTENT -->
+<section>
+  <div class="section-inner">
+
+    <div class="intro-text">
+      <h2>Schedule Your Results Review</h2>
+      <div class="divider"></div>
+      <p>Andrew will review your report before your call so you can dive straight into what matters most — your specific patterns, strengths, and the clearest path forward for your reinvention.</p>
+    </div>
+
+    <div class="calendar-card">
+      <h3>Book a 1:1 Results Review</h3>
+      <p class="sub">30 minutes · Free · Via Zoom</p>
+      <div class="calendar-wrap">
+        <!-- Google Calendar Appointment Scheduling begin -->
+        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ15Yckc_pnhezBqOua4LOUmCXe5tSAvRYr6nP63bVZ2fFZ3esBx9KmCe-sD3im3LCpnZZAOvfwY?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
+        <!-- end Google Calendar Appointment Scheduling -->
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <img class="footer-mark" src="Transparent mark without words.png" alt="PFS">
+    <div class="footer-name">Project Future Self</div>
+  </div>
+  <p>© 2025 Project Future Self. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+<script>
+  const raw = localStorage.getItem('pfs_report_data');
+  localStorage.removeItem('pfs_report_data');
+
+  if (raw) {
+    fetch('/api/andrew-report', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: raw,
+    })
+      .then(r => {
+        const bar = document.getElementById('status-bar');
+        if (r.ok) {
+          bar.textContent = 'Your report has been sent to Andrew. He will review it before your call.';
+          bar.classList.add('done');
+        } else {
+          bar.textContent = 'Report delivery in progress — Andrew will have your results shortly.';
+        }
+      })
+      .catch(() => {
+        document.getElementById('status-bar').textContent = 'Report delivery in progress — Andrew will have your results shortly.';
+      });
+  } else {
+    document.getElementById('status-bar').style.display = 'none';
+  }
+</script>
+</body>
+</html>

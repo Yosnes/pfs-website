@@ -1632,46 +1632,13 @@
 
     // ── QUIZ RESULTS SCREEN ──────────────────────────────────────────────────────
     function showResults() {
-      showScreen('screen-results');
       const sc = calcScores(); state.scores = sc;
       const ol = getLevel(LEVELS, sc.overall);
-      const dimOrder = ['clarity', 'resilience', 'support', 'action', 'purpose'];
-      let html = `
-  <div class="results-hero">
-    <div class="r-eyebrow">Your Readiness Profile</div>
-    <div class="r-name">${esc(state.name)}</div>
-    <div class="r-level">${ol.level}</div>
-    <div class="r-score">Overall Score: ${sc.totalRaw} / ${sc.totalMax} &nbsp;·&nbsp; ${sc.overall}%</div>
-    <div class="r-bar-track"><div class="r-bar-fill" id="bar-overall" style="width:0%"></div></div>
-    <div class="r-desc">${ol.desc}</div>
-  </div>
-  <div class="dim-results">`;
-      dimOrder.forEach(d => {
-        const dim = DIMS[d], pct = sc.pct[d], dl = getDimLevel(d, pct);
-        html += `<div class="dim-card">
-      <div class="dim-top">
-        <div class="dim-name">${dim.name}</div>
-        <div class="dim-lbl" style="background:${dim.bg};color:${dim.tc};">${dl.label} &nbsp; ${pct}%</div>
-      </div>
-      <div class="dim-bar-track"><div class="dim-bar-fill" id="bar-${d}" style="width:0%;background:${dim.color};"></div></div>
-      <div class="dim-insight">${dl.glance}</div>
-    </div>`;
-      });
-      html += `</div>
-  <button class="btn-report" onclick="generateAndShowReport()">View Your Full In-Depth Report →</button>
-  <div class="results-cta">
-    <h3>Ready to Accelerate Your Transformation?</h3>
-    <p>The 5-Day Reinvention Sprint addresses exactly what your profile reveals — with daily coaching, proven frameworks, and a community that understands the reinvention journey.</p>
-    <a href="sprint.html" class="btn-gold-link">Learn About the 5-Day Sprint →</a>
-  </div>
-  <p class="submit-note" id="submit-note" style="margin-top:16px">Sending results to Andrew...</p>`;
-      document.getElementById('results-content').innerHTML = html;
-      setTimeout(() => {
-        document.getElementById('bar-overall').style.width = sc.overall + '%';
-        dimOrder.forEach(d => { const el = document.getElementById('bar-' + d); if (el) el.style.width = sc.pct[d] + '%'; });
-      }, 100);
+      const data = buildReportData();
+      localStorage.setItem('pfs_report_data', JSON.stringify(data));
       submitToFormspree(sc, ol.level);
       submitToSheets(sc, ol.level);
+      window.location.href = 'results.html';
     }
 
     // ── FORMSPREE (Andrew notification) ─────────────────────────────────────────
