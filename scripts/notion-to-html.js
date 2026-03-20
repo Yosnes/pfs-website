@@ -42,7 +42,7 @@ async function fetchReadyPosts() {
     body: JSON.stringify({
       filter: {
         property: 'Status',
-        select: { equals: 'Ready to Publish' },
+        status: { equals: 'Ready to Publish' },
       },
       sorts: [{ property: 'Published Date', direction: 'descending' }],
     }),
@@ -57,7 +57,7 @@ async function fetchPublishedPosts() {
     body: JSON.stringify({
       filter: {
         property: 'Status',
-        select: { equals: 'Published' },
+        status: { equals: 'Published' },
       },
       sorts: [{ property: 'Published Date', direction: 'descending' }],
     }),
@@ -168,7 +168,7 @@ function getProp(page, name, type) {
     case 'rich_text':
       return prop.rich_text?.map(t => t.plain_text).join('') || '';
     case 'select':
-      return prop.select?.name || '';
+      return prop.select?.name || prop.status?.name || '';
     case 'date':
       return prop.date?.start || '';
     case 'multi_select':
