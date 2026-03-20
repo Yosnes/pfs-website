@@ -135,7 +135,7 @@
       <p>Andrew will review your report before your call so you can dive straight into what matters most — your specific patterns, strengths, and the clearest path forward for your reinvention.</p>
     </div>
 
-    <div class="calendar-card">
+    <div class="calendar-card" id="calendar-section">
       <h3>Book a 1:1 Results Review</h3>
       <p class="sub">30 minutes · Free · Via Zoom</p>
       <div class="calendar-wrap">
@@ -143,6 +143,16 @@
         <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ15Yckc_pnhezBqOua4LOUmCXe5tSAvRYr6nP63bVZ2fFZ3esBx9KmCe-sD3im3LCpnZZAOvfwY?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
         <!-- end Google Calendar Appointment Scheduling -->
       </div>
+      <div style="text-align:center;margin-top:24px;">
+        <button onclick="confirmBooking()" style="background:none;border:none;font-size:13px;font-weight:600;color:var(--text-muted);cursor:pointer;text-decoration:underline;text-underline-offset:3px;">I've scheduled my appointment ✓</button>
+      </div>
+    </div>
+
+    <div id="booked-confirmation" style="display:none;text-align:center;padding:56px 32px;">
+      <div style="font-size:48px;margin-bottom:16px;">🗓️</div>
+      <h2 style="font-family:'DM Serif Display',serif;font-size:28px;color:var(--navy);margin-bottom:12px;">You're all set!</h2>
+      <p style="font-size:16px;color:var(--text-mid);max-width:440px;margin:0 auto 8px;line-height:1.75;">Andrew is looking forward to meeting with you. He'll review your report before the call so you can hit the ground running.</p>
+      <p style="font-size:13px;color:var(--text-muted);margin-top:16px;">Check your email for a calendar confirmation with the meeting link.</p>
     </div>
 
   </div>
@@ -163,6 +173,12 @@
 </footer>
 
 <script>
+  function confirmBooking() {
+    document.getElementById('calendar-section').style.display = 'none';
+    document.getElementById('booked-confirmation').style.display = 'block';
+    window.scrollTo({ top: document.getElementById('booked-confirmation').offsetTop - 100, behavior: 'smooth' });
+  }
+
   const raw = localStorage.getItem('pfs_report_data');
   localStorage.removeItem('pfs_report_data');
 
