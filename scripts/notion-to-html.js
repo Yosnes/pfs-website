@@ -42,7 +42,7 @@ async function fetchReadyPosts() {
     body: JSON.stringify({
       filter: {
         property: 'Status',
-        status: { equals: 'Ready to Publish' },
+        select: { equals: 'Ready to Publish' },
       },
       sorts: [{ property: 'Published Date', direction: 'descending' }],
     }),
@@ -57,7 +57,7 @@ async function fetchPublishedPosts() {
     body: JSON.stringify({
       filter: {
         property: 'Status',
-        status: { equals: 'Published' },
+        select: { equals: 'Published' },
       },
       sorts: [{ property: 'Published Date', direction: 'descending' }],
     }),
