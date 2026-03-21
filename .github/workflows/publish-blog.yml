@@ -34,5 +34,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add blog/ blog.html
-          git diff --staged --quiet || git commit -m "chore: publish new blog posts from Notion [skip ci]"
+          git diff --staged --quiet || git commit -m "chore: publish new blog posts from Notion"
           git push

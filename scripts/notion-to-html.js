@@ -225,7 +225,7 @@ async function main() {
   console.log(`Found ${readyPosts.length} post(s) ready to publish`);
 
   for (const page of readyPosts) {
-    const title   = getProp(page, 'Name', 'title');
+    const title   = getProp(page, 'Title', 'title');
     const slug    = getProp(page, 'Slug', 'rich_text');
     const excerpt = getProp(page, 'Excerpt', 'rich_text');
     const date    = getProp(page, 'Published Date', 'date');
@@ -267,7 +267,7 @@ async function main() {
   }
 
   const cards = publishedPosts.map(page => {
-    const title   = getProp(page, 'Name', 'title');
+    const title   = getProp(page, 'Title', 'title');
     const slug    = getProp(page, 'Slug', 'rich_text');
     const excerpt = getProp(page, 'Excerpt', 'rich_text');
     const date    = getProp(page, 'Published Date', 'date');
