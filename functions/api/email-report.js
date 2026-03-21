@@ -39,7 +39,13 @@ export async function onRequestPost({ request, env }) {
       throw new Error(`PDF API returned ${pdfRes.status}: ${err}`);
     }
     const pdfBuffer = await pdfRes.arrayBuffer();
-    pdfBase64 = btoa(String.fromCharCode(...new Uint8Array(pdfBuffer)));
+    const bytes = new Uint8Array(pdfBuffer);
+    const chunkSize = 0x8000;
+    let binary = '';
+    for (let i = 0; i < bytes.length; i += chunkSize) {
+      binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+    }
+    pdfBase64 = btoa(binary);
     filename = `${data.name.replace(/\s+/g, '-')}-transformation-report.pdf`;
   } catch (e) {
     console.error('PDF generation failed:', e);

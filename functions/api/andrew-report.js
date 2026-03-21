@@ -16,10 +16,13 @@ export async function onRequestPost({ request, env, waitUntil }) {
 
     const pdfBuffer = await pdfRes.arrayBuffer();
 
-    // Safe base64 encoding for edge runtime
-    let binary = '';
+    // Chunked base64 encoding — avoids CPU limit from character-by-character loop
     const bytes = new Uint8Array(pdfBuffer);
-    for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
+    const chunkSize = 0x8000;
+    let binary = '';
+    for (let i = 0; i < bytes.length; i += chunkSize) {
+      binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+    }
     const pdfBase64 = btoa(binary);
 
     const filename = `${(data.name || 'report').replace(/\s+/g, '-')}-transformation-report.pdf`;
