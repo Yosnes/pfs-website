@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disclaimer | Project Future Self</title>
+<meta name="description" content="Coaching disclaimer for Project Future Self — this is not therapy, medical, legal, or financial advice.">
+<link rel="canonical" href="https://projectfutureself.com/disclaimer.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0D1F3C;
+    --slate:      #1E3A5F;
+    --gold:       #F5A31A;
+    --gold-dark:  #C07D0A;
+    --amber-bg:   #FDF6EC;
+    --text-dark:  #1A1208;
+    --text-mid:   #3D2E14;
+    --text-muted: #7A6240;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--amber-bg); color: var(--text-dark); line-height: 1.6; }
+
+  /* ── NAV ── */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(253,246,236,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(13,31,60,0.08); padding: 0 5%; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-mark { height: 44px; width: auto; }
+  .nav-wordmark { line-height: 1.15; }
+  .nav-wordmark .nw-top { font-size: 9px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+  .nav-wordmark .nw-main { font-size: 16px; font-weight: 800; letter-spacing: 0.02em; color: var(--navy); text-transform: uppercase; }
+  .nav-wordmark .nw-tag { font-size: 7px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dark); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta { font-size: 12px !important; font-weight: 800 !important; padding: 9px 20px; background: var(--gold); color: var(--navy) !important; border-radius: 24px; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .nav-cta:hover { background: #f8b83a !important; transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: all 0.3s; }
+
+  /* ── LEGAL CONTENT ── */
+  .legal-hero { background: var(--navy); padding: 60px 5% 50px; }
+  .legal-hero-inner { max-width: 760px; margin: 0 auto; }
+  .legal-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  .legal-hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 4vw, 48px); color: #FDF6EC; font-weight: 400; margin-bottom: 12px; }
+  .legal-hero p { font-size: 14px; color: rgba(253,246,236,0.5); }
+
+  .legal-body { padding: 60px 5% 80px; }
+  .legal-body-inner { max-width: 760px; margin: 0 auto; }
+
+  .legal-body h2 { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--navy); font-weight: 400; margin: 40px 0 12px; }
+  .legal-body h2:first-child { margin-top: 0; }
+  .legal-body p { font-size: 15px; color: var(--text-mid); line-height: 1.75; margin-bottom: 14px; }
+  .legal-body ul { margin: 0 0 14px 20px; }
+  .legal-body ul li { font-size: 15px; color: var(--text-mid); line-height: 1.75; margin-bottom: 6px; }
+  .legal-body a { color: var(--navy); text-decoration: underline; }
+  .legal-body a:hover { color: var(--gold-dark); }
+  .legal-divider { border: none; border-top: 1px solid rgba(13,31,60,0.1); margin: 40px 0; }
+
+  /* ── FOOTER ── */
+  footer { background: #060F1E; padding: 28px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-brand { display: flex; align-items: center; gap: 10px; }
+  .footer-mark { height: 32px; width: auto; opacity: 0.8; }
+  .footer-name { font-size: 12px; font-weight: 700; color: rgba(253,246,236,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+  footer p { font-size: 11px; color: rgba(253,246,236,0.3); }
+  .footer-links { display: flex; gap: 16px; flex-wrap: wrap; }
+  .footer-links a { font-size: 11px; color: rgba(253,246,236,0.3); text-decoration: none; }
+  .footer-links a:hover { color: rgba(253,246,236,0.6); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: rgba(253,246,236,0.98); padding: 16px 5% 20px; border-bottom: 1px solid rgba(13,31,60,0.1); gap: 14px; z-index: 99; }
+    .hamburger { display: flex; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">
+      <img class="nav-mark" src="pfs-logo.png" alt="Project Future Self">
+      <div class="nav-wordmark">
+        <div class="nw-top">Andrew Asnes</div>
+        <div class="nw-main">Project Future Self</div>
+        <div class="nw-tag">Reinvent · Redesign · Reclaim</div>
+      </div>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="sprint.html">5-Day Sprint</a>
+      <a href="index.html#about">About</a>
+      <a href="products.html">Products</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+      <a href="assessment.html" class="nav-cta">Take the Free Assessment</a>
+    </div>
+    <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="legal-hero">
+  <div class="legal-hero-inner">
+    <div class="legal-eyebrow">Legal</div>
+    <h1>Disclaimer</h1>
+    <p>Last updated: March 23, 2025</p>
+  </div>
+</div>
+
+<div class="legal-body">
+  <div class="legal-body-inner">
+
+    <h2>Coaching Is Not Therapy</h2>
+    <p>Project Future Self provides career coaching, reinvention frameworks, and personal development tools. This is not therapy, counseling, psychotherapy, or any form of mental health treatment. Andrew Asnes is a coach, not a licensed therapist, psychologist, psychiatrist, or medical professional.</p>
+    <p>If you are experiencing a mental health crisis or require clinical support, please seek help from a licensed mental health professional or contact a crisis helpline.</p>
+
+    <hr class="legal-divider">
+
+    <h2>Not Professional Advice</h2>
+    <p>Nothing on this Site — including blog posts, assessment results, program materials, digital products, or any communication from Andrew Asnes — constitutes professional legal, financial, medical, or therapeutic advice. All content is for informational and educational purposes only.</p>
+    <p>Before making significant career, financial, or life decisions, consult with the appropriate licensed professionals.</p>
+
+    <hr class="legal-divider">
+
+    <h2>Results Are Not Guaranteed</h2>
+    <p>Individual results from coaching programs, assessments, and digital products will vary. Testimonials, examples, and case studies shared on this Site represent specific results for specific individuals and are not guarantees that you will achieve the same or similar outcomes.</p>
+    <p>Your results will depend on many factors including your background, effort, commitment, market conditions, and other variables outside our control.</p>
+
+    <hr class="legal-divider">
+
+    <h2>Assessment Results</h2>
+    <p>The Transformation Readiness Assessment is a self-reflection tool designed to help you gain insight into your readiness for change. It is not a clinical assessment, psychological evaluation, or diagnostic instrument. Scores and interpretations are educational in nature and should not be used as the sole basis for major decisions.</p>
+
+    <hr class="legal-divider">
+
+    <h2>External Links</h2>
+    <p>This Site may contain links to third-party websites. These links are provided for convenience only. Project Future Self does not endorse, control, or take responsibility for the content, privacy practices, or accuracy of any third-party sites.</p>
+
+    <hr class="legal-divider">
+
+    <h2>Contact</h2>
+    <p>If you have questions about this disclaimer, contact us at <a href="mailto:info@projectfutureself.com">info@projectfutureself.com</a>.</p>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <img class="footer-mark" src="Transparent mark without words.png" alt="PFS">
+    <div class="footer-name">Project Future Self</div>
+  </div>
+  <p>© 2025 Project Future Self. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms</a>
+    <a href="disclaimer.html">Disclaimer</a>
+    <a href="refund.html">Refund Policy</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c12744dece674e8aac2d803f061fdd6e"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

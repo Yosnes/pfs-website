@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy | Project Future Self</title>
+<meta name="description" content="Privacy Policy for Project Future Self — covering what data we collect, how it's used, and your rights.">
+<link rel="canonical" href="https://projectfutureself.com/privacy.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0D1F3C;
+    --slate:      #1E3A5F;
+    --gold:       #F5A31A;
+    --gold-dark:  #C07D0A;
+    --amber-bg:   #FDF6EC;
+    --text-dark:  #1A1208;
+    --text-mid:   #3D2E14;
+    --text-muted: #7A6240;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--amber-bg); color: var(--text-dark); line-height: 1.6; }
+
+  /* ── NAV ── */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(253,246,236,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(13,31,60,0.08); padding: 0 5%; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-mark { height: 44px; width: auto; }
+  .nav-wordmark { line-height: 1.15; }
+  .nav-wordmark .nw-top { font-size: 9px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+  .nav-wordmark .nw-main { font-size: 16px; font-weight: 800; letter-spacing: 0.02em; color: var(--navy); text-transform: uppercase; }
+  .nav-wordmark .nw-tag { font-size: 7px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dark); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta { font-size: 12px !important; font-weight: 800 !important; padding: 9px 20px; background: var(--gold); color: var(--navy) !important; border-radius: 24px; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .nav-cta:hover { background: #f8b83a !important; transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: all 0.3s; }
+
+  /* ── LEGAL CONTENT ── */
+  .legal-hero { background: var(--navy); padding: 60px 5% 50px; }
+  .legal-hero-inner { max-width: 760px; margin: 0 auto; }
+  .legal-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  .legal-hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 4vw, 48px); color: #FDF6EC; font-weight: 400; margin-bottom: 12px; }
+  .legal-hero p { font-size: 14px; color: rgba(253,246,236,0.5); }
+
+  .legal-body { padding: 60px 5% 80px; }
+  .legal-body-inner { max-width: 760px; margin: 0 auto; }
+
+  .legal-body h2 { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--navy); font-weight: 400; margin: 40px 0 12px; }
+  .legal-body h2:first-child { margin-top: 0; }
+  .legal-body p { font-size: 15px; color: var(--text-mid); line-height: 1.75; margin-bottom: 14px; }
+  .legal-body ul { margin: 0 0 14px 20px; }
+  .legal-body ul li { font-size: 15px; color: var(--text-mid); line-height: 1.75; margin-bottom: 6px; }
+  .legal-body a { color: var(--navy); text-decoration: underline; }
+  .legal-body a:hover { color: var(--gold-dark); }
+  .legal-divider { border: none; border-top: 1px solid rgba(13,31,60,0.1); margin: 40px 0; }
+
+  /* ── FOOTER ── */
+  footer { background: #060F1E; padding: 28px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-brand { display: flex; align-items: center; gap: 10px; }
+  .footer-mark { height: 32px; width: auto; opacity: 0.8; }
+  .footer-name { font-size: 12px; font-weight: 700; color: rgba(253,246,236,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+  footer p { font-size: 11px; color: rgba(253,246,236,0.3); }
+  .footer-links { display: flex; gap: 16px; flex-wrap: wrap; }
+  .footer-links a { font-size: 11px; color: rgba(253,246,236,0.3); text-decoration: none; }
+  .footer-links a:hover { color: rgba(253,246,236,0.6); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: rgba(253,246,236,0.98); padding: 16px 5% 20px; border-bottom: 1px solid rgba(13,31,60,0.1); gap: 14px; z-index: 99; }
+    .hamburger { display: flex; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">
+      <img class="nav-mark" src="pfs-logo.png" alt="Project Future Self">
+      <div class="nav-wordmark">
+        <div class="nw-top">Andrew Asnes</div>
+        <div class="nw-main">Project Future Self</div>
+        <div class="nw-tag">Reinvent · Redesign · Reclaim</div>
+      </div>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="sprint.html">5-Day Sprint</a>
+      <a href="index.html#about">About</a>
+      <a href="products.html">Products</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+      <a href="assessment.html" class="nav-cta">Take the Free Assessment</a>
+    </div>
+    <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="legal-hero">
+  <div class="legal-hero-inner">
+    <div class="legal-eyebrow">Legal</div>
+    <h1>Privacy Policy</h1>
+    <p>Last updated: March 23, 2025</p>
+  </div>
+</div>
+
+<div class="legal-body">
+  <div class="legal-body-inner">
+
+    <h2>1. Introduction</h2>
+    <p>Project Future Self ("we", "us", or "our") is committed to protecting your personal information. This Privacy Policy explains what data we collect, how we use it, who we share it with, and your rights regarding your information.</p>
+    <p>By using our website at <a href="https://projectfutureself.com">projectfutureself.com</a>, you agree to the practices described in this policy.</p>
+
+    <hr class="legal-divider">
+
+    <h2>2. Information We Collect</h2>
+    <p>We collect the following types of information:</p>
+    <ul>
+      <li><strong>Contact information:</strong> Your name and email address when you submit a form, take the assessment, or make a purchase</li>
+      <li><strong>Assessment responses:</strong> Your answers to the Transformation Readiness Assessment questions and calculated scores</li>
+      <li><strong>Purchase information:</strong> Transaction details processed securely through Stripe — we do not store full payment card details</li>
+      <li><strong>Usage data:</strong> Anonymous analytics data collected by Cloudflare (page views, device type, country) — this does not include personally identifiable information</li>
+    </ul>
+
+    <hr class="legal-divider">
+
+    <h2>3. How We Use Your Information</h2>
+    <p>We use the information we collect to:</p>
+    <ul>
+      <li>Deliver products and services you have purchased</li>
+      <li>Send your assessment results and personalized PDF report</li>
+      <li>Respond to your inquiries and support requests</li>
+      <li>Notify you of program updates or relevant offerings (you may opt out at any time)</li>
+      <li>Improve the site and user experience using aggregate analytics data</li>
+    </ul>
+    <p>We do not sell your personal information to third parties.</p>
+
+    <hr class="legal-divider">
+
+    <h2>4. Third-Party Services</h2>
+    <p>We use the following third-party services to operate the site. Each has its own privacy policy:</p>
+    <ul>
+      <li><strong>Stripe</strong> — payment processing (<a href="https://stripe.com/privacy" target="_blank" rel="noopener">stripe.com/privacy</a>)</li>
+      <li><strong>Formspree</strong> — contact and application form submissions (<a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener">formspree.io/legal/privacy-policy</a>)</li>
+      <li><strong>Cloudflare</strong> — website hosting, security, and analytics (<a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">cloudflare.com/privacypolicy</a>)</li>
+      <li><strong>Resend</strong> — transactional email delivery (<a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener">resend.com/legal/privacy-policy</a>)</li>
+      <li><strong>Google Sheets</strong> — internal data logging (<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>)</li>
+      <li><strong>Notion</strong> — blog content management (<a href="https://www.notion.so/Privacy-Policy-3468d120cf614d4c9014c09f6adc9091" target="_blank" rel="noopener">notion.so/Privacy-Policy</a>)</li>
+    </ul>
+
+    <hr class="legal-divider">
+
+    <h2>5. Cookies</h2>
+    <p>We use Cloudflare Web Analytics, which collects anonymous usage data without using tracking cookies or fingerprinting. We do not use advertising cookies or retargeting pixels. Your browsing data is not shared with ad networks.</p>
+
+    <hr class="legal-divider">
+
+    <h2>6. Data Retention</h2>
+    <p>We retain your personal data only as long as necessary to fulfill the purpose it was collected for — including any legal, accounting, or reporting requirements. Assessment responses are retained to provide your report and for program improvement purposes. You may request deletion at any time.</p>
+
+    <hr class="legal-divider">
+
+    <h2>7. Your Rights</h2>
+    <p>Depending on your location, you may have the following rights regarding your personal data:</p>
+    <ul>
+      <li><strong>Access:</strong> Request a copy of the personal data we hold about you</li>
+      <li><strong>Correction:</strong> Request that we correct inaccurate or incomplete data</li>
+      <li><strong>Deletion:</strong> Request that we delete your personal data ("right to be forgotten")</li>
+      <li><strong>Portability:</strong> Request your data in a structured, machine-readable format</li>
+      <li><strong>Opt-out:</strong> Unsubscribe from marketing communications at any time</li>
+    </ul>
+    <p>To exercise any of these rights, contact us at <a href="mailto:info@projectfutureself.com">info@projectfutureself.com</a>. We will respond within 30 days.</p>
+
+    <hr class="legal-divider">
+
+    <h2>8. Children's Privacy</h2>
+    <p>Our Site is not directed to children under 13. We do not knowingly collect personal information from children. If you believe a child has provided us with personal data, please contact us and we will delete it promptly.</p>
+
+    <hr class="legal-divider">
+
+    <h2>9. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated date. Your continued use of the Site after changes constitutes acceptance of the revised policy.</p>
+
+    <hr class="legal-divider">
+
+    <h2>10. Contact</h2>
+    <p>For privacy-related questions or requests, contact us at <a href="mailto:info@projectfutureself.com">info@projectfutureself.com</a>.</p>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <img class="footer-mark" src="Transparent mark without words.png" alt="PFS">
+    <div class="footer-name">Project Future Self</div>
+  </div>
+  <p>© 2025 Project Future Self. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms</a>
+    <a href="disclaimer.html">Disclaimer</a>
+    <a href="refund.html">Refund Policy</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c12744dece674e8aac2d803f061fdd6e"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

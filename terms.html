@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms & Conditions | Project Future Self</title>
+<meta name="description" content="Terms and Conditions for Project Future Self — covering site use, program participation, payment terms, and limitations of liability.">
+<link rel="canonical" href="https://projectfutureself.com/terms.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0D1F3C;
+    --slate:      #1E3A5F;
+    --gold:       #F5A31A;
+    --gold-dark:  #C07D0A;
+    --amber-bg:   #FDF6EC;
+    --text-dark:  #1A1208;
+    --text-mid:   #3D2E14;
+    --text-muted: #7A6240;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--amber-bg); color: var(--text-dark); line-height: 1.6; }
+
+  /* ── NAV ── */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(253,246,236,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(13,31,60,0.08); padding: 0 5%; }
+  .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-mark { height: 44px; width: auto; }
+  .nav-wordmark { line-height: 1.15; }
+  .nav-wordmark .nw-top { font-size: 9px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+  .nav-wordmark .nw-main { font-size: 16px; font-weight: 800; letter-spacing: 0.02em; color: var(--navy); text-transform: uppercase; }
+  .nav-wordmark .nw-tag { font-size: 7px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-dark); }
+  .nav-links { display: flex; align-items: center; gap: 28px; }
+  .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta { font-size: 12px !important; font-weight: 800 !important; padding: 9px 20px; background: var(--gold); color: var(--navy) !important; border-radius: 24px; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .nav-cta:hover { background: #f8b83a !important; transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: all 0.3s; }
+
+  /* ── LEGAL CONTENT ── */
+  .legal-hero { background: var(--navy); padding: 60px 5% 50px; }
+  .legal-hero-inner { max-width: 760px; margin: 0 auto; }
+  .legal-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  .legal-hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 4vw, 48px); color: #FDF6EC; font-weight: 400; margin-bottom: 12px; }
+  .legal-hero p { font-size: 14px; color: rgba(253,246,236,0.5); }
+
+  .legal-body { padding: 60px 5% 80px; }
+  .legal-body-inner { max-width: 760px; margin: 0 auto; }
+
+  .legal-body h2 { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--navy); font-weight: 400; margin: 40px 0 12px; }
+  .legal-body h2:first-child { margin-top: 0; }
+  .legal-body p { font-size: 15px; color: var(--text-mid); line-height: 1.75; margin-bottom: 14px; }
+  .legal-body ul { margin: 0 0 14px 20px; }
+  .legal-body ul li { font-size: 15px; color: var(--text-mid); line-height: 1.75; margin-bottom: 6px; }
+  .legal-body a { color: var(--navy); text-decoration: underline; }
+  .legal-body a:hover { color: var(--gold-dark); }
+  .legal-divider { border: none; border-top: 1px solid rgba(13,31,60,0.1); margin: 40px 0; }
+
+  /* ── FOOTER ── */
+  footer { background: #060F1E; padding: 28px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-brand { display: flex; align-items: center; gap: 10px; }
+  .footer-mark { height: 32px; width: auto; opacity: 0.8; }
+  .footer-name { font-size: 12px; font-weight: 700; color: rgba(253,246,236,0.5); letter-spacing: 0.08em; text-transform: uppercase; }
+  footer p { font-size: 11px; color: rgba(253,246,236,0.3); }
+  .footer-links { display: flex; gap: 16px; flex-wrap: wrap; }
+  .footer-links a { font-size: 11px; color: rgba(253,246,236,0.3); text-decoration: none; }
+  .footer-links a:hover { color: rgba(253,246,236,0.6); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: rgba(253,246,236,0.98); padding: 16px 5% 20px; border-bottom: 1px solid rgba(13,31,60,0.1); gap: 14px; z-index: 99; }
+    .hamburger { display: flex; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">
+      <img class="nav-mark" src="pfs-logo.png" alt="Project Future Self">
+      <div class="nav-wordmark">
+        <div class="nw-top">Andrew Asnes</div>
+        <div class="nw-main">Project Future Self</div>
+        <div class="nw-tag">Reinvent · Redesign · Reclaim</div>
+      </div>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a href="sprint.html">5-Day Sprint</a>
+      <a href="index.html#about">About</a>
+      <a href="products.html">Products</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+      <a href="assessment.html" class="nav-cta">Take the Free Assessment</a>
+    </div>
+    <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="legal-hero">
+  <div class="legal-hero-inner">
+    <div class="legal-eyebrow">Legal</div>
+    <h1>Terms &amp; Conditions</h1>
+    <p>Last updated: March 23, 2025</p>
+  </div>
+</div>
+
+<div class="legal-body">
+  <div class="legal-body-inner">
+
+    <h2>1. Acceptance of Terms</h2>
+    <p>By accessing or using the Project Future Self website at <a href="https://projectfutureself.com">projectfutureself.com</a> (the "Site") or purchasing any products or services, you agree to be bound by these Terms &amp; Conditions. If you do not agree to these terms, please do not use the Site.</p>
+
+    <hr class="legal-divider">
+
+    <h2>2. Use of the Site</h2>
+    <p>You agree to use the Site only for lawful purposes and in a manner that does not infringe the rights of others. You must not:</p>
+    <ul>
+      <li>Use the Site in any way that violates applicable local, national, or international laws or regulations</li>
+      <li>Reproduce, duplicate, or resell any part of the Site or its content without prior written permission</li>
+      <li>Transmit any unsolicited or unauthorized advertising or promotional material</li>
+      <li>Attempt to gain unauthorized access to any part of the Site or its related systems</li>
+    </ul>
+
+    <hr class="legal-divider">
+
+    <h2>3. Products and Services</h2>
+    <p>Project Future Self offers digital products, the 5-Day Reinvention Sprint coaching program, and the Transformation Readiness Assessment. All descriptions are provided in good faith and are as accurate as possible. We reserve the right to modify, suspend, or discontinue any product or service at any time without notice.</p>
+
+    <hr class="legal-divider">
+
+    <h2>4. Payment Terms</h2>
+    <p>All purchases are processed securely through Stripe. By completing a purchase, you agree to Stripe's terms of service. Prices are listed in USD and are subject to change. You are responsible for any applicable taxes.</p>
+    <p>For digital products, you will receive immediate access upon successful payment. For the 5-Day Sprint, enrollment details will be provided via email following purchase.</p>
+
+    <hr class="legal-divider">
+
+    <h2>5. Intellectual Property</h2>
+    <p>All content on the Site — including text, graphics, logos, frameworks, templates, and course materials — is the property of Project Future Self and is protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works without express written permission.</p>
+    <p>This includes the Reinvention Matrix, Future-Self Identity Blueprint, Narrative Flip Model, Opportunity Engine Templates, and Future Self OS.</p>
+
+    <hr class="legal-divider">
+
+    <h2>6. Disclaimer of Warranties</h2>
+    <p>The Site and all content, products, and services are provided on an "as is" and "as available" basis without warranties of any kind, either express or implied. Project Future Self does not warrant that the Site will be uninterrupted, error-free, or free of harmful components.</p>
+
+    <hr class="legal-divider">
+
+    <h2>7. Limitation of Liability</h2>
+    <p>To the fullest extent permitted by law, Project Future Self and Andrew Asnes shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Site or its products and services. Our total liability to you for any claim shall not exceed the amount you paid for the relevant product or service.</p>
+
+    <hr class="legal-divider">
+
+    <h2>8. Governing Law</h2>
+    <p>These Terms are governed by and construed in accordance with the laws of the State of California, without regard to its conflict of law provisions. Any disputes shall be resolved in the courts of the State of California.</p>
+
+    <hr class="legal-divider">
+
+    <h2>9. Changes to These Terms</h2>
+    <p>We reserve the right to update these Terms at any time. Changes will be posted on this page with an updated date. Your continued use of the Site after changes constitutes acceptance of the revised Terms.</p>
+
+    <hr class="legal-divider">
+
+    <h2>10. Contact</h2>
+    <p>If you have any questions about these Terms, please contact us at <a href="mailto:info@projectfutureself.com">info@projectfutureself.com</a>.</p>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <img class="footer-mark" src="Transparent mark without words.png" alt="PFS">
+    <div class="footer-name">Project Future Self</div>
+  </div>
+  <p>© 2025 Project Future Self. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms</a>
+    <a href="disclaimer.html">Disclaimer</a>
+    <a href="refund.html">Refund Policy</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c12744dece674e8aac2d803f061fdd6e"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
