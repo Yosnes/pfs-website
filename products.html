@@ -160,6 +160,25 @@
     letter-spacing: 0.06em; text-transform: uppercase; margin-left: 8px; vertical-align: middle;
   }
   .prod-sub { font-size: 12px; color: var(--text-muted); font-weight: 400; display: block; margin-top: 3px; }
+  .ptable td:first-child a:hover { text-decoration: underline; }
+  .prod-toggle { display: inline-block; margin-top: 6px; font-size: 11px; font-weight: 600; color: var(--gold-dark); cursor: pointer; background: none; border: none; padding: 0; font-family: 'DM Sans', sans-serif; letter-spacing: 0.01em; transition: color 0.15s; }
+  .prod-toggle:hover { color: var(--navy); }
+  .prod-toggle .toggle-arrow { display: inline-block; transition: transform 0.25s; margin-right: 3px; }
+  .prod-toggle.open .toggle-arrow { transform: rotate(90deg); }
+
+  /* Accordion detail rows */
+  tr.detail-row td { padding: 0 !important; border-bottom: none !important; }
+  tr.detail-row .detail-inner { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1); }
+  tr.detail-row.open .detail-inner { max-height: 600px; }
+  .detail-body { padding: 16px 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; border-top: 1px solid var(--amber-mid); }
+  .detail-col-label { font-size: 9px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+  .detail-modules { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .detail-modules li { font-size: 12px; color: var(--text-mid); line-height: 1.5; padding-left: 18px; position: relative; }
+  .detail-modules li::before { content: attr(data-n); position: absolute; left: 0; font-size: 9px; font-weight: 800; color: var(--gold-dark); top: 2px; }
+  .detail-outcomes { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .detail-outcomes li { font-size: 12px; color: var(--text-mid); line-height: 1.5; padding-left: 14px; position: relative; }
+  .detail-outcomes li::before { content: '→'; position: absolute; left: 0; color: var(--gold-dark); font-weight: 700; font-size: 11px; }
+  @media (max-width: 600px) { .detail-body { grid-template-columns: 1fr; gap: 16px; } }
   .free-tag { color: #1a7a30 !important; }
   .included-tag { color: var(--text-muted) !important; font-size: 12px !important; font-style: italic; }
 
@@ -321,21 +340,62 @@
           <tr class="category-row"><td colspan="4"><span class="category-label">Career Tools</span></td></tr>
           <tr>
             <td>
-              Career Pivot Playbook
+              <a href="products/career-pivot-playbook.html" style="color:inherit;text-decoration:none;">Career Pivot Playbook</a>
               <span class="prod-sub">Step-by-step guide for executing a strategic career pivot</span>
+              <button class="prod-toggle" onclick="toggleDetail('cpp')"><span class="toggle-arrow">›</span> See what's inside</button>
             </td>
             <td>Digital Guide</td>
             <td>$149</td>
             <td><button class="btn-cart" data-price-id="price_1TCjZAF6VZVb4XEId0grYtvR" data-name="Career Pivot Playbook" data-price="149" onclick="addToCart(this)">Add to Cart</button></td>
           </tr>
+          <tr class="detail-row" id="detail-cpp">
+            <td colspan="4"><div class="detail-inner"><div class="detail-body">
+              <div><div class="detail-col-label">6 Modules</div><ul class="detail-modules">
+                <li data-n="1">The Pivot Opportunity Matrix</li>
+                <li data-n="2">Role &amp; Industry Alignment Map</li>
+                <li data-n="3">Skill Translation Framework</li>
+                <li data-n="4">Pivot Résumé &amp; LinkedIn Positioning</li>
+                <li data-n="5">Risk-Low Transition Strategy</li>
+                <li data-n="6">30-Day Pivot Execution Plan</li>
+              </ul></div>
+              <div><div class="detail-col-label">You'll Walk Away With</div><ul class="detail-outcomes">
+                <li>3–5 validated pivot paths, ranked and ready to pursue</li>
+                <li>Your experience reframed in your target role's language</li>
+                <li>A résumé &amp; LinkedIn positioned for where you're going</li>
+                <li>A risk-managed transition that protects your income</li>
+                <li>A 30-day week-by-week action plan</li>
+              </ul></div>
+            </div></div></td>
+          </tr>
           <tr>
             <td>
-              Job Search Accelerator System
+              <a href="products/job-search-accelerator-system.html" style="color:inherit;text-decoration:none;">Job Search Accelerator System</a>
               <span class="prod-sub">Compress months of searching into weeks</span>
+              <button class="prod-toggle" onclick="toggleDetail('jsa')"><span class="toggle-arrow">›</span> See what's inside</button>
             </td>
             <td>Digital System</td>
             <td>$149</td>
             <td><button class="btn-cart" data-price-id="price_1TCjZ9F6VZVb4XEIonDOyhUn" data-name="Job Search Accelerator System" data-price="149" onclick="addToCart(this)">Add to Cart</button></td>
+          </tr>
+          <tr class="detail-row" id="detail-jsa">
+            <td colspan="4"><div class="detail-inner"><div class="detail-body">
+              <div><div class="detail-col-label">7 Modules · 8 Tools</div><ul class="detail-modules">
+                <li data-n="1">Role Targeting &amp; Filtering</li>
+                <li data-n="2">Daily Workflow Map (60–90 min/day)</li>
+                <li data-n="3">Résumé / LinkedIn / ATS Checklist</li>
+                <li data-n="4">Outreach Script Templates</li>
+                <li data-n="5">Recruiter Engagement Guide</li>
+                <li data-n="6">Interview Preparation Guide</li>
+                <li data-n="7">30-Day Sprint Plan + Daily Tracker</li>
+              </ul></div>
+              <div><div class="detail-col-label">You'll Walk Away With</div><ul class="detail-outcomes">
+                <li>A focused list of 20–30 target companies</li>
+                <li>A daily routine that builds momentum without burnout</li>
+                <li>Scripts to start conversations with hiring managers now</li>
+                <li>A fully optimized résumé, LinkedIn, and ATS presence</li>
+                <li>A 30-day plan with daily targets and a progress tracker</li>
+              </ul></div>
+            </div></div></td>
           </tr>
           <!-- AI-Enhanced Career Toolkit hidden -->
 
@@ -343,42 +403,119 @@
           <tr class="category-row"><td colspan="4"><span class="category-label">Identity &amp; Brand</span></td></tr>
           <tr>
             <td>
-              Personal Brand Starter Kit
+              <a href="products/personal-brand-starter-kit.html" style="color:inherit;text-decoration:none;">Personal Brand Starter Kit</a>
               <span class="prod-sub">LinkedIn, bio, elevator pitch &amp; complete online presence</span>
+              <button class="prod-toggle" onclick="toggleDetail('pbsk')"><span class="toggle-arrow">›</span> See what's inside</button>
             </td>
             <td>Digital Kit</td>
             <td>$79</td>
             <td><button class="btn-cart" data-price-id="price_1TCjZ6F6VZVb4XEI1eezZHWj" data-name="Personal Brand Starter Kit" data-price="79" onclick="addToCart(this)">Add to Cart</button></td>
           </tr>
+          <tr class="detail-row" id="detail-pbsk">
+            <td colspan="4"><div class="detail-inner"><div class="detail-body">
+              <div><div class="detail-col-label">7 Modules · 2–4 Hours</div><ul class="detail-modules">
+                <li data-n="1">Brand Identity — Who You Are</li>
+                <li data-n="2">Value Proposition — What You Do</li>
+                <li data-n="3">Positioning &amp; Audience — Who It's For</li>
+                <li data-n="4">Headline &amp; Tagline Generator</li>
+                <li data-n="5">LinkedIn Profile Structure</li>
+                <li data-n="6">Visual Identity Quick Guide</li>
+                <li data-n="7">Light Visibility Plan</li>
+              </ul></div>
+              <div><div class="detail-col-label">You'll Walk Away With</div><ul class="detail-outcomes">
+                <li>A clear identity statement and positioning people understand</li>
+                <li>A headline and tagline for every platform</li>
+                <li>A LinkedIn profile aligned with where you're heading</li>
+                <li>Visual consistency without becoming a content creator</li>
+              </ul></div>
+            </div></div></td>
+          </tr>
           <tr>
             <td>
-              Confidence Reset Protocol
+              <a href="products/confidence-reset-protocol.html" style="color:inherit;text-decoration:none;">Confidence Reset Protocol</a>
               <span class="prod-sub">Rebuild self-belief with proven tools, reframes &amp; daily practices</span>
+              <button class="prod-toggle" onclick="toggleDetail('crp')"><span class="toggle-arrow">›</span> See what's inside</button>
             </td>
             <td>Digital Protocol</td>
             <td>$49</td>
             <td><button class="btn-cart" data-price-id="price_1TCjZ4F6VZVb4XEIKDzarUqM" data-name="Confidence Reset Protocol" data-price="49" onclick="addToCart(this)">Add to Cart</button></td>
           </tr>
+          <tr class="detail-row" id="detail-crp">
+            <td colspan="4"><div class="detail-inner"><div class="detail-body">
+              <div><div class="detail-col-label">5 Days · 20–35 Min/Day · 7 Tools</div><ul class="detail-modules">
+                <li data-n="0">Setup — Choose your daily time &amp; location</li>
+                <li data-n="1">Diagnostic — Identify what's actually undermining you</li>
+                <li data-n="2">Reframe — Scripts to interrupt self-doubt patterns</li>
+                <li data-n="3">Identity — Build your Future Self anchor</li>
+                <li data-n="4">Future Self — Connect actions to identity</li>
+                <li data-n="5">Momentum — Daily routine + 7-day action plan</li>
+              </ul></div>
+              <div><div class="detail-col-label">You'll Walk Away With</div><ul class="detail-outcomes">
+                <li>A clear diagnosis of what's eroding your confidence</li>
+                <li>Scripts to interrupt self-doubt in real time</li>
+                <li>A Future Self anchor to return to on hard days</li>
+                <li>A daily routine that rebuilds self-trust through evidence</li>
+              </ul></div>
+            </div></div></td>
+          </tr>
           <tr>
             <td>
-              Skill Monetization Toolkit
+              <a href="products/skill-monetization-toolkit.html" style="color:inherit;text-decoration:none;">Skill Monetization Toolkit</a>
               <span class="prod-sub">Turn your expertise into new income streams</span>
+              <button class="prod-toggle" onclick="toggleDetail('smt')"><span class="toggle-arrow">›</span> See what's inside</button>
             </td>
             <td>Digital Toolkit</td>
             <td>$99</td>
             <td><button class="btn-cart" data-price-id="price_1TCjZ2F6VZVb4XEIthU2o9zy" data-name="Skill Monetization Toolkit" data-price="99" onclick="addToCart(this)">Add to Cart</button></td>
+          </tr>
+          <tr class="detail-row" id="detail-smt">
+            <td colspan="4"><div class="detail-inner"><div class="detail-body">
+              <div><div class="detail-col-label">6 Modules · 20+ Templates &amp; Scripts</div><ul class="detail-modules">
+                <li data-n="1">Skill Extraction</li>
+                <li data-n="2">Offer Packaging &amp; Positioning</li>
+                <li data-n="3">Pricing &amp; Scope Calculator</li>
+                <li data-n="4">Low-Friction Monetization Models</li>
+                <li data-n="5">Outreach Scripts</li>
+                <li data-n="6">First-Client Action Plan</li>
+              </ul></div>
+              <div><div class="detail-col-label">You'll Walk Away With</div><ul class="detail-outcomes">
+                <li>1–3 monetizable offers you can confidently sell</li>
+                <li>Clear pricing and scope — no more undercharging</li>
+                <li>Outreach scripts to start paid conversations now</li>
+                <li>A 7–14 day plan to land your first paid engagement</li>
+              </ul></div>
+            </div></div></td>
           </tr>
 
           <!-- NARRATIVE -->
           <tr class="category-row"><td colspan="4"><span class="category-label">Narrative &amp; Story</span></td></tr>
           <tr>
             <td>
-              Reinvention Story Pack
+              <a href="products/reinvention-story-pack.html" style="color:inherit;text-decoration:none;">Reinvention Story Pack</a>
               <span class="prod-sub">Templates &amp; frameworks to tell your reinvention story powerfully</span>
+              <button class="prod-toggle" onclick="toggleDetail('rsp')"><span class="toggle-arrow">›</span> See what's inside</button>
             </td>
             <td>Digital Pack</td>
             <td>$79</td>
             <td><button class="btn-cart" data-price-id="price_1TCjYyF6VZVb4XEICZIVq9qp" data-name="Reinvention Story Pack" data-price="79" onclick="addToCart(this)">Add to Cart</button></td>
+          </tr>
+          <tr class="detail-row" id="detail-rsp">
+            <td colspan="4"><div class="detail-inner"><div class="detail-body">
+              <div><div class="detail-col-label">6 Modules · 5 Story Types · 6 Scripts</div><ul class="detail-modules">
+                <li data-n="1">Before / After Story</li>
+                <li data-n="2">"Tell Me About Yourself" Answer</li>
+                <li data-n="3">Interview Story Bank</li>
+                <li data-n="4">Networking Scripts</li>
+                <li data-n="5">LinkedIn About Builder</li>
+                <li data-n="6">Talking Points</li>
+              </ul></div>
+              <div><div class="detail-col-label">You'll Walk Away With</div><ul class="detail-outcomes">
+                <li>A clear before → after narrative you can deliver confidently</li>
+                <li>A structured "Tell me about yourself" for any context</li>
+                <li>Interview stories that show value without defending your past</li>
+                <li>Scripts for networking conversations — usable immediately</li>
+              </ul></div>
+            </div></div></td>
           </tr>
 
           <!-- INCLUDED WITH SPRINT -->
@@ -531,6 +668,15 @@
     if (!cart.length) return;
     const prices = cart.map(i => i.priceId).join(',');
     window.location.href = `/api/create-checkout?prices=${prices}`;
+  }
+
+  function toggleDetail(id) {
+    const row = document.getElementById('detail-' + id);
+    const btn = row.previousElementSibling.querySelector('.prod-toggle');
+    const isOpen = row.classList.contains('open');
+    row.classList.toggle('open', !isOpen);
+    btn.classList.toggle('open', !isOpen);
+    btn.lastChild.textContent = isOpen ? " See what's inside" : ' Hide details';
   }
 
   // Init on load
