@@ -354,67 +354,55 @@ export async function onRequestPost({ request, env, waitUntil }) {
   const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   const filename = `${name.replace(/\s+/g, '-')}-reinvention-story-pack.pdf`;
 
-  // 2. Build PDF via Railway (same service as assessment)
+  // 2–5. PDF generation + emails run in background so we can return 200 immediately.
+  // Railway PDF rendering (with font loading) can take 15–30 s — exceeds CF sync timeout.
   const pdfUrl = env.VERCEL_PDF_URL.replace(/\/api\/generate-pdf$/, '') + '/api/generate-pdf-from-html';
-  let pdfBase64;
-  try {
-    const htmlReport = buildReportHTML(name, answers, date);
-    const pdfRes = await fetch(pdfUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ html: htmlReport, name }),
-    });
-    if (!pdfRes.ok) {
-      const err = await pdfRes.text().catch(() => 'unknown');
-      throw new Error(`Railway PDF ${pdfRes.status}: ${err}`);
-    }
-    const pdfBuffer = await pdfRes.arrayBuffer();
-    const bytes = new Uint8Array(pdfBuffer);
-    const chunkSize = 0x8000;
-    let binary = '';
-    for (let i = 0; i < bytes.length; i += chunkSize) {
-      binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
-    }
-    pdfBase64 = btoa(binary);
-  } catch (e) {
-    console.error('[story-pack] Railway PDF generation failed:', e);
-    return new Response(JSON.stringify({ error: 'PDF generation failed' }), {
-      status: 502, headers: { 'Content-Type': 'application/json' },
-    });
-  }
 
-  // 3. Send user email
-  try {
-    const emailRes = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${env.RESEND_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from: 'Project Future Self <info@projectfutureself.com>',
-        to: [email],
-        bcc: ['info@projectfutureself.com'],
-        subject: `Your Reinvention Story Pack — ${name.split(' ')[0]}, your results`,
-        html: buildUserEmail(name, email),
-        attachments: [{ filename, content: pdfBase64 }],
-      }),
-    });
-    if (!emailRes.ok) {
-      const err = await emailRes.text().catch(() => 'unknown');
-      throw new Error(`Resend user email ${emailRes.status}: ${err}`);
-    }
-  } catch (e) {
-    console.error('[story-pack] User email failed:', e);
-    return new Response(JSON.stringify({ error: 'Email delivery failed' }), {
-      status: 502, headers: { 'Content-Type': 'application/json' },
-    });
-  }
-
-  // 4. Send Andrew notification (background — doesn't block response)
   waitUntil((async () => {
     try {
-      await fetch('https://api.resend.com/emails', {
+      // Build PDF
+      const htmlReport = buildReportHTML(name, answers, date);
+      const pdfRes = await fetch(pdfUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ html: htmlReport, name }),
+      });
+      if (!pdfRes.ok) {
+        const err = await pdfRes.text().catch(() => 'unknown');
+        throw new Error(`Railway PDF ${pdfRes.status}: ${err}`);
+      }
+      const pdfBuffer = await pdfRes.arrayBuffer();
+      const bytes = new Uint8Array(pdfBuffer);
+      const chunkSize = 0x8000;
+      let binary = '';
+      for (let i = 0; i < bytes.length; i += chunkSize) {
+        binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+      }
+      const pdfBase64 = btoa(binary);
+
+      // Send user email
+      const userEmailRes = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${env.RESEND_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: 'Project Future Self <info@projectfutureself.com>',
+          to: [email],
+          bcc: ['info@projectfutureself.com'],
+          subject: `Your Reinvention Story Pack — ${name.split(' ')[0]}, your results`,
+          html: buildUserEmail(name, email),
+          attachments: [{ filename, content: pdfBase64 }],
+        }),
+      });
+      if (!userEmailRes.ok) {
+        const err = await userEmailRes.text().catch(() => 'unknown');
+        console.error('[story-pack] User email failed:', userEmailRes.status, err);
+      }
+
+      // Send Andrew notification
+      const andrewEmailRes = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${env.RESEND_API_KEY}`,
@@ -429,19 +417,23 @@ export async function onRequestPost({ request, env, waitUntil }) {
           attachments: [{ filename, content: pdfBase64 }],
         }),
       });
+      if (!andrewEmailRes.ok) {
+        const err = await andrewEmailRes.text().catch(() => 'unknown');
+        console.error('[story-pack] Andrew email failed:', andrewEmailRes.status, err);
+      }
+
+      // Log to Google Sheets (fire-and-forget)
+      if (env.SHEETS_WEBHOOK_URL) {
+        fetch(env.SHEETS_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type: 'story_pack', name, email, date }),
+        }).catch(() => {});
+      }
     } catch (e) {
-      console.error('[story-pack] Andrew notification failed:', e);
+      console.error('[story-pack] Background task failed:', e);
     }
   })());
-
-  // 5. Log to Google Sheets (fire-and-forget)
-  if (env.SHEETS_WEBHOOK_URL) {
-    fetch(env.SHEETS_WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'story_pack', name, email, date }),
-    }).catch(() => {});
-  }
 
   return new Response(JSON.stringify({ ok: true }), {
     headers: { 'Content-Type': 'application/json' },
