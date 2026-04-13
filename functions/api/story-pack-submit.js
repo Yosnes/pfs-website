@@ -23,12 +23,12 @@ function buildUserEmail(name) {
     <p style="font-size:15px;color:#3D2E14;line-height:1.75;margin-bottom:28px">The real value comes from reading your own words back to yourself in interviews, networking conversations, and moments when you need to remember why you made this change.</p>
     <div style="background:#FDF6EC;border-radius:8px;padding:20px 22px;margin-bottom:28px">
       <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#C07D0A;margin-bottom:12px">Two Things to Do Right Now</div>
-      <div style="display:flex;gap:10px;margin-bottom:10px">
-        <div style="width:22px;height:22px;border-radius:50%;background:#0D1F3C;color:#F5A31A;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0">1</div>
+      <div style="margin-bottom:10px;display:flex;gap:10px">
+        <div style="width:22px;height:22px;min-width:22px;border-radius:50%;background:#0D1F3C;color:#F5A31A;font-size:10px;font-weight:800;text-align:center;line-height:22px">1</div>
         <p style="font-size:14px;color:#3D2E14;line-height:1.65;margin:0"><strong>Read Module 1 out loud.</strong> Your Before / After Story sounds different spoken than written — notice what feels true.</p>
       </div>
       <div style="display:flex;gap:10px">
-        <div style="width:22px;height:22px;border-radius:50%;background:#0D1F3C;color:#F5A31A;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0">2</div>
+        <div style="width:22px;height:22px;min-width:22px;border-radius:50%;background:#0D1F3C;color:#F5A31A;font-size:10px;font-weight:800;text-align:center;line-height:22px">2</div>
         <p style="font-size:14px;color:#3D2E14;line-height:1.65;margin:0"><strong>Pull up Module 3 before your next interview.</strong> Practice delivering Story 1 in under 2 minutes without notes.</p>
       </div>
     </div>
@@ -36,13 +36,13 @@ function buildUserEmail(name) {
       <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F5A31A;margin-bottom:8px">Want to work through this together?</div>
       <div style="font-size:18px;font-weight:700;color:#FDF6EC;margin-bottom:8px">Book a 30-Minute Call with Andrew</div>
       <p style="font-size:13px;color:rgba(253,246,236,.7);line-height:1.65;margin-bottom:18px">Talk through your story, get unstuck, and leave with clarity on your next move.</p>
-      <a href="${CALENDLY}" style="display:inline-block;padding:12px 28px;background:#F5A31A;color:#0D1F3C;font-weight:800;font-size:13px;border-radius:32px;text-decoration:none">Schedule a Call →</a>
+      <a href="${CALENDLY}" style="display:inline-block;padding:12px 28px;background:#F5A31A;color:#0D1F3C;font-weight:800;font-size:13px;border-radius:32px;text-decoration:none">Schedule a Call with Andrew &rarr;</a>
     </div>
-    <p style="font-size:14px;color:#3D2E14;line-height:1.75;margin-bottom:6px">— Andrew</p>
+    <p style="font-size:14px;color:#3D2E14;line-height:1.75;margin-bottom:6px">&mdash; Andrew</p>
     <p style="font-size:13px;color:#7A6240">Project Future Self</p>
   </td></tr>
   <tr><td style="background:#0D1F3C;border-radius:0 0 12px 12px;padding:18px 36px;text-align:center">
-    <p style="font-size:11px;color:rgba(253,246,236,.35);margin-bottom:4px">Project Future Self &nbsp;·&nbsp; <a href="https://projectfutureself.com" style="color:rgba(253,246,236,.35);text-decoration:none">projectfutureself.com</a></p>
+    <p style="font-size:11px;color:rgba(253,246,236,.35);margin-bottom:4px">Project Future Self &nbsp;&middot;&nbsp; <a href="https://projectfutureself.com" style="color:rgba(253,246,236,.35);text-decoration:none">projectfutureself.com</a></p>
     <p style="font-size:10px;color:rgba(253,246,236,.2)">For support, email <a href="mailto:support@projectfutureself.com" style="color:rgba(253,246,236,.3)">support@projectfutureself.com</a></p>
   </td></tr>
 </table>
@@ -56,12 +56,12 @@ function buildAndrewEmail(name, email, date, answers) {
     const v = answers[key];
     if (!v || !String(v).trim()) return '<em style="color:#999">Not completed</em>';
     const t = String(v).trim();
-    return esc(t.length > len ? t.slice(0, len) + '…' : t);
+    return esc(t.length > len ? t.slice(0, len) + '...' : t);
   };
   return `<!DOCTYPE html><html><head><meta charset="UTF-8"></head>
 <body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f5f0e8;margin:0;padding:24px">
 <div style="max-width:560px;background:#fff;border-radius:10px;padding:32px;border:1px solid #F5E8CC">
-  <div style="font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C07D0A;margin-bottom:6px">Project Future Self — New Submission</div>
+  <div style="font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C07D0A;margin-bottom:6px">Project Future Self &mdash; New Submission</div>
   <h2 style="font-size:20px;color:#0D1F3C;margin-bottom:20px">Reinvention Story Pack Workbook</h2>
   <table style="width:100%;font-size:14px;color:#3D2E14;margin-bottom:24px">
     <tr><td style="padding:6px 0;font-weight:700;width:100px">Name:</td><td>${esc(name)}</td></tr>
@@ -79,10 +79,8 @@ function buildAndrewEmail(name, email, date, answers) {
 </body></html>`;
 }
 
-// ── MAIN HANDLER ─────────────────────────────────────────────────────────────
-
 export async function onRequestPost({ request, env, waitUntil }) {
-  // 1. Parse & validate request
+  // 1. Parse & validate — return error codes CF won't intercept
   let data;
   try {
     data = await request.json();
@@ -97,8 +95,8 @@ export async function onRequestPost({ request, env, waitUntil }) {
     });
   }
 
-  if (!env.VERCEL_PDF_URL) {
-    return new Response(JSON.stringify({ error: 'PDF service not configured' }), {
+  if (!env.VERCEL_PDF_URL || !env.RESEND_API_KEY) {
+    return new Response(JSON.stringify({ error: 'Service not configured' }), {
       status: 503, headers: { 'Content-Type': 'application/json' },
     });
   }
@@ -107,61 +105,53 @@ export async function onRequestPost({ request, env, waitUntil }) {
   const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   const filename = `${name.replace(/\s+/g, '-')}-reinvention-story-pack.pdf`;
 
-  // 2. Generate PDF via Railway — send structured data, Railway builds HTML internally
-  const railwayBase = env.VERCEL_PDF_URL.replace(/\/api\/generate-pdf$/, '');
-  const pdfUrl = railwayBase + '/api/generate-story-pack-pdf';
-
-  let pdfBase64;
-  try {
-    const pdfRes = await fetch(pdfUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, answers }),
-    });
-    if (!pdfRes.ok) {
-      const err = await pdfRes.text().catch(() => 'unknown');
-      throw new Error(`Railway PDF ${pdfRes.status}: ${err}`);
-    }
-    const pdfBuffer = await pdfRes.arrayBuffer();
-    const bytes = new Uint8Array(pdfBuffer);
-    const chunkSize = 0x8000;
-    let binary = '';
-    for (let i = 0; i < bytes.length; i += chunkSize) {
-      binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
-    }
-    pdfBase64 = btoa(binary);
-  } catch (e) {
-    console.error('[story-pack] PDF generation failed:', e);
-    return new Response(JSON.stringify({ error: 'PDF generation failed' }), {
-      status: 502, headers: { 'Content-Type': 'application/json' },
-    });
-  }
-
-  // 3. Send user email with PDF attached
-  try {
-    const emailRes = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        from: 'Project Future Self <info@projectfutureself.com>',
-        to: [email],
-        bcc: ['info@projectfutureself.com'],
-        subject: `Your Reinvention Story Pack — ${name.split(' ')[0]}, your completed workbook`,
-        html: buildUserEmail(name),
-        attachments: [{ filename, content: pdfBase64 }],
-      }),
-    });
-    if (!emailRes.ok) throw new Error(`Resend ${emailRes.status}: ${await emailRes.text().catch(() => 'unknown')}`);
-  } catch (e) {
-    console.error('[story-pack] User email failed:', e);
-    return new Response(JSON.stringify({ error: 'Email delivery failed' }), {
-      status: 502, headers: { 'Content-Type': 'application/json' },
-    });
-  }
-
-  // 4. Notify Andrew (background — does not block response)
+  // 2. Return 200 immediately — PDF generation and email happen in background
+  // This matches the working pattern of andrew-report.js
   waitUntil((async () => {
     try {
+      // Derive Railway base URL robustly — handles any path format in VERCEL_PDF_URL
+      const railwayBase = new URL(env.VERCEL_PDF_URL).origin;
+      const pdfUrl = railwayBase + '/api/generate-story-pack-pdf';
+
+      const pdfRes = await fetch(pdfUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, answers }),
+      });
+      if (!pdfRes.ok) {
+        console.error('[story-pack] Railway error:', pdfRes.status, await pdfRes.text().catch(() => ''));
+        return;
+      }
+
+      const pdfBuffer = await pdfRes.arrayBuffer();
+      const bytes = new Uint8Array(pdfBuffer);
+      const chunkSize = 0x8000;
+      let binary = '';
+      for (let i = 0; i < bytes.length; i += chunkSize) {
+        binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+      }
+      const pdfBase64 = btoa(binary);
+
+      // Send user email
+      const userRes = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          from: 'Project Future Self <info@projectfutureself.com>',
+          to: [email],
+          bcc: ['info@projectfutureself.com'],
+          subject: `Your Reinvention Story Pack — ${name.split(' ')[0]}, your completed workbook`,
+          html: buildUserEmail(name),
+          attachments: [{ filename, content: pdfBase64 }],
+        }),
+      });
+      if (!userRes.ok) {
+        console.error('[story-pack] Resend user error:', userRes.status, await userRes.text().catch(() => ''));
+      } else {
+        console.log('[story-pack] User email sent to', email);
+      }
+
+      // Send Andrew notification
       await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
@@ -173,20 +163,20 @@ export async function onRequestPost({ request, env, waitUntil }) {
           html: buildAndrewEmail(name, email, date, answers),
           attachments: [{ filename, content: pdfBase64 }],
         }),
-      });
+      }).catch(e => console.error('[story-pack] Andrew email error:', e));
+
+      // Log to Google Sheets
+      if (env.SHEETS_WEBHOOK_URL) {
+        fetch(env.SHEETS_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type: 'story_pack', name, email, date }),
+        }).catch(() => {});
+      }
     } catch (e) {
-      console.error('[story-pack] Andrew notification failed:', e);
+      console.error('[story-pack] Unhandled error:', e);
     }
   })());
-
-  // 5. Log to Google Sheets (fire-and-forget)
-  if (env.SHEETS_WEBHOOK_URL) {
-    fetch(env.SHEETS_WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'story_pack', name, email, date }),
-    }).catch(() => {});
-  }
 
   return new Response(JSON.stringify({ ok: true }), {
     headers: { 'Content-Type': 'application/json' },
