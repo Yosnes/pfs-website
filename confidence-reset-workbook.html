@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confidence Reset Protocol — Interactive Workbook | Project Future Self</title>
+  <meta name="description" content="A structured 5-day behavioral and identity reset to rebuild self-trust, clarity, and momentum after disruption. Work through each day and receive your completed protocol as a PDF.">
+  <link rel="canonical" href="https://projectfutureself.com/confidence-reset-workbook.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0D1F3C;
+      --slate: #1E3A5F;
+      --gold: #F5A31A;
+      --gold-dark: #C07D0A;
+      --amber-bg: #FDF6EC;
+      --amber-mid: #F5E8CC;
+      --text-dark: #1A1208;
+      --text-mid: #3D2E14;
+      --text-muted: #7A6240;
+      --white: #FFFFFF;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
+    html { scroll-behavior: smooth }
+    body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--amber-bg); color: var(--text-dark); line-height: 1.6 }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(253,246,236,.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(13,31,60,.08); padding: 0 5% }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 72px }
+    .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none }
+    .nav-mark { height: 44px; width: auto }
+    .nav-wordmark { line-height: 1.15 }
+    .nav-wordmark .nw-top { font-size: 9px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--text-muted) }
+    .nav-wordmark .nw-main { font-size: 16px; font-weight: 800; letter-spacing: .02em; color: var(--navy); text-transform: uppercase }
+    .nav-wordmark .nw-tag { font-size: 7px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-dark) }
+    .nav-right { display: flex; align-items: center; gap: 8px }
+    .nav-links { display: flex; align-items: center; gap: 28px }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--text-mid); text-decoration: none; transition: color .2s }
+    .nav-links a:hover { color: var(--navy) }
+    .nav-cta { font-size: 12px !important; font-weight: 800 !important; padding: 9px 20px; background: var(--gold); color: var(--navy) !important; border-radius: 24px; transition: background .2s, transform .15s; white-space: nowrap }
+    .nav-cta:hover { background: #f8b83a !important; transform: translateY(-1px) }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px }
+
+    /* PAGE HEADER */
+    .page-header { background: var(--navy); padding: 72px 5% 56px; text-align: center }
+    .page-header .eyebrow { font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px }
+    .page-header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(32px, 5vw, 52px); font-weight: 400; color: #FDF6EC; line-height: 1.1; margin-bottom: 16px }
+    .page-header p { font-size: 15px; color: rgba(253,246,236,.6); max-width: 520px; margin: 0 auto; line-height: 1.75 }
+
+    /* WORKBOOK SHELL */
+    .workbook-wrapper { max-width: 820px; margin: 0 auto; padding: 40px 5% 80px }
+
+    /* PROGRESS */
+    .progress-strip { margin-bottom: 24px; display: none }
+    .progress-meta { display: flex; align-items: center; justify-content: space-between; gap: 16px }
+    .progress-steps { display: flex; align-items: center }
+    .pdot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0; transition: background .3s, color .3s }
+    .pdot.done { background: var(--navy); color: var(--gold) }
+    .pdot.current { background: var(--gold); color: var(--navy) }
+    .pdot.pending { background: var(--amber-mid); color: var(--text-muted) }
+    .pline { flex: 1; height: 2px; background: var(--amber-mid); width: 24px; transition: background .3s }
+    .pline.done { background: var(--navy) }
+    .progress-count { font-size: 12px; font-weight: 700; color: var(--navy); white-space: nowrap }
+
+    /* SCREENS */
+    .screen { display: none }
+    .screen.active { display: block }
+
+    /* CARD */
+    .card { background: var(--white); border: 1px solid var(--amber-mid); border-radius: 16px; padding: 40px }
+
+    /* INTRO */
+    .intro-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 8px }
+    .intro-h2 { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--navy); margin-bottom: 8px }
+    .gold-rule { width: 40px; height: 3px; background: var(--gold); border-radius: 2px; margin: 12px 0 24px }
+    .intro-desc { font-size: 15px; color: var(--text-mid); line-height: 1.75; margin-bottom: 20px }
+    .day-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 24px }
+    .day-list-item { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: var(--text-mid) }
+    .day-badge { width: 24px; height: 24px; border-radius: 6px; background: var(--navy); color: var(--gold); font-size: 9px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; letter-spacing: .02em }
+
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px }
+    .field { display: flex; flex-direction: column; gap: 6px }
+    .field label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted) }
+    .field input { background: var(--amber-bg); border: 1.5px solid rgba(13,31,60,.12); color: var(--text-dark); font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 12px 16px; border-radius: 8px; transition: border-color .2s; outline: none }
+    .field input:focus { border-color: var(--gold) }
+    .field input::placeholder { color: rgba(13,31,60,.25) }
+
+    /* DAY HERO */
+    .day-hero { background: var(--navy); border-radius: 12px 12px 0 0; padding: 20px 28px; display: flex; align-items: center; gap: 16px }
+    .day-hero-badge { width: 48px; height: 48px; border-radius: 10px; background: var(--gold); color: var(--navy); font-size: 10px; font-weight: 800; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; line-height: 1.1; letter-spacing: .04em }
+    .day-hero-eyebrow { font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 3px }
+    .day-hero-title { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--white); line-height: 1.2 }
+
+    /* MODULE BODY */
+    .module-body { background: var(--white); border: 1px solid var(--amber-mid); border-top: none; border-radius: 0 0 12px 12px; padding: 28px; margin-bottom: 32px }
+    .module-instructions { font-size: 14px; font-style: italic; color: var(--text-mid); line-height: 1.7; padding-bottom: 20px; border-bottom: 1px solid var(--amber-mid); margin-bottom: 24px }
+
+    /* FIELD BLOCKS */
+    .field-block { margin-bottom: 22px }
+    .field-block-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 8px }
+    .field-block-step { width: 26px; height: 26px; border-radius: 50%; background: var(--navy); color: var(--gold); font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px }
+    .field-block-step.gold { background: var(--gold); color: var(--navy) }
+    .field-block-step.slate { background: var(--slate); color: var(--gold) }
+    .field-block-info { flex: 1 }
+    .field-block-title { font-size: 14px; font-weight: 700; color: var(--navy); line-height: 1.3 }
+    .field-block-sub { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-top: 2px }
+    .prompt-text { font-size: 13px; font-style: italic; color: var(--text-muted); line-height: 1.6; margin-bottom: 8px; padding-left: 38px }
+
+    /* TEXTAREAS + INPUTS */
+    .workbook-textarea { width: 100%; background: var(--amber-bg); border: 1.5px solid rgba(13,31,60,.12); border-radius: 8px; padding: 14px 16px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text-dark); line-height: 1.65; resize: vertical; transition: border-color .2s; outline: none }
+    .workbook-textarea:focus { border-color: var(--gold) }
+    .workbook-textarea::placeholder { color: rgba(13,31,60,.25) }
+    .workbook-input { width: 100%; background: var(--amber-bg); border: 1.5px solid rgba(13,31,60,.12); border-radius: 8px; padding: 12px 16px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text-dark); transition: border-color .2s; outline: none }
+    .workbook-input:focus { border-color: var(--gold) }
+    .workbook-input::placeholder { color: rgba(13,31,60,.25) }
+
+    /* HIGHLIGHT / ANCHOR FIELD */
+    .anchor-field { background: var(--amber-mid); border-radius: 10px; padding: 16px 20px; margin-top: 8px }
+    .anchor-label { font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 10px }
+    .anchor-field .workbook-textarea { background: #fff; border-color: rgba(245,163,26,.4) }
+    .anchor-field .workbook-textarea:focus { border-color: var(--gold) }
+
+    /* DOUBT / REFRAME CARDS (Day 2) */
+    .doubt-card { border: 1px solid var(--amber-mid); border-radius: 10px; overflow: hidden; margin-bottom: 16px }
+    .doubt-card-header { background: var(--navy); padding: 10px 18px }
+    .doubt-card-label { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--white) }
+    .doubt-card-body { padding: 14px 18px; background: #FDF6EC }
+    .reframe-row { background: var(--white); border-top: 1px solid var(--amber-mid); padding: 12px 18px }
+    .reframe-label { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 6px }
+
+    /* ACTION ROWS (Day 4) */
+    .action-row { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px }
+    .action-num { width: 28px; height: 28px; border-radius: 50%; background: var(--gold); color: var(--navy); font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px }
+
+    /* NAVIGATION BUTTONS */
+    .nav-buttons { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; border-top: 1px solid var(--amber-mid); gap: 12px }
+    .btn-back { font-size: 13px; font-weight: 700; color: var(--text-muted); background: none; border: none; cursor: pointer; padding: 10px 0; transition: color .2s }
+    .btn-back:hover { color: var(--navy) }
+    .btn-next { display: inline-flex; align-items: center; gap: 6px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: .04em; color: var(--navy); background: var(--gold); border: none; border-radius: 32px; padding: 12px 24px; cursor: pointer; transition: background .2s, transform .15s }
+    .btn-next:hover { background: #f8b83a; transform: translateY(-1px) }
+    .btn-submit { display: inline-flex; align-items: center; gap: 6px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 800; letter-spacing: .04em; color: var(--navy); background: var(--gold); border: none; border-radius: 32px; padding: 14px 32px; cursor: pointer; transition: background .2s, transform .15s }
+    .btn-submit:hover:not(:disabled) { background: #f8b83a; transform: translateY(-1px) }
+    .btn-submit:disabled { opacity: .5; cursor: not-allowed }
+    .submit-error { display: none; font-size: 13px; color: #DC2626; line-height: 1.5; margin-top: 8px }
+
+    /* SUBMITTING */
+    .submitting-card { background: var(--white); border: 1px solid var(--amber-mid); border-radius: 16px; padding: 64px 40px; text-align: center }
+    .spinner { width: 48px; height: 48px; border: 3px solid var(--amber-mid); border-top-color: var(--gold); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 24px }
+    @keyframes spin { to { transform: rotate(360deg) } }
+
+    /* SUCCESS */
+    .success-card { background: var(--white); border: 1px solid var(--amber-mid); border-radius: 16px; padding: 56px 40px; text-align: center }
+    .success-icon { width: 64px; height: 64px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px }
+    .success-icon svg { width: 28px; height: 28px; stroke: var(--gold); fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round }
+
+    /* FOOTER */
+    footer { background: #060F1E; padding: 28px 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px }
+    .footer-brand { display: flex; align-items: center; gap: 10px }
+    .footer-mark { height: 32px; width: auto; opacity: .8 }
+    .footer-name { font-size: 12px; font-weight: 700; color: rgba(253,246,236,.5); letter-spacing: .08em; text-transform: uppercase }
+    footer > p { font-size: 11px; color: rgba(253,246,236,.3) }
+    .footer-links { display: flex; gap: 16px; flex-wrap: wrap }
+    .footer-links a { font-size: 11px; color: rgba(253,246,236,.3); text-decoration: none }
+    .footer-links a:hover { color: rgba(253,246,236,.6) }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none }
+      .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 72px; left: 0; right: 0; background: rgba(253,246,236,.98); padding: 16px 5% 20px; border-bottom: 1px solid rgba(13,31,60,.1); gap: 14px; z-index: 99 }
+      .hamburger { display: flex }
+      .card, .module-body, .submitting-card, .success-card { padding: 24px 20px }
+      .field-row { grid-template-columns: 1fr }
+      .day-list { grid-template-columns: 1fr }
+    }
+  </style>
+</head>
+
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">
+      <img class="nav-mark" src="Transparent mark without words.png" alt="Project Future Self mark">
+      <div class="nav-wordmark">
+        <div class="nw-top">Project</div>
+        <div class="nw-main">Future Self</div>
+        <div class="nw-tag">Reinvent · Redesign · Reclaim</div>
+      </div>
+    </a>
+    <div class="nav-right">
+      <div class="nav-links" id="nav-links">
+        <a href="sprint.html">5-Day Sprint</a>
+        <a href="index.html#about">About</a>
+        <a href="products.html">Products</a>
+        <a href="assessment.html">Assessment</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+        <a href="assessment.html" class="nav-cta">Take the Free Assessment</a>
+      </div>
+      <div class="hamburger" id="hamburger" onclick="document.getElementById('nav-links').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="eyebrow">Project Future Self · Behavioral Reset</div>
+  <h1>Confidence Reset Protocol</h1>
+  <p>A structured 5-day system to rebuild self-trust, clarity, and momentum after disruption. Work through each day below — your completed protocol is delivered as a PDF by email.</p>
+</div>
+
+<div class="workbook-wrapper">
+
+  <!-- PROGRESS BAR -->
+  <div class="progress-strip" id="progress-strip">
+    <div class="progress-meta">
+      <div class="progress-steps">
+        <div class="pdot pending" data-day="0">0</div>
+        <div class="pline" data-after="0"></div>
+        <div class="pdot pending" data-day="1">1</div>
+        <div class="pline" data-after="1"></div>
+        <div class="pdot pending" data-day="2">2</div>
+        <div class="pline" data-after="2"></div>
+        <div class="pdot pending" data-day="3">3</div>
+        <div class="pline" data-after="3"></div>
+        <div class="pdot pending" data-day="4">4</div>
+        <div class="pline" data-after="4"></div>
+        <div class="pdot pending" data-day="5">5</div>
+      </div>
+      <span class="progress-count" id="prog-count">Day 0 of 5</span>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN: INTRO ══ -->
+  <div class="screen active" id="screen-intro">
+    <div class="card">
+      <div class="intro-eyebrow">5-Day Behavioral Reset</div>
+      <div class="intro-h2">Reset Your Confidence from the Inside Out</div>
+      <div class="gold-rule"></div>
+      <p class="intro-desc">Confidence is not a feeling you wait for — it's built through evidence. This protocol walks you through a clear diagnostic, a pattern interrupt, an identity anchor, and a daily momentum routine. Work through each day and submit when ready. Your completed protocol will be emailed to you as a PDF.</p>
+      <div class="day-list">
+        <div class="day-list-item"><span class="day-badge">D0</span> Setup — Commit to the Protocol</div>
+        <div class="day-list-item"><span class="day-badge">D1</span> Diagnostic — Name the Real Problem</div>
+        <div class="day-list-item"><span class="day-badge">D2</span> Reframe — Interrupt the Pattern</div>
+        <div class="day-list-item"><span class="day-badge">D3</span> Identity — Build Your Anchor</div>
+        <div class="day-list-item"><span class="day-badge">D4</span> Future Self — Act the Part</div>
+        <div class="day-list-item"><span class="day-badge">D5</span> Momentum — Carry the Reset Forward</div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Your Name</label><input type="text" id="inp-name" placeholder="First and last name" autocomplete="name"></div>
+        <div class="field"><label>Email Address</label><input type="email" id="inp-email" placeholder="your@email.com" autocomplete="email"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+        <p style="font-size:12px;color:var(--text-muted)">Complete at your own pace · Results sent to your email</p>
+        <button class="btn-next" onclick="startWorkbook()">Begin Day 0 →</button>
+      </div>
+      <p id="intro-err" style="font-size:12px;color:#DC2626;margin-top:10px;display:none">Please enter your name and a valid email address to continue.</p>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN: DAY 0 — Setup ══ -->
+  <div class="screen" id="screen-d0">
+    <div class="day-hero">
+      <div class="day-hero-badge"><span>DAY</span><span>0</span></div>
+      <div>
+        <div class="day-hero-eyebrow">Day 0 · Before You Begin</div>
+        <div class="day-hero-title">Setup — Commit to the Protocol</div>
+      </div>
+    </div>
+    <div class="module-body">
+      <p class="module-instructions">Choose a consistent time and place to do this work each day. The same location, same time. Consistency signals to your brain that this is non-negotiable.</p>
+
+      <div class="field-block">
+        <div class="field-block-header">
+          <div class="field-block-step">1</div>
+          <div class="field-block-info">
+            <div class="field-block-title">When will you do this work each day?</div>
+            <div class="field-block-sub">Pick a specific time — not "morning," but "7:15am."</div>
+          </div>
+        </div>
+        <input type="text" class="workbook-input" data-field="cr_d0_time" placeholder="e.g., 7:15am before checking email">
+      </div>
+
+      <div class="field-block">
+        <div class="field-block-header">
+          <div class="field-block-step gold">2</div>
+          <div class="field-block-info">
+            <div class="field-block-title">Where specifically will you do it?</div>
+            <div class="field-block-sub">Same chair, same desk, same room — every day.</div>
+          </div>
+        </div>
+        <input type="text" class="workbook-input" data-field="cr_d0_location" placeholder="e.g., my desk in the home office with coffee, no phone">
+      </div>
+
+      <div class="field-block">
+        <div class="field-block-header">
+          <div class="field-block-step slate">★</div>
+          <div class="field-block-info">
+            <div class="field-block-title">Your Commitment Statement</div>
+            <div class="field-block-sub">Write it in present tense, as if it's already happening.</div>
+          </div>
+        </div>
+        <div class="anchor-field">
+          <div class="anchor-label">Write your commitment</div>
+          <textarea class="workbook-textarea" data-field="cr_d0_commitment" rows="3" placeholder="e.g., I do this work at 7:15am every morning because rebuilding my confidence is the most important thing I can do right now."></textarea>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="advance('d0','intro')">← Back</button>
+        <button class="btn-next" onclick="advance('d0','d1')">Next: Day 1 — Diagnostic →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN: DAY 1 — Diagnostic ══ -->
+  <div class="screen" id="screen-d1">
+    <div class="day-hero">
+      <div class="day-hero-badge"><span>DAY</span><span>1</span></div>
+      <div>
+        <div class="day-hero-eyebrow">Day 1 · Clear Diagnosis</div>
+        <div class="day-hero-title">Diagnostic — Name the Real Problem</div>
+      </div>
+    </div>
+    <div class="module-body">
+      <p class="module-instructions">You can't fix a confidence problem you haven't clearly named. This day is about precise diagnosis — not venting, not catastrophizing. What is actually happening, and what does it cost you?</p>
+
+      <div class="field-block">
+        <div class="field-block-header">
+          <div class="field-block-step">1</div>
+          <div class="field-block-info">
+            <div class="field-block-title">What happened that shook your confidence?</div>
+            <div class="field-block-sub">Be specific: what was the event, decision, or situation?</div>
+          </div>
+        </div>
+        <textarea class="workbook-textarea" data-field="cr_d1_situation" rows="4" placeholder="Describe the specific thing that triggered the erosion..."></textarea>
+      </div>
+
+      <div class="field-block">
+        <div class="field-block-header">
+          <div class="field-block-step gold">2</div>
+          <div class="field-block-info">
+            <div class="field-block-title">What do you think is really going on underneath?</div>
+            <div class="field-block-sub">The event is the surface. What's the root — fear of failure? Of not being enough? Of being exposed?</div>
+          </div>
+        </div>
+        <textarea class="workbook-textarea" data-field="cr_d1_root" rows="4" placeholder="Look past the event to the underlying belief or fear..."></textarea>
+      </div>
+
+      <div class="field-block">
+        <div class="field-block-header">
+          <div class="field-block-step">3</div>
+          <div class="field-block-info">
+            <div class="field-block-title">What pattern keeps showing up?</div>
+            <div class="field-block-sub">Avoidance? Overthinking? Withdrawal? Perfectionism? Something else?</div>
+          </div>
+        </div>
+        <input type="text" class="workbook-input" data-field="cr_d1_pattern" placeholder="Name the pattern — be honest and specific">
+      </div>
+
+      <div class="field-block">
+        <div class="field-block-header">
+          <div class="field-block-step slate">★</div>
+          <div class="field-block-info">
+            <div class="field-block-title">What is this confidence erosion costing you right now?</div>
+            <div class="field-block-sub">Opportunities missed, relationships affected, momentum lost — make it real.</div>
+          </div>
+        </div>
+        <div class="anchor-field">
+          <div class="anchor-label">The Real Cost</div>
+          <textarea class="workbook-textarea" data-field="cr_d1_cost" rows="4" placeholder="What are you losing by staying stuck here?"></textarea>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="advance('d1','d0')">← Back</button>
+        <button class="btn-next" onclick="advance('d1','d2')">Next: Day 2 — Reframe →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN: DAY 2 — Reframe ══ -->
+  <div class="screen" id="screen-d2">
+    <div class="day-hero">
+      <div class="day-hero-badge"><span>DAY</span><span>2</span></div>
+      <div>
+        <div class="day-hero-eyebrow">Day 2 · Interrupt the Pattern</div>
+        <div class="day-hero-title">Reframe — Scripts to Disrupt Self-Doubt</div>
+      </div>
+    </div>
+    <div class="module-body">
+      <p class="module-instructions">Self-doubt runs on automatic scripts. This day, you make those scripts explicit — and you write the reframes that interrupt them. A reframe is not a positive affirmation. It's an accurate counter-argument.</p>
+
+      <div class="doubt-card">
+        <div class="doubt-card-header"><div class="doubt-card-label">Self-Doubt Pattern #1</div></div>
+        <div class="doubt-card-body">
+          <textarea class="workbook-textarea" data-field="cr_d2_doubt1" rows="2" placeholder="e.g., 'I'm not qualified enough to apply for senior roles'"></textarea>
+        </div>
+        <div class="reframe-row">
+          <div class="reframe-label">Reframe</div>
+          <textarea class="workbook-textarea" data-field="cr_d2_reframe1" rows="2" placeholder="e.g., 'I've led teams of 8, managed $2M budgets, and driven 40% growth. The evidence says otherwise.'"></textarea>
+        </div>
+      </div>
+
+      <div class="doubt-card">
+        <div class="doubt-card-header"><div class="doubt-card-label">Self-Doubt Pattern #2</div></div>
+        <div class="doubt-card-body">
+          <textarea class="workbook-textarea" data-field="cr_d2_doubt2" rows="2" placeholder="Write your second self-doubt pattern..."></textarea>
+        </div>
+        <div class="reframe-row">
+          <div class="reframe-label">Reframe</div>
+          <textarea class="workbook-textarea" data-field="cr_d2_reframe2" rows="2" placeholder="Write the accurate counter-argument..."></textarea>
+        </div>
+      </div>
+
+      <div class="doubt-card">
+        <div class="doubt-card-header"><div class="doubt-card-label">Self-Doubt Pattern #3</div></div>
+        <div class="doubt-card-body">
+          <textarea class="workbook-textarea" data-field="cr_d2_doubt3" rows="2" placeholder="Write your third self-doubt pattern..."></textarea>
+        </div>
+        <div class="reframe-row">
+          <div class="reframe-label">Reframe</div>
+          <textarea class="workbook-textarea" data-field="cr_d2_reframe3" rows="2" placeholder="Write the accurate counter-argument..."></textarea>
+        </div>
+      </div>
+
+      <div class="field-block" style="margin-top:24px">
+        <div class="field-block-header">
+          <div class="field-block-step slate">★</div>
+          <div class="field-block-info">
+            <div class="field-block-title">My Interrupt Script</div>
+            <div class="field-block-sub">A 1–2 sentence script you say to yourself the moment doubt appears. Short. Direct. Evidence-based.</div>
+          </div>
+        </div>
+        <div class="anchor-field">
+          <div class="anchor-label">When the doubt shows up, I say to myself:</div>
+          <textarea class="workbook-textarea" data-field="cr_d2_interrupt" rows="3" placeholder="e.g., 'Stop. I know what this pattern is. Here's the evidence that contradicts it...'"></textarea>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="advance('d2','d1')">← Back</button>
+        <button class="btn-next" onclick="advance('d2','d3')">Next: Day 3 — Identity →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN: DAY 3 — Identity ══ -->
+  <div class="screen" id="screen-d3">
+    <div class="day-hero">
+      <div class="day-hero-badge"><span>DAY</span><span>3</span></div>
+      <div>
+        <div class="day-hero-eyebrow">Day 3 · Future Self Anchor</div>
+        <div class="day-hero-title">Identity — Build Your Anchor</div>
+      </div>
+    </div>
+    <div class="module-body">
+      <p class="module-instructions">Your Future Self anchor is a clear, evidence-based reference point for who you're becoming. Not who you hope to become — who you're already in the process of becoming. You'll return to this on hard days.</p>
+
+      <div class="field-block">
+        <div class="field-block-header">
+          <div class="field-block-step">1</div>
+          <div class="field-block-info">
+            <div class="field-block-title">Describe your Future Self in the present tense</div>
+            <div class="field-block-sub">Who is the person you're becoming? Write as if they already exist.</div>
+          </div>
+        </div>
+        <p class="prompt-text">"I am someone who ___. I show up as ___. I operate from ___."</p>
+        <textarea class="workbook-textarea" data-field="cr_d3_future" rows="5" placeholder="Write a paragraph describing this person in present tense..."></textarea>
+      </div>
+
+      <div class="field-block">
+        <div class="field-block-header">
+          <div class="field-block-step gold">2</div>
+          <div class="field-block-info">
+            <div class="field-block-title">Evidence this person already exists in you</div>
+            <div class="field-block-sub">List 3–5 specific moments, decisions, or qualities that prove this isn't wishful thinking.</div>
+          </div>
+        </div>
+        <textarea class="workbook-textarea" data-field="cr_d3_evidence" rows="5" placeholder="1. ...\n2. ...\n3. ...\n4. ...\n5. ..."></textarea>
+      </div>
+
+      <div class="field-block">
+        <div class="field-block-header">
+          <div class="field-block-step slate">★</div>
+          <div class="field-block-info">
+            <div class="field-block-title">Your Future Self Anchor Statement</div>
+            <div class="field-block-sub">1–2 sentences. This is the thing you say to yourself when confidence fails. Keep it grounded — based on evidence, not aspiration.</div>
+          </div>
+        </div>
+        <div class="anchor-field">
+          <div class="anchor-label">My anchor statement (return to this on hard days)</div>
+          <textarea class="workbook-textarea" data-field="cr_d3_anchor" rows="3" placeholder="e.g., 'I am someone who has navigated real adversity and come out more capable. The evidence is everywhere — I just have to look.'"></textarea>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="advance('d3','d2')">← Back</button>
+        <button class="btn-next" onclick="advance('d3','d4')">Next: Day 4 — Future Self →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN: DAY 4 — Future Self ══ -->
+  <div class="screen" id="screen-d4">
+    <div class="day-hero">
+      <div class="day-hero-badge"><span>DAY</span><span>4</span></div>
+      <div>
+        <div class="day-hero-eyebrow">Day 4 · Behavior as Identity</div>
+        <div class="day-hero-title">Future Self — Act the Part</div>
+      </div>
+    </div>
+    <div class="module-body">
+      <p class="module-instructions">You don't wait for confidence before you act — you act, and confidence follows. This day is about identifying the specific daily actions your Future Self takes, and committing to them as identity, not routine.</p>
+
+      <div class="field-block">
+        <div class="field-block-header">
+          <div class="field-block-info">
+            <div class="field-block-title">Daily Actions This Future Self Takes</div>
+            <div class="field-block-sub">Small, specific, repeatable. Not goals — behaviors. What does this person do each day that the current you isn't doing consistently?</div>
+          </div>
+        </div>
+        <div style="margin-top:12px">
+          <div class="action-row">
+            <div class="action-num">1</div>
+            <input type="text" class="workbook-input" data-field="cr_d4_action1" placeholder="e.g., Spend 30 minutes on outreach before opening email">
+          </div>
+          <div class="action-row">
+            <div class="action-num">2</div>
+            <input type="text" class="workbook-input" data-field="cr_d4_action2" placeholder="e.g., Say yes to one uncomfortable conversation per day">
+          </div>
+          <div class="action-row">
+            <div class="action-num">3</div>
+            <input type="text" class="workbook-input" data-field="cr_d4_action3" placeholder="e.g., End each day by writing one thing I did well">
+          </div>
+        </div>
+      </div>
+
+      <div class="field-block">
+        <div class="field-block-header">
+          <div class="field-block-step slate">★</div>
+          <div class="field-block-info">
+            <div class="field-block-title">How do these actions connect to who you're becoming?</div>
+            <div class="field-block-sub">Make the link explicit — not "I do this to feel better" but "I do this because this is who I am."</div>
+          </div>
+        </div>
+        <div class="anchor-field">
+          <div class="anchor-label">The connection</div>
+          <textarea class="workbook-textarea" data-field="cr_d4_bridge" rows="4" placeholder="e.g., 'Every time I reach out when I don't feel ready, I'm proving to myself that I operate from intention, not fear. That's the person I'm becoming.'"></textarea>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="advance('d4','d3')">← Back</button>
+        <button class="btn-next" onclick="advance('d4','d5')">Next: Day 5 — Momentum →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN: DAY 5 — Momentum ══ -->
+  <div class="screen" id="screen-d5">
+    <div class="day-hero">
+      <div class="day-hero-badge"><span>DAY</span><span>5</span></div>
+      <div>
+        <div class="day-hero-eyebrow">Day 5 · Carry the Reset Forward</div>
+        <div class="day-hero-title">Momentum — Build on What You've Proven</div>
+      </div>
+    </div>
+    <div class="module-body">
+      <p class="module-instructions">The reset is not a one-time event — it's the beginning of a new baseline. This day is about building a daily momentum routine you can sustain, and creating a concrete 7-day plan to carry the work forward.</p>
+
+      <div class="field-block">
+        <div class="field-block-header">
+          <div class="field-block-step">1</div>
+          <div class="field-block-info">
+            <div class="field-block-title">Three small wins from this protocol</div>
+            <div class="field-block-sub">These are evidence you can act even when confidence isn't fully there. Name them specifically.</div>
+          </div>
+        </div>
+        <textarea class="workbook-textarea" data-field="cr_d5_wins" rows="4" placeholder="1. ...\n2. ...\n3. ..."></textarea>
+      </div>
+
+      <div class="field-block">
+        <div class="field-block-header">
+          <div class="field-block-step gold">2</div>
+          <div class="field-block-info">
+            <div class="field-block-title">My daily momentum routine</div>
+            <div class="field-block-sub">10–15 minutes each morning. Simple enough to do even on hard days. Write it out as a sequence.</div>
+          </div>
+        </div>
+        <textarea class="workbook-textarea" data-field="cr_d5_routine" rows="5" placeholder="e.g., 1. Read my anchor statement (2 min) → 2. Review my three daily actions (1 min) → 3. Identify one thing I will do today as this Future Self (2 min) → 4. Write one thing I'm grateful for (2 min)"></textarea>
+      </div>
+
+      <div class="field-block">
+        <div class="field-block-header">
+          <div class="field-block-step slate">★</div>
+          <div class="field-block-info">
+            <div class="field-block-title">My 7-day forward plan</div>
+            <div class="field-block-sub">Specific actions for each of the next 7 days. Not goals — concrete actions with a day attached.</div>
+          </div>
+        </div>
+        <div class="anchor-field">
+          <div class="anchor-label">Day-by-day commitments</div>
+          <textarea class="workbook-textarea" data-field="cr_d5_plan" rows="8" placeholder="Day 1: ...\nDay 2: ...\nDay 3: ...\nDay 4: ...\nDay 5: ...\nDay 6: ...\nDay 7: ..."></textarea>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn-back" onclick="advance('d5','d4')">← Back</button>
+        <div>
+          <button class="btn-submit" id="btn-submit" onclick="submitWorkbook()">Submit My Protocol →</button>
+          <p class="submit-error" id="submit-error">Something went wrong — please try again or email <a href="mailto:info@projectfutureself.com">info@projectfutureself.com</a> with your answers.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN: SUBMITTING ══ -->
+  <div class="screen" id="screen-submitting">
+    <div class="submitting-card">
+      <div class="spinner"></div>
+      <h2 style="font-family:'DM Serif Display',serif;font-size:24px;color:var(--navy);margin-bottom:10px">Building your PDF…</h2>
+      <p style="font-size:14px;color:var(--text-muted);line-height:1.7">We're compiling your 5-day protocol and will email it to you in a moment.</p>
+    </div>
+  </div>
+
+  <!-- ══ SCREEN: SUCCESS ══ -->
+  <div class="screen" id="screen-success">
+    <div class="success-card">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <h2 style="font-family:'DM Serif Display',serif;font-size:28px;color:var(--navy);margin-bottom:12px">Your Reset Is Complete</h2>
+      <p style="font-size:15px;color:var(--text-mid);line-height:1.75;margin-bottom:6px">Your Confidence Reset Protocol PDF is on its way to <strong id="success-email"></strong>.</p>
+      <p style="font-size:14px;color:var(--text-muted);line-height:1.75;margin-bottom:32px">Check your inbox (and spam folder). The email comes from info@projectfutureself.com.</p>
+      <div style="background:var(--amber-mid);border-radius:10px;padding:20px 24px;max-width:460px;margin:0 auto 24px;text-align:left">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dark);margin-bottom:12px">Do This Today</div>
+        <p style="font-size:14px;color:var(--text-mid);line-height:1.7;margin-bottom:8px">📋 <strong>Read your Day 3 anchor statement out loud.</strong> Notice how it feels.</p>
+        <p style="font-size:14px;color:var(--text-mid);line-height:1.7">🔁 <strong>Start your momentum routine tomorrow morning.</strong> The next 7 days set your new baseline.</p>
+      </div>
+      <a href="https://calendly.com/andrew-projectfutureself/30min" style="display:inline-block;padding:13px 28px;background:var(--navy);color:#FDF6EC;font-weight:800;font-size:13px;border-radius:32px;text-decoration:none">Book a Call with Andrew →</a>
+    </div>
+  </div>
+
+</div><!-- /workbook-wrapper -->
+
+<footer>
+  <div class="footer-brand">
+    <img class="footer-mark" src="Transparent mark without words.png" alt="PFS">
+    <div class="footer-name">Project Future Self</div>
+  </div>
+  <p>© 2026 Project Future Self. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms</a>
+    <a href="disclaimer.html">Disclaimer</a>
+    <a href="refund.html">Refund Policy</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</footer>
+
+<script>
+  const state = { name: '', email: '', answers: {} };
+  const DAY_IDS = ['d0', 'd1', 'd2', 'd3', 'd4', 'd5'];
+  const LS_KEY = 'pfs_cr_answers';
+
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById('screen-' + id).classList.add('active');
+    updateProgress(id);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function updateProgress(id) {
+    const dayNum = { d0: 0, d1: 1, d2: 2, d3: 3, d4: 4, d5: 5 }[id];
+    const strip = document.getElementById('progress-strip');
+    if (dayNum === undefined) { strip.style.display = 'none'; return; }
+    strip.style.display = 'block';
+    document.getElementById('prog-count').textContent = 'Day ' + dayNum + ' of 5';
+    document.querySelectorAll('.pdot').forEach(d => {
+      const n = +d.dataset.day;
+      d.className = 'pdot ' + (n < dayNum ? 'done' : n === dayNum ? 'current' : 'pending');
+    });
+    document.querySelectorAll('.pline').forEach(l => {
+      l.className = 'pline' + (+l.dataset.after < dayNum ? ' done' : '');
+    });
+  }
+
+  function saveAnswers(screenId) {
+    if (!DAY_IDS.includes(screenId)) return;
+    document.querySelectorAll('#screen-' + screenId + ' [data-field]').forEach(el => {
+      state.answers[el.dataset.field] = el.value;
+    });
+    try { localStorage.setItem(LS_KEY, JSON.stringify(state.answers)); } catch (e) {}
+  }
+
+  function restoreAnswers(screenId) {
+    if (!DAY_IDS.includes(screenId)) return;
+    document.querySelectorAll('#screen-' + screenId + ' [data-field]').forEach(el => {
+      if (state.answers[el.dataset.field] !== undefined) el.value = state.answers[el.dataset.field];
+    });
+  }
+
+  function advance(from, to) {
+    saveAnswers(from);
+    showScreen(to);
+    restoreAnswers(to);
+  }
+
+  function startWorkbook() {
+    const name = document.getElementById('inp-name').value.trim();
+    const email = document.getElementById('inp-email').value.trim();
+    const err = document.getElementById('intro-err');
+    if (!name || !email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      err.style.display = 'block'; return;
+    }
+    err.style.display = 'none';
+    state.name = name;
+    state.email = email;
+    try {
+      const saved = localStorage.getItem(LS_KEY);
+      if (saved) state.answers = JSON.parse(saved);
+    } catch (e) {}
+    showScreen('d0');
+    restoreAnswers('d0');
+  }
+
+  async function submitWorkbook() {
+    saveAnswers('d5');
+    const btn = document.getElementById('btn-submit');
+    btn.disabled = true;
+    document.getElementById('submit-error').style.display = 'none';
+    showScreen('submitting');
+    try {
+      const res = await fetch('/api/confidence-reset-submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: state.name, email: state.email, answers: state.answers })
+      });
+      if (!res.ok) throw new Error('Status ' + res.status);
+      try { localStorage.removeItem(LS_KEY); } catch (e) {}
+      document.getElementById('success-email').textContent = state.email;
+      showScreen('success');
+    } catch (e) {
+      showScreen('d5');
+      document.getElementById('submit-error').style.display = 'block';
+      btn.disabled = false;
+    }
+  }
+
+  // Restore saved answers on load
+  (function () {
+    try {
+      const saved = localStorage.getItem(LS_KEY);
+      if (saved) state.answers = JSON.parse(saved);
+    } catch (e) {}
+  })();
+</script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c12744dece674e8aac2d803f061fdd6e"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

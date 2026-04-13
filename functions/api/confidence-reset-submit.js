@@ -15,27 +15,27 @@ function buildUserEmail(name) {
 <table width="100%" cellpadding="0" cellspacing="0" style="max-width:580px">
   <tr><td style="background:#0D1F3C;border-radius:12px 12px 0 0;padding:28px 36px">
     <div style="font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#F5A31A;margin-bottom:6px">PROJECT FUTURE SELF</div>
-    <div style="font-size:20px;font-weight:800;color:#FDF6EC">Reinvention Story Pack</div>
+    <div style="font-size:20px;font-weight:800;color:#FDF6EC">Confidence Reset Protocol</div>
   </td></tr>
   <tr><td style="background:#ffffff;padding:36px 36px 28px;border-left:1px solid #F5E8CC;border-right:1px solid #F5E8CC">
     <p style="font-size:16px;color:#0D1F3C;margin-bottom:20px">Hi ${esc(firstName)},</p>
-    <p style="font-size:15px;color:#3D2E14;line-height:1.75;margin-bottom:20px">Your Reinvention Story Pack workbook is attached as a PDF — all five modules, fully compiled from your answers.</p>
-    <p style="font-size:15px;color:#3D2E14;line-height:1.75;margin-bottom:28px">The real value comes from reading your own words back to yourself in interviews, networking conversations, and moments when you need to remember why you made this change.</p>
+    <p style="font-size:15px;color:#3D2E14;line-height:1.75;margin-bottom:20px">Your Confidence Reset Protocol is attached as a PDF — all six days, fully compiled from your answers.</p>
+    <p style="font-size:15px;color:#3D2E14;line-height:1.75;margin-bottom:28px">Return to Day 3 whenever you feel doubt creeping back. Your Future Self anchor and interrupt script are your most important tools from here.</p>
     <div style="background:#FDF6EC;border-radius:8px;padding:20px 22px;margin-bottom:28px">
       <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#C07D0A;margin-bottom:12px">Two Things to Do Right Now</div>
       <div style="display:flex;gap:10px;margin-bottom:10px">
         <div style="width:22px;height:22px;border-radius:50%;background:#0D1F3C;color:#F5A31A;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0">1</div>
-        <p style="font-size:14px;color:#3D2E14;line-height:1.65;margin:0"><strong>Read Module 1 out loud.</strong> Your Before / After Story sounds different spoken than written — notice what feels true.</p>
+        <p style="font-size:14px;color:#3D2E14;line-height:1.65;margin:0"><strong>Read your Future Self anchor statement out loud.</strong> Notice how it feels to hear your own words as a statement of identity, not aspiration.</p>
       </div>
       <div style="display:flex;gap:10px">
         <div style="width:22px;height:22px;border-radius:50%;background:#0D1F3C;color:#F5A31A;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0">2</div>
-        <p style="font-size:14px;color:#3D2E14;line-height:1.65;margin:0"><strong>Pull up Module 3 before your next interview.</strong> Practice delivering Story 1 in under 2 minutes without notes.</p>
+        <p style="font-size:14px;color:#3D2E14;line-height:1.65;margin:0"><strong>Start your Day 5 momentum routine tomorrow morning.</strong> Consistency over the next 7 days is what turns this reset into a new baseline.</p>
       </div>
     </div>
     <div style="background:#0D1F3C;border-radius:10px;padding:24px 28px;text-align:center;margin-bottom:28px">
       <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F5A31A;margin-bottom:8px">Want to work through this together?</div>
       <div style="font-size:18px;font-weight:700;color:#FDF6EC;margin-bottom:8px">Book a 30-Minute Call with Andrew</div>
-      <p style="font-size:13px;color:rgba(253,246,236,.7);line-height:1.65;margin-bottom:18px">Talk through your story, get unstuck, and leave with clarity on your next move.</p>
+      <p style="font-size:13px;color:rgba(253,246,236,.7);line-height:1.65;margin-bottom:18px">Talk through your reset, get unstuck, and leave with clarity on your next move.</p>
       <a href="${CALENDLY}" style="display:inline-block;padding:12px 28px;background:#F5A31A;color:#0D1F3C;font-weight:800;font-size:13px;border-radius:32px;text-decoration:none">Schedule a Call →</a>
     </div>
     <p style="font-size:14px;color:#3D2E14;line-height:1.75;margin-bottom:6px">— Andrew</p>
@@ -62,27 +62,27 @@ function buildAndrewEmail(name, email, date, answers) {
 <body style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f5f0e8;margin:0;padding:24px">
 <div style="max-width:560px;background:#fff;border-radius:10px;padding:32px;border:1px solid #F5E8CC">
   <div style="font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C07D0A;margin-bottom:6px">Project Future Self — New Submission</div>
-  <h2 style="font-size:20px;color:#0D1F3C;margin-bottom:20px">Reinvention Story Pack Workbook</h2>
+  <h2 style="font-size:20px;color:#0D1F3C;margin-bottom:20px">Confidence Reset Protocol</h2>
   <table style="width:100%;font-size:14px;color:#3D2E14;margin-bottom:24px">
     <tr><td style="padding:6px 0;font-weight:700;width:100px">Name:</td><td>${esc(name)}</td></tr>
     <tr><td style="padding:6px 0;font-weight:700">Email:</td><td><a href="mailto:${esc(email)}" style="color:#0D1F3C">${esc(email)}</a></td></tr>
     <tr><td style="padding:6px 0;font-weight:700">Date:</td><td>${date}</td></tr>
   </table>
   <div style="border-top:1px solid #F5E8CC;padding-top:18px;margin-bottom:8px">
-    <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#C07D0A;margin-bottom:14px">Module Previews</div>
-    <p style="font-size:13px;margin-bottom:4px"><strong>M1 Final Assembly:</strong> ${preview('m1_final')}</p>
-    <p style="font-size:13px;margin-bottom:4px"><strong>M2 Interview Version:</strong> ${preview('m2_interview')}</p>
-    <p style="font-size:13px;margin-bottom:16px"><strong>M4 Script A:</strong> ${preview('m4_script_a')}</p>
+    <div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#C07D0A;margin-bottom:14px">Key Answers Preview</div>
+    <p style="font-size:13px;margin-bottom:4px"><strong>D1 Root Cause:</strong> ${preview('cr_d1_root')}</p>
+    <p style="font-size:13px;margin-bottom:4px"><strong>D3 Anchor Statement:</strong> ${preview('cr_d3_anchor')}</p>
+    <p style="font-size:13px;margin-bottom:16px"><strong>D5 Forward Plan:</strong> ${preview('cr_d5_plan')}</p>
   </div>
-  <p style="font-size:13px;color:#7A6240">Full workbook PDF is attached. Reply to this email to respond directly to ${esc(name.split(' ')[0])}.</p>
+  <p style="font-size:13px;color:#7A6240">Full protocol PDF is attached. Reply to this email to respond directly to ${esc(name.split(' ')[0])}.</p>
 </div>
 </body></html>`;
 }
 
-// ── MAIN HANDLER ─────────────────────────────────────────────────────────────
+// ── MAIN HANDLER ──────────────────────────────────────────────────────────────
 
 export async function onRequestPost({ request, env, waitUntil }) {
-  // 1. Parse & validate request
+  // 1. Parse & validate
   let data;
   try {
     data = await request.json();
@@ -105,11 +105,11 @@ export async function onRequestPost({ request, env, waitUntil }) {
 
   const { name, email, answers = {} } = data;
   const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  const filename = `${name.replace(/\s+/g, '-')}-reinvention-story-pack.pdf`;
+  const filename = `${name.replace(/\s+/g, '-')}-confidence-reset-protocol.pdf`;
 
   // 2. Generate PDF via Railway — send structured data, Railway builds HTML internally
   const railwayBase = env.VERCEL_PDF_URL.replace(/\/api\/generate-pdf$/, '');
-  const pdfUrl = railwayBase + '/api/generate-story-pack-pdf';
+  const pdfUrl = railwayBase + '/api/generate-confidence-reset-pdf';
 
   let pdfBase64;
   try {
@@ -131,7 +131,7 @@ export async function onRequestPost({ request, env, waitUntil }) {
     }
     pdfBase64 = btoa(binary);
   } catch (e) {
-    console.error('[story-pack] PDF generation failed:', e);
+    console.error('[confidence-reset] PDF generation failed:', e);
     return new Response(JSON.stringify({ error: 'PDF generation failed' }), {
       status: 502, headers: { 'Content-Type': 'application/json' },
     });
@@ -146,20 +146,20 @@ export async function onRequestPost({ request, env, waitUntil }) {
         from: 'Project Future Self <info@projectfutureself.com>',
         to: [email],
         bcc: ['info@projectfutureself.com'],
-        subject: `Your Reinvention Story Pack — ${name.split(' ')[0]}, your completed workbook`,
+        subject: `Your Confidence Reset Protocol — ${name.split(' ')[0]}, your completed workbook`,
         html: buildUserEmail(name),
         attachments: [{ filename, content: pdfBase64 }],
       }),
     });
     if (!emailRes.ok) throw new Error(`Resend ${emailRes.status}: ${await emailRes.text().catch(() => 'unknown')}`);
   } catch (e) {
-    console.error('[story-pack] User email failed:', e);
+    console.error('[confidence-reset] User email failed:', e);
     return new Response(JSON.stringify({ error: 'Email delivery failed' }), {
       status: 502, headers: { 'Content-Type': 'application/json' },
     });
   }
 
-  // 4. Notify Andrew (background — does not block response)
+  // 4. Notify Andrew (background)
   waitUntil((async () => {
     try {
       await fetch('https://api.resend.com/emails', {
@@ -169,13 +169,13 @@ export async function onRequestPost({ request, env, waitUntil }) {
           from: 'Project Future Self <info@projectfutureself.com>',
           to: ['andrew@projectfutureself.com'],
           reply_to: email,
-          subject: `New Workbook: ${name} — Reinvention Story Pack (${date})`,
+          subject: `New Protocol: ${name} — Confidence Reset (${date})`,
           html: buildAndrewEmail(name, email, date, answers),
           attachments: [{ filename, content: pdfBase64 }],
         }),
       });
     } catch (e) {
-      console.error('[story-pack] Andrew notification failed:', e);
+      console.error('[confidence-reset] Andrew notification failed:', e);
     }
   })());
 
@@ -184,7 +184,7 @@ export async function onRequestPost({ request, env, waitUntil }) {
     fetch(env.SHEETS_WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'story_pack', name, email, date }),
+      body: JSON.stringify({ type: 'confidence_reset', name, email, date }),
     }).catch(() => {});
   }
 
