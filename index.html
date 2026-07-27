@@ -1260,6 +1260,11 @@
       skin:       "transparent",
       launcherStyle: "compact",
       showEndBtn: true,
+      background:      "transparent",
+      text: {
+        aiLabel:    "AI Avatar",
+        ctaLabel:   "Talk to Andrew's Asst",
+      },
       on: {
         'session.started':   () => console.log('session started'),
         'session.completed': (p) => console.log('done', p),
