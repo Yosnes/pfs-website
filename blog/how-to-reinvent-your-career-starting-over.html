@@ -205,5 +205,25 @@
 </footer>
 
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c12744dece674e8aac2d803f061fdd6e"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- SomebodyAI embedded agent (persistent across all pages) -->
+<script src="https://preview.somebodyai.co/v1/embed.js" async></script>
+<script>
+(function tryMount(n) {
+  if (window.SomebodyAgent) {
+    SomebodyAgent.mount({
+      agentId:    "6a505631cdef0c26da75c857",
+      placement:  "launcher",
+      skin:       "transparent",
+      showEndBtn: true,
+      on: {
+        'session.started':   () => console.log('session started'),
+        'session.completed': (p) => console.log('done', p),
+      },
+    });
+    return;
+  }
+  if (n > 0) setTimeout(function () { tryMount(n - 1); }, 100);
+})(30);
+</script>
 </body>
 </html>
