@@ -73,7 +73,8 @@ export async function onRequestPost({ request, env, waitUntil }) {
           reply_to: 'info@projectfutureself.com',
           subject: 'Let’s review your assessment results',
           html: `<p>Hi ${firstName},</p>
-<p>I like to review assessment results on a call. Please find a time for us to meet using this link: <a href="https://calendly.com/andrew-projectfutureself/30min">https://calendly.com/andrew-projectfutureself/30min</a>.</p>
+<p>Your Project Future Self Assessment is ready.<br>
+I like to review assessment results on a call. Please find a time for us to meet using this link: <a href="https://calendly.com/andrew-projectfutureself/30min">https://calendly.com/andrew-projectfutureself/30min</a>.</p>
 <p>Thank you,<br>Andrew</p>
 <p style="color:#888;font-size:12px;margin-top:32px">Project Future Self &nbsp;·&nbsp; <a href="https://projectfutureself.com" style="color:#888">projectfutureself.com</a></p>`,
         }),
