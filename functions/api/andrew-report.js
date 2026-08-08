@@ -57,6 +57,35 @@ export async function onRequestPost({ request, env, waitUntil }) {
       const d = await emailRes.json();
       console.log('[andrew-report] email sent, Resend ID:', d.id);
     }
+
+    // 3. Email the user a booking invite (no attachment)
+    if (data.email) {
+      const firstName = (data.name || '').trim().split(/\s+/)[0] || 'there';
+      const bookingRes = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${env.RESEND_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: 'Project Future Self <info@projectfutureself.com>',
+          to: [data.email],
+          reply_to: 'info@projectfutureself.com',
+          subject: 'Let’s review your assessment results',
+          html: `<p>Hi ${firstName},</p>
+<p>I like to review assessment results on a call. Please find a time for us to meet using this link: <a href="https://calendly.com/andrew-projectfutureself/30min">https://calendly.com/andrew-projectfutureself/30min</a>.</p>
+<p>Thank you,<br>Andrew</p>
+<p style="color:#888;font-size:12px;margin-top:32px">Project Future Self &nbsp;·&nbsp; <a href="https://projectfutureself.com" style="color:#888">projectfutureself.com</a></p>`,
+        }),
+      });
+
+      if (!bookingRes.ok) {
+        console.error('[andrew-report] booking email error:', await bookingRes.text());
+      } else {
+        const b = await bookingRes.json();
+        console.log('[andrew-report] booking email sent, Resend ID:', b.id);
+      }
+    }
   }
 
   // Return 200 immediately — PDF generation runs in background
