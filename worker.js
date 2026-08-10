@@ -1,6 +1,26 @@
+import {
+  handleCareerAnalyze,
+  handleCareerFeedback,
+  handleCareerPathways,
+  handleCareerReport,
+} from './career-navigator-api.js';
+
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
+
+    if (request.method === 'POST' && url.pathname === '/api/career-navigator-analyze') {
+      return handleCareerAnalyze(request, env);
+    }
+    if (request.method === 'POST' && url.pathname === '/api/career-navigator-pathways') {
+      return handleCareerPathways(request, env);
+    }
+    if (request.method === 'POST' && url.pathname === '/api/career-navigator-report') {
+      return handleCareerReport(request, env, ctx.waitUntil.bind(ctx));
+    }
+    if (request.method === 'POST' && url.pathname === '/api/career-navigator-feedback') {
+      return handleCareerFeedback(request, env, ctx.waitUntil.bind(ctx));
+    }
     
     // Example: Use KV namespace
     if (url.pathname === '/api/cache' && request.method === 'POST') {
