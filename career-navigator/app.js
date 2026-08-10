@@ -6,7 +6,10 @@
   const stepLabel = document.getElementById('step-label');
   const meterFill = document.getElementById('meter-fill');
   const announcement = document.getElementById('announcement');
-  const sessionKey = 'pfs-career-navigator-pilot-v3';
+  const sessionKey = 'pfs-career-navigator-pilot-v4';
+  const maxSkills = 12;
+  const maxDirectSkills = 9;
+  const maxSuggestedSkills = 3;
   const localHost = ['127.0.0.1', 'localhost'].includes(window.location.hostname);
   const isLocalPreview = (window.location.protocol === 'file:' || localHost) && !new URLSearchParams(window.location.search).has('live');
   let selectedResumeFile = null;
@@ -23,7 +26,7 @@
     current_role: 'Senior Operations Manager',
     experience_context: 'National service organization · 2019–Present',
     achievements: ['Led a 24-person, cross-functional service team', 'Reduced customer response time by 31%', 'Introduced performance dashboards used by senior leadership'],
-    explicit_skills: ['Team leadership', 'Process improvement', 'Customer experience', 'Performance measurement', 'Stakeholder management'],
+    explicit_skills: ['Team leadership', 'Process improvement', 'Customer experience', 'Performance measurement', 'Stakeholder management', 'Operational planning', 'Team development', 'KPI reporting'],
     inferred_skills: ['Change management', 'Product operations', 'Service design']
   };
 
@@ -57,7 +60,7 @@
     profile: { ...sampleProfile },
     pathways: samplePathways.map((pathway) => ({ ...pathway })),
     skills: {
-      explicit: ['Team leadership', 'Process improvement', 'Customer experience', 'Performance measurement', 'Stakeholder management'],
+      explicit: ['Team leadership', 'Process improvement', 'Customer experience', 'Performance measurement', 'Stakeholder management', 'Operational planning', 'Team development', 'KPI reporting'],
       inferred: ['Change management', 'Product operations', 'Service design']
     }
   };
@@ -172,9 +175,13 @@
         Object.assign(state, saved);
         state.profile = { ...sampleProfile, ...(saved.profile || {}) };
         state.skills = {
-          explicit: normalizeSkillList(saved.skills?.explicit || sampleProfile.explicit_skills, 12),
-          inferred: normalizeSkillList(saved.skills?.inferred || sampleProfile.inferred_skills, 8)
+          explicit: normalizeSkillList(saved.skills?.explicit || sampleProfile.explicit_skills, maxDirectSkills),
+          inferred: normalizeSkillList(saved.skills?.inferred || sampleProfile.inferred_skills, maxSuggestedSkills)
         };
+        const savedExplicitKeys = new Set(state.skills.explicit.map((skill) => skill.toLocaleLowerCase()));
+        state.skills.inferred = state.skills.inferred
+          .filter((skill) => !savedExplicitKeys.has(skill.toLocaleLowerCase()))
+          .slice(0, maxSkills - state.skills.explicit.length);
         state.pathways = Array.isArray(saved.pathways) && saved.pathways.length === 3
           ? saved.pathways
           : samplePathways.map((pathway) => ({ ...pathway }));
@@ -327,11 +334,11 @@
         });
         markProcessingStep(items, 2);
         state.profile = result.profile;
-        const explicit = normalizeSkillList(result.profile.explicit_skills, 12);
+        const explicit = normalizeSkillList(result.profile.explicit_skills, maxDirectSkills);
         const explicitKeys = new Set(explicit.map((skill) => skill.toLocaleLowerCase()));
         state.skills = {
           explicit,
-          inferred: normalizeSkillList(result.profile.inferred_skills, 8)
+          inferred: normalizeSkillList(result.profile.inferred_skills, Math.min(maxSuggestedSkills, maxSkills - explicit.length))
             .filter((skill) => !explicitKeys.has(skill.toLocaleLowerCase()))
         };
         markProcessingStep(items, 3);
@@ -397,7 +404,10 @@
     document.getElementById('explicit-skills').innerHTML = state.skills.explicit.map((skill) => skillMarkup(skill, 'explicit')).join('');
     document.getElementById('inferred-skills').innerHTML = state.skills.inferred.map((skill) => skillMarkup(skill, 'inferred')).join('');
     const count = state.skills.explicit.length + state.skills.inferred.length;
-    document.getElementById('skill-count').textContent = `${count} identified`;
+    document.getElementById('skill-count').textContent = `${count} of ${maxSkills} selected`;
+    document.getElementById('skill-limit-message').textContent = count >= maxSkills
+      ? 'You have reached the 12-skill maximum. Remove one before adding another.'
+      : '';
   }
 
   function removeSkill(type, encodedSkill) {
@@ -412,7 +422,7 @@
     const skill = input.value.trim();
     if (!skill) return;
     const allSkills = [...state.skills.explicit, ...state.skills.inferred].map((item) => item.toLowerCase());
-    if (!allSkills.includes(skill.toLowerCase())) state.skills.explicit.push(skill);
+    if (!allSkills.includes(skill.toLowerCase()) && allSkills.length < maxSkills) state.skills.explicit.push(skill);
     input.value = '';
     renderSkills();
     saveState();
