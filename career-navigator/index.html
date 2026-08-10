@@ -36,7 +36,7 @@
           <span class="nw-tag">Reinvent · Redesign · Reclaim</span>
         </span>
       </a>
-      <span class="pilot-pill">Private pilot · Sample mode</span>
+      <span class="pilot-pill" id="pilot-mode">Private pilot</span>
     </div>
   </nav>
 
@@ -93,11 +93,11 @@
               <span><strong>Stay connected</strong>Project Future Self may contact me for pilot feedback and updates.</span>
             </label>
             <div class="sample-callout">
-              <div><strong>Previewing the prototype?</strong><span>Fill the fields with fictional sample details.</span></div>
+              <div><strong>Want to preview first?</strong><span>Fill the fields with fictional sample details.</span></div>
               <button type="button" class="text-button" id="sample-details">Use sample details</button>
             </div>
             <button class="button primary wide" type="submit">Begin my Career Navigator <span>→</span></button>
-            <p class="fine-print">Prototype only: no information is submitted or emailed from this interface.</p>
+            <p class="fine-print">Your email is used to deliver your report. Pilot updates are optional and controlled by the checkbox above.</p>
           </form>
         </section>
 
@@ -110,7 +110,7 @@
           </div>
           <div class="privacy-callout">
             <span class="shield" aria-hidden="true">✓</span>
-            <div><strong>Designed around your privacy</strong><p>All personal data is stripped from your résumé and anonymized before processing by our AI.</p></div>
+            <div><strong>Designed around your privacy</strong><p>Your résumé is read in your browser. Common personal identifiers are removed before anonymized text is sent to our AI.</p></div>
           </div>
           <label class="upload-zone" id="upload-zone" for="resume-file">
             <input id="resume-file" type="file" accept=".pdf,.docx,.txt" hidden>
@@ -132,10 +132,11 @@
             <button type="button" class="button secondary compact" id="sample-resume">Use sample résumé</button>
           </div>
           <button class="button primary wide" type="button" id="analyze-resume" disabled>Read my résumé <span>→</span></button>
-          <p class="fine-print">In this prototype, selected files stay on your device and are not read or uploaded.</p>
+          <p class="fine-print" id="resume-privacy-note">Your original file stays on your device. Only anonymized résumé text is sent for analysis.</p>
+          <p class="fine-print">Automated redaction may not identify every personal detail. Remove anything especially sensitive before continuing. By continuing, you agree to the anonymized text being processed as described in our <a href="../privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</p>
         </section>
 
-        <!-- Screen 3: simulated processing -->
+        <!-- Screen 3: secure processing -->
         <section class="screen processing-screen" data-screen="3" aria-labelledby="screen-3-title">
           <div class="processing-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
           <span class="eyebrow">Creating your career profile</span>
@@ -147,7 +148,8 @@
             <li><span></span>Identifying skills and achievements</li>
             <li><span></span>Building your reviewable profile</li>
           </ol>
-          <p class="fine-print">Sample data is being used. No AI request is being made.</p>
+          <p class="fine-print" id="processing-note">Preparing your résumé securely.</p>
+          <p class="service-error" id="processing-error" role="alert" hidden></p>
           <button class="button primary wide" type="button" id="continue-profile" hidden>Review my career profile <span>→</span></button>
         </section>
 
@@ -165,8 +167,8 @@
           </label>
           <div class="section-heading"><div><span class="eyebrow">Experience signals</span><h3>What your work demonstrates</h3></div><button class="text-button" type="button" id="edit-summary">Edit summary</button></div>
           <div class="evidence-card">
-            <div class="evidence-top"><div><strong>Senior Operations Manager</strong><span>National service organization · 2019–Present</span></div><span class="confidence-tag">Strong evidence</span></div>
-            <ul><li>Led a 24-person, cross-functional service team</li><li>Reduced customer response time by 31%</li><li>Introduced performance dashboards used by senior leadership</li></ul>
+            <div class="evidence-top"><div><strong id="profile-current-role">Senior Operations Manager</strong><span id="profile-context">National service organization · 2019–Present</span></div><span class="confidence-tag">Strong evidence</span></div>
+            <ul id="profile-achievements"><li>Led a 24-person, cross-functional service team</li><li>Reduced customer response time by 31%</li><li>Introduced performance dashboards used by senior leadership</li></ul>
           </div>
           <div class="section-heading"><div><span class="eyebrow">Transferable skills</span><h3>Skills ready to carry forward</h3></div><span class="count-label" id="skill-count">8 identified</span></div>
           <div class="skills-group">
@@ -218,7 +220,8 @@
               <span>Anything you definitely want to leave behind?</span>
               <textarea id="leave-behind" rows="3" placeholder="For example: constant travel, managing a large team, or an industry that no longer fits.">Constant firefighting and roles where customer insight is ignored.</textarea>
             </label>
-            <button class="button primary wide" type="submit">Create my career pathways <span>→</span></button>
+            <button class="button primary wide" type="submit" id="create-pathways">Create my career pathways <span>→</span></button>
+            <p class="service-error" id="pathways-error" role="alert" hidden></p>
           </form>
         </section>
 
@@ -266,8 +269,9 @@
             <div><strong id="first-action-title">Rewrite your headline around product operations.</strong><p id="first-action-copy">Lead with the bridge between customer insight, operational systems, and cross-functional delivery.</p></div>
             <span class="time-badge" id="first-action-timing">Today</span>
           </div>
-          <button class="button primary wide" type="button" data-next="8">Email my complete report <span>→</span></button>
-          <p class="fine-print">Prototype only: the next screen previews confirmation, but no email will be sent.</p>
+          <button class="button primary wide" type="button" id="email-report">Email my complete report <span>→</span></button>
+          <p class="service-error" id="report-error" role="alert" hidden></p>
+          <p class="fine-print">We will confirm delivery before moving to the final screen.</p>
         </section>
 
         <!-- Screen 8: completion -->
@@ -275,14 +279,14 @@
           <div class="completion-mark" aria-hidden="true">✓</div>
           <span class="eyebrow">Your next move is clearer</span>
           <h2 id="screen-8-title">Your Career Navigator report is ready.</h2>
-          <p>In the live pilot, the full report and PDF will be emailed to <strong id="delivery-email">your email address</strong>.</p>
+          <p id="delivery-message">Your full report has been emailed to <strong id="delivery-email">your email address</strong>.</p>
           <div class="report-preview">
             <div class="report-cover"><span>Project Future Self</span><strong>Career Navigator</strong><small>Personal career pathway report</small></div>
             <div class="report-contents"><span>Included in your report</span><ul><li>Confirmed skills and career profile</li><li>Three evidence-based pathways</li><li>Your selected direction</li><li>A timeline-sensitive action plan</li></ul></div>
           </div>
           <div class="feedback-mini">
             <span>Was this useful?</span>
-            <div class="rating-buttons" aria-label="Rate this prototype">
+            <div class="rating-buttons" aria-label="Rate this pilot experience">
               <button type="button" data-rating="1" aria-label="1 out of 5">1</button><button type="button" data-rating="2" aria-label="2 out of 5">2</button><button type="button" data-rating="3" aria-label="3 out of 5">3</button><button type="button" data-rating="4" aria-label="4 out of 5">4</button><button type="button" data-rating="5" aria-label="5 out of 5">5</button>
             </div>
             <small id="rating-response" aria-live="polite"></small>
@@ -291,7 +295,7 @@
             <div><span class="eyebrow">Want a human perspective?</span><h3>Talk through your results with Andrew.</h3><p>Use your pathways as the starting point for a focused, no-pressure conversation.</p></div>
             <button class="button primary" id="calendly-button" type="button">Book a free conversation <span>↗</span></button>
           </div>
-          <button class="text-button restart-button" type="button" id="restart">Restart the sample journey</button>
+          <button class="text-button restart-button" type="button" id="restart">Restart the journey</button>
         </section>
 
         <aside class="screen-feedback" id="screen-feedback" aria-labelledby="screen-feedback-title">
@@ -320,6 +324,9 @@
     <div class="footer-links"><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../disclaimer.html">Disclaimer</a><a href="../contact.html">Contact</a></div>
   </footer>
 
+  <script src="vendor/pdf.min.js"></script>
+  <script src="vendor/mammoth.browser.min.js"></script>
+  <script src="resume-reader.js"></script>
   <script src="app.js"></script>
 </body>
 
