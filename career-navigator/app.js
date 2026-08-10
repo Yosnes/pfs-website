@@ -32,40 +32,44 @@
 
   const plans = {
     now: {
-      intro: 'Because you’re looking now, the first 30 days focus on visibility, conversations, and targeted applications.',
+      intro: 'Because you’re looking now, your search begins today. The first week creates immediate visibility, applications, and conversations while you keep improving your positioning.',
       phases: [
-        ['Days 1–30', 'Position and activate', ['Rewrite your résumé and headline', 'Build a 30-company target list', 'Hold 8 focused conversations']],
-        ['Days 31–60', 'Create interview momentum', ['Apply selectively each week', 'Build 5 evidence stories', 'Close one priority skill gap']],
-        ['Days 61–90', 'Convert and choose', ['Prepare role-specific cases', 'Evaluate fit, not only salary', 'Negotiate from your priorities']]
+        ['Days 1–7', 'Launch immediately', ['Update your résumé and headline in 48 hours', 'Apply to 5–8 strong-fit roles', 'Contact 10 people in your network']],
+        ['Days 8–30', 'Build interview momentum', ['Continue targeted applications each week', 'Hold 8 focused conversations', 'Prepare and practise 5 evidence stories']],
+        ['Days 31–60', 'Convert the pipeline', ['Follow up and expand your target list', 'Prepare for role-specific interviews', 'Evaluate and negotiate opportunities']]
       ],
-      action: ['Rewrite your headline around product operations.', 'Lead with the bridge between customer insight, operational systems, and cross-functional delivery.']
+      action: ['Apply to one strong-fit role today.', 'Tailor your opening summary to the role, then send two messages to people who may know the team.'],
+      badge: 'Today'
     },
     soon: {
       intro: 'Because you want to move soon while employed, the plan protects your current position while building a discreet pipeline.',
       phases: [
-        ['Days 1–30', 'Clarify and position', ['Define your non-negotiables', 'Update materials privately', 'Reconnect with trusted contacts']],
-        ['Days 31–60', 'Test the market', ['Hold discreet exploratory calls', 'Research priority employers', 'Complete one visible proof project']],
-        ['Days 61–90', 'Make the move', ['Begin targeted applications', 'Practice transition stories', 'Compare opportunities deliberately']]
+        ['Days 1–7', 'Clarify and position', ['Define your non-negotiables', 'Update materials privately', 'Identify 15 priority employers']],
+        ['Days 8–30', 'Enter the market discreetly', ['Reconnect with trusted contacts', 'Begin targeted applications', 'Hold 5 exploratory conversations']],
+        ['Days 31–90', 'Interview and choose', ['Build role-specific evidence stories', 'Interview without risking your current role', 'Compare opportunities deliberately']]
       ],
-      action: ['Schedule three discreet market conversations.', 'Choose people who can validate the role, the culture, and the skills employers actually value.']
+      action: ['Schedule three discreet market conversations.', 'Choose people who can validate the role, the culture, and the skills employers actually value.'],
+      badge: 'Within 3 days'
     },
     'one-three': {
-      intro: 'Your 1–3 month timeline gives you room to improve positioning before beginning a focused search.',
+      intro: 'Your 1–3 month timeline gives you a short positioning window, followed by outreach and applications early enough to make the move on schedule.',
       phases: [
-        ['Days 1–30', 'Research and reframe', ['Interview 5 people in the field', 'Rewrite your value proposition', 'Identify your strongest proof']],
-        ['Days 31–60', 'Build credibility', ['Complete a focused skill sprint', 'Create a small proof project', 'Expand your target network']],
-        ['Days 61–90', 'Enter the market', ['Launch targeted outreach', 'Apply to high-fit roles', 'Refine from response data']]
+        ['Days 1–14', 'Research and reframe', ['Interview 3 people in the field', 'Rewrite your value proposition', 'Identify your strongest proof']],
+        ['Days 15–45', 'Build and activate', ['Complete a focused skill sprint', 'Create a small proof project', 'Begin targeted outreach and applications']],
+        ['Days 46–90', 'Interview and transition', ['Apply to high-fit roles each week', 'Practise role-specific stories', 'Refine from response data']]
       ],
-      action: ['Interview one Product Operations leader.', 'Ask what their team owns, which backgrounds translate well, and what proof gets candidates noticed.']
+      action: ['Interview one Product Operations leader.', 'Ask what their team owns, which backgrounds translate well, and what proof gets candidates noticed.'],
+      badge: 'This week'
     },
     'three-six': {
       intro: 'Your 3–6 month timeline allows you to test the pathway and build evidence before committing to a move.',
       phases: [
-        ['Days 1–30', 'Explore deeply', ['Map the role ecosystem', 'Run 5 curiosity interviews', 'Audit your experience gaps']],
-        ['Days 31–60', 'Run a small experiment', ['Take on an adjacent project', 'Learn one priority method', 'Document measurable results']],
-        ['Days 61–90', 'Build your bridge', ['Create a portfolio case', 'Strengthen 10 relationships', 'Decide whether to pursue']]
+        ['Months 1–2', 'Explore and test', ['Map the role ecosystem', 'Run 5 curiosity interviews', 'Audit your experience gaps']],
+        ['Months 3–4', 'Build your bridge', ['Take on an adjacent project', 'Learn one priority method', 'Document measurable results']],
+        ['Months 5–6', 'Enter the market', ['Create a portfolio case', 'Begin targeted outreach and applications', 'Prepare your transition story']]
       ],
-      action: ['Find one product-adjacent project in your current role.', 'Use it to test your interest and create evidence before making a larger commitment.']
+      action: ['Find one product-adjacent project in your current role.', 'Use it to test your interest and create evidence before making a larger commitment.'],
+      badge: 'This month'
     },
     exploring: {
       intro: 'With no fixed deadline, your plan emphasizes low-risk experiments that create clarity through experience.',
@@ -74,7 +78,8 @@
         ['Days 31–60', 'Test assumptions', ['Try one micro-project', 'Join a relevant community', 'Track energy and curiosity']],
         ['Days 61–90', 'Choose the next test', ['Compare what you learned', 'Name your strongest direction', 'Design a deeper experiment']]
       ],
-      action: ['Choose one two-hour pathway experiment.', 'Test the work itself before judging whether you are qualified to make the change.']
+      action: ['Choose one two-hour pathway experiment.', 'Test the work itself before judging whether you are qualified to make the change.'],
+      badge: 'This week'
     }
   };
 
@@ -289,6 +294,7 @@
     `).join('');
     document.getElementById('first-action-title').textContent = plan.action[0];
     document.getElementById('first-action-copy').textContent = plan.action[1];
+    document.getElementById('first-action-timing').textContent = plan.badge;
   }
 
   function openCalendly() {
