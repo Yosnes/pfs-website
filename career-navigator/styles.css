@@ -595,6 +595,98 @@ footer {
   footer { flex-direction: column; text-align: center; }
 }
 
+/* Readability and in-flow pilot feedback */
+.journey-kicker { font-size: 13px; }
+.journey-copy { font-size: 16px; }
+.journey-steps strong { font-size: 15px; }
+.journey-steps small, .privacy-mini { font-size: 13px; }
+.back-link, .step-meter > span { font-size: 14px; }
+.screen-copy > p, .processing-screen > p, .completion-screen > p {
+  font-size: 18px;
+  line-height: 1.65;
+}
+.eyebrow { font-size: 13px; }
+.field > span, .choice-fieldset legend { font-size: 16px; }
+.field input, .field textarea, .add-skill-row input { font-size: 16px; }
+.field-error, .fine-print { font-size: 14px; line-height: 1.5; }
+.check-row span, .check-row strong { font-size: 16px; }
+.sample-callout strong, .sample-callout span { font-size: 15px; }
+.button { font-size: 16px; }
+.button.compact { min-height: 42px; font-size: 15px; }
+.text-button { font-size: 15px; }
+.privacy-callout strong, .privacy-callout p { font-size: 16px; }
+.upload-zone strong { font-size: 17px; }
+.upload-zone > span:not(.upload-icon):not(.upload-button), .upload-button, .paste-resume summary { font-size: 15px; }
+.divider { font-size: 13px; }
+.processing-list li { font-size: 16px; }
+.profile-score span, .profile-score strong { font-size: 14px; }
+.section-heading .eyebrow, .skills-group > p { font-size: 13px; }
+.section-heading h3 { font-size: 24px; }
+.count-label, .evidence-top span { font-size: 14px; }
+.evidence-top strong, .evidence-card li { font-size: 16px; }
+.skill-chip { min-height: 38px; font-size: 15px; }
+.choice-fieldset legend { font-size: 17px; }
+.choice-list strong, .choice-list small { font-size: 16px; }
+.choice-list label > span { min-height: 72px; padding-top: 15px; padding-bottom: 15px; }
+.chip-options span { padding: 10px 15px; font-size: 15px; }
+.pathway-key span, .path-type, .path-tags span, .recommendation-ribbon { font-size: 13px; }
+.path-number, .select-indicator { font-size: 14px; }
+.path-main h3 { font-size: 25px; }
+.path-main p, .reflection-callout, .reflection-callout strong { font-size: 16px; }
+.selected-path-summary span, .plan-phase > span, .first-action-label { font-size: 13px; }
+.selected-path-summary strong { font-size: 21px; }
+.plan-phase h3 { font-size: 21px; }
+.plan-phase li, .first-action strong, .first-action p { font-size: 15px; }
+.time-badge { font-size: 13px; }
+.report-cover span, .report-cover small, .report-contents > span { font-size: 13px; }
+.report-contents li { font-size: 15px; }
+.feedback-mini > span, .feedback-mini small { font-size: 15px; }
+.rating-buttons button { width: 38px; height: 38px; font-size: 15px; }
+.next-conversation .eyebrow { font-size: 13px; }
+.next-conversation h3 { font-size: 24px; }
+.next-conversation p, footer { font-size: 14px; }
+
+.screen-feedback {
+  max-width: 690px;
+  margin: 36px auto 0;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px 20px;
+  align-items: center;
+  background: var(--cream);
+  border: 1px solid rgba(13, 31, 60, .12);
+  border-radius: 14px;
+}
+.screen-feedback[hidden] { display: none; }
+.feedback-kicker { color: var(--gold-dark); font-size: 13px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+.feedback-heading p { margin: 3px 0 0; color: var(--navy); font-size: 17px; font-weight: 700; }
+.screen-feedback-actions { display: flex; gap: 7px; }
+.screen-feedback-actions button {
+  min-height: 42px;
+  padding: 8px 13px;
+  color: var(--navy);
+  background: #fff;
+  border: 1px solid rgba(13, 31, 60, .2);
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.screen-feedback-actions button:hover, .screen-feedback-actions button.selected { color: #fff; background: var(--navy); border-color: var(--navy); }
+.screen-feedback-comment { grid-column: 1 / -1; }
+.screen-feedback-comment > span { display: block; margin-bottom: 6px; color: var(--body); font-size: 15px; font-weight: 700; }
+.screen-feedback-comment small { color: var(--muted); font-weight: 400; }
+.screen-feedback-comment textarea { width: 100%; padding: 12px 14px; color: var(--ink); background: #fff; border: 1px solid rgba(13, 31, 60, .18); border-radius: 9px; font-size: 16px; resize: vertical; }
+.screen-feedback-comment textarea:focus { outline: 0; border-color: var(--gold-dark); box-shadow: 0 0 0 3px rgba(245, 163, 26, .14); }
+.screen-feedback-response { grid-column: 1 / -1; min-height: 20px; color: var(--green); font-size: 14px; }
+
+@media (max-width: 680px) {
+  .screen-copy > p, .processing-screen > p, .completion-screen > p { font-size: 17px; }
+  .screen-feedback { grid-template-columns: 1fr; }
+  .screen-feedback-actions { flex-wrap: wrap; }
+  .screen-feedback-comment, .screen-feedback-response { grid-column: 1; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
