@@ -1,0 +1,10 @@
+# Copy this file to .dev.vars for local development. Never commit the real file.
+OPENAI_API_KEY="replace-with-your-project-key"
+OPENAI_MODEL="gpt-5.4-mini"
+
+# Career Navigator report delivery (already used elsewhere in this project).
+RESEND_API_KEY="replace-with-your-resend-key"
+
+# Dedicated Google Sheets webhook for Career Navigator participant and feedback records.
+CAREER_NAVIGATOR_SHEETS_WEBHOOK_URL="https://script.google.com/macros/s/replace-with-your-deployment-id/exec"
+CAREER_NAVIGATOR_SHEETS_WEBHOOK_SECRET="replace-with-your-webhook-secret"
