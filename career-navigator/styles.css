@@ -595,7 +595,7 @@ footer {
   footer { flex-direction: column; text-align: center; }
 }
 
-/* Readability and in-flow pilot feedback */
+/* Readability refinements */
 .journey-kicker { font-size: 13px; }
 .journey-copy { font-size: 16px; }
 .journey-steps strong { font-size: 15px; }
@@ -646,39 +646,6 @@ footer {
 .next-conversation h3 { font-size: 24px; }
 .next-conversation p, footer { font-size: 14px; }
 
-.screen-feedback {
-  max-width: 690px;
-  margin: 36px auto 0;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 14px 20px;
-  align-items: center;
-  background: var(--cream);
-  border: 1px solid rgba(13, 31, 60, .12);
-  border-radius: 14px;
-}
-.screen-feedback[hidden] { display: none; }
-.feedback-kicker { color: var(--gold-dark); font-size: 13px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
-.feedback-heading p { margin: 3px 0 0; color: var(--navy); font-size: 17px; font-weight: 700; }
-.screen-feedback-actions { display: flex; gap: 7px; }
-.screen-feedback-actions button {
-  min-height: 42px;
-  padding: 8px 13px;
-  color: var(--navy);
-  background: #fff;
-  border: 1px solid rgba(13, 31, 60, .2);
-  border-radius: 999px;
-  font-size: 15px;
-  font-weight: 700;
-}
-.screen-feedback-actions button:hover, .screen-feedback-actions button.selected { color: #fff; background: var(--navy); border-color: var(--navy); }
-.screen-feedback-comment { grid-column: 1 / -1; }
-.screen-feedback-comment > span { display: block; margin-bottom: 6px; color: var(--body); font-size: 15px; font-weight: 700; }
-.screen-feedback-comment small { color: var(--muted); font-weight: 400; }
-.screen-feedback-comment textarea { width: 100%; padding: 12px 14px; color: var(--ink); background: #fff; border: 1px solid rgba(13, 31, 60, .18); border-radius: 9px; font-size: 16px; resize: vertical; }
-.screen-feedback-comment textarea:focus { outline: 0; border-color: var(--gold-dark); box-shadow: 0 0 0 3px rgba(245, 163, 26, .14); }
-.screen-feedback-response { grid-column: 1 / -1; min-height: 20px; color: var(--green); font-size: 14px; }
 .service-error {
   margin: 12px 0;
   padding: 12px 14px;
@@ -694,9 +661,6 @@ footer {
 
 @media (max-width: 680px) {
   .screen-copy > p, .processing-screen > p, .completion-screen > p { font-size: 17px; }
-  .screen-feedback { grid-template-columns: 1fr; }
-  .screen-feedback-actions { flex-wrap: wrap; }
-  .screen-feedback-comment, .screen-feedback-response { grid-column: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {

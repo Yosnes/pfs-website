@@ -6,7 +6,7 @@
   const stepLabel = document.getElementById('step-label');
   const meterFill = document.getElementById('meter-fill');
   const announcement = document.getElementById('announcement');
-  const sessionKey = 'pfs-career-navigator-pilot-v2';
+  const sessionKey = 'pfs-career-navigator-pilot-v3';
   const localHost = ['127.0.0.1', 'localhost'].includes(window.location.hostname);
   const isLocalPreview = (window.location.protocol === 'file:' || localHost) && !new URLSearchParams(window.location.search).has('live');
   let selectedResumeFile = null;
@@ -64,6 +64,25 @@
 
   function escapeHtml(value) {
     return String(value ?? '').replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[character]));
+  }
+
+  function normalizeSkillList(values, maxItems) {
+    const skills = (Array.isArray(values) ? values : [values])
+      .flatMap((value) => String(value ?? '').split(/\s*(?:\r?\n|[|;,•])\s*/))
+      .map((value) => value
+        .replace(/^[\s'"`\[\]{}]+|[\s'"`\[\]{}]+$/g, '')
+        .replace(/\s+/g, ' ')
+        .trim())
+      .filter((value) => value.length > 1)
+      .map((value) => value.slice(0, 72));
+
+    const seen = new Set();
+    return skills.filter((skill) => {
+      const key = skill.toLocaleLowerCase();
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    }).slice(0, maxItems);
   }
 
   async function apiRequest(path, payload) {
@@ -153,8 +172,8 @@
         Object.assign(state, saved);
         state.profile = { ...sampleProfile, ...(saved.profile || {}) };
         state.skills = {
-          explicit: Array.isArray(saved.skills?.explicit) ? saved.skills.explicit : [...sampleProfile.explicit_skills],
-          inferred: Array.isArray(saved.skills?.inferred) ? saved.skills.inferred : [...sampleProfile.inferred_skills]
+          explicit: normalizeSkillList(saved.skills?.explicit || sampleProfile.explicit_skills, 12),
+          inferred: normalizeSkillList(saved.skills?.inferred || sampleProfile.inferred_skills, 8)
         };
         state.pathways = Array.isArray(saved.pathways) && saved.pathways.length === 3
           ? saved.pathways
@@ -197,8 +216,6 @@
     if (next === 6) renderPathways();
     if (next === 7) renderPlan();
     if (next === 8) document.getElementById('delivery-email').textContent = state.email || 'your email address';
-    renderScreenFeedback(next);
-
     window.scrollTo({ top: 0, behavior: 'smooth' });
     const heading = document.querySelector(`.screen[data-screen="${next}"] h2`);
     if (heading) {
@@ -310,9 +327,12 @@
         });
         markProcessingStep(items, 2);
         state.profile = result.profile;
+        const explicit = normalizeSkillList(result.profile.explicit_skills, 12);
+        const explicitKeys = new Set(explicit.map((skill) => skill.toLocaleLowerCase()));
         state.skills = {
-          explicit: [...result.profile.explicit_skills],
-          inferred: [...result.profile.inferred_skills]
+          explicit,
+          inferred: normalizeSkillList(result.profile.inferred_skills, 8)
+            .filter((skill) => !explicitKeys.has(skill.toLocaleLowerCase()))
         };
         markProcessingStep(items, 3);
       }
@@ -330,35 +350,6 @@
       backButton.hidden = false;
       announcement.textContent = error.textContent;
     }
-  }
-
-  function renderScreenFeedback(screenNumber) {
-    const panel = document.getElementById('screen-feedback');
-    const comment = document.getElementById('screen-feedback-comment');
-    const response = document.getElementById('screen-feedback-response');
-    const text = document.getElementById('screen-feedback-text');
-    const saved = state.feedback[String(screenNumber)] || {};
-
-    panel.hidden = screenNumber === 8;
-    document.getElementById('feedback-screen-number').textContent = screenNumber;
-    document.querySelectorAll('[data-screen-feedback]').forEach((button) => {
-      const selected = button.dataset.screenFeedback === saved.rating;
-      button.classList.toggle('selected', selected);
-      button.setAttribute('aria-pressed', String(selected));
-    });
-    comment.hidden = !saved.rating;
-    text.value = saved.comment || '';
-    response.textContent = saved.rating ? 'Thanks — your feedback is saved.' : '';
-  }
-
-  function saveScreenFeedback(rating) {
-    const key = String(state.screen);
-    const existing = state.feedback[key] || {};
-    state.feedback[key] = { ...existing, rating };
-    saveState();
-    renderScreenFeedback(state.screen);
-    document.getElementById('screen-feedback-text').focus();
-    submitFeedback(key);
   }
 
   async function submitFeedback(screenNumber) {
@@ -655,19 +646,6 @@
     submitFeedback('overall');
     document.getElementById('rating-response').textContent = 'Thank you — your rating has been recorded.';
   }));
-
-  document.querySelectorAll('[data-screen-feedback]').forEach((button) => button.addEventListener('click', () => {
-    saveScreenFeedback(button.dataset.screenFeedback);
-  }));
-  let feedbackTimer;
-  document.getElementById('screen-feedback-text').addEventListener('input', (event) => {
-    const key = String(state.screen);
-    const existing = state.feedback[key] || {};
-    state.feedback[key] = { ...existing, comment: event.target.value };
-    saveState();
-    clearTimeout(feedbackTimer);
-    feedbackTimer = setTimeout(() => submitFeedback(key), 700);
-  });
 
   document.getElementById('calendly-button').addEventListener('click', openCalendly);
   document.getElementById('restart').addEventListener('click', () => {
