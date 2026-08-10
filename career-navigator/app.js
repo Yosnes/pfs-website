@@ -23,6 +23,7 @@
     path: 'growth',
     timeline: 'now',
     priorities: ['Meaningful work', 'Higher income', 'Stability'],
+    feedback: {},
     skills: {
       explicit: ['Team leadership', 'Process improvement', 'Customer experience', 'Performance measurement', 'Stakeholder management'],
       inferred: ['Change management', 'Product operations', 'Service design']
@@ -125,6 +126,7 @@
     if (next === 4) renderSkills();
     if (next === 7) renderPlan();
     if (next === 8) document.getElementById('delivery-email').textContent = state.email || 'your email address';
+    renderScreenFeedback(next);
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
     const heading = document.querySelector(`.screen[data-screen="${next}"] h2`);
@@ -193,11 +195,44 @@
 
   function runProcessing() {
     const items = [...document.querySelectorAll('#processing-list li')];
+    const continueButton = document.getElementById('continue-profile');
+    continueButton.hidden = true;
     items.forEach((item) => item.classList.remove('done'));
     items.forEach((item, index) => {
       setTimeout(() => item.classList.add('done'), 450 + index * 520);
     });
-    setTimeout(() => showScreen(4, { skipProcessing: true }), 2850);
+    setTimeout(() => {
+      continueButton.hidden = false;
+      announcement.textContent = 'Your sample career profile is ready to review.';
+    }, 2850);
+  }
+
+  function renderScreenFeedback(screenNumber) {
+    const panel = document.getElementById('screen-feedback');
+    const comment = document.getElementById('screen-feedback-comment');
+    const response = document.getElementById('screen-feedback-response');
+    const text = document.getElementById('screen-feedback-text');
+    const saved = state.feedback[String(screenNumber)] || {};
+
+    panel.hidden = screenNumber === 8;
+    document.getElementById('feedback-screen-number').textContent = screenNumber;
+    document.querySelectorAll('[data-screen-feedback]').forEach((button) => {
+      const selected = button.dataset.screenFeedback === saved.rating;
+      button.classList.toggle('selected', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+    comment.hidden = !saved.rating;
+    text.value = saved.comment || '';
+    response.textContent = saved.rating ? 'Thanks — saved in this prototype.' : '';
+  }
+
+  function saveScreenFeedback(rating) {
+    const key = String(state.screen);
+    const existing = state.feedback[key] || {};
+    state.feedback[key] = { ...existing, rating };
+    saveState();
+    renderScreenFeedback(state.screen);
+    document.getElementById('screen-feedback-text').focus();
   }
 
   function skillMarkup(skill, type) {
@@ -296,6 +331,7 @@
   });
   document.getElementById('sample-resume').addEventListener('click', () => setResumeReady('Alex-Morgan-Sample-Resume.pdf', 'Fictional sample résumé · Ready to preview'));
   document.getElementById('analyze-resume').addEventListener('click', () => showScreen(3));
+  document.getElementById('continue-profile').addEventListener('click', () => showScreen(4, { skipProcessing: true }));
 
   document.addEventListener('click', (event) => {
     const nextButton = event.target.closest('[data-next]');
@@ -340,6 +376,16 @@
     document.querySelectorAll('.rating-buttons button').forEach((item) => item.classList.toggle('selected', item === button));
     document.getElementById('rating-response').textContent = 'Thank you — this will be recorded in the live pilot.';
   }));
+
+  document.querySelectorAll('[data-screen-feedback]').forEach((button) => button.addEventListener('click', () => {
+    saveScreenFeedback(button.dataset.screenFeedback);
+  }));
+  document.getElementById('screen-feedback-text').addEventListener('input', (event) => {
+    const key = String(state.screen);
+    const existing = state.feedback[key] || {};
+    state.feedback[key] = { ...existing, comment: event.target.value };
+    saveState();
+  });
 
   document.getElementById('calendly-button').addEventListener('click', openCalendly);
   document.getElementById('restart').addEventListener('click', () => {
