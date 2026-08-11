@@ -92,10 +92,6 @@
               <input id="contact-consent" type="checkbox" checked>
               <span><strong>Stay connected</strong>Project Future Self may contact me for pilot feedback and updates.</span>
             </label>
-            <div class="sample-callout">
-              <div><strong>Want to preview first?</strong><span>Fill the fields with fictional sample details.</span></div>
-              <button type="button" class="text-button" id="sample-details">Use sample details</button>
-            </div>
             <button class="button primary wide" type="submit">Begin my Career Navigator <span>→</span></button>
             <p class="fine-print">Your email is used to deliver your report. Pilot updates are optional and controlled by the checkbox above.</p>
           </form>
@@ -127,10 +123,6 @@
               <textarea id="resume-text" rows="5" placeholder="Paste your résumé text here..."></textarea>
             </label>
           </details>
-          <div class="sample-callout sample-resume-callout">
-            <div><strong>Sample mode</strong><span>Use a fictional mid-career résumé to explore the full journey.</span></div>
-            <button type="button" class="button secondary compact" id="sample-resume">Use sample résumé</button>
-          </div>
           <button class="button primary wide" type="button" id="analyze-resume" disabled>Read my résumé <span>→</span></button>
           <p class="fine-print" id="resume-privacy-note">Your original file stays on your device. Only anonymized résumé text is sent for analysis.</p>
           <p class="fine-print">Automated redaction may not identify every personal detail. Remove anything especially sensitive before continuing. By continuing, you agree to the anonymized text being processed as described in our <a href="../privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</p>
@@ -160,17 +152,16 @@
             <h2 id="screen-4-title">Here’s what we found.</h2>
             <p>Review and correct this profile. Only information you confirm will be used to create your pathways.</p>
           </div>
-          <div class="profile-score"><span>Profile confidence</span><strong>High</strong><div><i></i></div></div>
           <label class="field">
             <span>Career summary</span>
-            <textarea id="career-summary" rows="4">Operations and customer-experience leader with 12+ years guiding cross-functional teams, improving service delivery, and turning complex problems into measurable business results.</textarea>
+            <textarea id="career-summary" rows="4"></textarea>
           </label>
           <div class="section-heading"><div><span class="eyebrow">Experience signals</span><h3>What your work demonstrates</h3></div><button class="text-button" type="button" id="edit-summary">Edit summary</button></div>
           <div class="evidence-card">
-            <div class="evidence-top"><div><strong id="profile-current-role">Senior Operations Manager</strong><span id="profile-context">National service organization · 2019–Present</span></div><span class="confidence-tag">Strong evidence</span></div>
-            <ul id="profile-achievements"><li>Led a 24-person, cross-functional service team</li><li>Reduced customer response time by 31%</li><li>Introduced performance dashboards used by senior leadership</li></ul>
+            <div class="evidence-top"><div><strong id="profile-current-role">Career experience</strong><span id="profile-context">Based on your résumé</span></div></div>
+            <ul id="profile-achievements"></ul>
           </div>
-          <div class="section-heading"><div><span class="eyebrow">Transferable skills</span><h3>Skills ready to carry forward</h3></div><span class="count-label" id="skill-count">11 of 12 selected</span></div>
+          <div class="section-heading"><div><span class="eyebrow">Transferable skills</span><h3>Skills ready to carry forward</h3></div><span class="count-label" id="skill-count">0 of 12 selected</span></div>
           <div class="skills-group">
             <p>Directly demonstrated</p>
             <div class="skill-list" id="explicit-skills"></div>
@@ -198,28 +189,29 @@
             <fieldset class="choice-fieldset">
               <legend>When are you planning to make a change?</legend>
               <div class="choice-list timeline-list">
-                <label><input type="radio" name="timeline" value="now" checked><span><strong>I’m out of work and looking now</strong><small>I need a focused plan for immediate momentum.</small></span></label>
+                <label><input type="radio" name="timeline" value="now"><span><strong>I’m out of work and looking now</strong><small>I need a focused plan for immediate momentum.</small></span></label>
                 <label><input type="radio" name="timeline" value="soon"><span><strong>As soon as possible, while employed</strong><small>I’m ready to move but need to protect my current position.</small></span></label>
                 <label><input type="radio" name="timeline" value="one-three"><span><strong>Within 1–3 months</strong><small>I have time to position myself thoughtfully.</small></span></label>
                 <label><input type="radio" name="timeline" value="three-six"><span><strong>Within 3–6 months</strong><small>I want to build skills and test possibilities first.</small></span></label>
                 <label><input type="radio" name="timeline" value="exploring"><span><strong>I’m exploring without a fixed deadline</strong><small>I want clarity before committing to a change.</small></span></label>
               </div>
+              <small class="field-error" id="timeline-error"></small>
             </fieldset>
             <fieldset class="choice-fieldset">
               <legend>What matters most in your next chapter? <small>Choose up to three</small></legend>
               <div class="chip-options" id="priority-options">
-                <label><input type="checkbox" value="Meaningful work" checked><span>Meaningful work</span></label>
-                <label><input type="checkbox" value="Higher income" checked><span>Higher income</span></label>
+                <label><input type="checkbox" value="Meaningful work"><span>Meaningful work</span></label>
+                <label><input type="checkbox" value="Higher income"><span>Higher income</span></label>
                 <label><input type="checkbox" value="More flexibility"><span>More flexibility</span></label>
                 <label><input type="checkbox" value="Leadership"><span>Leadership</span></label>
-                <label><input type="checkbox" value="Stability" checked><span>Stability</span></label>
+                <label><input type="checkbox" value="Stability"><span>Stability</span></label>
                 <label><input type="checkbox" value="Learning"><span>Learning</span></label>
               </div>
               <small class="field-error" id="priority-error"></small>
             </fieldset>
             <label class="field">
               <span>Anything you definitely want to leave behind?</span>
-              <textarea id="leave-behind" rows="3" placeholder="For example: constant travel, managing a large team, or an industry that no longer fits.">Constant firefighting and roles where customer insight is ignored.</textarea>
+              <textarea id="leave-behind" rows="3" placeholder="For example: constant travel, managing a large team, or an industry that no longer fits."></textarea>
             </label>
             <button class="button primary wide" type="submit" id="create-pathways">Create my career pathways <span>→</span></button>
             <p class="service-error" id="pathways-error" role="alert" hidden></p>
@@ -234,24 +226,7 @@
             <p>These aren’t predictions. They’re evidence-based possibilities built from your confirmed experience and priorities.</p>
           </div>
           <div class="pathway-key"><span><i class="adjacent"></i>Adjacent move</span><span><i class="growth"></i>Growth move</span><span><i class="reinvention"></i>Reinvention move</span></div>
-          <div class="pathway-list" id="pathway-list">
-            <button class="pathway-card" type="button" data-path="adjacent" aria-pressed="false">
-              <span class="path-number">01</span>
-              <div class="path-main"><span class="path-type adjacent-text">Adjacent move</span><h3>Director of Customer Operations</h3><p>Build on your operations leadership while moving closer to customer strategy and organizational influence.</p><div class="path-tags"><span>Fastest transition</span><span>Strong evidence</span></div></div>
-              <span class="select-indicator">Select</span>
-            </button>
-            <button class="pathway-card selected recommended" type="button" data-path="growth" aria-pressed="true">
-              <span class="recommendation-ribbon">Strongest overall fit</span>
-              <span class="path-number">02</span>
-              <div class="path-main"><span class="path-type growth-text">Growth move</span><h3>Product Operations Lead</h3><p>Translate customer and operational insight into better product decisions, launches, and cross-functional execution.</p><div class="path-tags"><span>High growth</span><span>Uses 6 confirmed skills</span></div></div>
-              <span class="select-indicator">Selected</span>
-            </button>
-            <button class="pathway-card" type="button" data-path="reinvention" aria-pressed="false">
-              <span class="path-number">03</span>
-              <div class="path-main"><span class="path-type reinvention-text">Reinvention move</span><h3>Independent Experience Consultant</h3><p>Package your leadership and service-transformation expertise into advisory work for growing organizations.</p><div class="path-tags"><span>More autonomy</span><span>Requires market testing</span></div></div>
-              <span class="select-indicator">Select</span>
-            </button>
-          </div>
+          <div class="pathway-list" id="pathway-list"></div>
           <div class="reflection-callout"><strong>A useful choice isn’t always the safest one.</strong><span>Choose the pathway that creates energy and feels credible enough to test—not the one you think you “should” pick.</span></div>
           <button class="button primary wide" id="choose-pathway" type="button">Build my action plan <span>→</span></button>
         </section>
@@ -261,14 +236,14 @@
           <div class="screen-copy compact-copy">
             <span class="eyebrow">Your selected direction</span>
             <h2 id="screen-7-title">A plan built for your timeline.</h2>
-            <p id="plan-intro">Because you’re looking now, the first 30 days focus on visibility, conversations, and targeted applications.</p>
+            <p id="plan-intro"></p>
           </div>
-          <div class="selected-path-summary"><span>Selected pathway</span><strong id="selected-path-title">Product Operations Lead</strong><button type="button" class="text-button" data-back-to="6">Change</button></div>
+          <div class="selected-path-summary"><span>Selected pathway</span><strong id="selected-path-title">Your selected pathway</strong><button type="button" class="text-button" data-back-to="6">Change</button></div>
           <div class="plan-timeline" id="plan-timeline"></div>
           <div class="first-action">
             <span class="first-action-label">Your first move</span>
-            <div><strong id="first-action-title">Rewrite your headline around product operations.</strong><p id="first-action-copy">Lead with the bridge between customer insight, operational systems, and cross-functional delivery.</p></div>
-            <span class="time-badge" id="first-action-timing">Today</span>
+            <div><strong id="first-action-title"></strong><p id="first-action-copy"></p></div>
+            <span class="time-badge" id="first-action-timing"></span>
           </div>
           <button class="button primary wide" type="button" id="email-report">Email my complete report <span>→</span></button>
           <p class="service-error" id="report-error" role="alert" hidden></p>

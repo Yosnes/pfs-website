@@ -304,22 +304,6 @@ main { padding: 42px 5% 76px; }
 .check-row span { display: flex; flex-direction: column; color: var(--body); font-size: 12px; }
 .check-row strong { color: var(--navy); font-size: 11px; }
 
-.sample-callout {
-  margin: 0 0 22px;
-  padding: 13px 15px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  background: var(--cream);
-  border: 1px dashed rgba(173, 108, 5, 0.35);
-  border-radius: 10px;
-}
-
-.sample-callout > div { display: flex; flex-direction: column; }
-.sample-callout strong { font-size: 11px; color: var(--navy); }
-.sample-callout span { font-size: 10px; color: var(--muted); }
-
 .button {
   min-height: 45px;
   padding: 12px 22px;
@@ -387,8 +371,6 @@ main { padding: 42px 5% 76px; }
 .paste-resume { margin-bottom: 15px; }
 .paste-resume summary { color: var(--slate); font-size: 11px; font-weight: 700; cursor: pointer; }
 .paste-resume .field { margin: 10px 0 0; }
-.sample-resume-callout { margin-top: 15px; }
-
 .processing-screen { padding-top: 38px; text-align: center; }
 .processing-screen h2 { max-width: 520px; margin: 0 auto; }
 .processing-screen > p { max-width: 540px; margin-left: auto; margin-right: auto; }
@@ -407,12 +389,6 @@ main { padding: 42px 5% 76px; }
 .processing-list li.done span { color: #fff; background: var(--green); border-color: var(--green); }
 .processing-list li.done span::after { content: '✓'; font-size: 9px; font-weight: 800; }
 
-.profile-score { margin-bottom: 22px; padding: 12px 15px; display: grid; grid-template-columns: auto auto minmax(100px, 1fr); align-items: center; gap: 10px; background: rgba(45, 120, 93, 0.06); border-radius: 8px; }
-.profile-score span, .profile-score strong { font-size: 10px; }
-.profile-score strong { color: var(--green); }
-.profile-score > div { height: 4px; background: rgba(45, 120, 93, 0.12); border-radius: 99px; }
-.profile-score i { display: block; width: 88%; height: 100%; background: var(--green); border-radius: inherit; }
-
 .section-heading { margin: 26px 0 11px; display: flex; align-items: flex-end; justify-content: space-between; gap: 15px; }
 .section-heading .eyebrow { margin-bottom: 2px; font-size: 8px; }
 .section-heading h3 { margin: 0; color: var(--navy); font-family: 'DM Serif Display', serif; font-size: 20px; font-weight: 400; }
@@ -423,7 +399,6 @@ main { padding: 42px 5% 76px; }
 .evidence-top > div { display: flex; flex-direction: column; }
 .evidence-top strong { color: var(--navy); font-size: 12px; }
 .evidence-top span { color: var(--muted); font-size: 9px; }
-.confidence-tag { padding: 4px 8px; color: var(--green) !important; background: rgba(45, 120, 93, .09); border-radius: 999px; font-weight: 700; white-space: nowrap; }
 .evidence-card ul { margin: 12px 0 0; padding-left: 18px; }
 .evidence-card li { margin: 4px 0; color: var(--body); font-size: 10px; }
 
@@ -578,10 +553,6 @@ footer {
   .step-meter { width: 60%; }
   .screen h2 { font-size: 34px; }
   .field-grid { grid-template-columns: 1fr; gap: 0; }
-  .sample-callout { align-items: flex-start; flex-direction: column; }
-  .sample-resume-callout .button { width: 100%; }
-  .profile-score { grid-template-columns: auto auto; }
-  .profile-score > div { grid-column: 1 / -1; }
   .evidence-top { flex-direction: column; }
   .pathway-card { grid-template-columns: 34px 1fr; }
   .select-indicator { grid-column: 2; justify-self: start; }
@@ -610,7 +581,6 @@ footer {
 .field input, .field textarea, .add-skill-row input { font-size: 16px; }
 .field-error, .fine-print { font-size: 14px; line-height: 1.5; }
 .check-row span, .check-row strong { font-size: 16px; }
-.sample-callout strong, .sample-callout span { font-size: 15px; }
 .button { font-size: 16px; }
 .button.compact { min-height: 42px; font-size: 15px; }
 .text-button { font-size: 15px; }
@@ -619,7 +589,6 @@ footer {
 .upload-zone > span:not(.upload-icon):not(.upload-button), .upload-button, .paste-resume summary { font-size: 15px; }
 .divider { font-size: 13px; }
 .processing-list li { font-size: 16px; }
-.profile-score span, .profile-score strong { font-size: 14px; }
 .section-heading .eyebrow, .skills-group > p { font-size: 13px; }
 .section-heading h3 { font-size: 24px; }
 .count-label, .evidence-top span { font-size: 14px; }
