@@ -6,7 +6,7 @@
   const stepLabel = document.getElementById('step-label');
   const meterFill = document.getElementById('meter-fill');
   const announcement = document.getElementById('announcement');
-  const sessionKey = 'pfs-career-navigator-pilot-v4';
+  const sessionKey = 'pfs-career-navigator-pilot-v5';
   const maxSkills = 12;
   const maxDirectSkills = 9;
   const maxSuggestedSkills = 3;
@@ -15,26 +15,14 @@
   let selectedResumeFile = null;
   let pastedResumeText = '';
 
-  const pathTitles = {
-    adjacent: 'Director of Customer Operations',
-    growth: 'Product Operations Lead',
-    reinvention: 'Independent Experience Consultant'
+  const emptyProfile = {
+    summary: '',
+    current_role: '',
+    experience_context: '',
+    achievements: [],
+    explicit_skills: [],
+    inferred_skills: []
   };
-
-  const sampleProfile = {
-    summary: 'Operations and customer-experience leader with 12+ years guiding cross-functional teams, improving service delivery, and turning complex problems into measurable business results.',
-    current_role: 'Senior Operations Manager',
-    experience_context: 'National service organization · 2019–Present',
-    achievements: ['Led a 24-person, cross-functional service team', 'Reduced customer response time by 31%', 'Introduced performance dashboards used by senior leadership'],
-    explicit_skills: ['Team leadership', 'Process improvement', 'Customer experience', 'Performance measurement', 'Stakeholder management', 'Operational planning', 'Team development', 'KPI reporting'],
-    inferred_skills: ['Change management', 'Product operations', 'Service design']
-  };
-
-  const samplePathways = [
-    { id: 'adjacent', type: 'Adjacent move', title: 'Director of Customer Operations', description: 'Build on your operations leadership while moving closer to customer strategy and organizational influence.', fit_reason: 'The fastest transition from your confirmed experience.', tags: ['Fastest transition', 'Strong evidence'], confirmed_skills_used: ['Team leadership', 'Customer experience', 'Performance measurement'] },
-    { id: 'growth', type: 'Growth move', title: 'Product Operations Lead', description: 'Translate customer and operational insight into better product decisions, launches, and cross-functional execution.', fit_reason: 'A credible stretch that uses six confirmed skills.', tags: ['High growth', 'Uses 6 confirmed skills'], confirmed_skills_used: ['Process improvement', 'Customer experience', 'Stakeholder management'] },
-    { id: 'reinvention', type: 'Reinvention move', title: 'Independent Experience Consultant', description: 'Package your leadership and service-transformation expertise into advisory work for growing organizations.', fit_reason: 'A more independent direction worth testing before committing.', tags: ['More autonomy', 'Requires market testing'], confirmed_skills_used: ['Change management', 'Service design', 'Team leadership'] }
-  ];
 
   const timelineLabels = {
     now: 'Out of work and looking now',
@@ -50,18 +38,17 @@
     email: '',
     consent: true,
     resumeReady: false,
-    sampleMode: false,
     sessionId: (window.crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`),
-    path: 'growth',
-    timeline: 'now',
-    priorities: ['Meaningful work', 'Higher income', 'Stability'],
-    leaveBehind: 'Constant firefighting and roles where customer insight is ignored.',
+    path: '',
+    timeline: '',
+    priorities: [],
+    leaveBehind: '',
     feedback: {},
-    profile: { ...sampleProfile },
-    pathways: samplePathways.map((pathway) => ({ ...pathway })),
+    profile: { ...emptyProfile },
+    pathways: [],
     skills: {
-      explicit: ['Team leadership', 'Process improvement', 'Customer experience', 'Performance measurement', 'Stakeholder management', 'Operational planning', 'Team development', 'KPI reporting'],
-      inferred: ['Change management', 'Product operations', 'Service design']
+      explicit: [],
+      inferred: []
     }
   };
 
@@ -89,7 +76,7 @@
   }
 
   async function apiRequest(path, payload) {
-    if (isLocalPreview) throw new Error('The local preview cannot connect to the secure pilot services. Use the sample résumé here, or test a deployed development preview.');
+    if (isLocalPreview) throw new Error('The local preview cannot connect to the secure pilot services. Test a deployed preview or the production page.');
     const response = await fetch(path, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -135,7 +122,7 @@
         ['Days 15–45', 'Build and activate', ['Complete a focused skill sprint', 'Create a small proof project', 'Begin targeted outreach and applications']],
         ['Days 46–90', 'Interview and transition', ['Apply to high-fit roles each week', 'Practise role-specific stories', 'Refine from response data']]
       ],
-      action: ['Interview one Product Operations leader.', 'Ask what their team owns, which backgrounds translate well, and what proof gets candidates noticed.'],
+      action: ['Interview one person doing the work you are considering.', 'Ask what their role owns, which backgrounds translate well, and what proof gets candidates noticed.'],
       badge: 'This week'
     },
     'three-six': {
@@ -173,18 +160,16 @@
       const saved = JSON.parse(sessionStorage.getItem(sessionKey));
       if (saved && typeof saved === 'object') {
         Object.assign(state, saved);
-        state.profile = { ...sampleProfile, ...(saved.profile || {}) };
+        state.profile = { ...emptyProfile, ...(saved.profile || {}) };
         state.skills = {
-          explicit: normalizeSkillList(saved.skills?.explicit || sampleProfile.explicit_skills, maxDirectSkills),
-          inferred: normalizeSkillList(saved.skills?.inferred || sampleProfile.inferred_skills, maxSuggestedSkills)
+          explicit: normalizeSkillList(saved.skills?.explicit || [], maxDirectSkills),
+          inferred: normalizeSkillList(saved.skills?.inferred || [], maxSuggestedSkills)
         };
         const savedExplicitKeys = new Set(state.skills.explicit.map((skill) => skill.toLocaleLowerCase()));
         state.skills.inferred = state.skills.inferred
           .filter((skill) => !savedExplicitKeys.has(skill.toLocaleLowerCase()))
           .slice(0, maxSkills - state.skills.explicit.length);
-        state.pathways = Array.isArray(saved.pathways) && saved.pathways.length === 3
-          ? saved.pathways
-          : samplePathways.map((pathway) => ({ ...pathway }));
+        state.pathways = Array.isArray(saved.pathways) ? saved.pathways : [];
       }
     } catch (_) {
       sessionStorage.removeItem(sessionKey);
@@ -287,7 +272,6 @@
     }
     selectedResumeFile = file;
     pastedResumeText = '';
-    state.sampleMode = false;
     document.getElementById('resume-text').value = '';
     setResumeReady(file.name, 'Selected locally · The original file stays on this device');
   }
@@ -307,48 +291,39 @@
     items.forEach((item) => item.classList.remove('done'));
 
     try {
-      if (state.sampleMode) {
-        note.textContent = 'Using fictional sample information. No AI request is being made.';
-        items.forEach((item, index) => setTimeout(() => markProcessingStep(items, index), 300 + index * 350));
-        await new Promise((resolve) => setTimeout(resolve, 1750));
-        state.profile = { ...sampleProfile };
-        state.skills = { explicit: [...sampleProfile.explicit_skills], inferred: [...sampleProfile.inferred_skills] };
-        state.pathways = samplePathways.map((pathway) => ({ ...pathway }));
-      } else {
-        note.textContent = 'Your original file is being read only in this browser.';
-        let extractedText = pastedResumeText;
-        if (selectedResumeFile) extractedText = await window.PFSResume.extractFileText(selectedResumeFile);
-        markProcessingStep(items, 0);
+      note.textContent = 'Your original file is being read only in this browser.';
+      let extractedText = pastedResumeText;
+      if (selectedResumeFile) extractedText = await window.PFSResume.extractFileText(selectedResumeFile);
+      markProcessingStep(items, 0);
 
-        const anonymized = window.PFSResume.anonymize(extractedText, { name: state.name, email: state.email });
-        extractedText = '';
-        selectedResumeFile = null;
-        resumeInput.value = '';
-        if (anonymized.text.length < 250) throw new Error('We could not find enough readable résumé text. Try pasting the résumé text instead.');
-        markProcessingStep(items, 1);
-        note.textContent = `${anonymized.totalRedactions} personal detail${anonymized.totalRedactions === 1 ? '' : 's'} removed. Sending anonymized text for analysis.`;
+      const anonymized = window.PFSResume.anonymize(extractedText, { name: state.name, email: state.email });
+      extractedText = '';
+      selectedResumeFile = null;
+      resumeInput.value = '';
+      if (anonymized.text.length < 250) throw new Error('We could not find enough readable résumé text. Try pasting the résumé text instead.');
+      markProcessingStep(items, 1);
+      note.textContent = `${anonymized.totalRedactions} personal detail${anonymized.totalRedactions === 1 ? '' : 's'} removed. Sending anonymized text for analysis.`;
 
-        const result = await apiRequest('/api/career-navigator-analyze', {
-          resumeText: anonymized.text,
-          sessionId: state.sessionId
-        });
-        markProcessingStep(items, 2);
-        state.profile = result.profile;
-        const explicit = normalizeSkillList(result.profile.explicit_skills, maxDirectSkills);
-        const explicitKeys = new Set(explicit.map((skill) => skill.toLocaleLowerCase()));
-        state.skills = {
-          explicit,
-          inferred: normalizeSkillList(result.profile.inferred_skills, Math.min(maxSuggestedSkills, maxSkills - explicit.length))
-            .filter((skill) => !explicitKeys.has(skill.toLocaleLowerCase()))
-        };
-        markProcessingStep(items, 3);
-      }
+      const result = await apiRequest('/api/career-navigator-analyze', {
+        resumeText: anonymized.text,
+        sessionId: state.sessionId
+      });
+      markProcessingStep(items, 2);
+      state.profile = result.profile;
+      const explicit = normalizeSkillList(result.profile.explicit_skills, maxDirectSkills);
+      const explicitKeys = new Set(explicit.map((skill) => skill.toLocaleLowerCase()));
+      state.skills = {
+        explicit,
+        inferred: normalizeSkillList(result.profile.inferred_skills, Math.min(maxSuggestedSkills, maxSkills - explicit.length))
+          .filter((skill) => !explicitKeys.has(skill.toLocaleLowerCase()))
+      };
+      markProcessingStep(items, 3);
 
       renderProfile();
       saveState();
       continueButton.hidden = false;
       backButton.hidden = true;
-      note.textContent = state.sampleMode ? 'Your sample profile is ready.' : 'Your anonymized career profile is ready to review.';
+      note.textContent = 'Your anonymized career profile is ready to review.';
       announcement.textContent = 'Your career profile is ready to review.';
     } catch (processingError) {
       note.textContent = 'Your original résumé has not been uploaded or stored.';
@@ -471,7 +446,7 @@
     const plan = planForSelection();
     const selectedPath = state.pathways.find((pathway) => pathway.id === state.path) || state.pathways[0];
     document.getElementById('plan-intro').textContent = plan.intro;
-    document.getElementById('selected-path-title').textContent = selectedPath?.title || pathTitles[state.path];
+    document.getElementById('selected-path-title').textContent = selectedPath?.title || 'Your selected pathway';
     document.getElementById('plan-timeline').innerHTML = plan.phases.map((phase) => `
       <article class="plan-phase">
         <span>${phase[0]}</span>
@@ -488,25 +463,29 @@
     const button = document.getElementById('create-pathways');
     const error = document.getElementById('pathways-error');
     error.hidden = true;
-    state.timeline = document.querySelector('input[name="timeline"]:checked').value;
+    const selectedTimeline = document.querySelector('input[name="timeline"]:checked');
+    const timelineError = document.getElementById('timeline-error');
+    timelineError.textContent = '';
+    if (!selectedTimeline) {
+      timelineError.textContent = 'Please choose when you are planning to make a change.';
+      announcement.textContent = timelineError.textContent;
+      return;
+    }
+    state.timeline = selectedTimeline.value;
     state.priorities = [...document.querySelectorAll('#priority-options input:checked')].map((input) => input.value);
     state.leaveBehind = document.getElementById('leave-behind').value.trim();
     syncConfirmedProfile();
     setBusy(button, true, 'Creating your pathways…');
 
     try {
-      if (!state.sampleMode) {
-        const result = await apiRequest('/api/career-navigator-pathways', {
-          profile: state.profile,
-          timeline: timelineLabels[state.timeline],
-          priorities: state.priorities,
-          leaveBehind: state.leaveBehind,
-          sessionId: state.sessionId
-        });
-        state.pathways = result.pathways;
-      } else {
-        state.pathways = samplePathways.map((pathway) => ({ ...pathway }));
-      }
+      const result = await apiRequest('/api/career-navigator-pathways', {
+        profile: state.profile,
+        timeline: timelineLabels[state.timeline],
+        priorities: state.priorities,
+        leaveBehind: state.leaveBehind,
+        sessionId: state.sessionId
+      });
+      state.pathways = result.pathways;
       state.path = state.pathways.some((pathway) => pathway.id === 'growth') ? 'growth' : state.pathways[0].id;
       renderPathways();
       selectPath(state.path);
@@ -571,12 +550,6 @@
     if (validateContact()) showScreen(2);
   });
 
-  document.getElementById('sample-details').addEventListener('click', () => {
-    document.getElementById('name').value = 'Alex Morgan';
-    document.getElementById('email').value = 'alex.morgan@example.com';
-    document.getElementById('contact-consent').checked = true;
-  });
-
   const uploadZone = document.getElementById('upload-zone');
   const resumeInput = document.getElementById('resume-file');
   resumeInput.addEventListener('change', () => handleFile(resumeInput.files[0]));
@@ -593,16 +566,7 @@
   document.getElementById('resume-text').addEventListener('input', (event) => {
     pastedResumeText = event.target.value.trim();
     selectedResumeFile = null;
-    state.sampleMode = false;
     if (pastedResumeText.length >= 80) setResumeReady('Pasted résumé text ready', 'Text stays in this browser until personal details are removed');
-  });
-  document.getElementById('sample-resume').addEventListener('click', () => {
-    selectedResumeFile = null;
-    pastedResumeText = '';
-    resumeInput.value = '';
-    document.getElementById('resume-text').value = '';
-    state.sampleMode = true;
-    setResumeReady('Alex-Morgan-Sample-Resume.pdf', 'Fictional sample résumé · No AI request required');
   });
   document.getElementById('analyze-resume').addEventListener('click', () => showScreen(3));
   document.getElementById('continue-profile').addEventListener('click', () => showScreen(4, { skipProcessing: true }));
@@ -669,8 +633,7 @@
   document.querySelectorAll('input[name="timeline"]').forEach((input) => { input.checked = input.value === state.timeline; });
   document.querySelectorAll('#priority-options input').forEach((input) => { input.checked = state.priorities.includes(input.value); });
   selectPath(state.path);
-  if (state.resumeReady && state.sampleMode) setResumeReady('Sample résumé selected', 'Fictional sample résumé · No AI request required');
-  if (state.resumeReady && !state.sampleMode && state.screen <= 2) {
+  if (state.resumeReady && state.screen <= 2) {
     state.resumeReady = false;
     document.getElementById('analyze-resume').disabled = true;
   }
