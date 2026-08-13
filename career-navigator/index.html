@@ -137,8 +137,8 @@
           <ol class="processing-list" id="processing-list">
             <li><span></span>Reading the résumé structure</li>
             <li><span></span>Removing personal information</li>
-            <li><span></span>Identifying skills and achievements</li>
-            <li><span></span>Building your reviewable profile</li>
+            <li><span></span>Connecting patterns across your career</li>
+            <li><span></span>Building evidence-backed insights</li>
           </ol>
           <p class="fine-print" id="processing-note">Preparing your résumé securely.</p>
           <p class="service-error" id="processing-error" role="alert" hidden></p>
@@ -149,17 +149,20 @@
         <section class="screen" data-screen="4" aria-labelledby="screen-4-title">
           <div class="screen-copy compact-copy">
             <span class="eyebrow">Your career profile</span>
-            <h2 id="screen-4-title">Here’s what we found.</h2>
-            <p>Review and correct this profile. Only information you confirm will be used to create your pathways.</p>
+            <h2 id="screen-4-title">Here’s the story beneath your job titles.</h2>
+            <p>Review what we see across your experience. Only the profile and insights you confirm will shape your pathways.</p>
           </div>
+          <div class="section-heading profile-story-heading"><div><span class="eyebrow">Your professional throughline</span><h3>The value you carry forward</h3></div><button class="text-button" type="button" id="edit-summary">Edit story</button></div>
           <label class="field">
-            <span>Career summary</span>
-            <textarea id="career-summary" rows="4"></textarea>
+            <span class="sr-only">Your professional throughline</span>
+            <textarea id="career-summary" class="career-story" rows="6"></textarea>
           </label>
-          <div class="section-heading"><div><span class="eyebrow">Experience signals</span><h3>What your work demonstrates</h3></div><button class="text-button" type="button" id="edit-summary">Edit summary</button></div>
-          <div class="evidence-card">
-            <div class="evidence-top"><div><strong id="profile-current-role">Career experience</strong><span id="profile-context">Based on your résumé</span></div></div>
-            <ul id="profile-achievements"></ul>
+          <div class="section-heading insight-heading"><div><span class="eyebrow">Patterns across your experience</span><h3>What your résumé suggests</h3></div></div>
+          <div class="profile-insights" id="profile-insights"></div>
+          <div class="tension-card" id="profile-tension" hidden>
+            <span class="tension-label">A useful tension</span>
+            <p id="profile-tension-text"></p>
+            <div class="insight-evidence"><strong>Why we think this</strong><ul id="profile-tension-evidence"></ul></div>
           </div>
           <div class="section-heading"><div><span class="eyebrow">Transferable skills</span><h3>Skills ready to carry forward</h3></div><span class="count-label" id="skill-count">0 of 12 selected</span></div>
           <div class="skills-group">
@@ -175,7 +178,23 @@
             <button class="button tertiary compact" id="add-skill" type="button">+ Add skill</button>
           </div>
           <small class="field-error" id="skill-limit-message" aria-live="polite"></small>
-          <button class="button primary wide" type="button" data-next="5">Confirm my profile <span>→</span></button>
+          <section class="wildcard-card" aria-labelledby="wildcard-title">
+            <span class="wildcard-label">Wildcard insight</span>
+            <h3 id="wildcard-title">A bolder read</h3>
+            <p id="wildcard-inference"></p>
+            <div class="insight-evidence wildcard-evidence"><strong>Why we think this</strong><ul id="wildcard-evidence"></ul></div>
+            <div class="wildcard-actions" role="group" aria-label="Respond to the wildcard insight">
+              <button type="button" data-wildcard-decision="confirmed">This resonates</button>
+              <button type="button" data-wildcard-decision="rejected">I disagree</button>
+              <button type="button" data-wildcard-decision="edited">Edit this insight</button>
+            </div>
+            <label class="wildcard-edit" id="wildcard-edit" hidden>
+              <span>Rewrite the insight so it fits</span>
+              <textarea id="wildcard-edit-text" rows="4"></textarea>
+            </label>
+            <small class="field-error wildcard-error" id="wildcard-error" aria-live="polite"></small>
+          </section>
+          <button class="button primary wide" id="confirm-profile" type="button" data-next="5">Confirm my profile <span>→</span></button>
         </section>
 
         <!-- Screen 5: goals -->
@@ -260,8 +279,12 @@
             <div class="report-cover"><span>Project Future Self</span><strong>Career Navigator</strong><small>Personal career pathway report</small></div>
             <div class="report-contents"><span>Included in your report</span><ul><li>Confirmed skills and career profile</li><li>Three evidence-based pathways</li><li>Your selected direction</li><li>A timeline-sensitive action plan</li></ul></div>
           </div>
-          <div class="feedback-mini">
-            <span>Was this useful?</span>
+          <div class="feedback-mini feedback-featured" aria-labelledby="overall-feedback-title">
+            <div class="feedback-featured-copy">
+              <span class="eyebrow">Help improve the pilot</span>
+              <h3 id="overall-feedback-title">Was this useful?</h3>
+              <p>Your rating helps us make Career Navigator more useful for the next person.</p>
+            </div>
             <div class="rating-buttons" aria-label="Rate this pilot experience">
               <button type="button" data-rating="1" aria-label="1 out of 5">1</button><button type="button" data-rating="2" aria-label="2 out of 5">2</button><button type="button" data-rating="3" aria-label="3 out of 5">3</button><button type="button" data-rating="4" aria-label="4 out of 5">4</button><button type="button" data-rating="5" aria-label="5 out of 5">5</button>
             </div>
@@ -273,6 +296,23 @@
           </div>
           <button class="text-button restart-button" type="button" id="restart">Restart the journey</button>
         </section>
+
+        <aside class="screen-feedback" id="screen-feedback" aria-labelledby="screen-feedback-title">
+          <div class="feedback-heading">
+            <span class="feedback-kicker">Pilot feedback · Screen <span id="feedback-screen-number">1</span></span>
+            <p id="screen-feedback-title">Was this screen easy to understand?</p>
+          </div>
+          <div class="screen-feedback-actions" role="group" aria-label="Rate the clarity of this screen">
+            <button type="button" data-screen-feedback="yes">Yes</button>
+            <button type="button" data-screen-feedback="mostly">Mostly</button>
+            <button type="button" data-screen-feedback="no">Not yet</button>
+          </div>
+          <label class="screen-feedback-comment" id="screen-feedback-comment" hidden>
+            <span>What would make this screen better? <small>Optional</small></span>
+            <textarea id="screen-feedback-text" rows="2" placeholder="Share a quick thought..."></textarea>
+          </label>
+          <small class="screen-feedback-response" id="screen-feedback-response" aria-live="polite"></small>
+        </aside>
 
       </section>
     </section>
