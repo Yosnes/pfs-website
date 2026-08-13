@@ -403,7 +403,11 @@ main { padding: 42px 5% 76px; }
 .evidence-card li { margin: 4px 0; color: var(--body); font-size: 10px; }
 
 .profile-story-heading { margin-top: 0; }
-.career-story { min-height: 180px; font-size: 16px; line-height: 1.7; }
+.career-story { min-height: 145px; font-size: 16px; line-height: 1.7; }
+.less-obvious-strength { margin: 18px 0 28px; padding: 19px 21px; background: var(--cream); border-left: 4px solid var(--gold-dark); border-radius: 10px; }
+.less-obvious-strength h3 { margin: 0 0 7px; color: var(--navy); font-family: 'DM Serif Display', serif; font-size: 22px; font-weight: 400; }
+.less-obvious-strength > p { margin: 0; color: var(--body); font-size: 16px; line-height: 1.65; }
+.less-obvious-strength .insight-evidence { background: rgba(255, 255, 255, .72); }
 .insight-heading { margin-top: 34px; }
 .profile-insights { display: grid; gap: 14px; }
 .insight-card {
