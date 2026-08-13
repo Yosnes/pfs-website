@@ -6,7 +6,7 @@
   const stepLabel = document.getElementById('step-label');
   const meterFill = document.getElementById('meter-fill');
   const announcement = document.getElementById('announcement');
-  const sessionKey = 'pfs-career-navigator-pilot-v5';
+  const sessionKey = 'pfs-career-navigator-pilot-v6';
   const maxSkills = 12;
   const maxDirectSkills = 9;
   const maxSuggestedSkills = 3;
@@ -17,9 +17,9 @@
 
   const emptyProfile = {
     summary: '',
-    current_role: '',
-    experience_context: '',
-    achievements: [],
+    insights: [],
+    constructive_tension: { supported: false, interpretation: '', evidence: [] },
+    wildcard: { inference: '', evidence: [], decision: '', confirmed_text: '' },
     explicit_skills: [],
     inferred_skills: []
   };
@@ -160,7 +160,19 @@
       const saved = JSON.parse(sessionStorage.getItem(sessionKey));
       if (saved && typeof saved === 'object') {
         Object.assign(state, saved);
-        state.profile = { ...emptyProfile, ...(saved.profile || {}) };
+        state.profile = {
+          ...emptyProfile,
+          ...(saved.profile || {}),
+          insights: Array.isArray(saved.profile?.insights) ? saved.profile.insights.slice(0, 3) : [],
+          constructive_tension: {
+            ...emptyProfile.constructive_tension,
+            ...(saved.profile?.constructive_tension || {})
+          },
+          wildcard: {
+            ...emptyProfile.wildcard,
+            ...(saved.profile?.wildcard || {})
+          }
+        };
         state.skills = {
           explicit: normalizeSkillList(saved.skills?.explicit || [], maxDirectSkills),
           inferred: normalizeSkillList(saved.skills?.inferred || [], maxSuggestedSkills)
@@ -208,6 +220,7 @@
     if (next === 6) renderPathways();
     if (next === 7) renderPlan();
     if (next === 8) document.getElementById('delivery-email').textContent = state.email || 'your email address';
+    renderScreenFeedback(next);
     window.scrollTo({ top: 0, behavior: 'smooth' });
     const heading = document.querySelector(`.screen[data-screen="${next}"] h2`);
     if (heading) {
@@ -309,7 +322,21 @@
         sessionId: state.sessionId
       });
       markProcessingStep(items, 2);
-      state.profile = result.profile;
+      state.profile = {
+        ...emptyProfile,
+        ...result.profile,
+        insights: Array.isArray(result.profile.insights) ? result.profile.insights.slice(0, 3) : [],
+        constructive_tension: {
+          ...emptyProfile.constructive_tension,
+          ...(result.profile.constructive_tension || {})
+        },
+        wildcard: {
+          ...emptyProfile.wildcard,
+          ...(result.profile.wildcard || {}),
+          decision: '',
+          confirmed_text: ''
+        }
+      };
       const explicit = normalizeSkillList(result.profile.explicit_skills, maxDirectSkills);
       const explicitKeys = new Set(explicit.map((skill) => skill.toLocaleLowerCase()));
       state.skills = {
@@ -334,6 +361,35 @@
     }
   }
 
+  function renderScreenFeedback(screenNumber) {
+    const panel = document.getElementById('screen-feedback');
+    const comment = document.getElementById('screen-feedback-comment');
+    const response = document.getElementById('screen-feedback-response');
+    const text = document.getElementById('screen-feedback-text');
+    const saved = state.feedback[String(screenNumber)] || {};
+
+    panel.hidden = screenNumber === 8;
+    document.getElementById('feedback-screen-number').textContent = screenNumber;
+    document.querySelectorAll('[data-screen-feedback]').forEach((button) => {
+      const selected = button.dataset.screenFeedback === saved.rating;
+      button.classList.toggle('selected', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+    comment.hidden = !saved.rating;
+    text.value = saved.comment || '';
+    response.textContent = saved.rating ? 'Thanks — your feedback is saved.' : '';
+  }
+
+  function saveScreenFeedback(rating) {
+    const key = String(state.screen);
+    const existing = state.feedback[key] || {};
+    state.feedback[key] = { ...existing, rating };
+    saveState();
+    renderScreenFeedback(state.screen);
+    document.getElementById('screen-feedback-text').focus();
+    submitFeedback(key);
+  }
+
   async function submitFeedback(screenNumber) {
     const entry = state.feedback[String(screenNumber)];
     if (!entry?.rating || isLocalPreview) return;
@@ -350,24 +406,100 @@
   }
 
   function syncConfirmedProfile() {
+    const wildcard = state.profile.wildcard || { ...emptyProfile.wildcard };
+    const editedWildcard = document.getElementById('wildcard-edit-text').value.trim();
     state.profile = {
       ...state.profile,
       summary: document.getElementById('career-summary').value.trim(),
+      wildcard: {
+        ...wildcard,
+        confirmed_text: wildcard.decision === 'confirmed'
+          ? wildcard.inference
+          : wildcard.decision === 'edited' ? editedWildcard : ''
+      },
       explicit_skills: [...state.skills.explicit],
       inferred_skills: [...state.skills.inferred]
     };
     saveState();
   }
 
+  function evidenceMarkup(items) {
+    return (Array.isArray(items) ? items : [])
+      .slice(0, 2)
+      .map((item) => `<li>${escapeHtml(item)}</li>`)
+      .join('');
+  }
+
+  function insightMarkup(insight, index) {
+    return `<article class="insight-card">
+      <span class="insight-number">0${index + 1}</span>
+      <div class="insight-copy">
+        <h4>${escapeHtml(insight.title || 'A pattern in your experience')}</h4>
+        <p>${escapeHtml(insight.interpretation || '')}</p>
+        <div class="insight-evidence"><strong>Why we think this</strong><ul>${evidenceMarkup(insight.evidence)}</ul></div>
+        <div class="insight-possibility"><strong>What this may open up</strong><span>${escapeHtml(insight.possibility || '')}</span></div>
+      </div>
+    </article>`;
+  }
+
   function renderProfile() {
     document.getElementById('career-summary').value = state.profile.summary || '';
-    document.getElementById('profile-current-role').textContent = state.profile.current_role || 'Career experience';
-    document.getElementById('profile-context').textContent = state.profile.experience_context || 'Based on your résumé';
-    document.getElementById('profile-achievements').innerHTML = (state.profile.achievements || [])
-      .slice(0, 5)
-      .map((achievement) => `<li>${escapeHtml(achievement)}</li>`)
+    document.getElementById('profile-insights').innerHTML = (state.profile.insights || [])
+      .slice(0, 3)
+      .map(insightMarkup)
       .join('');
+
+    const tension = state.profile.constructive_tension || emptyProfile.constructive_tension;
+    const tensionCard = document.getElementById('profile-tension');
+    tensionCard.hidden = !tension.supported;
+    document.getElementById('profile-tension-text').textContent = tension.supported ? tension.interpretation : '';
+    document.getElementById('profile-tension-evidence').innerHTML = tension.supported ? evidenceMarkup(tension.evidence) : '';
+
+    const wildcard = state.profile.wildcard || emptyProfile.wildcard;
+    document.getElementById('wildcard-inference').textContent = wildcard.inference || '';
+    document.getElementById('wildcard-evidence').innerHTML = evidenceMarkup(wildcard.evidence);
+    document.querySelectorAll('[data-wildcard-decision]').forEach((button) => {
+      const selected = button.dataset.wildcardDecision === wildcard.decision;
+      button.classList.toggle('selected', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+    const wildcardEdit = document.getElementById('wildcard-edit');
+    wildcardEdit.hidden = wildcard.decision !== 'edited';
+    document.getElementById('wildcard-edit-text').value = wildcard.confirmed_text || wildcard.inference || '';
+    document.getElementById('wildcard-error').textContent = '';
     renderSkills();
+  }
+
+  function setWildcardDecision(decision) {
+    const wildcard = state.profile.wildcard || { ...emptyProfile.wildcard };
+    state.profile.summary = document.getElementById('career-summary').value.trim();
+    state.profile.wildcard = {
+      ...wildcard,
+      decision,
+      confirmed_text: decision === 'confirmed'
+        ? wildcard.inference
+        : decision === 'edited' ? (wildcard.confirmed_text || wildcard.inference) : ''
+    };
+    renderProfile();
+    saveState();
+    if (decision === 'edited') document.getElementById('wildcard-edit-text').focus();
+  }
+
+  function validateConfirmedProfile() {
+    const error = document.getElementById('wildcard-error');
+    const wildcard = state.profile.wildcard || emptyProfile.wildcard;
+    error.textContent = '';
+    if (!wildcard.decision) {
+      error.textContent = 'Please tell us whether the wildcard insight resonates, does not fit, or needs editing.';
+      document.querySelector('.wildcard-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return false;
+    }
+    if (wildcard.decision === 'edited' && wildcard.confirmed_text.trim().length < 20) {
+      error.textContent = 'Please finish your edited insight before continuing.';
+      document.getElementById('wildcard-edit-text').focus();
+      return false;
+    }
+    return true;
   }
 
   function skillMarkup(skill, type) {
@@ -577,7 +709,10 @@
     const removeButton = event.target.closest('[data-remove-skill]');
     const pathwayButton = event.target.closest('.pathway-card');
     if (nextButton) {
-      if (state.screen === 4) syncConfirmedProfile();
+      if (state.screen === 4) {
+        syncConfirmedProfile();
+        if (!validateConfirmedProfile()) return;
+      }
       showScreen(nextButton.dataset.next);
     }
     if (backToButton) showScreen(backToButton.dataset.backTo);
@@ -594,6 +729,16 @@
     }
   });
   document.getElementById('edit-summary').addEventListener('click', () => document.getElementById('career-summary').focus());
+
+  document.querySelectorAll('[data-wildcard-decision]').forEach((button) => button.addEventListener('click', () => {
+    setWildcardDecision(button.dataset.wildcardDecision);
+  }));
+  document.getElementById('wildcard-edit-text').addEventListener('input', (event) => {
+    if (state.profile.wildcard?.decision !== 'edited') return;
+    state.profile.wildcard.confirmed_text = event.target.value;
+    document.getElementById('wildcard-error').textContent = '';
+    saveState();
+  });
 
   document.getElementById('priority-options').addEventListener('change', (event) => {
     const checked = [...document.querySelectorAll('#priority-options input:checked')];
@@ -620,6 +765,19 @@
     submitFeedback('overall');
     document.getElementById('rating-response').textContent = 'Thank you — your rating has been recorded.';
   }));
+
+  document.querySelectorAll('[data-screen-feedback]').forEach((button) => button.addEventListener('click', () => {
+    saveScreenFeedback(button.dataset.screenFeedback);
+  }));
+  let feedbackTimer;
+  document.getElementById('screen-feedback-text').addEventListener('input', (event) => {
+    const key = String(state.screen);
+    const existing = state.feedback[key] || {};
+    state.feedback[key] = { ...existing, comment: event.target.value };
+    saveState();
+    clearTimeout(feedbackTimer);
+    feedbackTimer = setTimeout(() => submitFeedback(key), 700);
+  });
 
   document.getElementById('calendly-button').addEventListener('click', openCalendly);
   document.getElementById('restart').addEventListener('click', () => {
