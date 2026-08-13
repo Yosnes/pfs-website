@@ -6,7 +6,7 @@
   const stepLabel = document.getElementById('step-label');
   const meterFill = document.getElementById('meter-fill');
   const announcement = document.getElementById('announcement');
-  const sessionKey = 'pfs-career-navigator-pilot-v6';
+  const sessionKey = 'pfs-career-navigator-pilot-v7';
   const maxSkills = 12;
   const maxDirectSkills = 9;
   const maxSuggestedSkills = 3;
@@ -17,6 +17,7 @@
 
   const emptyProfile = {
     summary: '',
+    less_obvious_strength: { interpretation: '', evidence: [] },
     insights: [],
     constructive_tension: { supported: false, interpretation: '', evidence: [] },
     wildcard: { inference: '', evidence: [], decision: '', confirmed_text: '' },
@@ -164,6 +165,10 @@
           ...emptyProfile,
           ...(saved.profile || {}),
           insights: Array.isArray(saved.profile?.insights) ? saved.profile.insights.slice(0, 3) : [],
+          less_obvious_strength: {
+            ...emptyProfile.less_obvious_strength,
+            ...(saved.profile?.less_obvious_strength || {})
+          },
           constructive_tension: {
             ...emptyProfile.constructive_tension,
             ...(saved.profile?.constructive_tension || {})
@@ -326,6 +331,10 @@
         ...emptyProfile,
         ...result.profile,
         insights: Array.isArray(result.profile.insights) ? result.profile.insights.slice(0, 3) : [],
+        less_obvious_strength: {
+          ...emptyProfile.less_obvious_strength,
+          ...(result.profile.less_obvious_strength || {})
+        },
         constructive_tension: {
           ...emptyProfile.constructive_tension,
           ...(result.profile.constructive_tension || {})
@@ -444,6 +453,9 @@
 
   function renderProfile() {
     document.getElementById('career-summary').value = state.profile.summary || '';
+    const lessObviousStrength = state.profile.less_obvious_strength || emptyProfile.less_obvious_strength;
+    document.getElementById('less-obvious-strength-text').textContent = lessObviousStrength.interpretation || '';
+    document.getElementById('less-obvious-strength-evidence').innerHTML = evidenceMarkup(lessObviousStrength.evidence);
     document.getElementById('profile-insights').innerHTML = (state.profile.insights || [])
       .slice(0, 3)
       .map(insightMarkup)
