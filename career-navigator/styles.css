@@ -481,6 +481,14 @@ main { padding: 42px 5% 76px; }
 .chip-options input { position: absolute; opacity: 0; }
 .chip-options span { padding: 8px 12px; display: inline-flex; color: var(--body); background: #fff; border: 1px solid rgba(13, 31, 60, .15); border-radius: 999px; font-size: 10px; cursor: pointer; }
 .chip-options input:checked + span { color: var(--navy); background: var(--sand); border-color: var(--gold-dark); font-weight: 700; }
+.interest-section { margin: 4px 0 28px; padding: 22px; background: var(--cream); border: 1px solid rgba(13, 31, 60, .1); border-radius: 13px; }
+.interest-heading { margin-bottom: 18px; }
+.interest-heading h3 { margin: 0; color: var(--navy); font-family: 'DM Serif Display', serif; font-size: 23px; font-weight: 400; }
+.interest-heading p { margin: 4px 0 0; color: var(--body); font-size: 15px; line-height: 1.5; }
+.interest-section .compact-fieldset { margin-bottom: 18px; }
+.interest-section .chip-options span { background: #fffdfa; }
+.interest-other-field { margin: 0 0 18px; }
+.interest-other-field small { color: var(--muted); font-weight: 400; }
 
 .pathway-key { margin: 0 0 14px; display: flex; flex-wrap: wrap; gap: 14px; }
 .pathway-key span { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); font-size: 8px; }
@@ -499,6 +507,10 @@ main { padding: 42px 5% 76px; }
 .adjacent-text { color: var(--blue); }.growth-text { color: var(--green); }.reinvention-text { color: var(--purple); }
 .path-main h3 { margin: 3px 0 5px; color: var(--navy); font-family: 'DM Serif Display', serif; font-size: 19px; font-weight: 400; }
 .path-main p { margin: 0; color: var(--body); font-size: 10px; line-height: 1.55; }
+.pathway-curiosity { margin-top: 12px; padding: 11px 13px; color: var(--body); background: rgba(119, 94, 153, .08); border-left: 3px solid var(--purple); border-radius: 7px; font-size: 14px; line-height: 1.5; }
+.pathway-curiosity strong { display: block; margin-bottom: 3px; color: var(--navy); }
+.pathway-curiosity small { display: block; margin-top: 6px; color: var(--muted); font-size: 13px; line-height: 1.45; }
+.pathway-curiosity small strong { display: inline; color: var(--purple); }
 .path-tags { margin-top: 9px; display: flex; flex-wrap: wrap; gap: 5px; }
 .path-tags span { padding: 3px 7px; color: var(--muted); background: var(--cream); border-radius: 999px; font-size: 8px; }
 .select-indicator { align-self: center; color: var(--slate); font-size: 9px; font-weight: 800; }
@@ -624,6 +636,7 @@ footer {
   .step-meter { width: 60%; }
   .screen h2 { font-size: 34px; }
   .field-grid { grid-template-columns: 1fr; gap: 0; }
+  .interest-section { padding: 18px; }
   .evidence-top { flex-direction: column; }
   .pathway-card { grid-template-columns: 34px 1fr; }
   .select-indicator { grid-column: 2; justify-self: start; }

@@ -6,10 +6,11 @@
   const stepLabel = document.getElementById('step-label');
   const meterFill = document.getElementById('meter-fill');
   const announcement = document.getElementById('announcement');
-  const sessionKey = 'pfs-career-navigator-pilot-v7';
+  const sessionKey = 'pfs-career-navigator-pilot-v8';
   const maxSkills = 12;
   const maxDirectSkills = 9;
   const maxSuggestedSkills = 3;
+  const maxInterestChoices = 3;
   const localHost = ['127.0.0.1', 'localhost'].includes(window.location.hostname);
   const isLocalPreview = (window.location.protocol === 'file:' || localHost) && !new URLSearchParams(window.location.search).has('live');
   let selectedResumeFile = null;
@@ -43,6 +44,7 @@
     path: '',
     timeline: '',
     priorities: [],
+    interests: { topics: [], activities: [], other: '', unsure: false },
     leaveBehind: '',
     feedback: {},
     profile: { ...emptyProfile },
@@ -187,6 +189,12 @@
           .filter((skill) => !savedExplicitKeys.has(skill.toLocaleLowerCase()))
           .slice(0, maxSkills - state.skills.explicit.length);
         state.pathways = Array.isArray(saved.pathways) ? saved.pathways : [];
+        state.interests = {
+          topics: Array.isArray(saved.interests?.topics) ? saved.interests.topics.slice(0, maxInterestChoices) : [],
+          activities: Array.isArray(saved.interests?.activities) ? saved.interests.activities.slice(0, maxInterestChoices) : [],
+          other: String(saved.interests?.other || '').slice(0, 160),
+          unsure: Boolean(saved.interests?.unsure)
+        };
       }
     } catch (_) {
       sessionStorage.removeItem(sessionKey);
@@ -563,10 +571,13 @@
     document.getElementById('pathway-list').innerHTML = state.pathways.map((pathway, index) => {
       const selected = pathway.id === state.path;
       const recommended = pathway.id === 'growth';
+      const curiosity = pathway.id === 'reinvention' && pathway.interest_connection
+        ? `<div class="pathway-curiosity"><strong>Why this surfaced</strong>${escapeHtml(pathway.interest_connection)}${pathway.investigate ? `<small><strong>What to investigate:</strong> ${escapeHtml(pathway.investigate)}</small>` : ''}</div>`
+        : '';
       return `<button class="pathway-card${selected ? ' selected' : ''}${recommended ? ' recommended' : ''}" type="button" data-path="${escapeHtml(pathway.id)}" aria-pressed="${selected}">
         ${recommended ? '<span class="recommendation-ribbon">Strongest overall fit</span>' : ''}
         <span class="path-number">${String(index + 1).padStart(2, '0')}</span>
-        <div class="path-main"><span class="path-type ${typeClasses[pathway.id] || ''}">${escapeHtml(pathway.type)}</span><h3>${escapeHtml(pathway.title)}</h3><p>${escapeHtml(pathway.description)}</p><div class="path-tags">${(pathway.tags || []).slice(0, 2).map((tag) => `<span>${escapeHtml(tag)}</span>`).join('')}</div></div>
+        <div class="path-main"><span class="path-type ${typeClasses[pathway.id] || ''}">${escapeHtml(pathway.type)}</span><h3>${escapeHtml(pathway.title)}</h3><p>${escapeHtml(pathway.description)}</p>${curiosity}<div class="path-tags">${(pathway.tags || []).slice(0, 2).map((tag) => `<span>${escapeHtml(tag)}</span>`).join('')}</div></div>
         <span class="select-indicator">${selected ? 'Selected' : 'Select'}</span>
       </button>`;
     }).join('');
@@ -617,6 +628,13 @@
     }
     state.timeline = selectedTimeline.value;
     state.priorities = [...document.querySelectorAll('#priority-options input:checked')].map((input) => input.value);
+    const selectedTopics = [...document.querySelectorAll('#interest-topic-options input:checked')].map((input) => input.value);
+    state.interests = {
+      topics: selectedTopics.filter((value) => value !== 'Not sure yet').slice(0, maxInterestChoices),
+      activities: [...document.querySelectorAll('#interest-activity-options input:checked')].map((input) => input.value).slice(0, maxInterestChoices),
+      other: document.getElementById('interest-other').value.trim().slice(0, 160),
+      unsure: selectedTopics.includes('Not sure yet')
+    };
     state.leaveBehind = document.getElementById('leave-behind').value.trim();
     syncConfirmedProfile();
     setBusy(button, true, 'Creating your pathways…');
@@ -626,6 +644,7 @@
         profile: state.profile,
         timeline: timelineLabels[state.timeline],
         priorities: state.priorities,
+        interests: state.interests,
         leaveBehind: state.leaveBehind,
         sessionId: state.sessionId
       });
@@ -762,6 +781,31 @@
     }
   });
 
+  function enforceInterestLimit(event, containerId, errorId, exclusiveValue = '') {
+    const inputs = [...document.querySelectorAll(`#${containerId} input`)];
+    const error = document.getElementById(errorId);
+    if (exclusiveValue && event.target.checked && event.target.value === exclusiveValue) {
+      inputs.forEach((input) => { if (input !== event.target) input.checked = false; });
+    } else if (exclusiveValue && event.target.checked) {
+      const exclusive = inputs.find((input) => input.value === exclusiveValue);
+      if (exclusive) exclusive.checked = false;
+    }
+    const checked = inputs.filter((input) => input.checked);
+    if (checked.length > maxInterestChoices) {
+      event.target.checked = false;
+      error.textContent = 'Choose up to three.';
+    } else {
+      error.textContent = '';
+    }
+  }
+
+  document.getElementById('interest-topic-options').addEventListener('change', (event) => {
+    enforceInterestLimit(event, 'interest-topic-options', 'interest-topic-error', 'Not sure yet');
+  });
+  document.getElementById('interest-activity-options').addEventListener('change', (event) => {
+    enforceInterestLimit(event, 'interest-activity-options', 'interest-activity-error');
+  });
+
   document.getElementById('goals-form').addEventListener('submit', async (event) => {
     event.preventDefault();
     await createPathways();
@@ -802,6 +846,11 @@
   document.getElementById('contact-consent').checked = state.consent;
   document.querySelectorAll('input[name="timeline"]').forEach((input) => { input.checked = input.value === state.timeline; });
   document.querySelectorAll('#priority-options input').forEach((input) => { input.checked = state.priorities.includes(input.value); });
+  document.querySelectorAll('#interest-topic-options input').forEach((input) => {
+    input.checked = input.value === 'Not sure yet' ? state.interests.unsure : state.interests.topics.includes(input.value);
+  });
+  document.querySelectorAll('#interest-activity-options input').forEach((input) => { input.checked = state.interests.activities.includes(input.value); });
+  document.getElementById('interest-other').value = state.interests.other;
   selectPath(state.path);
   if (state.resumeReady && state.screen <= 2) {
     state.resumeReady = false;

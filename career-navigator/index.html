@@ -232,6 +232,49 @@
               </div>
               <small class="field-error" id="priority-error"></small>
             </fieldset>
+            <section class="interest-section" aria-labelledby="interest-section-title">
+              <div class="interest-heading">
+                <h3 id="interest-section-title">What are you curious about?</h3>
+                <p>You don’t need to know your next field yet. Curiosity is enough.</p>
+              </div>
+              <fieldset class="choice-fieldset compact-fieldset">
+                <legend>Subjects or problems <small>Choose up to three</small></legend>
+                <div class="chip-options" id="interest-topic-options">
+                  <label><input type="checkbox" value="Education and learning"><span>Education and learning</span></label>
+                  <label><input type="checkbox" value="Health and wellbeing"><span>Health and wellbeing</span></label>
+                  <label><input type="checkbox" value="Technology and AI"><span>Technology and AI</span></label>
+                  <label><input type="checkbox" value="Climate and sustainability"><span>Climate and sustainability</span></label>
+                  <label><input type="checkbox" value="Community impact"><span>Community impact</span></label>
+                  <label><input type="checkbox" value="Public service"><span>Public service</span></label>
+                  <label><input type="checkbox" value="Media and storytelling"><span>Media and storytelling</span></label>
+                  <label><input type="checkbox" value="Financial wellbeing"><span>Financial wellbeing</span></label>
+                  <label><input type="checkbox" value="Entrepreneurship"><span>Entrepreneurship</span></label>
+                  <label><input type="checkbox" value="Arts and culture"><span>Arts and culture</span></label>
+                  <label><input type="checkbox" value="Not sure yet"><span>I’m not sure yet</span></label>
+                </div>
+                <small class="field-error" id="interest-topic-error"></small>
+              </fieldset>
+              <label class="field interest-other-field">
+                <span>Something else you’re curious about <small>Optional</small></span>
+                <input id="interest-other" type="text" maxlength="160" placeholder="Add a field, cause, or problem">
+              </label>
+              <fieldset class="choice-fieldset compact-fieldset">
+                <legend>Work you’d like to do more of <small>Choose up to three</small></legend>
+                <div class="chip-options" id="interest-activity-options">
+                  <label><input type="checkbox" value="Helping or advising people"><span>Helping or advising people</span></label>
+                  <label><input type="checkbox" value="Teaching or explaining"><span>Teaching or explaining</span></label>
+                  <label><input type="checkbox" value="Building programs or services"><span>Building programs or services</span></label>
+                  <label><input type="checkbox" value="Solving complex problems"><span>Solving complex problems</span></label>
+                  <label><input type="checkbox" value="Organizing people and projects"><span>Organizing people and projects</span></label>
+                  <label><input type="checkbox" value="Writing or communicating"><span>Writing or communicating</span></label>
+                  <label><input type="checkbox" value="Researching and analyzing"><span>Researching and analyzing</span></label>
+                  <label><input type="checkbox" value="Creating or designing"><span>Creating or designing</span></label>
+                  <label><input type="checkbox" value="Leading change"><span>Leading change</span></label>
+                  <label><input type="checkbox" value="Developing relationships"><span>Developing relationships</span></label>
+                </div>
+                <small class="field-error" id="interest-activity-error"></small>
+              </fieldset>
+            </section>
             <label class="field">
               <span>Anything you definitely want to leave behind?</span>
               <textarea id="leave-behind" rows="3" placeholder="For example: constant travel, managing a large team, or an industry that no longer fits."></textarea>
