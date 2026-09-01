@@ -118,7 +118,6 @@
     <div class="nav-links" id="nav-links">
       <a href="../sprint.html">5-Day Sprint</a>
       <a href="../index.html#about">About</a>
-      <a href="../products.html">Products</a>
       <a href="../blog.html" style="color:var(--navy);font-weight:700;">Blog</a>
       <a href="../assessment.html">Assessment</a>
       <a href="../contact.html">Contact</a>
@@ -205,24 +204,36 @@
 </footer>
 
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "c12744dece674e8aac2d803f061fdd6e"}'></script><!-- End Cloudflare Web Analytics -->
-<!-- SomebodyAI embedded agent (persistent across all pages) -->
-<script src="https://preview.somebodyai.co/v1/embed.js" async></script>
+<!-- Load the embed script -->
+<script src="https://embed.somebodyai.co/v1/embed" async></script>
+
+<!-- Mount when SomebodyAgent is ready -->
 <script>
 (function tryMount(n) {
   if (window.SomebodyAgent) {
     SomebodyAgent.mount({
-      agentId:    "6a505631cdef0c26da75c857",
-      placement:  "launcher",
-      skin:       "transparent",
-      launcherStyle: "compact",
+      agentId: "6a505631cdef0c26da75c857",
+      placement: "launcher",
+      skin: "v1",
+      position: "bottom-right",
+      orientation: "portrait",
+      autostart: false,
+      idleReminder: { idleSeconds: 4, times: 1 },
+      pageActions: ["scan_page", "scroll_to", "highlight", "prefill_form", "expand_section", "navigate"],
+      pageObserve: true,
+      timer: "remaining",
+      timerMinutes: 5,
+      timerOptions: { warnMessage: "Sorry but my calls are limited to 5 minutes. We've got one minute left", endMessage: "Thank you for contacting us." },
       showEndBtn: true,
-      background:      "transparent",
+      pip: true,
       text: {
-        aiLabel:    "AI Avatar",
-        ctaLabel:   "Talk to Andrew's Asst",
+        aiLabel: "Talk to Andrew's assistant Amir",
+      },
+      context: {
+        customGreeting: "Hi. What's bringing you to Project Future Self today? I can answer your questions or help you send a message.",
       },
       on: {
-        'session.started':   () => console.log('session started'),
+        'session.started': () => console.log('session started'),
         'session.completed': (p) => console.log('done', p),
       },
     });

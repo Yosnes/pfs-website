@@ -118,7 +118,6 @@
     <div class="nav-links" id="nav-links">
       <a href="../sprint.html">5-Day Sprint</a>
       <a href="../index.html#about">About</a>
-      <a href="../products.html">Products</a>
       <a href="../blog.html" style="color:var(--navy);font-weight:700;">Blog</a>
       <a href="../assessment.html">Assessment</a>
       <a href="../contact.html">Contact</a>
@@ -153,7 +152,7 @@
   <div class="article-inner">
     <h2><strong>Why Reinvention Is a Skill (And the 5-Pillar Framework I Built Across Five Careers)</strong></h2>
 <p><em>Most people treat career reinvention like a crisis to survive. I've come to understand it as a skill to develop — one with a repeatable structure that works across industries, roles, and life stages.</em></p>
-<p>In my <a href="/329c9641e6628099bd8ef2f26b94fa80">last post</a>, I wrote about leaving the Paul Taylor Dance Company after eleven years as a Principal Dancer and what that first reinvention taught me about identity and starting over. If you haven't read it, the short version is this: reinvention is harder than it looks from the outside, more possible than it feels from the inside, and almost never as random as it appears.</p>
+<p>In my <a href="how-to-reinvent-your-career-starting-over.html">last post</a>, I wrote about leaving the Paul Taylor Dance Company after eleven years as a Principal Dancer and what that first reinvention taught me about identity and starting over. If you haven't read it, the short version is this: reinvention is harder than it looks from the outside, more possible than it feels from the inside, and almost never as random as it appears.</p>
 <p>What I didn't get into was the pattern I began to notice after the second reinvention. And the third. By the time I had moved from concert dance to Broadway to theatrical producing to XR technology to management consulting to enterprise software — five distinct professional identities across roughly two decades — I had enough data points to ask a different kind of question.</p>
 <p>Not "how do I reinvent myself?" but "what does every successful reinvention actually have in common?"</p>
 <p>The answer to that question became the foundation of Project Future Self. And the short answer is: reinvention is not a personality trait, a stroke of luck, or a privilege reserved for certain kinds of people. It is a skill. One with identifiable components that can be learned, practiced, and applied deliberately.</p>
@@ -219,24 +218,36 @@
   </div>
 </footer>
 
-<!-- SomebodyAI embedded agent (persistent across all pages) -->
-<script src="https://preview.somebodyai.co/v1/embed.js" async></script>
+<!-- Load the embed script -->
+<script src="https://embed.somebodyai.co/v1/embed" async></script>
+
+<!-- Mount when SomebodyAgent is ready -->
 <script>
 (function tryMount(n) {
   if (window.SomebodyAgent) {
     SomebodyAgent.mount({
-      agentId:    "6a505631cdef0c26da75c857",
-      placement:  "launcher",
-      skin:       "transparent",
-      launcherStyle: "compact",
+      agentId: "6a505631cdef0c26da75c857",
+      placement: "launcher",
+      skin: "v1",
+      position: "bottom-right",
+      orientation: "portrait",
+      autostart: false,
+      idleReminder: { idleSeconds: 4, times: 1 },
+      pageActions: ["scan_page", "scroll_to", "highlight", "prefill_form", "expand_section", "navigate"],
+      pageObserve: true,
+      timer: "remaining",
+      timerMinutes: 5,
+      timerOptions: { warnMessage: "Sorry but my calls are limited to 5 minutes. We've got one minute left", endMessage: "Thank you for contacting us." },
       showEndBtn: true,
-      background:      "transparent",
+      pip: true,
       text: {
-        aiLabel:    "AI Avatar",
-        ctaLabel:   "Talk to Andrew's Asst",
+        aiLabel: "Talk to Andrew's assistant Amir",
+      },
+      context: {
+        customGreeting: "Hi. What's bringing you to Project Future Self today? I can answer your questions or help you send a message.",
       },
       on: {
-        'session.started':   () => console.log('session started'),
+        'session.started': () => console.log('session started'),
         'session.completed': (p) => console.log('done', p),
       },
     });

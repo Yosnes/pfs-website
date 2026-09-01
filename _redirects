@@ -1,0 +1,7 @@
+# Retired digital-product storefront — 301 to the active paid offer
+/products.html          /sprint.html    301
+/products               /sprint.html    301
+/products/*             /sprint.html    301
+/cart.html              /index.html     301
+/cart                   /index.html     301
+/download-success.html  /index.html     301
