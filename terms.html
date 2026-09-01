@@ -203,9 +203,9 @@
       placement: "launcher",
       skin: "v1",
       position: "bottom-right",
+      launcherStyle: "compact",
       orientation: "portrait",
-      autostart: true,
-      idleReminder: { idleSeconds: 4, times: 1 },
+      idleReminder: { idleSeconds: 5, times: 1 },
       pageActions: ["scan_page", "scroll_to", "highlight", "prefill_form", "expand_section", "navigate"],
       pageObserve: true,
       timer: "remaining",
@@ -215,11 +215,10 @@
       pip: true,
       text: {
         aiLabel: "Talk to Andrew's assistant Amir",
-        ctaLabel: "Talk to Amir",
         disclaimer: "This is an AI assistant and can make mistakes",
       },
       context: {
-        customGreeting: "Hi. What's bringing you to Project Future Self today? I can answer your questions or help you send a message.",
+        customGreeting: "Hi there! I am Amir, Andrew's AI assistant. I can answer your questions or help you send a message. What's bringing you to Project Future Self today?",
       },
       on: {
         'session.started': () => console.log('session started'),
