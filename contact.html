@@ -160,24 +160,24 @@
       <div class="form-h2">How Can We Help?</div>
       <div class="gold-rule"></div>
 
-      <form id="contact-form">
+      <form id="contact-form" name="contact" aria-label="Contact form" data-sbai-label="Contact form" data-sbai-type="form">
         <div class="form-grid-2">
           <div class="form-field">
             <label for="inp-first">First Name</label>
-            <input type="text" id="inp-first" name="firstName" autocomplete="given-name" placeholder="First name">
+            <input type="text" id="inp-first" name="firstName" autocomplete="given-name" placeholder="First name" data-sbai-label="First Name" data-sbai-type="field">
           </div>
           <div class="form-field">
             <label for="inp-last">Last Name</label>
-            <input type="text" id="inp-last" name="lastName" autocomplete="family-name" placeholder="Last name">
+            <input type="text" id="inp-last" name="lastName" autocomplete="family-name" placeholder="Last name" data-sbai-label="Last Name" data-sbai-type="field">
           </div>
         </div>
         <div class="form-field">
           <label for="inp-email">Email Address</label>
-          <input type="email" id="inp-email" name="email" autocomplete="email" placeholder="your@email.com">
+          <input type="email" id="inp-email" name="email" autocomplete="email" placeholder="your@email.com" data-sbai-label="Email Address" data-sbai-type="field">
         </div>
         <div class="form-field">
           <label for="inp-message">Tell Us What You'd Like to Know</label>
-          <textarea id="inp-message" name="message" rows="6" placeholder="Write your message here..."></textarea>
+          <textarea id="inp-message" name="message" rows="6" placeholder="Write your message here..." data-sbai-label="Message" data-sbai-type="field"></textarea>
         </div>
         <button type="submit" class="btn-submit" id="btn-submit">Send Message →</button>
         <p id="form-status" style="margin-top:14px;font-size:13px;display:none;"></p>
