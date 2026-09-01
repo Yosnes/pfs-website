@@ -1902,7 +1902,7 @@
       skin: "v1",
       position: "bottom-right",
       orientation: "portrait",
-      autostart: false,
+      autostart: true,
       idleReminder: { idleSeconds: 4, times: 1 },
       pageActions: ["scan_page", "scroll_to", "highlight", "prefill_form", "expand_section", "navigate"],
       pageObserve: true,
@@ -1913,6 +1913,8 @@
       pip: true,
       text: {
         aiLabel: "Talk to Andrew's assistant Amir",
+        ctaLabel: "Talk to Amir",
+        disclaimer: "This is an AI assistant and can make mistakes",
       },
       context: {
         customGreeting: "Hi. What's bringing you to Project Future Self today? I can answer your questions or help you send a message.",
