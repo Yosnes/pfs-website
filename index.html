@@ -1517,11 +1517,12 @@
       timerOptions: { warnMessage: "Sorry but my calls are limited to 5 minutes. We've got one minute left", endMessage: "Thank you for contacting us." },
       showEndBtn: true,
       pip: true,
-      text: {
+        text: {
         aiLabel: "Talk to Andrew's assistant Amir",
+        disclaimer: "This is an AI assistant and can make mistakes",
       },
       context: {
-        customGreeting: "Hi. What's bringing you to Project Future Self today? I can answer your questions or help you send a message.",
+        customGreeting: "Hi. I can answer your questions or help you send a message. What's bringing you to Project Future Self today?",
       },
       on: {
         'session.started': () => console.log('session started'),
